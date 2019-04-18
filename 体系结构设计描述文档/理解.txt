@@ -6,12 +6,14 @@ promotion覆盖了16用例
 sales覆盖了15,17用例
 member覆盖了18,19,20用例
 
-userdata存储多条诸如“身份-用户名-密码”的信息。
-moviedetailsdata存储多条诸如“电影ID-名称-电影宣传海报-导演-编剧-主演-类型-制片国家/地区-语言-上映日期-片长-下映日期”的信息。
-likedata存储多条诸如“用户-影片”的信息。
-scheduledata存储多条诸如“排片ID-时间-影厅-影片ID-票价-是否可见”的信息。
-promotiondata存储多条诸如“优惠ID-时间段-金额-条件”的信息，表示某个优惠活动；以及多条诸如“用户-优惠ID”的信息，表示用户拥有的优惠。
-salesdata存储多条诸如“用户-排片ID-座位”的信息，每条表示销售记录。
-memberdata存储多条诸如“用户-会员卡余额”的信息。
+userdata存储多条诸如“userID-身份-用户名-密码”的信息。
+moviedetailsdata存储多条诸如“moviedetailsID-名称-电影宣传海报-导演-编剧-主演-类型-制片国家/地区-语言-上映日期-片长-下映日期”的信息。
+likedata存储多条诸如“likeID-userID-影片”的信息。
+scheduledata存储多条诸如“scheduleID-时间-影厅-moviedetailsID-票价-是否可见”的信息。
+promotiondata存储多条诸如“promotionID-时间段-金额-条件”的信息，表示某个优惠活动；以及多条诸如“hasPromotionID-userID-promotionID”的信息，表示用户拥有的优惠。
+salesdata存储多条诸如“salesID-userID-scheduleID-座位”的信息，每条表示销售记录。
+memberdata存储多条诸如“memberID-userID-会员卡余额”的信息。
 
-注意，15用例中的统计功能是sales实现的。由于sales存储了“用户-排片ID-座位”的信息，再加上sales包所依赖的schedule包所提供的信息，就能计算出15用例要求统计的数据。
+以上userID、movieDetailsID、likeID、scheduleID、promotionID、hasPromotionID、salesID、memberID是用来标识某条信息的，数据层应该提供“通过这些ID查找某条信息”的接口。
+
+注意，15用例中的统计功能是由sales实现的。由于sales存储了“用户-排片ID-座位”的信息，再加上sales包所依赖的schedule包所提供的信息，就能计算出15用例要求统计的数据。
