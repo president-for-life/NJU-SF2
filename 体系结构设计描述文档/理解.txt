@@ -16,6 +16,6 @@ memberdata存储多条诸如“memberID-userID-会员卡余额”的信息。
 
 以上userID、movieDetailsID、likeID、scheduleID、promotionID、hasPromotionID、salesID、memberID是用来标识某条信息的，数据层应该提供“通过这些ID查找某条信息”的接口。
 
-注意，15用例中的统计功能是由schedule实现的。由于schedule存储了“salesID-userID-scheduleID-座位-支付状态”的信息，再加上schedule包所依赖的sales包所提供的信息，就能计算出15用例要求统计的数据。
+注意，15用例中的统计功能是由sales实现的。sales自身的信息加上sales所依赖的schedule包存储的信息，就能计算出15用例要求统计的数据。
 
-本来sales包要依赖于schedule来进行销售任务，但由于有循环依赖，因此把schedule的某些类抽象成接口放到sales包内，schedule的具体类实现这些接口。从而schedule包依赖于sales包。
+为了消除sales->schedule->moviedetails->sales的循环依赖，把moviedetails中的部分类变为接口放到了schedule中。
