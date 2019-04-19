@@ -1,0 +1,57 @@
+UserDataService : 
+find()
+insert()
+init()
+finish()
+
+MoviedetailDataService :
+find()
+insert()
+delete()
+update()
+init()
+finish()
+
+LikeDataService :
+find()
+insert()
+delete()
+init()
+finish()
+
+ScheduleDataService :
+find()
+insert()
+delete()
+update()
+init()
+finish()
+
+PromotionDataService :
+find()
+insert()
+delete()
+init()
+finish()
+
+HaspromotionDataService :
+find()
+insert()
+delete()
+init()
+finish()
+
+SalesDataService :
+find()
+insert()
+delete()
+init()
+finish()
+
+MemberDataService :
+find()
+insert()
+delete()
+update()
+init()
+finish()
