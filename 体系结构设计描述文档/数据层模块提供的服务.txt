@@ -28,10 +28,10 @@ find()
 -LikeDataService.find(long userID, long movieDetailsID)
 -LikeDataService.find(long movieDetailsID)
 
-insert()
-delete()
-init()
-finish()
+.insert()
+.delete()
+.init()
+.finish()
 
 ScheduleDataService :
 find()
