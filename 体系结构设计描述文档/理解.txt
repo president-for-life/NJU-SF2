@@ -13,5 +13,5 @@ likedata存储多条诸如“likeID-userID-moviedetailsID-日期”的信息。
 scheduledata存储多条诸如“scheduleID-时间-影厅-moviedetailsID-票价-可见时间”的信息。
 promotiondata存储多条诸如“promotionID-时间段-金额-条件”的信息，表示某个优惠活动
 haspromotiondata诸如多条诸如“hasPromotionID-userID-promotionID”的信息，表示用户拥有的优惠。
-salesdata存储多条诸如“salesID-userID-scheduleID-座位-支付状态”的信息，每条表示销售记录。
+salesdata存储多条诸如“salesID-userID-scheduleID-座位-订单”的信息，每条表示销售记录。
 memberdata存储多条诸如“memberID-userID-会员卡余额-订单”的信息。
