@@ -10,7 +10,7 @@ userdata存储多条诸如“userID-身份-用户名-密码”的信息。
 halldata存储多条诸如“hallID-影厅名-影厅座位数”的信息。
 moviedetailsdata存储多条诸如“moviedetailsID-名称-电影宣传海报-导演-编剧-主演-类型-制片国家/地区-语言-上映日期-片长-下映日期”的信息。
 likedata存储多条诸如“likeID-userID-moviedetailsID-日期”的信息。
-scheduledata存储多条诸如“scheduleID-时间-影厅-moviedetailsID-票价-是否可见”的信息。
+scheduledata存储多条诸如“scheduleID-时间-影厅-moviedetailsID-票价-可见时间”的信息。
 promotiondata存储多条诸如“promotionID-时间段-金额-条件”的信息，表示某个优惠活动
 haspromotiondata诸如多条诸如“hasPromotionID-userID-promotionID”的信息，表示用户拥有的优惠。
 salesdata存储多条诸如“salesID-userID-scheduleID-座位-支付状态”的信息，每条表示销售记录。
