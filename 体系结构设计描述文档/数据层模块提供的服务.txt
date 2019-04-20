@@ -1,6 +1,15 @@
 UserDataService : 
 find()
+-find(String username)
 insert()
+init()
+finish()
+
+HallDataService :
+find()
+-findAll()
+insert()
+delete()
 init()
 finish()
 
