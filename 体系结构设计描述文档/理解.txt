@@ -14,6 +14,4 @@ scheduledata´æ´¢¶àÌõÖîÈç¡°scheduleID-Ê±¼ä-Ó°Ìü-moviedetailsID-Æ±¼Û-¿É¼ûÊ±¼ä¡±µÄĞ
 promotiondata´æ´¢¶àÌõÖîÈç¡°promotionID-Ê±¼ä¶Î-½ğ¶î-Ìõ¼ş¡±µÄĞÅÏ¢£¬±íÊ¾Ä³¸öÓÅ»İ»î¶¯
 haspromotiondataÖîÈç¶àÌõÖîÈç¡°hasPromotionID-userID-promotionID¡±µÄĞÅÏ¢£¬±íÊ¾ÓÃ»§ÓµÓĞµÄÓÅ»İ¡£
 salesdata´æ´¢¶àÌõÖîÈç¡°salesID-userID-scheduleID-×ùÎ»-Ö§¸¶×´Ì¬¡±µÄĞÅÏ¢£¬Ã¿Ìõ±íÊ¾ÏúÊÛ¼ÇÂ¼¡£
-memberdata´æ´¢¶àÌõÖîÈç¡°memberID-userID-»áÔ±¿¨Óà¶î¡±µÄĞÅÏ¢¡£
-
-ÒÔÉÏuserID¡¢movieDetailsID¡¢likeID¡¢scheduleID¡¢promotionID¡¢hasPromotionID¡¢salesID¡¢memberIDÊÇÓÃÀ´±êÊ¶Ä³ÌõĞÅÏ¢µÄ£¬Êı¾İ²ãÓ¦¸ÃÌá¹©¡°Í¨¹ıÕâĞ©ID²éÕÒÄ³ÌõĞÅÏ¢¡±µÄ½Ó¿Ú¡£
+memberdata´æ´¢¶àÌõÖîÈç¡°memberID-userID-»áÔ±¿¨Óà¶î-¶©µ¥¡±µÄĞÅÏ¢¡£
