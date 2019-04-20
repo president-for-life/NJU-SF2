@@ -46,7 +46,6 @@ finish()
 
 PromotionDataService :
 find()
-
 insert()
 delete()
 init()
