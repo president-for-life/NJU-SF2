@@ -37,7 +37,7 @@ ScheduleDataService :
 find()
 -ScheduleDataService.find(Date[] time)
 -ScheduleDataService.find(Date[] time,long[] hallID)
--ScheduleDataService.find(Date[] time,long movieDetailsID)
+-ScheduleDataService.find(Date[] time,long[] movieDetailsID)
 insert()
 delete()
 update()
@@ -46,7 +46,7 @@ finish()
 
 PromotionDataService :
 find()
--SalesDataService.find(long movieDetailsID, Date time)
+
 insert()
 delete()
 init()
@@ -61,6 +61,7 @@ finish()
 
 SalesDataService :
 find()
+-SalesDataService.find(long movieDetailsID, Date time)
 insert()
 delete()
 init()
