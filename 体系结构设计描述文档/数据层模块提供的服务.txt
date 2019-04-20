@@ -15,6 +15,8 @@ finish()
 
 MoviedetailDataService :
 find()
+-findAll()
+-find(String keyword)
 insert()
 delete()
 update()
@@ -23,6 +25,9 @@ finish()
 
 LikeDataService :
 find()
+-LikeDataService.find(long userID, long movieDetailsID)
+-LikeDataService.find(long movieDetailsID)
+
 insert()
 delete()
 init()
@@ -30,6 +35,9 @@ finish()
 
 ScheduleDataService :
 find()
+-ScheduleDataService.find(Date[] time)
+-ScheduleDataService.find(Date[] time,long[] hallID)
+-ScheduleDataService.find(Date[] time,long movieDetailsID)
 insert()
 delete()
 update()
@@ -38,6 +46,7 @@ finish()
 
 PromotionDataService :
 find()
+-SalesDataService.find(long movieDetailsID, Date time)
 insert()
 delete()
 init()
