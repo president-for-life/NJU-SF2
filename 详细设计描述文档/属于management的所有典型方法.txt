@@ -1,0 +1,27 @@
+Hall：
+1. 搜索所有影厅
+	HallService.searchAllHall()
+
+Movie:
+1. 上架电影
+	MovieService.addMovie(MovieForm addMovieForm)
+2. 搜索所有影厅
+	MovieService.searchAllMovie()
+3. 根据关键词搜索电影
+	MovieService.getMovieByKeyword(String keyword)
+4. 批量下架电影
+	MovieService.pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm)
+5. 更新电影信息
+	MovieService.updateMovie(MovieForm updateMovieForm)
+	
+Schedule:
+1. 添加排片信息
+	ScheduleService.addSchedule(ScheduleForm scheduleForm)
+2. 查询包括从起始时间开始的7天排片计划
+	ScheduleService.searchScheduleSevenDays(int hallId, Date startDate)
+3. 批量删除排片信息
+	ScheduleService.deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm)
+4. 修改排片信息
+	ScheduleService.updateSchedule(ScheduleForm scheduleForm)
+5. 观众看到的排片信息
+	ScheduleService.getScheduleView()
