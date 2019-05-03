@@ -16,56 +16,56 @@ import java.util.List;
 public interface MovieMapper {
     /**
      * 插入一条电影信息
-     * @param addMovieForm
-     * @return
+     * @param addMovieForm 电影表单（使用表单和数据层打交道，很奇怪）
+     * @return ？
      */
     int insertOneMovie(MovieForm addMovieForm);
 
     /**
      * 根据id查找电影
-     * @param id
-     * @return
+     * @param id 电影id
+     * @return po.Movie
      */
     Movie selectMovieById(@Param("id") int id);
 
     /**
      * 根据id和userId查找电影
-     * @param id
-     * @param userId
-     * @return
+     * @param id 电影id
+     * @param userId 用户id
+     * @return po.Movie
      */
     Movie selectMovieByIdAndUserId(@Param("id") int id, @Param("userId") int userId);
 
     /**
      * 展示所有电影
-     * @return
+     * @return po.Movie数组
      */
     List<Movie> selectAllMovie();
 
     /**
      * 展示所有电影(不包括已经下架的)
-     * @return
+     * @return po.Movie数组
      */
     List<Movie> selectOtherMoviesExcludeOff();
 
     /**
      * 根据关键字搜索电影
-     * @param keyword
-     * @return
+     * @param keyword 关键字
+     * @return po.Movie数组
      */
     List<Movie> selectMovieByKeyword(@Param("keyword") String keyword);
 
     /**
      * 批量更新电影状态
-     * @param movieIdList
-     * @return
+     * @param movieIdList 电影id数组
+     * @return ？
      */
     int updateMovieStatusBatch(List<Integer> movieIdList);
 
     /**
      * 修改电影
-     * @param updateMovieForm
-     * @return
+     * @param updateMovieForm 电影表单
+     * @return ？
      */
     int updateMovie(MovieForm updateMovieForm);
 }

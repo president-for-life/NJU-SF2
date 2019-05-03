@@ -16,6 +16,7 @@ import java.util.List;
  * @date 2019/4/12 2:01 PM
  */
 @Service
+
 public class HallServiceImpl implements HallService, HallServiceForBl {
     @Autowired
     private HallMapper hallMapper;
@@ -41,6 +42,9 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
 
     }
 
+    /**
+     * po.Hall数组转vo.HallVO数组
+     */
     private List<HallVO> hallList2HallVOList(List<Hall> hallList){
         List<HallVO> hallVOList = new ArrayList<>();
         for(Hall hall : hallList){

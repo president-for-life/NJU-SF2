@@ -28,13 +28,13 @@ public class MovieLikeServiceImpl implements MovieLikeService {
 
     @Override
     public ResponseVO likeMovie(int userId, int movieId) {
-
         //todo: user 判空
         if (userLikeTheMovie(userId, movieId)) {
             return ResponseVO.buildFailure(ALREADY_LIKE_ERROR_MESSAGE);
         } else if (movieServiceForBl.getMovieById(movieId) == null) {
             return ResponseVO.buildFailure(MOVIE_NOT_EXIST_ERROR_MESSAGE);
         }
+
         try {
             return ResponseVO.buildSuccess(movieLikeMapper.insertOneLike(movieId, userId));
         } catch (Exception e) {
@@ -50,13 +50,13 @@ public class MovieLikeServiceImpl implements MovieLikeService {
         } else if (movieServiceForBl.getMovieById(movieId) == null) {
             return ResponseVO.buildFailure(MOVIE_NOT_EXIST_ERROR_MESSAGE);
         }
+
         try {
             return ResponseVO.buildSuccess(movieLikeMapper.deleteOneLike(movieId, userId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
-
     }
 
     @Override
@@ -79,11 +79,16 @@ public class MovieLikeServiceImpl implements MovieLikeService {
         }
     }
 
+    /**
+     * 判断某用户是否想看某电影
+     */
     private boolean userLikeTheMovie(int userId, int movieId) {
         return movieLikeMapper.selectLikeMovie(movieId, userId) == 0 ? false : true;
     }
-    
 
+    /**
+     * po.DateLike数组转vo.DateLikeVO数组
+     */
     private List<DateLikeVO> dateLikeList2DateLikeVOList(List<DateLike> dateLikeList){
         List<DateLikeVO> dateLikeVOList = new ArrayList<>();
         for(DateLike dateLike : dateLikeList){

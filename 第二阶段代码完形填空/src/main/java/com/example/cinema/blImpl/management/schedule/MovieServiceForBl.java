@@ -10,8 +10,8 @@ import com.example.cinema.vo.MovieVO;
 public interface MovieServiceForBl {
     /**
      * 根据id查找电影
-     * @param id
-     * @return
+     * @param id 电影id
+     * @return po.Movie
      */
     Movie getMovieById(int id);
 }

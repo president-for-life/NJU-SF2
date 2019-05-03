@@ -8,8 +8,8 @@ import com.example.cinema.po.Hall;
 public interface HallServiceForBl {
     /**
      * 搜索影厅
-     * @param id
-     * @return
+     * @param id 影厅id
+     * @return po.Hall
      */
     Hall getHallById(int id);
 }

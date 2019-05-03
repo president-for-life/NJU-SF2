@@ -130,23 +130,28 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
 
     /**
      * 下架和修改电影的前置检查
-     * @param movieIdList
-     * @return
+     * @param movieIdList 电影id数组
+     * @return ResponseVO
      */
     public ResponseVO preCheck(List<Integer> movieIdList){
         Date thisTime = new Date();
         List<ScheduleItem> scheduleItems = scheduleServiceForBl.getScheduleByMovieIdList(movieIdList);
 
-        // 检查是否有电影后续有排片及是否有观众购票未使用
+        // 检查是否有电影后续有排片
         for(ScheduleItem s : scheduleItems){
             if(s.getEndTime().after(thisTime)){
                 return ResponseVO.buildFailure(SCHEDULE_ERROR_MESSAGE);
             }
         }
+
+        // 未检查是否有观众购买该电影的票并还未观看
+
         return ResponseVO.buildSuccess();
     }
 
-
+    /**
+     * po.Movie数组转vo.MovieVO数组
+     */
     private List<MovieVO> movieList2MovieVOList(List<Movie> movieList){
         List<MovieVO> movieVOList = new ArrayList<>();
         for(Movie movie : movieList){
