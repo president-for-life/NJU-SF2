@@ -1,0 +1,105 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Untitled",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Main",
+					"defaultDiagram": true
+				}
+			]
+		},
+		{
+			"_type": "UMLCollaboration",
+			"_id": "AAAAAAFqfmbQCOR4eG4=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Collaboration1",
+			"ownedElements": [
+				{
+					"_type": "UMLInteraction",
+					"_id": "AAAAAAFqfmbQCOR5FRY=",
+					"_parent": {
+						"$ref": "AAAAAAFqfmbQCOR4eG4="
+					},
+					"name": "Interaction1",
+					"ownedElements": [
+						{
+							"_type": "UMLSequenceDiagram",
+							"_id": "AAAAAAFqfmbQCeR6xJQ=",
+							"_parent": {
+								"$ref": "AAAAAAFqfmbQCOR5FRY="
+							},
+							"name": "SequenceDiagram1",
+							"ownedViews": [
+								{
+									"_type": "UMLFrameView",
+									"_id": "AAAAAAFqfmbQCeR7EPA=",
+									"_parent": {
+										"$ref": "AAAAAAFqfmbQCeR6xJQ="
+									},
+									"model": {
+										"$ref": "AAAAAAFqfmbQCeR6xJQ="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFqfmbQCeR8WeQ=",
+											"_parent": {
+												"$ref": "AAAAAAFqfmbQCeR7EPA="
+											},
+											"font": "Arial;13;0",
+											"left": 75.97900390625,
+											"top": 10,
+											"width": 115.9052734375,
+											"height": 13,
+											"text": "SequenceDiagram1"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFqfmbQCeR9gPk=",
+											"_parent": {
+												"$ref": "AAAAAAFqfmbQCeR7EPA="
+											},
+											"font": "Arial;13;1",
+											"left": 10,
+											"top": 10,
+											"width": 60.97900390625,
+											"height": 13,
+											"text": "interaction"
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 5,
+									"top": 5,
+									"width": 1340,
+									"height": 516,
+									"nameLabel": {
+										"$ref": "AAAAAAFqfmbQCeR8WeQ="
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAFqfmbQCeR9gPk="
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
