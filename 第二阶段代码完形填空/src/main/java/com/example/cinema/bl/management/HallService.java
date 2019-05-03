@@ -9,7 +9,7 @@ import com.example.cinema.vo.ResponseVO;
 public interface HallService {
     /**
      * 搜索所有影厅
-     * @return
+     * @return ResponseVO
      */
     ResponseVO searchAllHall();
 }

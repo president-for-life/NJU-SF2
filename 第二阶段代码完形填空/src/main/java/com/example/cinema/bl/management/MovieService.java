@@ -11,48 +11,48 @@ import com.example.cinema.vo.ResponseVO;
 public interface MovieService {
     /**
      * 上架电影
-     * @param addMovieForm
-     * @return
+     * @param addMovieForm 电影表单
+     * @return ResponseVO
      */
     ResponseVO addMovie(MovieForm addMovieForm);
 
     /**
      * 根据id和userid搜索电影，可以知道这个用户是否点过想看这部电影
-     * @param id
-     * @param userId
-     * @return
+     * @param id 电影id
+     * @param userId 用户id
+     * @return ResponseVO
      */
     ResponseVO searchOneMovieByIdAndUserId(int id, int userId);
 
     /**
      * 搜索全部电影
-     * @return
+     * @return ResponseVO
      */
     ResponseVO searchAllMovie();
 
     /**
      * 搜索全部电影(不包括已经下架的)
-     * @return
+     * @return ResponseVO
      */
     ResponseVO searchOtherMoviesExcludeOff();
 
     /**
      * 根据关键字搜索电影
-     * @param keyword
-     * @return
+     * @param keyword 关键词
+     * @return ResponseVO
      */
     ResponseVO getMovieByKeyword(String keyword);
 
     /**
      * 批量下架电影
-     * @param movieBatchOffForm
-     * @return
+     * @param movieBatchOffForm 电影表单
+     * @return ResponseVO
      */
     ResponseVO pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm);
 
     /**
      * 更新电影信息
-     * @param updateMovieForm
+     * @param updateMovieForm 电影表单
      * @return
      */
     ResponseVO updateMovie(MovieForm updateMovieForm);

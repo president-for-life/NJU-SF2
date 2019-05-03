@@ -14,13 +14,11 @@ import java.util.List;
 public interface HallMapper {
     /**
      * 查询所有影厅信息
-     * @return
      */
     List<Hall> selectAllHall();
 
     /**
      * 根据id查询影厅
-     * @return
      */
     Hall selectHallById(@Param("hallId") int hallId);
 }

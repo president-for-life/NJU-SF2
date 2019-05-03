@@ -13,16 +13,16 @@ public interface AccountMapper {
 
     /**
      * 创建一个新的账号
-     * @param username
-     * @param password
-     * @return
+     * @param username 用户名
+     * @param password 密码
+     * @return ？
      */
     public int createNewAccount(@Param("username") String username, @Param("password") String password);
 
     /**
      * 根据用户名查找账号
-     * @param username
-     * @return
+     * @param username 用户名
+     * @return po.User
      */
     public User getAccountByName(@Param("username") String username);
 }

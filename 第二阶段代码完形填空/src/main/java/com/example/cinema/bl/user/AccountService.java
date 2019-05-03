@@ -12,13 +12,13 @@ public interface AccountService {
 
     /**
      * 注册账号
-     * @return
+     * @return ResponseVO
      */
     public ResponseVO registerAccount(UserForm userForm);
 
     /**
-     * 用户登录，登录成功会将用户信息保存再session中
-     * @return
+     * 用户登录，登录成功会将用户信息保存在session中
+     * @return vo.UserVO
      */
     public UserVO login(UserForm userForm);
 
