@@ -133,9 +133,9 @@
 													"font": "Arial;13;1",
 													"left": 93,
 													"top": 47,
-													"width": 62.736328125,
+													"width": 80.79541015625,
 													"height": 13,
-													"text": "MovieUI"
+													"text": "ScheduleUI"
 												},
 												{
 													"_type": "LabelView",
@@ -164,7 +164,7 @@
 											"font": "Arial;13;0",
 											"left": 88,
 											"top": 40,
-											"width": 72.736328125,
+											"width": 90.79541015625,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7+zORrz3Xg="
@@ -189,7 +189,7 @@
 												"$ref": "AAAAAAFqe7+zORrwcMA="
 											},
 											"font": "Arial;13;0",
-											"left": 124,
+											"left": 133,
 											"top": 80,
 											"width": 1,
 											"height": 427
@@ -198,7 +198,7 @@
 									"font": "Arial;13;0",
 									"left": 88,
 									"top": 40,
-									"width": 72.736328125,
+									"width": 90.79541015625,
 									"height": 467,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7+zORryfGo="
@@ -247,9 +247,9 @@
 													"font": "Arial;13;1",
 													"left": 301,
 													"top": 47,
-													"width": 93.103515625,
+													"width": 114.05712890625,
 													"height": 13,
-													"text": "MovieService"
+													"text": "ScheduleService"
 												},
 												{
 													"_type": "LabelView",
@@ -280,7 +280,7 @@
 											"font": "Arial;13;0",
 											"left": 296,
 											"top": 40,
-											"width": 103.103515625,
+											"width": 124.05712890625,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7+4yBsSpqM="
@@ -305,7 +305,7 @@
 												"$ref": "AAAAAAFqe7+4yBsPUgM="
 											},
 											"font": "Arial;13;0",
-											"left": 348,
+											"left": 358,
 											"top": 80,
 											"width": 1,
 											"height": 427
@@ -314,7 +314,7 @@
 									"font": "Arial;13;0",
 									"left": 296,
 									"top": 40,
-									"width": 103.103515625,
+									"width": 124.05712890625,
 									"height": 467,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7+4yBsRXfA="
@@ -363,9 +363,9 @@
 													"font": "Arial;13;1",
 													"left": 493,
 													"top": 47,
-													"width": 119.8271484375,
+													"width": 140.78076171875,
 													"height": 13,
-													"text": "MovieServiceImpl"
+													"text": "ScheduleServiceImpl"
 												},
 												{
 													"_type": "LabelView",
@@ -396,7 +396,7 @@
 											"font": "Arial;13;0",
 											"left": 488,
 											"top": 40,
-											"width": 129.8271484375,
+											"width": 150.78076171875,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7++0Rsx9Q8="
@@ -421,7 +421,7 @@
 												"$ref": "AAAAAAFqe7++0Rsu/ao="
 											},
 											"font": "Arial;13;0",
-											"left": 553,
+											"left": 563,
 											"top": 80,
 											"width": 1,
 											"height": 420
@@ -430,7 +430,7 @@
 									"font": "Arial;13;0",
 									"left": 488,
 									"top": 40,
-									"width": 129.8271484375,
+									"width": 150.78076171875,
 									"height": 460,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7++0RswRTs="
@@ -467,7 +467,7 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 64,
+													"left": 48,
 													"height": 13
 												},
 												{
@@ -477,11 +477,11 @@
 														"$ref": "AAAAAAFqe7/FIBtPRYk="
 													},
 													"font": "Arial;13;1",
-													"left": 717,
+													"left": 709,
 													"top": 47,
-													"width": 134.22998046875,
+													"width": 173.99169921875,
 													"height": 13,
-													"text": "MovieBatchOffForm"
+													"text": "scheduleBatchDeleteForm"
 												},
 												{
 													"_type": "LabelView",
@@ -491,7 +491,7 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 64,
+													"left": 48,
 													"width": 106.20263671875,
 													"height": 13,
 													"text": "(from Interaction1)"
@@ -504,15 +504,15 @@
 													},
 													"visible": false,
 													"font": "Arial;13;0",
-													"left": 64,
+													"left": 48,
 													"height": 13,
 													"horizontalAlignment": 1
 												}
 											],
 											"font": "Arial;13;0",
-											"left": 712,
+											"left": 704,
 											"top": 40,
-											"width": 144.22998046875,
+											"width": 183.99169921875,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7/FIBtQ2VM="
@@ -537,16 +537,16 @@
 												"$ref": "AAAAAAFqe7/FIBtNwLw="
 											},
 											"font": "Arial;13;0",
-											"left": 784,
+											"left": 796,
 											"top": 80,
 											"width": 1,
 											"height": 417
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 712,
+									"left": 704,
 									"top": 40,
-									"width": 144.22998046875,
+									"width": 183.99169921875,
 									"height": 457,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7/FIBtPRYk="
@@ -595,9 +595,9 @@
 													"font": "Arial;13;1",
 													"left": 981,
 													"top": 47,
-													"width": 93.07177734375,
+													"width": 114.025390625,
 													"height": 13,
-													"text": "MovieMapper"
+													"text": "ScheduleMapper"
 												},
 												{
 													"_type": "LabelView",
@@ -628,7 +628,7 @@
 											"font": "Arial;13;0",
 											"left": 976,
 											"top": 40,
-											"width": 103.07177734375,
+											"width": 124.025390625,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7/LJBtvjA0="
@@ -653,7 +653,7 @@
 												"$ref": "AAAAAAFqe7/LJBtsoiw="
 											},
 											"font": "Arial;13;0",
-											"left": 1028,
+											"left": 1038,
 											"top": 80,
 											"width": 1,
 											"height": 420
@@ -662,7 +662,7 @@
 									"font": "Arial;13;0",
 									"left": 976,
 									"top": 40,
-									"width": 103.07177734375,
+									"width": 124.025390625,
 									"height": 460,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7/LJBturi8="
@@ -711,9 +711,9 @@
 													"font": "Arial;13;1",
 													"left": 1181,
 													"top": 47,
-													"width": 65.62451171875,
+													"width": 86.578125,
 													"height": 13,
-													"text": "MoviePO"
+													"text": "SchedulePO"
 												},
 												{
 													"_type": "LabelView",
@@ -744,7 +744,7 @@
 											"font": "Arial;13;0",
 											"left": 1176,
 											"top": 40,
-											"width": 75.62451171875,
+											"width": 96.578125,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFqe7/RaxuOOOc="
@@ -769,7 +769,7 @@
 												"$ref": "AAAAAAFqe7/RaxuL8cU="
 											},
 											"font": "Arial;13;0",
-											"left": 1214,
+											"left": 1224,
 											"top": 80,
 											"width": 1,
 											"height": 417
@@ -778,7 +778,7 @@
 									"font": "Arial;13;0",
 									"left": 1176,
 									"top": 40,
-									"width": 75.62451171875,
+									"width": 96.578125,
 									"height": 457,
 									"nameCompartment": {
 										"$ref": "AAAAAAFqe7/RaxuNvVA="
@@ -807,7 +807,7 @@
 												"$ref": "AAAAAAFqe8I3KBvDo4U="
 											},
 											"font": "Arial;13;0",
-											"left": -17,
+											"left": -7,
 											"top": 96,
 											"width": 499.4716796875,
 											"height": 13,
@@ -817,7 +817,7 @@
 												"$ref": "AAAAAAFqe8I3KBvE2eU="
 											},
 											"edgePosition": 1,
-											"text": "1 : pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm)"
+											"text": "1 : deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -830,7 +830,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 232,
+											"left": 242,
 											"top": 81,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -851,7 +851,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 232,
+											"left": 242,
 											"top": 116,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -871,7 +871,7 @@
 												"$ref": "AAAAAAFqe8I3KBvDo4U="
 											},
 											"font": "Arial;13;0",
-											"left": 341,
+											"left": 351,
 											"top": 112,
 											"width": 14,
 											"height": 369
@@ -884,7 +884,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7+zORr3KZg="
 									},
-									"points": "124:112;341:112",
+									"points": "133:112;351:112",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8I3KBvFHeU="
 									},
@@ -918,17 +918,17 @@
 												"$ref": "AAAAAAFqe8JILxvYOVs="
 											},
 											"font": "Arial;13;0",
-											"left": 262,
-											"top": 144,
-											"width": 376.63818359375,
+											"left": 222,
+											"top": 143,
+											"width": 475.4775390625,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": -4.612721317992635,
+											"distance": 10.04987562112089,
 											"hostEdge": {
 												"$ref": "AAAAAAFqe8JILxvZUis="
 											},
 											"edgePosition": 1,
-											"text": "2 : pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm)"
+											"text": "2 : deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -941,7 +941,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 450,
+											"left": 460,
 											"top": 129,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -962,7 +962,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 450,
+											"left": 460,
 											"top": 164,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -982,7 +982,7 @@
 												"$ref": "AAAAAAFqe8JILxvYOVs="
 											},
 											"font": "Arial;13;0",
-											"left": 546,
+											"left": 556,
 											"top": 160,
 											"width": 14,
 											"height": 297
@@ -995,7 +995,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7+4yBsWkkg="
 									},
-									"points": "354:160;546:160",
+									"points": "364:160;556:160",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8JILxvayEA="
 									},
@@ -1029,9 +1029,9 @@
 												"$ref": "AAAAAAFqe8JYixvtcBs="
 											},
 											"font": "Arial;13;0",
-											"left": 613,
+											"left": 614,
 											"top": 186,
-											"width": 110.54443359375,
+											"width": 130.076171875,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -1039,7 +1039,7 @@
 												"$ref": "AAAAAAFqe8JYixvuzk4="
 											},
 											"edgePosition": 1,
-											"text": "3 : getMovieIdList()"
+											"text": "3 : getScheduleIdList()"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1052,7 +1052,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 668,
+											"left": 679,
 											"top": 171,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1073,7 +1073,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 668,
+											"left": 679,
 											"top": 206,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1093,7 +1093,7 @@
 												"$ref": "AAAAAAFqe8JYixvtcBs="
 											},
 											"font": "Arial;13;0",
-											"left": 777,
+											"left": 789,
 											"top": 202,
 											"width": 14,
 											"height": 29
@@ -1106,7 +1106,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7++0Rs1Bso="
 									},
-									"points": "559:202;777:202",
+									"points": "569:202;789:202",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8JYixvv8lg="
 									},
@@ -1140,9 +1140,9 @@
 												"$ref": "AAAAAAFqe8JmDxwC9JY="
 											},
 											"font": "Arial;13;0",
-											"left": 589,
+											"left": 590,
 											"top": 251,
-											"width": 163.3125,
+											"width": 182.84423828125,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -1150,7 +1150,7 @@
 												"$ref": "AAAAAAFqe8JmDxwD6Po="
 											},
 											"edgePosition": 1,
-											"text": "4 : List<Integer> movieIdList"
+											"text": "4 : List<Integer> ScheduleIdList"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1163,7 +1163,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 670,
+											"left": 681,
 											"top": 266,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1184,7 +1184,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 671,
+											"left": 682,
 											"top": 231,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1205,7 +1205,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 546,
+											"left": 556,
 											"top": 247,
 											"width": 14,
 											"height": 25
@@ -1218,7 +1218,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7/FIBtUJwU="
 									},
-									"points": "784:247;559:247",
+									"points": "796:247;569:247",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8JmDxwEwDs="
 									},
@@ -1252,9 +1252,9 @@
 												"$ref": "AAAAAAFqe8J3xRwXadc="
 											},
 											"font": "Arial;13;0",
-											"left": 631,
+											"left": 635,
 											"top": 304,
-											"width": 318.65869140625,
+											"width": 331.7158203125,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -1262,7 +1262,7 @@
 												"$ref": "AAAAAAFqe8J3xRwYso8="
 											},
 											"edgePosition": 1,
-											"text": "5 : movieMapper.updateMovieStatusBatch(movieIdList)"
+											"text": "5 : scheduleMapper.deleteScheduleBatch(scheduleIdList)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1275,7 +1275,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 790,
+											"left": 800,
 											"top": 289,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1296,7 +1296,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 790,
+											"left": 800,
 											"top": 324,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1316,7 +1316,7 @@
 												"$ref": "AAAAAAFqe8J3xRwXadc="
 											},
 											"font": "Arial;13;0",
-											"left": 1021,
+											"left": 1031,
 											"top": 320,
 											"width": 14,
 											"height": 166
@@ -1329,7 +1329,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7++0Rs1Bso="
 									},
-									"points": "559:320;1021:320",
+									"points": "569:320;1031:320",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8J3xRwZ5dQ="
 									},
@@ -1363,17 +1363,17 @@
 												"$ref": "AAAAAAFqe8NkJhxg3bU="
 											},
 											"font": "Arial;13;0",
-											"left": 1002,
-											"top": 341,
-											"width": 237.0087890625,
+											"left": 965,
+											"top": 336,
+											"width": 331.7158203125,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": 1.57079566012823,
+											"distance": 15,
 											"hostEdge": {
 												"$ref": "AAAAAAFqe8NkJhxhLHs="
 											},
 											"edgePosition": 1,
-											"text": "6 : updateMovieStatusBatch(movieIdList)"
+											"text": "6 : deleteScheduleBatch(scheduleIdList)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1386,7 +1386,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1120,
+											"left": 1130,
 											"top": 326,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1407,7 +1407,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1120,
+											"left": 1130,
 											"top": 361,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1427,7 +1427,7 @@
 												"$ref": "AAAAAAFqe8NkJhxg3bU="
 											},
 											"font": "Arial;13;0",
-											"left": 1207,
+											"left": 1217,
 											"top": 357,
 											"width": 14,
 											"height": 100
@@ -1440,7 +1440,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7/LJBtzK9s="
 									},
-									"points": "1034:357;1207:357",
+									"points": "1044:357;1217:357",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8NkJhxir5Q="
 									},
@@ -1474,7 +1474,7 @@
 												"$ref": "AAAAAAFqe8wqxhpOIoQ="
 											},
 											"font": "Arial;13;0",
-											"left": 1220,
+											"left": 1230,
 											"top": 379,
 											"width": 78.04443359375,
 											"height": 13,
@@ -1497,7 +1497,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1274,
+											"left": 1284,
 											"top": 379,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1518,7 +1518,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1240,
+											"left": 1250,
 											"top": 380,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1538,7 +1538,7 @@
 												"$ref": "AAAAAAFqe8wqxhpOIoQ="
 											},
 											"font": "Arial;13;0",
-											"left": 1214,
+											"left": 1224,
 											"top": 396,
 											"width": 14,
 											"height": 29
@@ -1551,7 +1551,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7/RaxuSqTY="
 									},
-									"points": "1220:376;1250:376;1250:396;1227:396",
+									"points": "1230:376;1260:376;1260:396;1237:396",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8wqxxpQSfo="
 									},
@@ -1585,7 +1585,7 @@
 												"$ref": "AAAAAAFqe8N0MBx1ADk="
 											},
 											"font": "Arial;13;0",
-											"left": 1110,
+											"left": 1120,
 											"top": 428,
 											"width": 18.0654296875,
 											"height": 13,
@@ -1608,7 +1608,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1119,
+											"left": 1129,
 											"top": 443,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1629,7 +1629,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1120,
+											"left": 1130,
 											"top": 408,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1650,7 +1650,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1021,
+											"left": 1031,
 											"top": 424,
 											"width": 14,
 											"height": 25
@@ -1663,7 +1663,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7/RaxuSqTY="
 									},
-									"points": "1207:424;1034:424",
+									"points": "1217:424;1044:424",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8N0MBx3fxU="
 									},
@@ -1697,7 +1697,7 @@
 												"$ref": "AAAAAAFqe8KHlRws9sY="
 											},
 											"font": "Arial;13;0",
-											"left": 780,
+											"left": 790,
 											"top": 452,
 											"width": 18.0654296875,
 											"height": 13,
@@ -1720,7 +1720,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 789,
+											"left": 799,
 											"top": 467,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1741,7 +1741,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 790,
+											"left": 800,
 											"top": 432,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1762,7 +1762,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 546,
+											"left": 556,
 											"top": 448,
 											"width": 14,
 											"height": 25
@@ -1775,7 +1775,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7/LJBtzK9s="
 									},
-									"points": "1021:448;559:448",
+									"points": "1031:448;569:448",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8KHlRwuGzE="
 									},
@@ -1809,7 +1809,7 @@
 												"$ref": "AAAAAAFqe8PRWxyPn7c="
 											},
 											"font": "Arial;13;0",
-											"left": 401,
+											"left": 411,
 											"top": 468,
 											"width": 102.6162109375,
 											"height": 13,
@@ -1832,7 +1832,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 452,
+											"left": 462,
 											"top": 483,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1853,7 +1853,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 453,
+											"left": 463,
 											"top": 448,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1874,7 +1874,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 341,
+											"left": 351,
 											"top": 464,
 											"width": 14,
 											"height": 25
@@ -1887,7 +1887,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7++0Rs1Bso="
 									},
-									"points": "553:464;354:464",
+									"points": "563:464;364:464",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8PRWxyRX6Y="
 									},
@@ -1921,7 +1921,7 @@
 												"$ref": "AAAAAAFqe8PbgBykzz0="
 											},
 											"font": "Arial;13;0",
-											"left": 180,
+											"left": 190,
 											"top": 480,
 											"width": 102.6162109375,
 											"height": 13,
@@ -1944,7 +1944,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 231,
+											"left": 241,
 											"top": 495,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1965,7 +1965,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 232,
+											"left": 242,
 											"top": 460,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1986,7 +1986,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 124,
+											"left": 133,
 											"top": 476,
 											"width": 14,
 											"height": 25
@@ -1999,7 +1999,7 @@
 									"tail": {
 										"$ref": "AAAAAAFqe7+4yBsWkkg="
 									},
-									"points": "341:476;124:476",
+									"points": "351:476;133:476",
 									"nameLabel": {
 										"$ref": "AAAAAAFqe8PbgBymdS0="
 									},
@@ -2023,7 +2023,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm)",
+							"name": "deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm)",
 							"source": {
 								"$ref": "AAAAAAFqe7+zORrwcMA="
 							},
@@ -2038,7 +2038,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm)",
+							"name": "deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm)",
 							"source": {
 								"$ref": "AAAAAAFqe7+4yBsPUgM="
 							},
@@ -2053,7 +2053,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "getMovieIdList()",
+							"name": "getScheduleIdList()",
 							"source": {
 								"$ref": "AAAAAAFqe7++0Rsu/ao="
 							},
@@ -2068,7 +2068,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "List<Integer> movieIdList",
+							"name": "List<Integer> ScheduleIdList",
 							"source": {
 								"$ref": "AAAAAAFqe7/FIBtNwLw="
 							},
@@ -2083,7 +2083,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "movieMapper.updateMovieStatusBatch(movieIdList)",
+							"name": "scheduleMapper.deleteScheduleBatch(scheduleIdList)",
 							"source": {
 								"$ref": "AAAAAAFqe7++0Rsu/ao="
 							},
@@ -2098,7 +2098,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "updateMovieStatusBatch(movieIdList)",
+							"name": "deleteScheduleBatch(scheduleIdList)",
 							"source": {
 								"$ref": "AAAAAAFqe7/LJBtsoiw="
 							},
@@ -2187,7 +2187,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MovieUI",
+							"name": "ScheduleUI",
 							"represent": {
 								"$ref": "AAAAAAFqe7+zOBrvf8E="
 							},
@@ -2199,7 +2199,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MovieService",
+							"name": "ScheduleService",
 							"represent": {
 								"$ref": "AAAAAAFqe7+4yBsO1hs="
 							},
@@ -2211,7 +2211,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MovieServiceImpl",
+							"name": "ScheduleServiceImpl",
 							"represent": {
 								"$ref": "AAAAAAFqe7++0Rstrgw="
 							},
@@ -2223,7 +2223,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MovieBatchOffForm",
+							"name": "scheduleBatchDeleteForm",
 							"represent": {
 								"$ref": "AAAAAAFqe7/FIBtMEWc="
 							},
@@ -2235,7 +2235,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MovieMapper",
+							"name": "ScheduleMapper",
 							"represent": {
 								"$ref": "AAAAAAFqe7/LIxtrZu8="
 							},
@@ -2247,7 +2247,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqe73XJhrg71Q="
 							},
-							"name": "MoviePO",
+							"name": "SchedulePO",
 							"represent": {
 								"$ref": "AAAAAAFqe7/RaxuKym0="
 							},
