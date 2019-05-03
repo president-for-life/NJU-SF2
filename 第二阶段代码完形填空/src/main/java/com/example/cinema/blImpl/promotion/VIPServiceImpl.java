@@ -20,9 +20,12 @@ public class VIPServiceImpl implements VIPService {
 
     @Override
     public ResponseVO addVIPCard(int userId) {
+        // 创建会员卡
         VIPCard vipCard = new VIPCard();
         vipCard.setUserId(userId);
         vipCard.setBalance(0);
+
+        // 插入会员卡po
         try {
             int id = vipCardMapper.insertOneCard(vipCard);
             return ResponseVO.buildSuccess(vipCardMapper.selectCardById(id));
@@ -57,8 +60,12 @@ public class VIPServiceImpl implements VIPService {
         if (vipCard == null) {
             return ResponseVO.buildFailure("会员卡不存在");
         }
+
+        // 根据付款金额计算会员卡增加的余额
         double balance = vipCard.calculate(vipCardForm.getAmount());
         vipCard.setBalance(vipCard.getBalance() + balance);
+
+        // 更新会员卡余额
         try {
             vipCardMapper.updateCardBalance(vipCardForm.getVipId(), vipCard.getBalance());
             return ResponseVO.buildSuccess(vipCard);

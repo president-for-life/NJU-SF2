@@ -30,6 +30,7 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public ResponseVO addCoupon(CouponForm couponForm) {
         try {
+            // 创建优惠券
             Coupon coupon=new Coupon();
             coupon.setName(couponForm.getName());
             coupon.setDescription(couponForm.getDescription());
@@ -37,7 +38,10 @@ public class CouponServiceImpl implements CouponService {
             coupon.setDiscountAmount(couponForm.getDiscountAmount());
             coupon.setStartTime(couponForm.getStartTime());
             coupon.setEndTime(couponForm.getEndTime());
+
+            // 插入优惠券
             couponMapper.insertCoupon(coupon);
+
             return ResponseVO.buildSuccess(coupon);
         } catch (Exception e) {
             e.printStackTrace();

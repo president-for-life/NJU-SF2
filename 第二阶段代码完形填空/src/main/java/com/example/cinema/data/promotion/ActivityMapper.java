@@ -12,21 +12,33 @@ import java.util.List;
 @Mapper
 public interface ActivityMapper {
 
+    /**
+     * 插入优惠活动
+     */
     int insertActivity(Activity activity);
 
+    /**
+     * 为某优惠活动插入优惠电影列表
+     */
     int insertActivityAndMovie(@Param("activityId") int activityId,@Param("movieId") List<Integer> movieId);
 
+    /**
+     * 选择所有优惠活动
+     */
     List<Activity> selectActivities();
 
+    /**
+     * 选择优惠电影列表中含有某电影的优惠活动
+     */
     List<Activity> selectActivitiesByMovie(int movieId);
 
+    /**
+     * 选择某优惠活动
+     */
     Activity selectById(int id);
 
+    /**
+     * ？
+     */
     List<Activity> selectActivitiesWithoutMovie();
-
-
-
-
-
-
 }

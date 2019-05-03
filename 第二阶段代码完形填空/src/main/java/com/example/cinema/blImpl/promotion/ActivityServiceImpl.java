@@ -26,18 +26,26 @@ public class ActivityServiceImpl implements ActivityService {
     @Transactional
     public ResponseVO publishActivity(ActivityForm activityForm) {
         try {
+            // 创建优惠券
             ResponseVO vo = couponService.addCoupon(activityForm.getCouponForm());
             Coupon coupon = (Coupon) vo.getContent();
+
+            // 创建优惠活动
             Activity activity = new Activity();
             activity.setName(activityForm.getName());
             activity.setDescription(activityForm.getName());
             activity.setStartTime(activityForm.getStartTime());
             activity.setEndTime(activityForm.getEndTime());
             activity.setCoupon(coupon);
+
+            // 插入优惠活动
             activityMapper.insertActivity(activity);
-            if(activityForm.getMovieList()!=null&&activityForm.getMovieList().size()!=0){
+
+            // 优惠活动的条件为“购买指定电影”
+            if (activityForm.getMovieList() != null && activityForm.getMovieList().size() != 0) {
                 activityMapper.insertActivityAndMovie(activity.getId(), activityForm.getMovieList());
             }
+
             return ResponseVO.buildSuccess(activityMapper.selectById(activity.getId()));
         } catch (Exception e) {
             e.printStackTrace();
