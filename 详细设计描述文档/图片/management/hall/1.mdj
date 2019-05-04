@@ -63,8 +63,8 @@
 												"$ref": "AAAAAAFqc0BfyCBMHt4="
 											},
 											"font": "Arial;13;0",
-											"left": 78.97900390625,
-											"top": 5,
+											"left": 86.97900390625,
+											"top": 13,
 											"width": 120.9453125,
 											"height": 13,
 											"text": "Sequence Diagram()"
@@ -76,15 +76,16 @@
 												"$ref": "AAAAAAFqc0BfyCBMHt4="
 											},
 											"font": "Arial;13;1",
-											"left": 13,
-											"top": 5,
+											"left": 21,
+											"top": 13,
 											"width": 60.97900390625,
 											"height": 13,
 											"text": "interaction"
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 8,
+									"left": 16,
+									"top": 8,
 									"width": 985,
 									"height": 577,
 									"nameLabel": {
