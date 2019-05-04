@@ -63,7 +63,7 @@
 											"top": 286,
 											"width": 927,
 											"height": 13,
-											"text": "Statistic"
+											"text": "blImpl.statistic"
 										},
 										{
 											"_type": "LabelView",
@@ -380,9 +380,9 @@
 											"font": "Arial;13;0",
 											"left": -440,
 											"top": -296,
-											"width": 83.78271484375,
+											"width": 122.07177734375,
 											"height": 13,
-											"text": "(from Statistic)"
+											"text": "(from blImpl.statistic)"
 										},
 										{
 											"_type": "LabelView",
@@ -560,9 +560,9 @@
 											"font": "Arial;13;0",
 											"left": -472,
 											"top": -304,
-											"width": 83.78271484375,
+											"width": 122.07177734375,
 											"height": 13,
-											"text": "(from Statistic)"
+											"text": "(from blImpl.statistic)"
 										},
 										{
 											"_type": "LabelView",
@@ -744,9 +744,9 @@
 											"font": "Arial;13;0",
 											"left": -424,
 											"top": -296,
-											"width": 83.78271484375,
+											"width": 122.07177734375,
 											"height": 13,
-											"text": "(from Statistic)"
+											"text": "(from blImpl.statistic)"
 										},
 										{
 											"_type": "LabelView",
@@ -927,9 +927,9 @@
 											"font": "Arial;13;0",
 											"left": -72,
 											"top": -208,
-											"width": 83.78271484375,
+											"width": 122.07177734375,
 											"height": 13,
-											"text": "(from Statistic)"
+											"text": "(from blImpl.statistic)"
 										},
 										{
 											"_type": "LabelView",
@@ -1748,9 +1748,9 @@
 											"font": "Arial;13;0",
 											"left": -272,
 											"top": -8,
-											"width": 83.78271484375,
+											"width": 122.07177734375,
 											"height": 13,
-											"text": "(from Statistic)"
+											"text": "(from blImpl.statistic)"
 										},
 										{
 											"_type": "LabelView",
@@ -2781,7 +2781,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Statistic",
+					"name": "blImpl.statistic",
 					"ownedElements": [
 						{
 							"_type": "UMLClass",
