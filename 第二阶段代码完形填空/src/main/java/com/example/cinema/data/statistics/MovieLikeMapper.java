@@ -16,7 +16,6 @@ public interface MovieLikeMapper {
      * 插入一条想看记录
      * @param movieId 电影id
      * @param userId 用户id
-     * @return ？
      */
     int insertOneLike(@Param("movieId")int movieId ,@Param("userId")int userId);
 
@@ -24,7 +23,6 @@ public interface MovieLikeMapper {
      * 删除一条想看记录
      * @param movieId 电影id
      * @param userId 用户id
-     * @return ？
      */
     int deleteOneLike(@Param("movieId")int movieId ,@Param("userId")int userId);
 
@@ -40,7 +38,6 @@ public interface MovieLikeMapper {
      * 根据movieId和userId查找记录
      * @param movieId 电影id
      * @param userId 用户id
-     * @return ？
      */
     int selectLikeMovie(@Param("movieId") int movieId ,@Param("userId")int userId);
 

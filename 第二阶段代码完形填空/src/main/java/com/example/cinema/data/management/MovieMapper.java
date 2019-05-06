@@ -17,7 +17,6 @@ public interface MovieMapper {
     /**
      * 插入一条电影信息
      * @param addMovieForm 电影表单（使用表单和数据层打交道，很奇怪）
-     * @return ？
      */
     int insertOneMovie(MovieForm addMovieForm);
 
@@ -58,14 +57,12 @@ public interface MovieMapper {
     /**
      * 批量更新电影状态
      * @param movieIdList 电影id数组
-     * @return ？
      */
     int updateMovieStatusBatch(List<Integer> movieIdList);
 
     /**
      * 修改电影
      * @param updateMovieForm 电影表单
-     * @return ？
      */
     int updateMovie(MovieForm updateMovieForm);
 }

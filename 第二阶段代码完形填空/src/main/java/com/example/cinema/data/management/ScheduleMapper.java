@@ -19,7 +19,6 @@ public interface ScheduleMapper {
     /**
      * 插入一条排片信息
      * @param scheduleForm 排片表单
-     * @return ？
      */
     int insertOneSchedule(ScheduleForm scheduleForm);
 
@@ -39,21 +38,19 @@ public interface ScheduleMapper {
      * @param startTime 开始日期
      * @param endTime 结束日期
      * @param id ？id
-     * @return
+     * @return po.ScheduleItem数组
      */
     List<ScheduleItem> selectScheduleConflictByHallIdAndTime(@Param("hallId") int hallId, @Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("id") int id);
 
     /**
      * 插入观众可见排片限制
      * @param scheduleViewForm 排片可见表单
-     * @return ？
      */
     int insertOneView(ScheduleViewForm scheduleViewForm);
 
     /**
      * 修改观众可见排片限制
      * @param scheduleViewForm 排片可见表单
-     * @return ？
      */
     int updateOneView(ScheduleViewForm scheduleViewForm);
 
@@ -66,7 +63,6 @@ public interface ScheduleMapper {
     /**
      * 批量删除排片信息
      * @param scheduleIdList 排片id数组
-     * @return ？
      */
     int deleteScheduleBatch(List<Integer> scheduleIdList);
 
@@ -86,7 +82,6 @@ public interface ScheduleMapper {
     /**
      * 根据id修改排片信息
      * @param scheduleForm 排片表单
-     * @return ？
      */
     int updateScheduleById(ScheduleForm scheduleForm);
 
@@ -106,7 +101,7 @@ public interface ScheduleMapper {
     List<ScheduleItem> selectScheduleByMovieIdList(List<Integer> movieIdList);
 
     /**
-     * 查询movieId的所有排片信息
+     * 查询某电影的所有排片信息
      * @param movieId 电影id
      * @return po.ScheduleItem数组
      */

@@ -17,22 +17,21 @@ import java.util.List;
 public interface StatisticsMapper {
     /**
      * 查询date日期每部电影的排片次数
-     * @param date
-     * @return
+     * @param date 日期
+     * @return po.MovieScheduleTime数组
      */
     List<MovieScheduleTime> selectMovieScheduleTimes(@Param("date") Date date, @Param("nextDate") Date nextDate);
 
     /**
      * 查询所有电影的总票房（包括已经下架的，降序排列）
-     * @return
+     * @return po.MovieTotalBoxOffice数组
      */
     List<MovieTotalBoxOffice> selectMovieTotalBoxOffice();
 
     /**
      * 查询某天每个客户的购票金额
-     * @param date
-     * @param nextDate
-     * @return
+     * @param date 日期
+     * @return po.AudiencePrice数组
      */
     List<AudiencePrice> selectAudiencePrice(@Param("date") Date date, @Param("nextDate") Date nextDate);
 }

@@ -3,6 +3,9 @@ package com.example.cinema.blImpl.sales;
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.blImpl.management.hall.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
+import com.example.cinema.blImpl.promotion.ActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.CouponServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPServiceForBl;
 import com.example.cinema.data.sales.TicketMapper;
 import com.example.cinema.po.Hall;
 import com.example.cinema.po.ScheduleItem;
@@ -26,6 +29,12 @@ public class TicketServiceImpl implements TicketService {
     ScheduleServiceForBl scheduleService;
     @Autowired
     HallServiceForBl hallService;
+    @Autowired
+    ActivityServiceForBl activityService;
+    @Autowired
+    CouponServiceForBl couponService;
+    @Autowired
+    VIPServiceForBl vipService;
 
     @Override
     @Transactional
