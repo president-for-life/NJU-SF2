@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * Created by liying on 2019/4/14.
  */
 @Service
-public class VIPServiceImpl implements VIPService {
+public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Autowired
     VIPCardMapper vipCardMapper;
 
@@ -42,6 +42,18 @@ public class VIPServiceImpl implements VIPService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    /**
+     * @author 梁正川
+     */
+    public VIPCard getVIPCardById(int id) {
+        try {
+            return vipCardMapper.selectCardById(id);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

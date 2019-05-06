@@ -77,6 +77,7 @@ public class Ticket {
         return vo;
 
     }
+
     public TicketWithScheduleVO getWithScheduleVO() {
         TicketWithScheduleVO vo = new TicketWithScheduleVO();
         vo.setRowIndex(this.getRowIndex());

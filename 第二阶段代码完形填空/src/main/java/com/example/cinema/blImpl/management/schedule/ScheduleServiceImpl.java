@@ -62,7 +62,8 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
             if(!responseVO.getSuccess()){
                 return responseVO;
             }
-            //在修改时要检查想要修改的排片信息是否已被观众可见，若可见则无法修改
+
+            // 在修改时要检查想要修改的排片信息是否已被观众可见，若可见则无法修改
             if(isAudienceCanView(Arrays.asList(scheduleForm.getId()))){
                 return ResponseVO.buildFailure(VIEW_CONFLICT_ERROR_MESSAGE);
             }
@@ -103,7 +104,7 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
     @Override
     public ResponseVO searchAudienceSchedule(int movieId) {
         try{
-            //根据view中设置的排片可见限制
+            // 根据view中设置的排片可见限制
             int days = scheduleMapper.selectView();
             List<ScheduleItem> scheduleItems = scheduleMapper.selectScheduleByMovieId(movieId);
 
@@ -298,7 +299,7 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
         return false;
     }
 
-    List<ScheduleVO> getScheduleVOList(int interval,Date startDate, List<ScheduleItem> scheduleItemList ) throws ParseException {
+    List<ScheduleVO> getScheduleVOList(int interval, Date startDate, List<ScheduleItem> scheduleItemList ) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<ScheduleVO> scheduleVOList = new ArrayList<>();
         for(int i = 0; i < interval; i++){
@@ -319,8 +320,9 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
         return scheduleVOList;
     }
 
-
-
+    /**
+     * po.ScheduleItem数组转vo.ScheduleItemVO数组
+     */
     private List<ScheduleItemVO> scheduleItemList2ScheduleItemVOList(List<ScheduleItem> scheduleItemList){
         List<ScheduleItemVO> scheduleItemVOList = new ArrayList<>();
         for(ScheduleItem scheduleItem : scheduleItemList){

@@ -79,7 +79,7 @@ public interface ScheduleMapper {
 
     /**
      * 查询排片限制信息
-     * @return ？
+     * @return 排片对观众的可见的天数
      */
     int selectView();
 

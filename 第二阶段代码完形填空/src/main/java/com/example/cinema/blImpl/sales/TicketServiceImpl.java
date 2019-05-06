@@ -42,13 +42,17 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public ResponseVO getBySchedule(int scheduleId) {
         try {
+            // 获得某场次的所有电影票
             List<Ticket> tickets = ticketMapper.selectTicketsBySchedule(scheduleId);
+
+            // 得出该场次的被锁座位
             ScheduleItem schedule=scheduleService.getScheduleItemById(scheduleId);
             Hall hall=hallService.getHallById(schedule.getHallId());
             int[][] seats=new int[hall.getRow()][hall.getColumn()];
             tickets.stream().forEach(ticket -> {
                 seats[ticket.getRowIndex()][ticket.getColumnIndex()]=1;
             });
+
             ScheduleWithSeatVO scheduleWithSeatVO=new ScheduleWithSeatVO();
             scheduleWithSeatVO.setScheduleItem(schedule);
             scheduleWithSeatVO.setSeats(seats);
@@ -62,7 +66,6 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public ResponseVO getTicketByUser(int userId) {
         return null;
-
     }
 
     @Override

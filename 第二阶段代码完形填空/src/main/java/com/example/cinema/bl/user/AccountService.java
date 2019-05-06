@@ -12,7 +12,7 @@ public interface AccountService {
 
     /**
      * 注册账号
-     * @return ResponseVO
+     * @return vo.ResponseVO
      */
     public ResponseVO registerAccount(UserForm userForm);
 
