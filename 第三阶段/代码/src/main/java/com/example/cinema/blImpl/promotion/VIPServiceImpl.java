@@ -3,6 +3,7 @@ package com.example.cinema.blImpl.promotion;
 import com.example.cinema.bl.promotion.VIPService;
 import com.example.cinema.data.promotion.VIPCardMapper;
 import com.example.cinema.po.VIPCard;
+import com.example.cinema.po.VIPCardCharge;
 import com.example.cinema.po.VIPCardStrategy;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPCardChargeForm;
@@ -10,6 +11,8 @@ import com.example.cinema.vo.VIPCardStrategyForm;
 import com.example.cinema.vo.VIPInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -19,6 +22,10 @@ import org.springframework.stereotype.Service;
 public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Autowired
     VIPCardMapper vipCardMapper;
+
+    /*================================================================================
+    会员卡策略
+     */
 
     @Override
     public ResponseVO addStrategy(VIPCardStrategyForm strategyForm) {
@@ -53,6 +60,10 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             return ResponseVO.buildFailure("获得会员卡充值优惠策略失败");
         }
     }
+
+    /*================================================================================
+    会员卡
+     */
 
     @Override
     public ResponseVO addVIPCard(int userId) {
@@ -164,5 +175,8 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-
+    public List<VIPCardCharge> getChargeRecords(int userId) {
+        // TODO
+        return null;
+    }
 }

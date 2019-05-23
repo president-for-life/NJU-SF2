@@ -46,7 +46,7 @@ public interface TicketService {
      * @return vo.ResponseVO，包含vo.TicketWithScheduleVO
      * @author 戴羽涵
      */
-    ResponseVO getTicketByUser(int userId);
+    ResponseVO getTicketsByUser(int userId);
 
     /**
      * TODO:完成购票【使用会员卡】流程包括会员卡扣费、校验优惠券和根据优惠活动赠送优惠券

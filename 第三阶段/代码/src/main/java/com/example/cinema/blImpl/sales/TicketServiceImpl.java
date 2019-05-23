@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Created by liying on 2019/4/16.
  */
 @Service
-public class TicketServiceImpl implements TicketService {
+public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
     @Autowired
     TicketMapper ticketMapper;
@@ -305,7 +305,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public ResponseVO getTicketByUser(int userId) {
+    public ResponseVO getTicketsByUser(int userId) {
         try {
             List<Ticket> ticketList = ticketMapper.selectTicketsByUser(userId);
             List<TicketWithScheduleVO> ticketWithScheduleVOList = new ArrayList<>();
@@ -319,6 +319,16 @@ public class TicketServiceImpl implements TicketService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("获取用户买过的票失败");
+        }
+    }
+
+    @Override
+    public List<Ticket> getTicketsByUserForBl(int userId) {
+        try {
+            return ticketMapper.selectTicketsByUser(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

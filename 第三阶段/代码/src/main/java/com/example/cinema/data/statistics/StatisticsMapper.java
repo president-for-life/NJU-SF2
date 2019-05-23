@@ -1,6 +1,7 @@
 package com.example.cinema.data.statistics;
 
 import com.example.cinema.po.AudiencePrice;
+import com.example.cinema.po.Consumption;
 import com.example.cinema.po.MovieScheduleTime;
 import com.example.cinema.po.MovieTotalBoxOffice;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,6 +16,18 @@ import java.util.List;
  */
 @Mapper
 public interface StatisticsMapper {
+
+    /*================================================================================
+    用户消费
+     */
+
+    /**
+     * 查询消费达到一定金额的用户 TODO 未写SQL语句
+     *
+     * @author 梁正川
+     */
+    List<Consumption> selectConsumption(double amount);
+
     /**
      * 查询date日期每部电影的排片次数
      *

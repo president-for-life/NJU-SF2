@@ -59,7 +59,7 @@ public interface VIPService {
     ResponseVO getVIPInfo();
 
     /**
-     * 使用会员卡
+     * 充值会员卡
      *
      * @param vipCardChargeForm 会员卡表单
      * @return vo.ResponseVO
