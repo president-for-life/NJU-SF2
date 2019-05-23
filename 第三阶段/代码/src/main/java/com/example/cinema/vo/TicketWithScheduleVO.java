@@ -13,31 +13,38 @@ public class TicketWithScheduleVO {
      * 电影票id
      */
     private int id;
+
     /**
      * 用户id
      */
     private int userId;
+
     /**
      * 排片
      */
     private ScheduleItem schedule;
+
     /**
      * 列号
      */
     private int columnIndex;
+
     /**
      * 排号
      */
     private int rowIndex;
+
     /**
      * 订单状态
      */
     private String state;
 
-    private Timestamp time;
+    /**
+     * 实际支付金额
+     */
+    private double actualPayment;
 
-    public TicketWithScheduleVO() {
-    }
+    private Timestamp time;
 
     public Timestamp getTime() {
         return time;
@@ -85,6 +92,14 @@ public class TicketWithScheduleVO {
 
     public void setRowIndex(int rowIndex) {
         this.rowIndex = rowIndex;
+    }
+
+    public double getActualPayment() {
+        return actualPayment;
+    }
+
+    public void setActualPayment(double actualPayment) {
+        this.actualPayment = actualPayment;
     }
 
     public String getState() {

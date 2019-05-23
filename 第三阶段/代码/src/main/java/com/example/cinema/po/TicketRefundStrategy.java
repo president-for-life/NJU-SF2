@@ -12,9 +12,14 @@ public class TicketRefundStrategy {
     private int refundable;
 
     /**
-     * 退票比例
+     * 返还比例
      */
     private double ratio;
+
+    /**
+     * 开场前 time 分钟不许退票
+     */
+    private int time;
 
     public int getId() {
         return id;
@@ -38,5 +43,13 @@ public class TicketRefundStrategy {
 
     public void setRatio(double ratio) {
         this.ratio = ratio;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }

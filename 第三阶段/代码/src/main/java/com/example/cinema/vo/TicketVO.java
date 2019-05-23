@@ -2,48 +2,50 @@ package com.example.cinema.vo;
 
 import java.sql.Timestamp;
 
-/**
- * Created by liying on 2019/4/16.
- */
 public class TicketVO {
 
     /**
      * 电影票id
      */
     private int id;
+
     /**
      * 用户id
      */
     private int userId;
+
     /**
      * 排片id
      */
     private int scheduleId;
+
     /**
      * 列号
      */
     private int columnIndex;
+
     /**
      * 排号
      */
     private int rowIndex;
+
     /**
-     * 订单状态
+     * 订单状态：
+     * 0：支付未完成
+     * 1：支付已完成但未出票
+     * 2：已失效
+     * 3：已出票
+     * 4：退票未完成
+     * 5：退票已完成
      */
     private String state;
 
+    /**
+     * 实际支付金额
+     */
+    private double actualPayment;
+
     private Timestamp time;
-
-    public TicketVO() {
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
 
     public int getId() {
         return id;
@@ -91,5 +93,21 @@ public class TicketVO {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public double getActualPayment() {
+        return actualPayment;
+    }
+
+    public void setActualPayment(double actualPayment) {
+        this.actualPayment = actualPayment;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 }
