@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.user.AccountMapper">
+
+    <insert id="insertOneAccount" parameterType="com.example.cinema.po.User"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into user(role, username, password)
+        values(#{role}, #{username}, #{password})
+    </insert>
+
+    <update id="updateOneAccount">
+        update user
+        set role = #{role}, username = #{username}, password = #{password}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOneAccount">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="selectAdmins" resultMap="User">
+        select * from user where role = 'admin'
+    </select>
+
+    <select id="selectUsers" resultMap="User">
+        select * from user where role = 'user'
+    </select>
+
+    <select id="getAccountByName" resultMap="User">
+        select * from user where username=#{username}
+    </select>
+
+    <resultMap id="User" type="com.example.cinema.po.User">
+    </resultMap>
+</mapper>
