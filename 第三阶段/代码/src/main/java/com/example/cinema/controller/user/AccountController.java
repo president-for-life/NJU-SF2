@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author huwen
+ * @author 胡文
  * @date 2019/3/23
  */
 @RestController()

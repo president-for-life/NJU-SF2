@@ -1,7 +1,7 @@
 package com.example.cinema.po;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/21 2:51 PM
  */
 public class AudiencePrice {

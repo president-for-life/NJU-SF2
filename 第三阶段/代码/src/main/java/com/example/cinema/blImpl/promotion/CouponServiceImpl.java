@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/17.
+ * @author 李莹
+ * @date 2019/4/17
  */
 @Service
 public class CouponServiceImpl implements CouponService, CouponServiceForBl {

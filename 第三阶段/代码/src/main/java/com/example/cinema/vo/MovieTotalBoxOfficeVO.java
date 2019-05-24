@@ -3,7 +3,7 @@ package com.example.cinema.vo;
 import com.example.cinema.po.MovieTotalBoxOffice;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/21 1:42 PM
  */
 public class MovieTotalBoxOfficeVO {

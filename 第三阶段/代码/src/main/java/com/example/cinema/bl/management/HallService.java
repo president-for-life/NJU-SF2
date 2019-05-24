@@ -3,7 +3,7 @@ package com.example.cinema.bl.management;
 import com.example.cinema.vo.ResponseVO;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/12 2:01 PM
  */
 public interface HallService {

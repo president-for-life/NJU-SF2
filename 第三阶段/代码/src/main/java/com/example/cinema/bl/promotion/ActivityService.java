@@ -4,7 +4,8 @@ import com.example.cinema.vo.ActivityForm;
 import com.example.cinema.vo.ResponseVO;
 
 /**
- * Created by liying on 2019/4/20.
+ * @author 李莹
+ * @date 2019/4/20
  */
 public interface ActivityService {
 

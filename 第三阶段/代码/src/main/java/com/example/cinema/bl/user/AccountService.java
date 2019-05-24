@@ -5,7 +5,7 @@ import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.UserVO;
 
 /**
- * @author huwen
+ * @author 胡文
  * @date 2019/3/23
  */
 public interface AccountService {

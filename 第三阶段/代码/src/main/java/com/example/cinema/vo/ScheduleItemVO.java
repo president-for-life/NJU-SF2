@@ -5,7 +5,7 @@ import com.example.cinema.po.ScheduleItem;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/28 5:43 PM
  */
 public class ScheduleItemVO {

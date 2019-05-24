@@ -3,7 +3,7 @@ package com.example.cinema.po;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/28 5:12 PM
  */
 public class Movie {

@@ -1,7 +1,7 @@
 package com.example.cinema.vo;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/13 12:08 PM
  */
 public class ScheduleViewForm {

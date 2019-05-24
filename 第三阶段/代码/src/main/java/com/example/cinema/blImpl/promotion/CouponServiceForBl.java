@@ -5,6 +5,9 @@ import com.example.cinema.vo.ResponseVO;
 
 import java.util.List;
 
+/**
+ * @author 梁正川
+ */
 public interface CouponServiceForBl {
 
     /**

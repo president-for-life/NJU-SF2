@@ -4,6 +4,9 @@ import com.example.cinema.po.VIPCardCharge;
 
 import java.util.List;
 
+/**
+ * @author 梁正川
+ */
 public interface VIPServiceForBl {
 
     /**

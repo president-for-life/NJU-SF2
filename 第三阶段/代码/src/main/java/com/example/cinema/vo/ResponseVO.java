@@ -1,7 +1,7 @@
 package com.example.cinema.vo;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/3/12 5:14 PM
  */
 public class ResponseVO {

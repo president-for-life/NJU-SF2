@@ -19,8 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author fjj
- * @date 2019/3/12 6:43 PM
+ * @author 范佳杰
  */
 @Service
 public class MovieServiceImpl implements MovieService, MovieServiceForBl {

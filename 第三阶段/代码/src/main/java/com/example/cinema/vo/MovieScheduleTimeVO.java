@@ -3,7 +3,7 @@ package com.example.cinema.vo;
 import com.example.cinema.po.MovieScheduleTime;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/16 2:48 PM
  */
 public class MovieScheduleTimeVO {

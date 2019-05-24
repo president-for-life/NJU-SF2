@@ -5,7 +5,7 @@ import com.example.cinema.vo.MovieForm;
 import com.example.cinema.vo.ResponseVO;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/3/12 6:24 PM
  */
 public interface MovieService {

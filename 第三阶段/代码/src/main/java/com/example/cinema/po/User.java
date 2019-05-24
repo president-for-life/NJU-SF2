@@ -1,7 +1,7 @@
 package com.example.cinema.po;
 
 /**
- * @author huwen
+ * @author 胡文
  * @date 2019/3/23
  */
 public class User {

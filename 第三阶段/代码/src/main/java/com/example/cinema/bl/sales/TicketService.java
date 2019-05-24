@@ -6,6 +6,9 @@ import com.example.cinema.vo.TicketRefundStrategyForm;
 
 import java.util.List;
 
+/**
+ * @author 李莹
+ */
 public interface TicketService {
 
     /**

@@ -5,7 +5,7 @@ import com.example.cinema.po.Movie;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/3/23 1:12 PM
  */
 public class MovieVO {
