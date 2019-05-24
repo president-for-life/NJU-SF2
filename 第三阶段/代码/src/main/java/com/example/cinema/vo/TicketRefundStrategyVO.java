@@ -1,10 +1,10 @@
-package com.example.cinema.po;
+package com.example.cinema.vo;
 
-import com.example.cinema.vo.TicketRefundStrategyVO;
+import com.example.cinema.po.Movie;
 
 import java.util.List;
 
-public class TicketRefundStrategy {
+public class TicketRefundStrategyVO {
 
     /**
      * 退票策略id
@@ -72,15 +72,5 @@ public class TicketRefundStrategy {
 
     public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
-    }
-
-    public TicketRefundStrategyVO getVO() {
-        TicketRefundStrategyVO ticketRefundStrategy = new TicketRefundStrategyVO();
-        ticketRefundStrategy.setId(this.getId());
-        ticketRefundStrategy.setRefundable(this.getRefundable());
-        ticketRefundStrategy.setRatio(this.getRatio());
-        ticketRefundStrategy.setTime(this.getTime());
-        ticketRefundStrategy.setMovieList(this.getMovieList());
-        return ticketRefundStrategy;
     }
 }

@@ -32,11 +32,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserVO login(UserForm userForm) {
         User user = accountMapper.getAccountByName(userForm.getUsername());
-        if (null == user || !user.getPassword().equals(userForm.getPassword())) {// 用户名不存在或密码错误
+        if (null == user
+                || !user.getPassword().equals(userForm.getPassword())) {// 用户名不存在或密码错误
             return null;
         }
         return new UserVO(user);
     }
-
-
 }

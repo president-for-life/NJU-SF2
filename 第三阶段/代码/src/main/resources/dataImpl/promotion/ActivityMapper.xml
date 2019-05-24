@@ -45,7 +45,6 @@
             movie m
         on
             am.movie_id=m.id
-
     </select>
 
     <select id="selectActivitiesByMovie" resultMap="Activity">
@@ -63,8 +62,8 @@
         am.movie_id=m.id
 
         where a.start_time &lt; Now() and a.end_time &gt; Now() and am.movie_id=#{movieId}
-
     </select>
+
     <select id="selectActivitiesWithoutMovie" resultMap="Activity">
         select
         *
@@ -75,10 +74,7 @@
         on
         a.id=am.activity_id
         where a.start_time &lt; Now() and a.end_time &gt; Now() and movie_id is null
-
     </select>
-
-
 
     <resultMap id="Activity" type="com.example.cinema.po.Activity">
         <result column="a_description" property="description"></result>

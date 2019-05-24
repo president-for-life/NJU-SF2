@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.cinema.data.sales.TicketMapper">
+
+    <resultMap id="Ticket" type="com.example.cinema.po.Ticket">
+        <result column="schedule_id" property="scheduleId"></result>
+        <result column="id" property="id"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="column_index" property="columnIndex"></result>
+        <result column="row_index" property="rowIndex"></result>
+        <result column="state" property="state"></result>
+        <result column="time" property="time"></result>
+    </resultMap>
+
     <insert id="insertTicket" parameterType="com.example.cinema.po.Ticket"
             useGeneratedKeys="true" keyProperty="id">
         insert into ticket(user_id,schedule_id,column_index,row_index,state)
         values(#{userId}, #{scheduleId},#{columnIndex},#{rowIndex},#{state})
     </insert>
+
     <insert id="insertTickets" parameterType="java.util.List"
             useGeneratedKeys="true" keyProperty="id">
         insert into ticket(user_id,schedule_id,column_index,row_index,state)
@@ -14,7 +26,6 @@
                  separator=",">
             (#{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state})
         </foreach>
-
     </insert>
 
     <select id="selectTicketById" resultMap="Ticket">
@@ -33,7 +44,6 @@
         select * from ticket where user_id=#{userId}
     </select>
 
-
     <update id="updateTicketState">
         update ticket set state = #{state} where id=#{ticketId}
     </update>
@@ -46,29 +56,56 @@
         update ticket SET  state =2 WHERE minute(timediff(now(),time))>15 and state=0;
     </update>
 
-    <resultMap id="Ticket" type="com.example.cinema.po.Ticket">
-        <result column="schedule_id" property="scheduleId"></result>
+    <resultMap id="TicketRefundStrategy" type="com.example.cinema.po.TicketRefundStrategy">
         <result column="id" property="id"></result>
-        <result column="user_id" property="userId"></result>
-        <result column="column_index" property="columnIndex"></result>
-        <result column="row_index" property="rowIndex"></result>
-        <result column="state" property="state"></result>
+        <result column="refundable" property="refundable"></result>
+        <result column="ratio" property="ratio"></result>
         <result column="time" property="time"></result>
+        <result column="end_time" property="endTime"></result>
+        <collection property="movieList" ofType="com.example.cinema.po.Movie">
+            <id column="movie_id" property="id"></id>
+            <result column="poster_url" property="posterUrl"></result>
+            <result column="screen_writer" property="screenWriter"></result>
+            <result column="start_date" property="startDate"></result>
+            <result column="end_date" property="endDate"></result>
+            <result column="name" property="name"></result>
+            <result column="director" property="director"></result>
+            <result column="type" property="type"></result>
+            <result column="country" property="country"></result>
+            <result column="language" property="language"></result>
+            <result column="length" property="length"></result>
+            <result column="description" property="description"></result>
+            <result column="status" property="status"></result>
+            <result column="starring" property="starring"></result>
+        </collection>
     </resultMap>
 
     <insert id="insertOneRefundStrategy" parameterType="com.example.cinema.po.TicketRefundStrategy"
             useGeneratedKeys="true" keyProperty="id">
-        insert into refund_strategy(refundable, ratio)
-        values(#{refundable}, #{ratio})
+        insert into refund_strategy(refundable, ratio, time)
+        values(#{refundable}, #{ratio}, #{time})
     </insert>
 
     <update id="updateOneRefundStrategy">
         update refund_strategy
-        set refundable = #{refundable}, ratio = #{ratio}
+        set refundable = #{refundable}, ratio = #{ratio}, time = #{time}
         where id = #{id}
     </update>
 
-    <resultMap id="VIPCardStrategy" type="com.example.cinema.po.TicketRefundStrategy">
-    </resultMap>
+    <select id="selectById" resultMap="Activity">
+        select
+            *
+        from
+            activity a
+                left join
+            activity_movie am
+            on
+                a.id=am.activity_id
+                left join
+            movie m
+            on
+                am.movie_id=m.id
+        WHERE a.id=#{id}
+    </select>
 
 </mapper>

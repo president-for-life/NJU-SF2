@@ -41,8 +41,7 @@ public class Ticket {
      * 1：支付已完成但未出票
      * 2：已失效
      * 3：已出票
-     * 4：退票未完成
-     * 5：退票已完成
+     * 4：已退票
      */
     private int state;
 
@@ -142,10 +141,7 @@ public class Ticket {
                 stateString = "已出票";
                 break;
             case 4:
-                stateString = "退票未完成";
-                break;
-            case 5:
-                stateString = "退票已完成";
+                stateString = "已退票";
                 break;
             default:
                 stateString = "未完成";
@@ -178,10 +174,7 @@ public class Ticket {
                 stateString = "已出票";
                 break;
             case 4:
-                stateString = "退票未完成";
-                break;
-            case 5:
-                stateString = "退票已完成";
+                stateString = "已退票";
                 break;
             default:
                 stateString = "未完成";

@@ -42,10 +42,4 @@ public class TicketController {
         return ticketService.getBySchedule(scheduleId);
     }
 
-    @PostMapping("/cancel")
-    public ResponseVO cancelTicket(@RequestParam List<Integer> ticketId) {
-        return ticketService.cancelTicket(ticketId);
-    }
-
-
 }

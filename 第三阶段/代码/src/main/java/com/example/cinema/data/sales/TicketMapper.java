@@ -16,91 +16,115 @@ public interface TicketMapper {
 
     /**
      * 插入单一电影票
-     *
-     * @param ticket po.Ticket
      */
     int insertTicket(Ticket ticket);
 
     /**
      * 插入多个电影票
-     *
-     * @param tickets po.Ticket数组
      */
     int insertTickets(List<Ticket> tickets);
 
     /**
      * 删除单一电影票
-     *
-     * @param ticketId 电影票id
      */
     void deleteTicket(int ticketId);
 
     /**
-     * 更新电影票状态
-     *
-     * @param ticketId 电影票id
-     * @param state    状态
+     * 更新单一电影票状态
      */
-    void updateTicketState(@Param("ticketId") int ticketId, @Param("state") int state);
+    void updateTicketState(
+            @Param("ticketId") int ticketId,
+            @Param("state") int state
+    );
 
     /**
-     * 选择某排片场次的电影票
-     *
-     * @param scheduleId 排片id
-     * @return po.Ticket数组
+     * 选择单一排片场次的所有电影票
      */
     List<Ticket> selectTicketsBySchedule(int scheduleId);
 
     /**
-     * 选择某排片场次中某座位的电影票
-     *
-     * @param scheduleId  排片id
-     * @param columnIndex 列号
-     * @param rowIndex    行号
-     * @return po.Ticket
+     * 选择单一排片场次中某座位的单一电影票
      */
-    Ticket selectTicketByScheduleIdAndSeat(@Param("scheduleId") int scheduleId, @Param("column") int columnIndex, @Param("row") int rowIndex);
+    Ticket selectTicketByScheduleIdAndSeat(
+            @Param("scheduleId") int scheduleId,
+            @Param("column") int columnIndex,
+            @Param("row") int rowIndex
+    );
 
     /**
-     * 选择某电影票
-     *
-     * @param id 电影票id
-     * @return po.Ticket
+     * 选择单一电影票
      */
     Ticket selectTicketById(int id);
 
     /**
-     * 选择某用户买过的电影票
-     *
-     * @param userId 用户id
-     * @return po.Ticket数组
+     * 选择某用户买过的所有电影票（包括所有状态）
      */
     List<Ticket> selectTicketsByUser(int userId);
 
     /**
-     * 删除失效的电影票
+     * 定时删除已失效的多个电影票
      */
     @Scheduled(cron = "0/1 * * * * ?")
     void cleanExpiredTicket();
 
     /*================================================================================
-    退票策略
+    退票策略 TODO 未完成SQL语句
      */
 
     /**
-     * 插入退票策略
+     * 锁退票策略表、退票策略电影表
+     * 用户进入退票流程前使用
+     * 防止管理员在退票流程中修改退票策略
+     */
+    void lockTables();
+
+    /**
+     * 解锁退票策略表、退票策略电影表
+     * 用户完成退票流程后使用
+     */
+    void unlockTables();
+
+    /**
+     * 插入单一退票策略
      *
-     * @author 梁正川
+     * @param strategy 不含movieList的po
      */
     int insertOneRefundStrategy(TicketRefundStrategy strategy);
 
     /**
-     * 修改退票策略
+     * 修改单一退票策略
      *
-     * @author 梁正川
+     * @param strategy 不含movieList的po
      */
-    int updateOneRefundStrategy(TicketRefundStrategy strategy);
+    void updateOneRefundStrategy(TicketRefundStrategy strategy);
 
-    // TODO 选择退票策略
+    /**
+     * 为单一退票策略插入使用该策略的电影列表
+     */
+    int insertStrategyAndMovies(
+            @Param("strategyId") int strategyId,
+            @Param("movieIdList") List<Integer> movieIdList
+    );
+
+    /**
+     * 为单一退票策略删除使用该策略的电影列表
+     */
+    void deleteStrategyAndMovies(
+            @Param("strategyId") int strategyId,
+            @Param("movieIdList") List<Integer> movieIdList
+    );
+
+    /**
+     * 选择单一退票策略
+     *
+     * @return 含有movieList的po
+     */
+    TicketRefundStrategy selectRefundStrategyById(int id);
+
+    /**
+     * 选择所有退票策略
+     *
+     * @return 含有movieList的po
+     */
+    List<TicketRefundStrategy> selectRefundStrategies();
 }
-
