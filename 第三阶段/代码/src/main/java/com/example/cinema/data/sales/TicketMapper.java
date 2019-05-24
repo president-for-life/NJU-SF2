@@ -87,14 +87,14 @@ public interface TicketMapper {
     /**
      * 插入单一退票策略
      *
-     * @param strategy 不含movieList的po
+     * @param strategy 没有用到movieList的po
      */
     int insertOneRefundStrategy(TicketRefundStrategy strategy);
 
     /**
      * 修改单一退票策略
      *
-     * @param strategy 不含movieList的po
+     * @param strategy 没有用到movieList的po
      */
     void updateOneRefundStrategy(TicketRefundStrategy strategy);
 
@@ -117,14 +117,15 @@ public interface TicketMapper {
     /**
      * 选择单一退票策略
      *
-     * @return 含有movieList的po
+     * @param id 退票策略id
+     * @return 用到movieList的po
      */
     TicketRefundStrategy selectRefundStrategyById(int id);
 
     /**
      * 选择所有退票策略
      *
-     * @return 含有movieList的po
+     * @return 用到movieList的po
      */
     List<TicketRefundStrategy> selectRefundStrategies();
 }

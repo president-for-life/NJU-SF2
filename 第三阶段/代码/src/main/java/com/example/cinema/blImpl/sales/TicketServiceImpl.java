@@ -344,11 +344,41 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
     }
 
     @Override
-    public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
+    public ResponseVO pickUpTicket(int ticketId) {
+        // TODO
+
         return null;
     }
 
-    public ResponseVO addRefundTicket() {
+    @Override
+    public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
+        // TODO
+
+        return null;
+    }
+
+    @Override
+    public ResponseVO updateRefundStrategy(TicketRefundStrategyForm strategyForm) {
+        // TODO
+
+        return null;
+    }
+
+    @Override
+    public ResponseVO addRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
+        // TODO
+
+        return null;
+    }
+
+    public ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
+        // TODO
+
+        return null;
+    }
+
+    @Override
+    public ResponseVO addRefundTicket(int ticketId) {
         ticketMapper.lockTables(); // 锁数据库表，防止管理员修改退票策略
 
         // TODO
@@ -359,8 +389,9 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
     @Override
     public ResponseVO completeRefundTicket(int ticketId) {
         // TODO
+        // 退还到银行卡中（因为可能没有办会员卡）
 
-        ticketMapper.unlockTables(); // 解锁数据库表
+        ticketMapper.unlockTables(); // 解锁数据库表，管理员现在开始可以修改退票策略
         return null;
     }
 
