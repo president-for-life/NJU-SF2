@@ -229,6 +229,28 @@ LOCK TABLES `refund_strategy` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `refund_strategy_movie`
+--
+
+DROP TABLE IF EXISTS `refund_strategy_movie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `refund_strategy_movie` (
+  `refund_strategy_id` int(11) DEFAULT NULL,
+  `movie_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `refund_strategy_movie`
+--
+
+LOCK TABLES `refund_strategy_movie` WRITE;
+/*!40000 ALTER TABLE `refund_strategy_movie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `refund_strategy_movie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `schedule`
 --
 
@@ -424,4 +446,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-23 19:01:26
+-- Dump completed on 2019-05-24 21:03:09

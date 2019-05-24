@@ -123,6 +123,13 @@ public interface TicketMapper {
     TicketRefundStrategy selectRefundStrategyById(int id);
 
     /**
+     * 选择某电影使用的退票策略
+     *
+     * @return 没有用到movieList的po
+     */
+    TicketRefundStrategy selectRefundStrategyByMovie(int movieId);
+
+    /**
      * 选择所有退票策略
      *
      * @return 用到movieList的po
