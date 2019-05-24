@@ -12,36 +12,40 @@ import java.util.stream.Collectors;
  */
 public class Activity {
 
+    /**
+     * 优惠活动id
+     */
     private int id;
+
     /**
      * 优惠活动名称
      */
     private String name;
+
     /**
      * 优惠活动描述
      */
     private String description;
+
     /**
      * 优惠活动开始时间
      */
     private Timestamp startTime;
+
     /**
      * 优惠活动截止时间
      */
     private Timestamp endTime;
+
     /**
      * 优惠电影列表
      */
     private List<Movie> movieList;
+
     /**
      * 优惠券规格
      */
     private Coupon coupon;
-
-
-    public Activity() {
-
-    }
 
     public ActivityVO getVO() {
         ActivityVO vo = new ActivityVO();

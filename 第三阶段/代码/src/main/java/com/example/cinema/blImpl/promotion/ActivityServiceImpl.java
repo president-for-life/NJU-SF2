@@ -40,12 +40,15 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
             activity.setEndTime(activityForm.getEndTime());
             activity.setCoupon(coupon);
 
-            // 插入优惠活动
+            // 插入优惠活动 TODO activity中的id会自动生成吗？
             activityMapper.insertActivity(activity);
 
             // 优惠活动的条件为“购买指定电影”
-            if (activityForm.getMovieList() != null && activityForm.getMovieList().size() != 0) {
-                activityMapper.insertActivityAndMovie(activity.getId(), activityForm.getMovieList());
+            if (activityForm.getMovieList() != null
+                    && activityForm.getMovieList().size() != 0) {
+                activityMapper.insertActivityAndMovie(
+                        activity.getId(), activityForm.getMovieList()
+                );
             }
 
             return ResponseVO.buildSuccess(activityMapper.selectById(activity.getId()));

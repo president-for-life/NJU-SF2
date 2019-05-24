@@ -1,6 +1,7 @@
 package com.example.cinema.po;
 
 public class TicketRefundStrategy {
+
     /**
      * 退票策略id
      */
