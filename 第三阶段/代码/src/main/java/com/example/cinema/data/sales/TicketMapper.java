@@ -9,7 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/16.
+ * @author 李莹
+ * @date 2019/4/16
  */
 @Mapper
 public interface TicketMapper {

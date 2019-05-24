@@ -4,9 +4,9 @@ package com.example.cinema.po;
 import java.sql.Timestamp;
 
 /**
- * Created by liying on 2019/4/14.
+ * @author 李莹
+ * @date 2019/4/14
  */
-
 public class VIPCard {
 
     public static final double price = 25;

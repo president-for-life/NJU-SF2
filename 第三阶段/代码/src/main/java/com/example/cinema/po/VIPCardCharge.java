@@ -2,6 +2,9 @@ package com.example.cinema.po;
 
 import java.sql.Timestamp;
 
+/**
+ * @author 梁正川
+ */
 public class VIPCardCharge {
 
     /**

@@ -9,7 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/14.
+ * @author 李莹
+ * @date 2019/4/14
  */
 @Mapper
 public interface VIPCardMapper {
