@@ -43,7 +43,7 @@ public class UserVO {
         this.password = password;
     }
 
-    public String role() { return role; }
+    public String getRole() { return role; }
 
     public void setRole(String rle) { this.role = role; }
 }
