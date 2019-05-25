@@ -22,6 +22,7 @@ public class AccountController {
     @Autowired
     private AccountServiceImpl accountService;
 
+    // 修改这个类，使得返回值包括role
     @PostMapping("/login")
     public ResponseVO login(@RequestBody UserForm userForm, HttpSession session) {
         UserVO user = accountService.login(userForm);
