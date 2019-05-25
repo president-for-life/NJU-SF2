@@ -3,22 +3,27 @@ package com.example.cinema.vo;
 import com.example.cinema.po.VIPCardStrategy;
 
 public class VIPCardStrategyForm {
+
     /**
      * 会员卡策略id
      */
     private int id;
+
     /**
      * 会员卡价格
      */
     private double price;
+
     /**
      * 会员卡策略描述
      */
     private String description;
+
     /**
      * 满
      */
     private double targetAmount;
+
     /**
      * 送
      */
@@ -66,13 +71,11 @@ public class VIPCardStrategyForm {
 
     public VIPCardStrategy getPO() {
         VIPCardStrategy vipCardStrategy = new VIPCardStrategy();
-
         vipCardStrategy.setId(this.getId());
         vipCardStrategy.setPrice(this.getPrice());
         vipCardStrategy.setDescription(this.getDescription());
         vipCardStrategy.setTargetAmount(this.getTargetAmount());
         vipCardStrategy.setDiscountAmount(this.getDiscountAmount());
-
         return vipCardStrategy;
     }
 }

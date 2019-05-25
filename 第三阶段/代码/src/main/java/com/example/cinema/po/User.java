@@ -5,9 +5,28 @@ package com.example.cinema.po;
  * @date 2019/3/23
  */
 public class User {
+
+    /**
+     * 用户id
+     */
     private Integer id;
+
+    /**
+     * 角色：
+     * manager：经理
+     * admin：管理员
+     * user：（普通）用户
+     */
     private String role;
+
+    /**
+     * 用户名
+     */
     private String username;
+
+    /**
+     * 密码
+     */
     private String password;
 
     public Integer getId() {

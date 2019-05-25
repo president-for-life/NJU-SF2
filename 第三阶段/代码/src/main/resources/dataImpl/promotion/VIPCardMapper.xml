@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.cinema.data.promotion.VIPCardMapper">
+
+    <resultMap id="VIPCardStrategy" type="com.example.cinema.po.VIPCardStrategy">
+        <result column="id" property="id"></result>
+        <result column="price" property="price"></result>
+        <result column="description" property="description"></result>
+        <result column="target_amount" property="targetAmount"></result>
+        <result column="discount_amount" property="discountAmount"></result>
+    </resultMap>
+
     <insert id="insertStrategy" parameterType="com.example.cinema.po.VIPCardStrategy"
             useGeneratedKeys="true" keyProperty="id">
         insert into vip_card_strategy(price, description, target_amount, discount_amount)
         values(#{price}, #{description}, #{targetAmount}, #{discountAmount})
     </insert>
 
-    <update id="updateStrategy">
+    <update id="updateStrategy" parameterType="com.example.cinema.po.VIPCardStrategy">
         update vip_card_strategy
         set price = #{price}, description = #{description},
             target_amount = #{targetAmount}, discount_amount = #{discountAmount}
@@ -18,10 +27,18 @@
         select * from vip_card_strategy where id=#{id}
     </select>
 
+    <resultMap id="VIPCard" type="com.example.cinema.po.VIPCard">
+        <result column="id" property="id"></result>
+        <result column="strategy_id" property="strategyId"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="balance" property="balance"></result>
+        <result column="join_time" property="joinDate"></result>
+    </resultMap>
+
     <insert id="insertOneCard" parameterType="com.example.cinema.po.VIPCard"
             useGeneratedKeys="true" keyProperty="id">
-        insert into vip_card(user_id,balance)
-        values(#{userId}, #{balance})
+        insert into vip_card(strategy_id, user_id, balance)
+        values(#{strategyId}, #{userId}, #{balance})
     </insert>
 
     <select id="selectCardById" resultMap="VIPCard">
@@ -32,31 +49,16 @@
         select * from vip_card where user_id=#{userId}
     </select>
 
-    <resultMap id="VIPCardStrategy" type="com.example.cinema.po.VIPCardStrategy">
-        <result column="id" property="id"></result>
-        <result column="price" property="price"></result>
-        <result column="description" property="description"></result>
-        <result column="target_amount" property="targetAmount"></result>
-        <result column="discount_amount" property="discountAmount"></result>
-    </resultMap>
-
-    <resultMap id="VIPCard" type="com.example.cinema.po.VIPCard">
-        <result column="join_time" property="joinDate"></result>
-        <result column="id" property="id"></result>
-        <result column="user_id" property="userId"></result>
-        <result column="balance" property="balance"></result>
-    </resultMap>
-
-    <update id="updateCardBalance" >
-        update vip_card set balance = #{balance} where id=#{id}
-    </update>
-
     <resultMap id="VIPCardCharge" type="com.example.cinema.po.VIPCardCharge">
         <result column="id" property="id"></result>
         <result column="vip_card_id" property="vipCardId"></result>
         <result column="time" property="time"></result>
         <result column="amount" property="amount"></result>
     </resultMap>
+
+    <update id="updateCardBalance" >
+        update vip_card set balance = #{balance} where id=#{id}
+    </update>
 
     <select id="selectChargesByUser" resultMap="VIPCardCharge">
         select vip_card_charge.id, vip_card.id, time, amount from vip_card_charge

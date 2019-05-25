@@ -9,6 +9,11 @@ import com.example.cinema.vo.VIPCardStrategyForm;
  * @date 2019/4/14
  */
 public interface VIPService {
+
+    /*================================================================================
+    会员卡策略
+     */
+
     /**
      * 发布会员卡充值优惠策略
      *
@@ -33,6 +38,10 @@ public interface VIPService {
      * @author 梁正川
      */
     ResponseVO getStrategy(int strategyId);
+
+    /*================================================================================
+    会员卡
+     */
 
     /**
      * 某用户获得会员卡
