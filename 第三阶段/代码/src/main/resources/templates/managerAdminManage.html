@@ -2,16 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>影院管理</title>
+    <title>电影管理</title>
+    <!-- 引入css样式文件 -->
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/movieList.css"/>
+    <!-- Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <!-- font-asesome图标库 -->
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/cinemaHall.css"/>
 
+
+    <!-- 引入js脚本文件 -->
+    <!-- jquery -->
     <script src="/js/jquery.js"></script>
+    <!-- Bootstrap 核心 JavaScript 文件 -->
     <script src="/js/bootstrap.js"></script>
     <script src="/js/request.js"></script>
-    <script src="/js/adminCinemaManage.js"></script>
+    <script src="/js/managerAdminManage.js"></script>
 
 </head>
 <body>
@@ -19,29 +26,47 @@
     <div class="nav-left-container">
         <div class="nav-user-container" style="margin-bottom: 50px;">
             <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
-            <p class="title">Admin</p>
+            <p class="title">Manager</p>
         </div>
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
-            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
-            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-            <li role="presentation" class="active"><a href="#"><i class="icon-cogs"></i> 影院管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+            <li role="presentation" class="active"><a href="#"><i class="icon-film"></i>员工管理</a></li>
         </ul>
     </div>
     <div class="content-container">
-        <div class="content-item">
-            <span class="title gray-text">常规设置</span>
-            <div class="content-card card">
-                <span class="">用户可见排片日期：</span><span id="can-see-num"></span>
-                <a style="margin-left: 20px;" class="primary-text" id="canview-modify-btn">修改</a>
-                <input type="number" class="form-control" id="canview-set-input" style="display: none;width: 200px;">
-                <a style="display: none" class="primary-text" id="canview-confirm-btn">确认</a>
-            </div>
+        <div class="content-header">
+            <span class="title gray-text">员工列表</span>
+            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#adminModal"><i class="icon-plus-sign"></i> 上架电影</button>
         </div>
-        <div class="content-item">
-            <span class="title gray-text">影厅管理</span>
-            <div class="content-card card" id="hall-card">
+        <ul class="admin-on-list">
+        </ul>
+    </div>
+</div>
+<div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="movieModalLabel">新增员工</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="movie-type-input">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="movie-type-input" placeholder="请输入电影类型">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="movie-length-input">密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="movie-length-input" placeholder="请输入电影片长">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="movie-form-btn">确认</button>
             </div>
         </div>
     </div>

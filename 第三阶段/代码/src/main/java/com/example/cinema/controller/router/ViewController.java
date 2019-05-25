@@ -79,4 +79,9 @@ public class ViewController {
     public String getUserMember() {
         return "userMember";
     }
+
+    @RequestMapping(value = "/manager/admin/manage")
+    public String getManagerAdminManage() { return "managerAdminManage";
+    }
+
 }

@@ -25,6 +25,7 @@ $(document).ready(function () {
                     }
                     else {
                         sessionStorage.setItem("role", "manager");
+                        window.location.href = "/manager/admin/manage"
                     }
                 } else {
                     alert(res.message);

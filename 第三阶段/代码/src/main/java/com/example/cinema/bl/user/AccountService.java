@@ -25,5 +25,11 @@ public interface AccountService {
     UserVO login(UserForm userForm);
 
 
+    /**
+     * 搜索全部Admin
+     *
+     * @return vo.ResponseVO
+     */
+    ResponseVO searchAllAdmin();
 
 }

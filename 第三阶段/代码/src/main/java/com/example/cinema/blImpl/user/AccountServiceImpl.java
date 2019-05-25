@@ -9,6 +9,9 @@ import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author 胡文
  * @date 2019/3/23
@@ -37,5 +40,22 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         return new UserVO(user);
+    }
+
+    public ResponseVO searchAllAdmin() {
+        try {
+            return ResponseVO.buildSuccess(userList2UserVOList(accountMapper.selectAdmins()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    private List<UserVO> userList2UserVOList(List<User> userList) {
+        List<UserVO> userVOList = new ArrayList<>();
+        for (User user : userList) {
+            userVOList.add(new UserVO(user));
+        }
+        return userVOList;
     }
 }
