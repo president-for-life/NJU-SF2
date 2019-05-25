@@ -27,6 +27,10 @@
         select * from vip_card_strategy where id=#{id}
     </select>
 
+    <select id="selectStrategies" resultMap="VIPCardStrategy">
+        select * from vip_card_strategy
+    </select>
+
     <resultMap id="VIPCard" type="com.example.cinema.po.VIPCard">
         <result column="id" property="id"></result>
         <result column="strategy_id" property="strategyId"></result>
@@ -40,6 +44,10 @@
         insert into vip_card(strategy_id, user_id, balance)
         values(#{strategyId}, #{userId}, #{balance})
     </insert>
+
+    <update id="updateCardBalance" >
+        update vip_card set balance = #{balance} where id=#{id}
+    </update>
 
     <select id="selectCardById" resultMap="VIPCard">
         select * from vip_card where id=#{id}
@@ -56,14 +64,15 @@
         <result column="amount" property="amount"></result>
     </resultMap>
 
-    <update id="updateCardBalance" >
-        update vip_card set balance = #{balance} where id=#{id}
-    </update>
+    <insert id="insertOneChargeRecord"
+            parameterType="com.example.cinema.po.VIPCardCharge"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into vip_card_charge(vip_card_id, amount)
+        values(#{vipCardId}, #{amount})
+    </insert>
 
-    <select id="selectChargesByUser" resultMap="VIPCardCharge">
-        select vip_card_charge.id, vip_card.id, time, amount from vip_card_charge
-            left join vip_card
-                on vip_card_charge.vip_card_id = vip_card.id
+    <select id="selectChargeRecordsByCard" resultMap="VIPCardCharge">
+        select * from vip_card_charge where vip_card_id = #{vipCardId}
     </select>
 
 </mapper>

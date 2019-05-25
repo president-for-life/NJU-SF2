@@ -38,7 +38,7 @@ public interface VIPCardMapper {
      *
      * @author 梁正川
      */
-    VIPCardStrategy selectStrategyById(int id);
+    VIPCardStrategy selectStrategyById(@Param("id") int id);
 
     /**
      * 选择所有会员卡策略
@@ -93,5 +93,5 @@ public interface VIPCardMapper {
      *
      * @author 梁正川
      */
-    List<VIPCardCharge> selectChargeRecordsByUser(@Param("userId") int userId);
+    List<VIPCardCharge> selectChargeRecordsByCard(@Param("vipCardId") int vipCardId);
 }
