@@ -8,7 +8,7 @@
         values(#{role}, #{username}, #{password})
     </insert>
 
-    <update id="updateOneAccount">
+    <update id="updateOneAccount" parameterType="com.example.cinema.po.User">
         update user
         set role = #{role}, username = #{username}, password = #{password}
         where id = #{id}

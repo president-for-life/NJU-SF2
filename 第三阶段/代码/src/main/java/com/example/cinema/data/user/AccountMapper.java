@@ -22,6 +22,7 @@ public interface AccountMapper {
 
     /**
      * 更新一个账号
+     * 数据库根据user中的id决定更新哪一个账号
      *
      * @author 梁正川
      */
@@ -51,6 +52,7 @@ public interface AccountMapper {
     /**
      * 根据用户名查找账号
      *
+     * @author 胡文
      * @param username 用户名
      * @return po.User
      */
