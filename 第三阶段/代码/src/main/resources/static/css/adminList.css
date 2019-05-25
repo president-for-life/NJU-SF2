@@ -1,0 +1,28 @@
+.admin-item {
+    list-style: none;
+    display: flex;
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-info {
+    flex: 1;
+    padding: 10px 20px 0 20px;
+}
+
+.admin-info > div {
+    margin: 5px 0;
+}
+
+.admin-title {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+}
