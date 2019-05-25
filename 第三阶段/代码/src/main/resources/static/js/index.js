@@ -15,6 +15,7 @@ $(document).ready(function () {
                 if (res.success) {
                     sessionStorage.setItem('username', formData.username);
                     sessionStorage.setItem('id', res.content.id);
+                    console.log(res.content);
                     if (res.content.role == "admin") {
                         sessionStorage.setItem('role', 'admin');
                         window.location.href = "/admin/movie/manage"
