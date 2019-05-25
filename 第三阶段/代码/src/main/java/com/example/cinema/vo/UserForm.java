@@ -3,7 +3,7 @@ package com.example.cinema.vo;
 import com.example.cinema.po.User;
 
 /**
- * @author huwen
+ * @author 胡文
  * @date 2019/3/23
  */
 public class UserForm {

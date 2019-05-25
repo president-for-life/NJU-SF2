@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 /**
- * Created by liying on 2019/4/14.
+ * @author 李莹
+ * @date 2019/4/14
  */
 @Service
 public class VIPServiceImpl implements VIPService, VIPServiceForBl {

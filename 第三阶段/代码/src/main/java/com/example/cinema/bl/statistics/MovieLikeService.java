@@ -3,7 +3,7 @@ package com.example.cinema.bl.statistics;
 import com.example.cinema.vo.ResponseVO;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/28 3:07 PM
  */
 public interface MovieLikeService {

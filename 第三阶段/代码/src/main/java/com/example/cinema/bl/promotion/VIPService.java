@@ -4,11 +4,10 @@ import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPCardChargeForm;
 import com.example.cinema.vo.VIPCardStrategyForm;
 
-
 /**
- * Created by liying on 2019/4/14.
+ * @author 李莹
+ * @date 2019/4/14
  */
-
 public interface VIPService {
     /**
      * 发布会员卡充值优惠策略

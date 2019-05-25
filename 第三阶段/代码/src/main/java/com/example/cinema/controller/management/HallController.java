@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 影厅管理
  *
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/12 1:59 PM
  */
 @RestController

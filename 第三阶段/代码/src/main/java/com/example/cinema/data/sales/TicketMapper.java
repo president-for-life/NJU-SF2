@@ -9,7 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/16.
+ * @author 李莹
+ * @date 2019/4/16
  */
 @Mapper
 public interface TicketMapper {
@@ -121,6 +122,13 @@ public interface TicketMapper {
      * @return 用到movieList的po
      */
     TicketRefundStrategy selectRefundStrategyById(int id);
+
+    /**
+     * 选择某电影使用的退票策略
+     *
+     * @return 没有用到movieList的po
+     */
+    TicketRefundStrategy selectRefundStrategyByMovie(int movieId);
 
     /**
      * 选择所有退票策略

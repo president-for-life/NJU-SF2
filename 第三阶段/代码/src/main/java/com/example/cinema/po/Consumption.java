@@ -1,5 +1,8 @@
 package com.example.cinema.po;
 
+/**
+ * @author 梁正川
+ */
 public class Consumption {
 
     /**

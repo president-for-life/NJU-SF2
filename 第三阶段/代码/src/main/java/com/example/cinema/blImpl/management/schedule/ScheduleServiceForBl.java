@@ -5,8 +5,7 @@ import com.example.cinema.po.ScheduleItem;
 import java.util.List;
 
 /**
- * @author fjj
- * @date 2019/4/28 12:30 AM
+ * @author 范佳杰
  */
 public interface ScheduleServiceForBl {
     /**

@@ -4,6 +4,9 @@ import com.example.cinema.po.Ticket;
 
 import java.util.List;
 
+/**
+ * @author 梁正川
+ */
 public interface TicketServiceForBl {
     /**
      * 获得某用户的电影票

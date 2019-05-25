@@ -4,6 +4,9 @@ import com.example.cinema.vo.TicketRefundStrategyVO;
 
 import java.util.List;
 
+/**
+ * @author 梁正川
+ */
 public class TicketRefundStrategy {
 
     /**

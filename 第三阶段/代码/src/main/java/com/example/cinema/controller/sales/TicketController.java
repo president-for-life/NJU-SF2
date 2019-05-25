@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/16.
+ * @author 李莹
+ * @date 2019/4/16
  */
 @RestController
 @RequestMapping("/ticket")

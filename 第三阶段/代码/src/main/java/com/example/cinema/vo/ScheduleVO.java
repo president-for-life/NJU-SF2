@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/12 4:05 PM
  */
 public class ScheduleVO {

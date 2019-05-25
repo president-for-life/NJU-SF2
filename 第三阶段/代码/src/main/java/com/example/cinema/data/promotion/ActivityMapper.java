@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/20.
+ * @author 李莹
+ * @date 2019/4/20
  */
 @Mapper
 public interface ActivityMapper {

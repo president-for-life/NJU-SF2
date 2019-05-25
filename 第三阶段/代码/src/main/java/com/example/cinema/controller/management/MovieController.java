@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 电影管理
  *
- * @author fjj
+ * @author 范佳杰
  * @date 2019/3/12 6:17 PM
  */
 @RestController

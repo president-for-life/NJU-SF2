@@ -19,6 +19,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author 李莹
+ */
 @Service
 public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 

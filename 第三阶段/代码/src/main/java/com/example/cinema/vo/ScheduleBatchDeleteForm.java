@@ -3,7 +3,7 @@ package com.example.cinema.vo;
 import java.util.List;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/13 3:57 PM
  */
 public class ScheduleBatchDeleteForm {

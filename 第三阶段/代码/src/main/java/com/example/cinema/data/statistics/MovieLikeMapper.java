@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-
 /**
- * Created by liying on 2019/3/23.
+ * @author 李莹
+ * @date 2019/3/23
  */
 @Mapper
 public interface MovieLikeMapper {

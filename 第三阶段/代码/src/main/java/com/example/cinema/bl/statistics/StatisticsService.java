@@ -5,7 +5,7 @@ import com.example.cinema.vo.ResponseVO;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/16 1:34 PM
  */
 public interface StatisticsService {

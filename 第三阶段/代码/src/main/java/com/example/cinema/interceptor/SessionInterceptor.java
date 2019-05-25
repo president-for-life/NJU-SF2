@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author huwen
+ * @author 胡文
  * @date 2019/3/23
  */
 public class SessionInterceptor extends HandlerInterceptorAdapter {

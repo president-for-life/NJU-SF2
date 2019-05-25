@@ -3,7 +3,7 @@ package com.example.cinema.vo;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/11 4:09 PM
  */
 public class ScheduleForm {

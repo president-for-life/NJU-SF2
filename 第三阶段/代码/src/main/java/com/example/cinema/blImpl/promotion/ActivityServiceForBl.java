@@ -4,6 +4,9 @@ import com.example.cinema.po.Activity;
 
 import java.util.List;
 
+/**
+ * @author 梁正川
+ */
 public interface ActivityServiceForBl {
 
     /**

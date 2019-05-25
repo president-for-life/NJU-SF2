@@ -6,9 +6,9 @@ import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 /**
- * Created by liying on 2019/4/20.
+ * @author 李莹
+ * @date 2019/4/20
  */
 @RestController
 @RequestMapping("/activity")

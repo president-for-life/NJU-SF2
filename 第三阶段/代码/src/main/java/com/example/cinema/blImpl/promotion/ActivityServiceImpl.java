@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/20.
+ * @author 李莹
+ * @date 2019/4/20
  */
 @Service
 public class ActivityServiceImpl implements ActivityService, ActivityServiceForBl {

@@ -3,8 +3,7 @@ package com.example.cinema.blImpl.management.schedule;
 import com.example.cinema.po.Movie;
 
 /**
- * @author fjj
- * @date 2019/4/28 12:29 AM
+ * @author 范佳杰
  */
 public interface MovieServiceForBl {
     /**

@@ -4,7 +4,8 @@ package com.example.cinema.po;
 import java.sql.Date;
 
 /**
- * Created by liying on 2019/3/23.
+ * @author 李莹
+ * @date 2019/3/23
  */
 public class DateLike {
 

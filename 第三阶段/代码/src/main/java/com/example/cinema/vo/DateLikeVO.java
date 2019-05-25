@@ -5,7 +5,7 @@ import com.example.cinema.po.DateLike;
 import java.sql.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/28 6:03 PM
  */
 public class DateLikeVO {

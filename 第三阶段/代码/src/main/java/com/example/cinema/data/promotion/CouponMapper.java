@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/17.
+ * @author 李莹
+ * @date 2019/4/17
  */
 @Mapper
 public interface CouponMapper {

@@ -8,7 +8,7 @@ import com.example.cinema.vo.ScheduleViewForm;
 import java.util.Date;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/11 4:14 PM
  */
 public interface ScheduleService {

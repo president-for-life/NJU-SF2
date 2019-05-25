@@ -1,7 +1,7 @@
 package com.example.cinema.po;
 
 /**
- * @author fjj
+ * @author 范佳杰
  * @date 2019/4/28 5:09 PM
  */
 public class Hall {
