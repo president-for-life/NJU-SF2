@@ -56,12 +56,20 @@
         update ticket SET  state =2 WHERE minute(timediff(now(),time))>15 and state=0;
     </update>
 
+    <update id="lockTables">
+        lock tables refund_strategy read;
+        lock tables refund_strategy_movie read
+    </update>
+
+    <update id="unlockTables">
+        unlock tables
+    </update>
+
     <resultMap id="TicketRefundStrategy" type="com.example.cinema.po.TicketRefundStrategy">
         <result column="id" property="id"></result>
         <result column="refundable" property="refundable"></result>
         <result column="ratio" property="ratio"></result>
         <result column="time" property="time"></result>
-        <result column="end_time" property="endTime"></result>
         <collection property="movieList" ofType="com.example.cinema.po.Movie">
             <id column="movie_id" property="id"></id>
             <result column="poster_url" property="posterUrl"></result>

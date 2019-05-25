@@ -24,7 +24,7 @@ $(document).ready(function () {
                         window.location.href = "/user/home"
                     }
                     else {
-                        sessionStorage.setItem("role", "manage");
+                        sessionStorage.setItem("role", "manager");
                     }
                 } else {
                     alert(res.message);
