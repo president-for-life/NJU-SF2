@@ -44,41 +44,28 @@ public interface VIPService {
      */
 
     /**
-     * 某用户获得会员卡
-     *
-     * @param userId 用户id
-     * @return vo.ResponseVO
+     * 某用户获得使用某种策略的会员卡
+     * 如果用户已持有会员卡，切换会员卡使用的策略
      */
-    ResponseVO addVIPCard(int userId);
+    ResponseVO addVIPCard(int userId, int strategyId);
 
     /**
      * 根据id获得某会员卡
-     *
-     * @param id 会员卡id
-     * @return vo.ResponseVO
      */
     ResponseVO getCardById(int id);
 
     /**
      * 获得会员卡信息
-     *
-     * @return vo.ResponseVO
      */
-    ResponseVO getVIPInfo();
+    ResponseVO getVIPCardStrategy(int strategyId);
 
     /**
      * 充值会员卡
-     *
-     * @param vipCardChargeForm 会员卡表单
-     * @return vo.ResponseVO
      */
     ResponseVO charge(VIPCardChargeForm vipCardChargeForm);
 
     /**
      * 获得某用户的会员卡
-     *
-     * @param userId 用户id
-     * @return vo.ResponseVO
      */
     ResponseVO getCardByUserId(int userId);
 

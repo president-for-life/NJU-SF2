@@ -5,13 +5,11 @@ import com.example.cinema.data.promotion.VIPCardMapper;
 import com.example.cinema.po.VIPCard;
 import com.example.cinema.po.VIPCardCharge;
 import com.example.cinema.po.VIPCardStrategy;
-import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.VIPCardChargeForm;
-import com.example.cinema.vo.VIPCardStrategyForm;
-import com.example.cinema.vo.VIPInfoVO;
+import com.example.cinema.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,14 +39,20 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
 
     @Override
     public ResponseVO updateStrategy(VIPCardStrategyForm strategyForm) {
-        // TODO 考虑对已购买该会员卡的影响。
-        VIPCardStrategy strategy = strategyForm.getPO();
         try {
-            vipCardMapper.updateStrategy(strategy);
-            return ResponseVO.buildSuccess("修改会员卡充值优惠策略成功");
+            int strategyId = strategyForm.getId();
+
+            // 只有当没有会员卡使用该策略时才能修改该策略
+            if(vipCardMapper.strategyUseCount(strategyId) == 0) {
+                VIPCardStrategy strategy = strategyForm.getPO();
+                vipCardMapper.updateStrategy(strategy);
+                return ResponseVO.buildSuccess("修改会员卡充值优惠策略成功！");
+            } else {
+                return ResponseVO.buildFailure("存在会员卡使用该充值优惠策略！");
+            }
         } catch(Exception e) {
             e.printStackTrace();
-            return ResponseVO.buildFailure("修改会员卡充值优惠策略失败");
+            return ResponseVO.buildFailure("修改会员卡充值优惠策略失败！");
         }
     }
 
@@ -66,17 +70,23 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
      */
 
     @Override
-    public ResponseVO addVIPCard(int userId) {
-        // TODO
-        // 创建会员卡
-        VIPCard vipCard = new VIPCard();
-        vipCard.setUserId(userId);
-        vipCard.setBalance(0);
-
-        // 插入会员卡po
+    public ResponseVO addVIPCard(int userId, int strategyId) {
         try {
-            int id = vipCardMapper.insertOneCard(vipCard);
-            return ResponseVO.buildSuccess(vipCardMapper.selectCardById(id));
+            VIPCard card = new VIPCard();
+            card.setStrategyId(strategyId);
+            card.setUserId(userId);
+            card.setBalance(0);
+
+            VIPCard oldCard = vipCardMapper.selectCardByUserId(userId);
+            if(oldCard == null) { // 用户没有会员卡，增加会员卡
+                vipCardMapper.insertOneCard(card);
+            } else { // 用户已持有会员卡，切换会员卡策略
+                vipCardMapper.updateCardStrategy(oldCard.getId(), strategyId);
+            }
+
+            return ResponseVO.buildSuccess(
+                    vipCardMapper.selectCardByUserId(userId)
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -94,30 +104,49 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     }
 
     @Override
-    public ResponseVO getVIPInfo() {
-        // TODO
-        VIPInfoVO vipInfoVO = new VIPInfoVO();
-        vipInfoVO.setDescription(VIPCard.description);
-        vipInfoVO.setPrice(VIPCard.price);
-        return ResponseVO.buildSuccess(vipInfoVO);
+    public ResponseVO getVIPCardStrategy(int strategyId) {
+        try {
+            VIPCardStrategy vipCardStrategy
+                    = vipCardMapper.selectStrategyById(strategyId);
+            VIPCardStrategyVO vipCardStrategyVO = vipCardStrategy.getVO();
+            return ResponseVO.buildSuccess(vipCardStrategyVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("获取会员卡策略失败！");
+        }
     }
 
     @Override
     public ResponseVO charge(VIPCardChargeForm vipCardChargeForm) {
-        // TODO
-        VIPCard vipCard = vipCardMapper.selectCardById(vipCardChargeForm.getVipCardId());
-        if (vipCard == null) {
-            return ResponseVO.buildFailure("会员卡不存在");
-        }
-
-        // 根据付款金额计算会员卡增加的余额
-        double balance = vipCard.calculate(vipCardChargeForm.getAmount());
-        vipCard.setBalance(vipCard.getBalance() + balance);
-
-        // 更新会员卡余额
         try {
-            vipCardMapper.updateCardBalance(vipCardChargeForm.getVipCardId(), vipCard.getBalance());
-            return ResponseVO.buildSuccess(vipCard);
+            // 获取会员卡和会员卡使用的策略
+            VIPCard card = vipCardMapper.selectCardById(
+                    vipCardChargeForm.getVipCardId()
+            );
+            VIPCardStrategy strategy = vipCardMapper.selectStrategyById(
+                    card.getStrategyId()
+            );
+
+            // 根据付款金额计算会员卡增加的余额
+            double amount = strategy.calculateAmount(
+                    vipCardChargeForm.getPayment()
+            );
+            card.setBalance(card.getBalance() + amount);
+
+            // 更新会员卡余额
+            vipCardMapper.updateCardBalance(
+                    card.getId(),
+                    card.getBalance()
+            );
+
+            // 插入会员卡充值记录
+            VIPCardCharge chargeRecord = new VIPCardCharge();
+            chargeRecord.setVipCardId(card.getId());
+            chargeRecord.setPayment(vipCardChargeForm.getPayment());
+            chargeRecord.setAmount(amount);
+            vipCardMapper.insertOneChargeRecord(chargeRecord);
+
+            return ResponseVO.buildSuccess(card);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -134,22 +163,18 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             VIPCard card = vipCardMapper.selectCardByUserId(userId);
             double balance = card.getBalance();
 
-            //////////////////////////////////////////////////////
             ////////////////////控制台测试信息////////////////////
             System.out.println("扣款前余额：" + balance);
             ////////////////////控制台测试信息////////////////////
-            //////////////////////////////////////////////////////
 
             if (balance >= pay) { // 余额充足，扣款成功
                 vipCardMapper.updateCardBalance(card.getId(), balance - pay);
 
-                //////////////////////////////////////////////////////
                 ////////////////////控制台测试信息////////////////////
                 card = vipCardMapper.selectCardByUserId(userId);
                 balance = card.getBalance();
                 System.out.println("扣款后余额：" + balance);
                 ////////////////////控制台测试信息////////////////////
-                //////////////////////////////////////////////////////
 
                 return true;
             } else { // 余额不足，扣款失败
@@ -175,8 +200,14 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    @Override
     public List<VIPCardCharge> getChargeRecords(int userId) {
-        // TODO
-        return null;
+        try {
+            VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
+            return vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 }
