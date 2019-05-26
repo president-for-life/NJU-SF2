@@ -1,11 +1,12 @@
-package com.example.cinema.po;
+package com.example.cinema.vo;
 
 import java.sql.Timestamp;
 
 /**
  * @author 梁正川
+ * @date 2019/5/26
  */
-public class VIPCardCharge {
+public class VIPCardChargeVO {
 
     /**
      * 充值id

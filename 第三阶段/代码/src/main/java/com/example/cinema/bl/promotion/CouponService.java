@@ -3,6 +3,8 @@ package com.example.cinema.bl.promotion;
 import com.example.cinema.vo.CouponForm;
 import com.example.cinema.vo.ResponseVO;
 
+import java.util.List;
+
 /**
  * @author 李莹
  * @date 2019/4/17
@@ -26,12 +28,11 @@ public interface CouponService {
     ResponseVO addCoupon(CouponForm couponForm);
 
     /**
-     * 让某观众获得某优惠劵
+     * 让多个观众获得某优惠劵
      *
-     * @param couponId 优惠券id
-     * @param userId   用户id
+     * @author 梁正川
      * @return vo.ResponseVO
      */
-    ResponseVO issueCoupon(int couponId, int userId);
+    ResponseVO issueCoupon(int couponId, List<Integer> userIdList);
 
 }

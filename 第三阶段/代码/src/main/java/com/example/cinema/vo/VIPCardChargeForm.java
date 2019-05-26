@@ -1,7 +1,8 @@
 package com.example.cinema.vo;
 
 /**
- * Created by liying on 2019/4/14.
+ * @author 李莹
+ * @date 2019/4/14
  */
 public class VIPCardChargeForm {
 
@@ -13,7 +14,7 @@ public class VIPCardChargeForm {
     /**
      * 充值金额
      */
-    private int amount;
+    private double payment;
 
     public int getVipCardId() {
         return vipCardId;
@@ -23,13 +24,11 @@ public class VIPCardChargeForm {
         this.vipCardId = vipCardId;
     }
 
-    public int getAmount() {
-        return amount;
+    public double getPayment() {
+        return payment;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setPayment(double payment) {
+        this.payment = payment;
     }
-
-
 }

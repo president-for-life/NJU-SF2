@@ -23,7 +23,7 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
     @Autowired
     ActivityMapper activityMapper;
     @Autowired
-    CouponService couponService;
+    CouponServiceForBl couponService;
 
     @Override
     @Transactional

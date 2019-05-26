@@ -1,22 +1,27 @@
 package com.example.cinema.vo;
 
 public class VIPCardStrategyVO {
+
     /**
      * 会员卡策略id
      */
     private int id;
+
     /**
      * 会员卡价格
      */
     private double price;
+
     /**
      * 会员卡策略描述
      */
     private String description;
+
     /**
      * 满
      */
     private double targetAmount;
+
     /**
      * 送
      */

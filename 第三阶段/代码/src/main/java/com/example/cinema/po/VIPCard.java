@@ -9,12 +9,6 @@ import java.sql.Timestamp;
  */
 public class VIPCard {
 
-    // TODO 删除此属性
-    public static final double price = 25;
-
-    // TODO 删除此属性
-    public static final String description = "满200送30";
-
     /**
      * 会员卡id
      */
@@ -78,10 +72,5 @@ public class VIPCard {
 
     public void setJoinDate(Timestamp joinDate) {
         this.joinDate = joinDate;
-    }
-
-    public double calculate(double amount) {
-        // TODO
-        return (int) (amount / 200) * 30 + amount;
     }
 }

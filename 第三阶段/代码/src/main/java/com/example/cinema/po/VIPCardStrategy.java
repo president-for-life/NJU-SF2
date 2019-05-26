@@ -1,5 +1,7 @@
 package com.example.cinema.po;
 
+import com.example.cinema.vo.VIPCardStrategyVO;
+
 /**
  * @author 梁正川
  */
@@ -68,5 +70,23 @@ public class VIPCardStrategy {
 
     public void setDiscountAmount(double discountAmount) {
         this.discountAmount = discountAmount;
+    }
+
+    /**
+     * 根据充值金额计算实际充入金额
+     */
+    public double calculateAmount(double payment) {
+        return (int) (payment / this.getTargetAmount()) * this.getDiscountAmount()
+                + payment;
+    }
+
+    public VIPCardStrategyVO getVO() {
+        VIPCardStrategyVO vipCardStrategy = new VIPCardStrategyVO();
+        vipCardStrategy.setId(this.getId());
+        vipCardStrategy.setPrice(this.getPrice());
+        vipCardStrategy.setDescription(this.getDescription());
+        vipCardStrategy.setTargetAmount(this.getTargetAmount());
+        vipCardStrategy.setDiscountAmount(this.getDiscountAmount());
+        return vipCardStrategy;
     }
 }

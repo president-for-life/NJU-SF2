@@ -63,13 +63,15 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public ResponseVO issueCoupon(int couponId, int userId) {
+    public ResponseVO issueCoupon(int couponId, List<Integer> userIdList) {
         try {
-            couponMapper.insertCouponUser(couponId, userId);
+            for(int userId : userIdList) {
+                couponMapper.insertCouponUser(couponId, userId);
+            }
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
+            return ResponseVO.buildFailure("为多个用户赠送优惠券失败！");
         }
     }
 

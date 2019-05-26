@@ -47,6 +47,13 @@ public interface VIPCardMapper {
      */
     List<VIPCardStrategy> selectStrategies();
 
+    /**
+     * 使用某会员卡策略的会员卡数量
+     *
+     * @author 梁正川
+     */
+    int strategyUseCount(@Param("id") int id);
+
     /*================================================================================
     会员卡
      */
@@ -56,14 +63,27 @@ public interface VIPCardMapper {
      *
      * @author 梁正川
      */
-    int insertOneCard(VIPCard vipCard);
+    void insertOneCard(VIPCard vipCard);
+
+    /**
+     * 切换会员卡使用的策略
+     *
+     * @author 梁正川
+     */
+    void updateCardStrategy(
+            @Param("id") int id,
+            @Param("strategyId") int strategyId
+    );
 
     /**
      * 更新单一会员卡的余额
      *
      * @param balance 更新的余额
      */
-    void updateCardBalance(@Param("id") int id, @Param("balance") double balance);
+    void updateCardBalance(
+            @Param("id") int id,
+            @Param("balance") double balance
+    );
 
     /**
      * 选择单一会员卡
@@ -73,12 +93,12 @@ public interface VIPCardMapper {
     VIPCard selectCardById(@Param("id") int id);
 
     /**
-     * 根据用户id选择单一会员卡
+     * 根据用户选择单一会员卡
      */
     VIPCard selectCardByUserId(@Param("userId") int userId);
 
     /*================================================================================
-    会员卡充值
+    会员卡充值记录
      */
 
     /**

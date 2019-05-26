@@ -33,8 +33,8 @@ public class VIPCardController {
     }
 
     @PostMapping("/add")
-    public ResponseVO addVIP(@RequestParam int userId) {
-        return vipService.addVIPCard(userId);
+    public ResponseVO addVIP(@RequestParam int userId, @RequestParam int strategyId) {
+        return vipService.addVIPCard(userId, strategyId);
     }
 
     @GetMapping("{userId}/get")
@@ -43,8 +43,8 @@ public class VIPCardController {
     }
 
     @GetMapping("/getVIPInfo")
-    public ResponseVO getVIPInfo() {
-        return vipService.getVIPInfo();
+    public ResponseVO getVIPInfo(@RequestParam int strategyId) {
+        return vipService.getVIPCardStrategy(strategyId);
     }
 
     @PostMapping("/charge")
@@ -52,5 +52,8 @@ public class VIPCardController {
         return vipService.charge(vipCardChargeForm);
     }
 
-
+    @GetMapping("/charge/records")
+    public ResponseVO getChargeRecords(@RequestParam int userId) {
+        return vipService.getChargeRecords(userId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.promotion;
 
 import com.example.cinema.po.Coupon;
+import com.example.cinema.vo.CouponForm;
 import com.example.cinema.vo.ResponseVO;
 
 import java.util.List;
@@ -18,6 +19,14 @@ public interface CouponServiceForBl {
      * @author 梁正川
      */
     List<Coupon> getCouponsByUserForBl(int userId);
+
+    /**
+     * 发布优惠券
+     *
+     * @param couponForm 优惠券表单
+     * @return vo.ResponseVO
+     */
+    ResponseVO addCoupon(CouponForm couponForm);
 
     /**
      * 删除某用户拥有的某优惠券
@@ -38,11 +47,9 @@ public interface CouponServiceForBl {
     Coupon getCouponById(int id);
 
     /**
-     * 让某观众获得某优惠劵
+     * 让多个观众获得某优惠劵
      *
-     * @param couponId 优惠券id
-     * @param userId   用户id
-     * @return vo.ResponseVO
+     * @author 梁正川
      */
-    ResponseVO issueCoupon(int couponId, int userId);
+    ResponseVO issueCoupon(int couponId, List<Integer> userIdList);
 }

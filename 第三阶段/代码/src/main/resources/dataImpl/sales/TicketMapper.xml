@@ -14,8 +14,8 @@
 
     <insert id="insertTicket" parameterType="com.example.cinema.po.Ticket"
             useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id,schedule_id,column_index,row_index,state)
-        values(#{userId}, #{scheduleId},#{columnIndex},#{rowIndex},#{state})
+        insert into ticket(user_id, schedule_id, column_index, row_index, state)
+        values(#{userId}, #{scheduleId}, #{columnIndex}, #{rowIndex}, #{state})
     </insert>
 
     <insert id="insertTickets" parameterType="java.util.List"
@@ -29,7 +29,7 @@
     </insert>
 
     <select id="selectTicketById" resultMap="Ticket">
-        select * from ticket where id=#{id}
+        select * from ticket where id = #{id}
     </select>
 
     <select id="selectTicketsBySchedule" resultMap="Ticket">

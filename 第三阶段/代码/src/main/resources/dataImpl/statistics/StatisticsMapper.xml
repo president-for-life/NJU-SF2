@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.cinema.data.statistics.StatisticsMapper">
+
+    <select id="selectConsumption" resultType="com.example.cinema.po.MovieScheduleTime">
+        select user_id as userId, sum(actual_payment) as amount
+        from ticket
+        group by userId
+        order by amount desc
+    </select>
+
     <select id="selectMovieScheduleTimes" resultType="com.example.cinema.po.MovieScheduleTime">
-        select movie_id as movieId, count(*) as time,name from
+        select movie_id as movieId, count(*) as time, name from
               (select * from schedule where start_time between #{date} and #{nextDate}) s,
               movie where s.movie_id = movie.id group by movieId
     </select>
