@@ -201,13 +201,14 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     }
 
     @Override
-    public List<VIPCardCharge> getChargeRecords(int userId) {
+    public ResponseVO getChargeRecords(int userId) {
         try {
             VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
-            return vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
+            List<VIPCardCharge> chargeRecords = vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
+            return ResponseVO.buildSuccess(chargeRecords);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ArrayList<>();
+            return ResponseVO.buildFailure("查找会员卡充值记录失败！");
         }
     }
 }

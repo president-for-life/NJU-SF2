@@ -69,7 +69,7 @@ public interface TicketMapper {
     void cleanExpiredTicket();
 
     /*================================================================================
-    退票策略 TODO 未完成SQL语句
+    退票策略
      */
 
     /**

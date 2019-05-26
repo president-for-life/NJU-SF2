@@ -91,7 +91,8 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/manager/admin/manage")
-    public String getManagerAdminManage() { return "managerAdminManage";
+    public String getManagerAdminManage() {
+        return "managerAdminManage";
     }
 
 }

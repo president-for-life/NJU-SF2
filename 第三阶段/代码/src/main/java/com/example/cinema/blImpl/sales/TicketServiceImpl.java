@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -235,7 +236,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
             // 赠送优惠券
             for (Coupon coupon : couponsToBeIssued) {
-                couponService.issueCoupon(coupon.getId(), userId);
+                couponService.issueCoupon(coupon.getId(), Arrays.asList(userId));
             }
 
             ////////////////////控制台测试信息////////////////////

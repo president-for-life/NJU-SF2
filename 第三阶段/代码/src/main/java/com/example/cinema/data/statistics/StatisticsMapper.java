@@ -21,7 +21,7 @@ public interface StatisticsMapper {
      */
 
     /**
-     * 查询消费达到一定金额的用户 TODO 未写SQL语句
+     * 查询消费达到一定金额的用户
      *
      * @author 梁正川
      */

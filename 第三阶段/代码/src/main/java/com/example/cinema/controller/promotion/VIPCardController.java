@@ -51,4 +51,9 @@ public class VIPCardController {
     public ResponseVO charge(@RequestBody VIPCardChargeForm vipCardChargeForm) {
         return vipService.charge(vipCardChargeForm);
     }
+
+    @GetMapping("/charge/records")
+    public ResponseVO getChargeRecords(@RequestParam int userId) {
+        return vipService.getChargeRecords(userId);
+    }
 }

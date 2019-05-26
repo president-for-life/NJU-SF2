@@ -1,8 +1,11 @@
 package com.example.cinema.bl.promotion;
 
+import com.example.cinema.po.VIPCardCharge;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPCardChargeForm;
 import com.example.cinema.vo.VIPCardStrategyForm;
+
+import java.util.List;
 
 /**
  * @author 李莹
@@ -69,4 +72,10 @@ public interface VIPService {
      */
     ResponseVO getCardByUserId(int userId);
 
+    /**
+     * 查找某用户会员卡充值记录
+     *
+     * @author 梁正川
+     */
+    ResponseVO getChargeRecords(int userId);
 }

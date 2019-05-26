@@ -29,7 +29,7 @@
     </insert>
 
     <select id="selectTicketById" resultMap="Ticket">
-        select * from ticket where id=#{id}
+        select * from ticket where id = #{id}
     </select>
 
     <select id="selectTicketsBySchedule" resultMap="Ticket">
