@@ -148,7 +148,8 @@ public class Ticket {
                 stateString = "未完成";
         }
         vo.setState(stateString);
-        vo.setTime(time);
+        vo.setActualPayment(this.getActualPayment());
+        vo.setTime(this.getTime());
         return vo;
 
     }
