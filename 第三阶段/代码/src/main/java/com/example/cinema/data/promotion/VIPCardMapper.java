@@ -63,7 +63,7 @@ public interface VIPCardMapper {
      *
      * @author 梁正川
      */
-    int insertOneCard(VIPCard vipCard);
+    void insertOneCard(VIPCard vipCard);
 
     /**
      * 切换会员卡使用的策略
