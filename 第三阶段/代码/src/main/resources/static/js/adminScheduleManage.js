@@ -156,6 +156,7 @@ $(document).ready(function() {
         $('#scheduleEditModal')[0].dataset.scheduleId = schedule.id;
         console.log(schedule);
     });
+
     
     $('#schedule-form-btn').click(function () {
         var form = {

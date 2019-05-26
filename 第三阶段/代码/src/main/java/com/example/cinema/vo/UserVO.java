@@ -46,4 +46,13 @@ public class UserVO {
     public String getRole() { return role; }
 
     public void setRole(String rle) { this.role = role; }
+
+    public User getPO() {
+        User user = new User();
+        user.setId(this.getId());
+        user.setRole(this.getRole());
+        user.setUsername(this.getUsername());
+        user.setPassword(this.getPassword());
+        return user;
+    }
 }

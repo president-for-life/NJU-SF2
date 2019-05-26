@@ -2,52 +2,61 @@ $(document).ready(function(){
 
     getAdminList();
 
-    $("#movie-form-btn").click(function () {
-        var formData = getMovieForm();
-        if(!validateMovieForm(formData)) {
+    $("#admin-form-btn").click(function () {
+        var formData = getAdminForm();
+        if(!validateAdminForm(formData)) {
             return;
         }
         postRequest(
-            '/movie/add',
+            '/register',
             formData,
             function (res) {
-                getMovieList();
-                $("#movieModal").modal('hide');
+                getAdminList();
+                $("#adminModal").modal('hide');
             },
             function (error) {
                 alert(error);
             });
     });
 
-    function getMovieForm() {
+
+
+
+
+    function getAdminForm() {
         return {
-            name: $('#movie-name-input').val(),
-            startDate: $('#movie-date-input').val(),
-            posterUrl: $('#movie-img-input').val(),
-            description: $('#movie-description-input').val(),
-            type: $('#movie-type-input').val(),
-            length: $('#movie-length-input').val(),
-            country: $('#movie-country-input').val(),
-            starring: $('#movie-star-input').val(),
-            director: $('#movie-director-input').val(),
-            screenWriter: $('#movie-writer-input').val(),
-            language: $('#movie-language-input').val()
+            username: $('#admin-username-input').val(),
+            password: $('#admin-password-input').val(),
+            role: "admin"
         };
     }
 
-    function validateMovieForm(data) {
+    function validateAdminForm(data) {
         var isValidate = true;
-        if(!data.name) {
+        if(!data.username) {
             isValidate = false;
-            $('#movie-name-input').parent('.form-group').addClass('has-error');
+            $('#admin-username-input').parent('.form-group').addClass('has-error');
+            alert("用户名不能为空")
         }
-        if(!data.posterUrl) {
+        if(!data.password) {
             isValidate = false;
-            $('#movie-img-input').parent('.form-group').addClass('has-error');
+            $('#admin-password-input').parent('.form-group').addClass('has-error');
+            alert("密码不能为空")
         }
-        if(!data.startDate) {
+        return isValidate;
+    }
+
+    function validateEditAdminForm(data) {
+        var isValidate = true;
+        if(!data.username) {
             isValidate = false;
-            $('#movie-date-input').parent('.form-group').addClass('has-error');
+            $('#admin-edit-username-input').parent('.form-group').addClass('has-error');
+            alert("用户名不能为空")
+        }
+        if(!data.password) {
+            isValidate = false;
+            $('#admin-edit-password-input').parent('.form-group').addClass('has-error');
+            alert("密码不能为空")
         }
         return isValidate;
     }
@@ -67,16 +76,78 @@ $(document).ready(function(){
     function renderAdminList(list) {
         $('.admin-on-list').empty();
         var adminDomStr = '';
-        list.forEach(function (admin) {
+        list.forEach(function (user) {
             adminDomStr +=
-                "<li class='admin-item card'>" +
+                "<li id='user-" + user.id + "' class='admin-item' data-user='" + JSON.stringify(user) + "'>" +
                 "<div class='admin-info'>" +
                 "<div class='admin-title'>" +
-                "<span class='primary-text'>" + admin.username + "</span>" +
+                "<span class='primary-text'>" + user.username + "</span>" +
                 "</div>" +
                 "</div>" +
                 "</li>";
         });
         $('.admin-on-list').append(adminDomStr);
     }
+
+    $(document).on('click','.admin-item',function (e) {
+        console.log("点击成功");
+        var user = JSON.parse(e.currentTarget.dataset.user);
+        $("#admin-edit-username-input").val(user.username);
+        $("#admin-edit-password-input").val(user.password);
+        $('#adminEditModal').modal('show');
+        $('#adminEditModal')[0].dataset.userId = user.id;
+    });
+
+
+    $('#admin-edit-form-btn').click(function () {
+        var form = {
+            id: Number($('#adminEditModal')[0].dataset.userId),
+            username: $("#admin-edit-username-input").val(),
+            password : $("#admin-edit-password-input").val(),
+            role: "admin"
+        };
+        //todo 需要做一下表单验证？
+        if (!validateEditAdminForm(form)){
+            return
+        }
+
+        console.log("运行到了这一行");
+
+        postRequest(
+            '/update',
+            form,
+            function (res) {
+                if(res.success){
+                    getAdminList();
+                    $("#adminEditModal").modal('hide');
+                } else{
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+    });
+
+    $("#admin-edit-remove-btn").click(function () {
+        var r=confirm("确认要删除该排片信息吗")
+        if (r) {
+            deleteRequest(
+                '/schedule/delete/batch',
+                {scheduleIdList:[Number($('#scheduleEditModal')[0].dataset.scheduleId)]},
+                function (res) {
+                    if(res.success){
+                        getSchedules();
+                        $("#scheduleEditModal").modal('hide');
+                    } else{
+                        alert(res.message);
+                    }
+                },
+                function (error) {
+                    alert(JSON.stringify(error));
+                }
+            );
+        }
+    })
 });

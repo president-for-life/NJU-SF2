@@ -26,10 +26,20 @@ public interface AccountService {
 
 
     /**
+     * 更新一个user
+     *
+     * @return vo.ResponseVO
+     */
+
+    ResponseVO updateUser(UserVO userVO);
+
+
+    /**
      * 搜索全部Admin
      *
      * @return vo.ResponseVO
      */
+
     ResponseVO searchAllAdmin();
 
 }

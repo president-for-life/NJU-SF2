@@ -43,6 +43,11 @@ public class AccountController {
         return "index";
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseVO updateSchedule(@RequestBody UserVO userVO) {
+        return accountService.updateUser(userVO);
+    }
+
     @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
     public ResponseVO searchAllAdmin() {
         //返回结果中包括所有userRole为Admin的对象
