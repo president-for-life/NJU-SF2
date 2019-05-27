@@ -105,12 +105,10 @@ $(document).ready(function(){
             username: $("#admin-edit-username-input").val(),
             password : $("#admin-edit-password-input").val()
         };
-        //todo 需要做一下表单验证？
         if (!validateEditAdminForm(form)){
             return
         }
 
-        console.log("运行到了这一行");
 
         postRequest(
             '/update',

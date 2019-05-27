@@ -8,14 +8,18 @@ import com.example.cinema.po.Hall;
  */
 public class HallForm {
 
+    private Integer id;
     private String name;
     private Integer row;
     private Integer column;
 
-    public HallForm(Hall hall) {
-        this.name = hall.getName();
-        this.row = hall.getRow();
-        this.column = hall.getColumn();
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -44,6 +48,7 @@ public class HallForm {
 
     public Hall getPO() {
         Hall hall = new Hall();
+        hall.setId(this.getId());
         hall.setName(this.getName());
         hall.setColumn(this.getColumn());
         hall.setRow(this.getRow());

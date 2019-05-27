@@ -19,6 +19,26 @@ $(document).ready(function() {
         );
     }
 
+    function validateHallForm(data) {
+        var isValidate = true;
+        if(!data.name) {
+            isValidate = false;
+            $('#hall-name-input').parent('.form-group').addClass('has-error');
+            alert("影厅名不能为空")
+        }
+        if(!data.column) {
+            isValidate = false;
+            $('#hall-column-input').parent('.form-group').addClass('has-error');
+            alert("列数不能为空")
+        }
+        if(!data.row) {
+            isValidate = false;
+            $('#hall-row-input').parent('.form-group').addClass('has-error');
+            alert("行数不能为空")
+        }
+        return isValidate;
+    }
+
     function renderHall(halls){
         $('#hall-card').empty();
         var hallDomStr = "";
@@ -99,4 +119,30 @@ $(document).ready(function() {
             }
         );
     })
+
+    function getHallForm() {
+        return {
+            name: $('#hall-name-input').val(),
+            column: Number($('#hall-column-input').val()),
+            row: Number($('#hall-row-input').val()),
+        };
+    }
+
+    $("#hall-form-btn").click(function () {
+        var formData = getHallForm();
+        if(!validateHallForm(formData)) {
+            return;
+        }
+        console.log(formData);
+        postRequest(
+            '/hall/add',
+            formData,
+            function (res) {
+                getCinemaHalls();
+                $("#hallModal").modal('hide');
+            },
+            function (error) {
+                alert(error);
+            });
+    });
 });

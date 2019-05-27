@@ -6,7 +6,6 @@ import com.example.cinema.po.Hall;
 import com.example.cinema.vo.HallForm;
 import com.example.cinema.vo.HallVO;
 import com.example.cinema.vo.ResponseVO;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
