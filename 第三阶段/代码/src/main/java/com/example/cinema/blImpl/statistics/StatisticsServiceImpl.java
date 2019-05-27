@@ -4,6 +4,7 @@ import com.example.cinema.bl.statistics.StatisticsService;
 import com.example.cinema.blImpl.management.hall.HallServiceForBl;
 import com.example.cinema.data.statistics.StatisticsMapper;
 import com.example.cinema.po.AudiencePrice;
+import com.example.cinema.po.Consumption;
 import com.example.cinema.po.MovieScheduleTime;
 import com.example.cinema.po.MovieTotalBoxOffice;
 import com.example.cinema.vo.AudiencePriceVO;
@@ -192,6 +193,22 @@ public class StatisticsServiceImpl implements StatisticsService {
                     movieTotalBoxOfficeList2MovieTotalBoxOfficeVOList(moviePopularList)
             );
         } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    /**h
+     * @autor 石創烽
+     * @param amount
+     * @return
+     */
+    @Override
+    public ResponseVO getConsumption(double amount){
+        try{
+            List<Consumption> consumptionList=statisticsMapper.selectConsumption(amount);
+            return ResponseVO.buildSuccess(consumptionList);
+        }catch(Exception e){
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }

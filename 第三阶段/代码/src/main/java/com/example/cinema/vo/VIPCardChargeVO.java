@@ -1,5 +1,7 @@
 package com.example.cinema.vo;
 
+import com.example.cinema.po.VIPCardCharge;
+
 import java.sql.Timestamp;
 
 /**
@@ -33,6 +35,12 @@ public class VIPCardChargeVO {
      */
     private double amount;
 
+    public VIPCardChargeVO(VIPCardCharge vipCardCharge){
+        this.vipCardId=vipCardCharge.getVipCardId();
+        this.time=vipCardCharge.getTime();
+        this.payment=vipCardCharge.getPayment();
+        this.amount=vipCardCharge.getAmount();
+    }
     public int getId() {
         return id;
     }

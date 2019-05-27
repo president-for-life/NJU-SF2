@@ -92,7 +92,9 @@
                 </div>
             </div>
             <button onclick="chargeClick()">立即充值</button>
+            <button onclick="getChargeRecordsClick()">查看历史充值</button>
         </div>
+
     </div>
 
     <!--优惠券-->
@@ -103,7 +105,12 @@
         <div id="coupon-list"></div>
     </div>
 </div>
-
+<div class="modal fade" id="checkRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <table>
+        <tbody id="tbody1">
+        </tbody>
+    </table>
+</div>
 <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
