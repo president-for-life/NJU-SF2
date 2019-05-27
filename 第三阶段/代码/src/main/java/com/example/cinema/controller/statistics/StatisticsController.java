@@ -46,5 +46,9 @@ public class StatisticsController {
         return statisticsService.getPopularMovies(days, movieNum);
     }
 
+    @RequestMapping(value = "statistics/consumption", method = RequestMethod.GET)
+    public ResponseVO getConsumption(@RequestParam double amount) {
+        return statisticsService.getConsumption(amount);
+    }
 
 }

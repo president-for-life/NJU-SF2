@@ -60,6 +60,59 @@ function chargeClick() {
     $("#userMember-amount-group").css("display", "");
     isBuyState = false;
 }
+function getChargeRecordsClick() {
+    getRequest(
+        '/vip/charge/records/'+vipCardId,
+        function (res) {
+            var data = res.content || [];
+            if(data===null){
+                alert("无充值记录");
+            }
+            else {
+                var tableAdd = document.createElement("table");
+                document.getElementById("tbody1").appendChild(tableAdd);
+
+
+                for (var i = 0; i < data.length; i++) {
+                    var rowData = data[i];
+                    var newRow = document.createElement("tr");
+                    tableAdd.appendChild(newRow);
+
+                    var newCol0 = document.createElement("td");
+                    newRow.appendChild(newCol0);
+                    var checkBox = document.createElement("input");
+                    checkBox.type = "checkbox";
+                    newCol0.appendChild(checkBox);
+
+
+                    var newCol = document.createElement("td");
+                    //双标签有inner属性，表示可以设置内容
+                    newCol.innerHTML = rowData.time;
+                    newRow.appendChild(newCol);
+
+                    var newCol2 = document.createElement("td");
+                    //双标签有inner属性，表示可以设置内容
+                    newCol2.innerHTML = rowData.amount;
+                    newRow.appendChild(newCol2);
+
+                    var newCol3 = document.createElement("td");
+                    //双标签有inner属性，表示可以设置内容
+                    newCol3.innerHTML = rowData.payment;
+                    newRow.appendChild(newCol3);
+                }
+                var lastRow = document.createElement("tr");
+                tableAdd.appendChild(lastRow);
+                var lasttd1 = document.createElement("td");
+                lastRow.appendChild(lasttd1);
+                $('#checkRecord').modal('show')
+            }
+        },
+        function (error) {
+            alert(error);
+        });
+
+
+}
 
 function clearForm() {
     $('#userMember-form input').val("");

@@ -51,4 +51,11 @@ public interface StatisticsService {
      * @return vo.ResponseVO
      */
     ResponseVO getPopularMovies(int days, int movieNum);
+
+    /**
+     *
+     * @param amount
+     * @return
+     */
+    public ResponseVO getConsumption(double amount);
 }
