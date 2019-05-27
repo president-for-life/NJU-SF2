@@ -32,7 +32,7 @@ $(document).ready(function() {
                 seat+= "<div>"+temp+"</div>";
             }
             var hallDom =
-                "<div class='cinema-hall'>" +
+                "<div id='hall-" + hall.id + "' class='hall-item' data-hall='" + JSON.stringify(hall) + "'>" +
                 "<div>" +
                 "<span class='cinema-hall-name'>"+ hall.name +"</span>" +
                 "<span class='cinema-hall-size'>"+ hall.column +'*'+ hall.row +"</span>" +
@@ -44,6 +44,18 @@ $(document).ready(function() {
         });
         $('#hall-card').append(hallDomStr);
     }
+
+
+    $(document).on('click','.hall-item',function (e) {
+        var hall = JSON.parse(e.currentTarget.dataset.hall);
+        $("#hall-edit-name-input").val(hall.name);
+        $("#hall-edit-column-input").val(hall.column);
+        $("#hall-edit-row-input").val(hall.row);
+        $('#hallEditModal').modal('show');
+        $('#hallEditModal')[0].dataset.hallId = hall.id;
+    });
+
+
 
     function getCanSeeDayNum() {
         getRequest(

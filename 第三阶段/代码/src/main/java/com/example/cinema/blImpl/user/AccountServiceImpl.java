@@ -5,11 +5,13 @@ import com.example.cinema.data.user.AccountMapper;
 import com.example.cinema.po.User;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
+import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,9 +44,35 @@ public class AccountServiceImpl implements AccountService {
         return new UserVO(user);
     }
 
+    @Override
     public ResponseVO searchAllAdmin() {
         try {
             return ResponseVO.buildSuccess(userList2UserVOList(accountMapper.selectAdmins()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    @Override
+    public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
+        try {
+            //TODO 需要增加一个方法判断用户名是否重复。
+            User user = userUpdateForm.getPO();
+            accountMapper.updateOneAccount(user);
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    @Override
+    public ResponseVO deleteOneAccount(Integer id) {
+        try {
+            int userId = id;
+            accountMapper.deleteOneAccount(userId);
+            return ResponseVO.buildSuccess();
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -58,4 +86,5 @@ public class AccountServiceImpl implements AccountService {
         }
         return userVOList;
     }
+
 }

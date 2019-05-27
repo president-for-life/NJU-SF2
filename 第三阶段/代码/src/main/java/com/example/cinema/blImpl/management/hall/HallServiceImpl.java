@@ -3,8 +3,10 @@ package com.example.cinema.blImpl.management.hall;
 import com.example.cinema.bl.management.HallService;
 import com.example.cinema.data.management.HallMapper;
 import com.example.cinema.po.Hall;
+import com.example.cinema.vo.HallForm;
 import com.example.cinema.vo.HallVO;
 import com.example.cinema.vo.ResponseVO;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 范佳杰
+ * @author 范佳杰，徐志乐
  * @date 2019/4/12 2:01 PM
  */
 @Service
@@ -75,4 +77,30 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
             return -1;
         }
     }
+
+    @Override
+    public ResponseVO insertOneHall(HallForm hallForm) {
+        try {
+            //TODO 最好判断是否有重名影厅
+            hallMapper.insertOneHall(hallForm.getPO());
+        } catch (Exception e) {
+            return ResponseVO.buildFailure(e.getMessage());
+        }
+        return ResponseVO.buildSuccess();
+    }
+
+    @Override
+    public ResponseVO updateOneHall(HallForm hallUpdateForm) {
+        try {
+            Hall hall = hallUpdateForm.getPO();
+            //TODO 需要判断影厅当前是否已经被使用
+            hallMapper.updateOneHall(hall);
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+
 }
