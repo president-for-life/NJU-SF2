@@ -57,7 +57,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
         try {
-            //TODO 需要增加一个方法判断用户名是否重复。
+            int validId = validUpdateUsername(userUpdateForm.getUsername());
+            if (validId != -1 && validId != userUpdateForm.getId()){
+                return ResponseVO.buildFailure(ACCOUNT_EXIST);
+            }
             User user = userUpdateForm.getPO();
             accountMapper.updateOneAccount(user);
             return ResponseVO.buildSuccess();
@@ -85,6 +88,19 @@ public class AccountServiceImpl implements AccountService {
             userVOList.add(new UserVO(user));
         }
         return userVOList;
+    }
+
+    private int validUpdateUsername(String username){
+        try{
+            User user = accountMapper.getAccountByName(username);
+            if(user != null){
+                return user.getId();
+            }
+            return -1;
+        } catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
     }
 
 }

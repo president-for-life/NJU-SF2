@@ -158,8 +158,13 @@ $(document).ready(function() {
             '/hall/add',
             formData,
             function (res) {
-                getCinemaHalls();
-                $("#hallModal").modal('hide');
+                if (res.success){
+                    getCinemaHalls();
+                    $("#hallModal").modal('hide');
+                }
+                else{
+                    alert(res.message);
+                }
             },
             function (error) {
                 alert(error);
@@ -181,8 +186,13 @@ $(document).ready(function() {
             form,
             function (res) {
                 if(res.success){
-                    getCinemaHalls()
-                    $("#hallEditModal").modal('hide');
+                    if (res.success){
+                        getCinemaHalls();
+                        $("#hallEditModal").modal('hide');
+                    }
+                    else{
+                        alert(res.message);
+                    }
                 } else{
                     alert(res.message);
                 }

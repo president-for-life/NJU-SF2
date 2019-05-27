@@ -11,8 +11,13 @@ $(document).ready(function(){
             '/register',
             formData,
             function (res) {
-                getAdminList();
-                $("#adminModal").modal('hide');
+                if (res.success) {
+                    getAdminList();
+                    $("#adminModal").modal('hide');
+                }
+                else {
+                    alert(res.message);
+                }
             },
             function (error) {
                 alert(error);
