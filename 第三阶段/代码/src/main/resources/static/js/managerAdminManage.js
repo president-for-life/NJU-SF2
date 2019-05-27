@@ -135,9 +135,10 @@ $(document).ready(function(){
         var x = (Number($('#adminEditModal')[0].dataset.userId));
         console.log(x);
         console.log(typeof x);
+        console.log('/delete/' + Number($('#adminEditModal')[0].dataset.userId));
         if (r) {
             deleteRequest(
-                '/delete?id=' + Number($('#adminEditModal')[0].dataset.userId),
+                '/delete/' + Number($('#adminEditModal')[0].dataset.userId),
                 null,
                 function (res) {
                     if(res.success){

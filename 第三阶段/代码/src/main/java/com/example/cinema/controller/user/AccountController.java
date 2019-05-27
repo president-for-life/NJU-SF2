@@ -49,7 +49,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public ResponseVO deleteOneAccount(@PathVariable(value = "id") int id) {
+    public ResponseVO deleteOneAccount(@PathVariable(value = "id") Integer id) {
         return accountService.deleteOneAccount(id);
     }
 

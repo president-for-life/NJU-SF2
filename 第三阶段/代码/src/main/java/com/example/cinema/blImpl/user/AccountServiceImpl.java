@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseVO deleteOneAccount(int id) {
+    public ResponseVO deleteOneAccount(Integer id) {
         try {
             int userId = id;
             accountMapper.deleteOneAccount(userId);
