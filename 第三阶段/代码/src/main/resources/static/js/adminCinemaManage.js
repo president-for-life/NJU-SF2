@@ -50,7 +50,7 @@ $(document).ready(function() {
         var hall = JSON.parse(e.currentTarget.dataset.hall);
         $("#hall-edit-name-input").val(hall.name);
         $("#hall-edit-column-input").val(hall.column);
-        $("#hall-edit-column-input").val(hall.row);
+        $("#hall-edit-row-input").val(hall.row);
         $('#hallEditModal').modal('show');
         $('#hallEditModal')[0].dataset.hallId = hall.id;
     });

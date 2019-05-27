@@ -1,11 +1,11 @@
 package com.example.cinema.controller.management;
 
 import com.example.cinema.bl.management.HallService;
+import com.example.cinema.vo.HallForm;
+import com.example.cinema.vo.HallUpdateForm;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 影厅管理
@@ -22,4 +22,16 @@ public class HallController {
     public ResponseVO searchAllHall() {
         return hallService.searchAllHall();
     }
+
+    @PostMapping(value = "hall/add")
+    public ResponseVO insertOneHall(@RequestBody HallForm hallForm){
+        return hallService.insertOneHall(hallForm);
+    }
+
+    @PostMapping(value = "hall/update")
+    public ResponseVO updateOneHall(@RequestBody HallUpdateForm hallUpdateForm) {
+        return hallService.updateOneHall(hallUpdateForm);
+    }
+
+
 }
