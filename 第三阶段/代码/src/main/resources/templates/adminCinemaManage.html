@@ -57,5 +57,81 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="hallModal" tabindex="-1" role="dialog" aria-labelledby="hallModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="hallModalLabel">新增影厅</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-name-input">影厅名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="hall-name-input" placeholder="请输入影厅名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-column-input">列数</label>
+                        <div class="col-sm-10">
+                            <input type="number" required="true" class="form-control" id="hall-column-input" placeholder="请输入列数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-row-input">行数</label>
+                        <div class="col-sm-10">
+                            <input type="number" required="true" class="form-control" id="hall-row-input" placeholder="请输入行数">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="hall-form-btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="hallEditModal" tabindex="-1" role="dialog" aria-labelledby="hallModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改影厅</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-edit-name-input">影厅名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="hall-edit-name-input" placeholder="请输入影厅名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-edit-column-input">列数</label>
+                        <div class="col-sm-10">
+                            <input type="number" required="true" class="form-control" id="hall-edit-column-input" placeholder="请输入列数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-edit-row-input">行数</label>
+                        <div class="col-sm-10">
+                            <input type="number" required="true" class="form-control" id="hall-edit-row-input" placeholder="请输入行数">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="hall-edit-remove-btn">删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="hall-edit-form-btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

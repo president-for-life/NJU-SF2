@@ -90,7 +90,6 @@ $(document).ready(function(){
     }
 
     $(document).on('click','.admin-item',function (e) {
-        console.log("点击成功");
         var user = JSON.parse(e.currentTarget.dataset.user);
         $("#admin-edit-username-input").val(user.username);
         $("#admin-edit-password-input").val(user.password);
@@ -132,10 +131,6 @@ $(document).ready(function(){
 
     $("#admin-edit-remove-btn").click(function () {
         var r=confirm("确认要删除该Admin对象吗");
-        var x = (Number($('#adminEditModal')[0].dataset.userId));
-        console.log(x);
-        console.log(typeof x);
-        console.log('/delete/' + Number($('#adminEditModal')[0].dataset.userId));
         if (r) {
             deleteRequest(
                 '/delete/' + Number($('#adminEditModal')[0].dataset.userId),
