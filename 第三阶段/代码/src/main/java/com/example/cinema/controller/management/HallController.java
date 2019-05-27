@@ -2,7 +2,6 @@ package com.example.cinema.controller.management;
 
 import com.example.cinema.bl.management.HallService;
 import com.example.cinema.vo.HallForm;
-import com.example.cinema.vo.HallUpdateForm;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class HallController {
     }
 
     @PostMapping(value = "hall/update")
-    public ResponseVO updateOneHall(@RequestBody HallUpdateForm hallUpdateForm) {
+    public ResponseVO updateOneHall(@RequestBody HallForm hallUpdateForm) {
         return hallService.updateOneHall(hallUpdateForm);
     }
 

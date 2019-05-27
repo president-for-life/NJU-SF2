@@ -1,7 +1,6 @@
 package com.example.cinema.bl.management;
 
 import com.example.cinema.vo.HallForm;
-import com.example.cinema.vo.HallUpdateForm;
 import com.example.cinema.vo.ResponseVO;
 
 /**
@@ -26,5 +25,5 @@ public interface HallService {
      *
      * @return vo.ResponseVO
      */
-    ResponseVO updateOneHall(HallUpdateForm hallUpdateForm);
+    ResponseVO updateOneHall(HallForm hallUpdateForm);
 }

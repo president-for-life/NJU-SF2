@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
         try {
-            // 需要增加一个方法判断用户名是否重复。
+            //TODO 需要增加一个方法判断用户名是否重复。
             User user = userUpdateForm.getPO();
             accountMapper.updateOneAccount(user);
             return ResponseVO.buildSuccess();
