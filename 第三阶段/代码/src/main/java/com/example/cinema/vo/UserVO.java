@@ -12,6 +12,7 @@ public class UserVO {
     private String password;
     private String role;
 
+
     public UserVO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
@@ -47,12 +48,4 @@ public class UserVO {
 
     public void setRole(String rle) { this.role = role; }
 
-    public User getPO() {
-        User user = new User();
-        user.setId(this.getId());
-        user.setRole(this.getRole());
-        user.setUsername(this.getUsername());
-        user.setPassword(this.getPassword());
-        return user;
-    }
 }

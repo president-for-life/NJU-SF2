@@ -102,9 +102,9 @@ $(document).ready(function(){
     $('#admin-edit-form-btn').click(function () {
         var form = {
             id: Number($('#adminEditModal')[0].dataset.userId),
+            role: "admin",
             username: $("#admin-edit-username-input").val(),
-            password : $("#admin-edit-password-input").val(),
-            role: "admin"
+            password : $("#admin-edit-password-input").val()
         };
         //todo 需要做一下表单验证？
         if (!validateEditAdminForm(form)){
@@ -134,12 +134,12 @@ $(document).ready(function(){
         var r=confirm("确认要删除该排片信息吗")
         if (r) {
             deleteRequest(
-                '/schedule/delete/batch',
-                {scheduleIdList:[Number($('#scheduleEditModal')[0].dataset.scheduleId)]},
+                '/delete',
+                (Number($('#adminEditModal')[0].dataset.userId)),
                 function (res) {
                     if(res.success){
-                        getSchedules();
-                        $("#scheduleEditModal").modal('hide');
+                        getAdminList();
+                        $("#adminEditModal").modal('hide');
                     } else{
                         alert(res.message);
                     }

@@ -2,6 +2,7 @@ package com.example.cinema.bl.user;
 
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
+import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 
 /**
@@ -31,7 +32,7 @@ public interface AccountService {
      * @return vo.ResponseVO
      */
 
-    ResponseVO updateUser(UserVO userVO);
+    ResponseVO updateUser(UserUpdateForm userUpdateForm);
 
 
     /**
@@ -41,5 +42,14 @@ public interface AccountService {
      */
 
     ResponseVO searchAllAdmin();
+
+    /**
+     * 搜索全部Admin
+     *
+     * @param id
+     * @return vo.ResponseVO
+     */
+
+    ResponseVO deleteOneAccount(Integer id);
 
 }

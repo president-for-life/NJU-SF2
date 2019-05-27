@@ -5,6 +5,7 @@ import com.example.cinema.data.user.AccountMapper;
 import com.example.cinema.po.User;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
+import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,10 +55,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseVO updateUser(UserVO userVO) {
+    public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
         try {
-            User user = userVO.getPO();
+            // 需要增加一个方法判断用户名是否重复。
+            User user = userUpdateForm.getPO();
             accountMapper.updateOneAccount(user);
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    @Override
+    public ResponseVO deleteOneAccount(Integer id) {
+        try {
+            accountMapper.deleteOneAccount(id);
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,4 +85,5 @@ public class AccountServiceImpl implements AccountService {
         }
         return userVOList;
     }
+
 }
