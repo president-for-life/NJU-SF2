@@ -4,6 +4,7 @@ import com.example.cinema.blImpl.user.AccountServiceImpl;
 import com.example.cinema.config.InterceptorConfiguration;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
+import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,6 @@ public class AccountController {
     @Autowired
     private AccountServiceImpl accountService;
 
-    // 修改这个类，使得返回值包括role
     @PostMapping("/login")
     public ResponseVO login(@RequestBody UserForm userForm, HttpSession session) {
         UserVO user = accountService.login(userForm);
@@ -41,6 +41,16 @@ public class AccountController {
     public String logOut(HttpSession session) {
         session.removeAttribute(InterceptorConfiguration.SESSION_KEY);
         return "index";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseVO updateAccount(@RequestBody UserUpdateForm userUpdateForm) {
+        return accountService.updateUser(userUpdateForm);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public ResponseVO deleteOneAccount(Integer userId) {
+        return accountService.deleteOneAccount(userId);
     }
 
     @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
