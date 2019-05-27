@@ -39,6 +39,26 @@ $(document).ready(function() {
         return isValidate;
     }
 
+    function validateEditHallForm(data) {
+        var isValidate = true;
+        if(!data.name) {
+            isValidate = false;
+            $('#hall-edit-name-input').parent('.form-group').addClass('has-error');
+            alert("影厅名不能为空")
+        }
+        if(!data.column) {
+            isValidate = false;
+            $('#hall-edit-column-input').parent('.form-group').addClass('has-error');
+            alert("列数不能为空")
+        }
+        if(!data.row) {
+            isValidate = false;
+            $('#hall-edit-row-input').parent('.form-group').addClass('has-error');
+            alert("行数不能为空")
+        }
+        return isValidate;
+    }
+
     function renderHall(halls){
         $('#hall-card').empty();
         var hallDomStr = "";
@@ -144,5 +164,32 @@ $(document).ready(function() {
             function (error) {
                 alert(error);
             });
+    });
+
+    $('#hall-edit-form-btn').click(function () {
+        var form = {
+            id: Number($('#hallEditModal')[0].dataset.hallId),
+            name: $('#hall-edit-name-input').val(),
+            column: Number($('#hall-edit-column-input').val()),
+            row: Number($('#hall-edit-row-input').val()),
+        };
+        if (!validateEditHallForm(form)){
+            return
+        }
+        postRequest(
+            '/hall/update',
+            form,
+            function (res) {
+                if(res.success){
+                    getCinemaHalls()
+                    $("#hallEditModal").modal('hide');
+                } else{
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
     });
 });
