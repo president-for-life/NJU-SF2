@@ -48,9 +48,9 @@ public class AccountController {
         return accountService.updateUser(userUpdateForm);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResponseVO deleteOneAccount(Integer userId) {
-        return accountService.deleteOneAccount(userId);
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseVO deleteOneAccount(@PathVariable(value = "id") int id) {
+        return accountService.deleteOneAccount(id);
     }
 
     @RequestMapping(value = "/admin/all", method = RequestMethod.GET)

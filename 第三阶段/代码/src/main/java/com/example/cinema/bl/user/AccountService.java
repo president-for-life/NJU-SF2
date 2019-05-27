@@ -50,6 +50,6 @@ public interface AccountService {
      * @return vo.ResponseVO
      */
 
-    ResponseVO deleteOneAccount(Integer id);
+    ResponseVO deleteOneAccount(int id);
 
 }

@@ -131,11 +131,14 @@ $(document).ready(function(){
     });
 
     $("#admin-edit-remove-btn").click(function () {
-        var r=confirm("确认要删除该排片信息吗")
+        var r=confirm("确认要删除该Admin对象吗");
+        var x = (Number($('#adminEditModal')[0].dataset.userId));
+        console.log(x);
+        console.log(typeof x);
         if (r) {
             deleteRequest(
-                '/delete',
-                (Number($('#adminEditModal')[0].dataset.userId)),
+                '/delete?id=' + Number($('#adminEditModal')[0].dataset.userId),
+                null,
                 function (res) {
                     if(res.success){
                         getAdminList();
