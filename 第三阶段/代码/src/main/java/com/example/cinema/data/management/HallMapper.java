@@ -35,11 +35,4 @@ public interface HallMapper {
      * @author 梁正川
      */
     int updateOneHall(Hall hall);
-
-    /**
-     * 某影厅正在进行和将来的排片的数量
-     *
-     * @author 梁正川
-     */
-    int numSchedules(@Param("hallId") int hallId);
 }

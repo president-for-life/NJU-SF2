@@ -88,6 +88,11 @@
             order by end_time asc
     </select>
 
+    <select id="selectNumSchedules" resultType="int">
+        select count(*) as num from schedule
+        where hall_id = #{hallId} and timestampdiff(SECOND, now(), end_time) &gt; 0
+    </select>
+
     <resultMap id="ScheduleItem" type="com.example.cinema.po.ScheduleItem">
         <id column="id" property="id"></id>
         <result column="hall_id" property="hallId"></result>

@@ -23,4 +23,11 @@ public interface ScheduleServiceForBl {
      * @return po.ScheduleItem
      */
     ScheduleItem getScheduleItemById(int id);
+
+    /**
+     * 获得某影厅正在进行和将来的排片的数量
+     *
+     * @author 梁正川
+     */
+    int getNumSchedules(int hallId);
 }
