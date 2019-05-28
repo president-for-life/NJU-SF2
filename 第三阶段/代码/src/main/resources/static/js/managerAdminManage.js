@@ -24,10 +24,6 @@ $(document).ready(function(){
             });
     });
 
-
-
-
-
     function getAdminForm() {
         return {
             username: $('#admin-username-input').val(),
@@ -102,7 +98,6 @@ $(document).ready(function(){
         $('#adminEditModal')[0].dataset.userId = user.id;
     });
 
-
     $('#admin-edit-form-btn').click(function () {
         var form = {
             id: Number($('#adminEditModal')[0].dataset.userId),
@@ -113,7 +108,6 @@ $(document).ready(function(){
         if (!validateEditAdminForm(form)){
             return
         }
-
 
         postRequest(
             '/update',
@@ -133,7 +127,7 @@ $(document).ready(function(){
     });
 
     $("#admin-edit-remove-btn").click(function () {
-        var r=confirm("确认要删除该Admin对象吗");
+        var r = confirm("确认要删除该Admin对象吗");
         if (r) {
             deleteRequest(
                 '/delete/' + Number($('#adminEditModal')[0].dataset.userId),
