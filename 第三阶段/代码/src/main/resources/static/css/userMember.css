@@ -154,3 +154,16 @@
 .notice {
      margin-left: 12px;
 }
+.table
+{
+    width:100%;
+}
+.table.line hr {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.th
+{
+    height:50px;
+}
