@@ -1,45 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>会员卡管理</title>
-    <!-- 引入css样式文件 -->
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/adminRefundStrategy.css"/>
-    <!-- Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <!-- font-asesome图标库 -->
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+	<meta charset="UTF-8">
+	<title>退票策略管理</title>
+	<!-- 引入css样式文件 -->
+	<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/adminRefundStrategy.css"/>
+	<!-- Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+	<!-- font-asesome图标库 -->
+	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
 
-    <!-- 引入js脚本文件 -->
-    <!-- jquery -->
-    <script src="/js/jquery.js"></script>
-    <!-- Bootstrap 核心 JavaScript 文件 -->
-    <script src="/js/bootstrap.js"></script>
-    <!-- 公共方法 -->
-    <script src="/js/request.js"></script>
-    <script src="/js/adminRefundStrategy.js"></script>
+	<!-- 引入js脚本文件 -->
+	<!-- jquery -->
+	<script src="/js/jquery.js"></script>
+	<!-- Bootstrap 核心 JavaScript 文件 -->
+	<script src="/js/bootstrap.js"></script>
+	<!-- 公共方法 -->
+	<script src="/js/request.js"></script>
+	<script src="/js/adminRefundStrategy.js"></script>
 </head>
 <body>
 <div class="main-container">
-    <div class="nav-left-container">
-        <div class="nav-user-container" style="margin-bottom: 50px;">
-            <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
-            <p class="title">Admin</p>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
-            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
-            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-            <li role="presentation"><a href="/admin/member"><i class="icon-credit-card"></i> 会员卡管理</a></li>
-            <li role="presentation" class="active"><a href="#"><i class="icon-ticket"></i> 退票策略管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
-        </ul>
-    </div>
-    <div class="content-container">
+	<div class="nav-left-container">
+		<div class="nav-user-container" style="margin-bottom: 50px;">
+			<img class="avatar-lg" src="/images/defaultAvatar.jpg"/>
+			<p class="title">Admin</p>
+		</div>
+		<ul class="nav nav-pills nav-stacked">
+			<li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+			<li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+			<li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+			<li role="presentation"><a href="/admin/member"><i class="icon-credit-card"></i> 会员卡管理</a></li>
+			<li role="presentation" class="active"><a href="#"><i class="icon-ticket"></i> 退票策略管理</a></li>
+			<li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
+			<li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+		</ul>
+	</div>
+	<div class="content-container">
+		<div class="content-header">
+			<span class="title gray-text">退票策略</span>
+			<button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
+			        data-target="#ticketRefundStrategyModal"><i class="icon-plus-sign"></i> 新增退票策略
+			</button>
+		</div>
+		<ul class="ticket-refund-strategy-on-list">
+		</ul>
+	</div>
+</div>
 
-    </div>
+<div class="modal fade" id="strategyModal" tabindex="-1" role="dialog" aria-labelledby="strategyModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="strategyModalLabel">新增退票策略</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="strategy-refundable-input"><span class="error-text">*
+						</span>是否可退票</label>
+						<div class="col-sm-10">
+							<input type="radio" class="form-control" id="strategy-refundable-input">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="strategy-ratio-input"><span class="error-text">*
+						</span>返还比例</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="strategy-ratio-input" min="0.0" max="1.0"
+							       step="0.1">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="strategy-time-input">允许在开场前多少分钟退票</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="strategy-time-input" min="0"
+							       step="10">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="strategy-movie-input">使用本退票策略的电影列表</label>
+						<div class="col-sm-10">
+							<select id="strategy-movie-input" class="form-control">
+							</select>
+							<p class="help-block">不选择代表所有电影</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="strategy-movie-input">已选电影</label>
+						<div id="selected-movies" class="col-sm-10">
+
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="strategy-form-btn">确认</button>
+			</div>
+		</div>
+	</div>
+
+
 </div>
 </body>
 </html>

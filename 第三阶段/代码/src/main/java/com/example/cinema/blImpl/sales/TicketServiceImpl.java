@@ -442,7 +442,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			Date movieStartDate = scheduleService.getScheduleItemById(scheduleId).getStartTime();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date presentDate = new Date();  // 获取当前日期时间
-			long hourGap=(presentDate.getTime()-movieStartDate.getTime())/3600000;  // 毫秒 ==> 小时
+			long minuteGap=(presentDate.getTime()-movieStartDate.getTime())/60000;  // 毫秒 ==> 分钟
 			/*
 			 * 订单状态：
 			 * 0：支付未完成
@@ -452,7 +452,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			 * 4：已退票
 			 */
 			boolean canBeRefund =
-					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (hourGap >= (long) ticketRefundStrategy.getTime());
+					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (minuteGap >= (long) ticketRefundStrategy.getTime());
 			if (canBeRefund) {  // 如果满足所有的退票条件，就计算可退给用户的金额
 //				double actualPayment = ticket.getActualPayment();  // 获取用户实际付款的金额
 //				double refundPayment = actualPayment * ticketRefundStrategy.getRatio();  // 计算可退还给用户的金额
