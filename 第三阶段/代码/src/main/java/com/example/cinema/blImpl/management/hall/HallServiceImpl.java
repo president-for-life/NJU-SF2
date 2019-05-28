@@ -1,6 +1,8 @@
 package com.example.cinema.blImpl.management.hall;
 
 import com.example.cinema.bl.management.HallService;
+import com.example.cinema.bl.management.ScheduleService;
+import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
 import com.example.cinema.data.management.HallMapper;
 import com.example.cinema.po.Hall;
 import com.example.cinema.vo.HallForm;
@@ -20,6 +22,7 @@ import java.util.List;
 public class HallServiceImpl implements HallService, HallServiceForBl {
     @Autowired
     private HallMapper hallMapper;
+    private ScheduleServiceForBl scheduleServiceForBl;
 
     /**
      * po.Hall数组转vo.HallVO数组
@@ -93,6 +96,11 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
         try {
             Hall hall = hallUpdateForm.getPO();
             //TODO 需要判断影厅当前是否已经被使用
+            int y = hall.getId();
+            int x = scheduleServiceForBl.getNumSchedules(y);
+            if ( x > 0){
+                return ResponseVO.buildFailure("正在使用中的影厅");
+            }
             hallMapper.updateOneHall(hall);
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
