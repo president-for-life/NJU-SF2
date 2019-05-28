@@ -21,11 +21,6 @@
         where id = #{id}
     </update>
 
-    <select id="numSchedules" resultType="int">
-        select count(*) as num from schedule
-        where hall_id = #{hallId} and timestampdiff(SECOND, now(), end_time) &gt; 0
-    </select>
-
     <resultMap id="Hall" type="com.example.cinema.po.Hall">
     </resultMap>
 

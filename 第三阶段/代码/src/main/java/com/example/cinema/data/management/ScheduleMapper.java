@@ -120,4 +120,10 @@ public interface ScheduleMapper {
      */
     List<ScheduleItem> selectScheduleByMovieId(@Param("movieId") int movieId);
 
+    /**
+     * 某影厅正在进行和将来的排片的数量
+     *
+     * @author 梁正川
+     */
+    int selectNumSchedules(@Param("hallId") int hallId);
 }
