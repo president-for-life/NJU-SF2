@@ -320,7 +320,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id_uindex` (`id`),
   UNIQUE KEY `user_username_uindex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +329,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'manager','manager','123'),(2,'admin','admin1','123'),(3,'admin','admin2','123'),(16,'user','user1','123'),(17,'user','user2','123'),(18,'user','user3','123');
+INSERT INTO `user` VALUES (1,'manager','manager','123'),(2,'admin','admin1','123'),(3,'admin','admin2','123'),(16,'user','user1','123'),(17,'user','user2','123'),(18,'user','user3','123'),(19,'user','user4','123'),(20,'admin','admin3','123');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,4 +446,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-27  9:39:43
+-- Dump completed on 2019-05-28 18:45:43
