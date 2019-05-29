@@ -89,4 +89,13 @@ public class VIPCardStrategy {
         vipCardStrategy.setDiscountAmount(this.getDiscountAmount());
         return vipCardStrategy;
     }
+
+    public String toString() {
+        return this.getId() + " "
+                + this.getPrice() + " "
+                + this.getDescription() + " "
+                + this.getTargetAmount() + " "
+                + this.getDiscountAmount() + " "
+                + this.getDiscountAmount();
+    }
 }

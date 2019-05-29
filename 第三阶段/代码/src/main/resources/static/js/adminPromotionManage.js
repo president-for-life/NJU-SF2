@@ -23,15 +23,8 @@ $(document).ready(function() {
 
         activities.forEach(function (activity) {
             var movieDomStr = "";
-            if(activity.movieList.length){
-                activity.movieList.forEach(function (movie) {
-                    movieDomStr += "<li class='activity-movie primary-text'>"+movie.name+"</li>";
-                });
-            }else{
-                movieDomStr = "<li class='activity-movie primary-text'>所有热映电影</li>";
-            }
 
-            activitiesDomStr+=
+            activitiesDomStr +=
                 "<div class='activity-container'>" +
                 "    <div class='activity-card card'>" +
                 "       <div class='activity-line'>" +

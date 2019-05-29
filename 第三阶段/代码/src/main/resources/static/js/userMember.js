@@ -65,50 +65,54 @@ getChargeRecordsClick=function() {
    getRequest(
         '/vip/charge/records?userId='+16,
         function (res) {
+            var data=res.content||[];
+            var $content_container_tbody = $("#tbody");
+            $content_container_tbody.empty();
+            var recordDomStr = "<tr>"+
+                               "<td>"+"充值时间"+"</td>"+
+                               "<td></td>" +
+                               "</tr>"+"<div>";
+            data.forEach(function (vipCardCharge) {
 
-            var data = res.content || [];
-            var tableAdd = document.createElement("table");
-            document.getElementById("tbody1").appendChild(tableAdd);
-            var newRow = document.createElement("tr");
-            tableAdd.appendChild(newRow);
-            var newCol = document.createElement("td");
-            newCol.innerHTML="时间";
-            newRow.appendChild(newCol);
-            var newCol2 = document.createElement("td");
-            var newCol3 = document.createElement("td");
-            newCol3.innerHTML = "充值金额";
-            newRow.appendChild(newCol3);
-            var newCol2 = document.createElement("td");
-            for (var i = 0; i < data.length; i++) {
-                var rowData = data[i];
-                var newRow = document.createElement("tr");
-                tableAdd.appendChild(newRow);
-
-                var newCol = document.createElement("td");
-                //双标签有inner属性，表示可以设置内容
-                newCol.innerHTML = rowData.time;
-                newRow.appendChild(newCol);
-                var newCol2 = document.createElement("td");
-                //双标签有inner属性，表示可以设置内容
-                newCol2.innerHTML = rowData.amount;
-                newRow.appendChild(newCol2);
-                var newCol0 = document.createElement("td");
-                newRow.appendChild(newCol0);
-                var checkBox = document.createElement("input");
-                checkBox.type = "checkbox";
-                newCol0.appendChild(checkBox);
-            }
-            var lastRow = document.createElement("tr");
-            tableAdd.appendChild(lastRow);
-            var lasttd1 = document.createElement("td");
-            lastRow.appendChild(lasttd1);
-            $('#checkRecord').modal('show')
+               recordDomStr +=
+                    "<tr>" +
+                    "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
+                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
+                    "</tr>"+
+                    "<tr style=\"background-color: #e6e6e6;font-size: 100px\"  hidden=\"hidden\">"+
+                    "充值金额："+vipCardCharge.amount+
+                    "</tr>"
+            });
+            recordDomStr+="</div>"
+            $content_container_tbody.append(recordDomStr);
+            $('#checkRecord').modal("show")
         },
         function (error) {
             alert(error);
         });
 
 };
+$(document).on('click', '#r', function () {
+    alert
+    if($(this).parent().next().is(":hidden")) {
+        $(this).parent().next().show()
+    }
+    else {
+        $(this).parents("tr").next().hide();
+    }
+
+});
+//时间转化
+function timetrans(date) {
+    var date = new Date(date );//如果date为13位不需要乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y + M + D + h + m + s;
+}
 
 function clearForm() {
     $('#tbody1').empty();
