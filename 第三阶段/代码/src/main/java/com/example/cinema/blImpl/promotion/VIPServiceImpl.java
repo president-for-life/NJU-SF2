@@ -131,6 +131,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             VIPCard card = vipCardMapper.selectCardById(
                     vipCardChargeForm.getVipCardId()
             );
+
             VIPCardStrategy strategy = vipCardMapper.selectStrategyById(
                     card.getStrategyId()
             );
@@ -188,11 +189,18 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Override
     public ResponseVO getCardByUserId(int userId) {
         try {
-            VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
-            if (vipCard == null) {
+            // 会员卡
+            VIPCard card = vipCardMapper.selectCardByUserId(userId);
+            if (card == null) {
                 return ResponseVO.buildFailure("用户卡不存在");
             }
-            return ResponseVO.buildSuccess(vipCard);
+
+            // 会员卡使用的策略
+            VIPCardStrategy strategy
+                    = vipCardMapper.selectStrategyById(card.getStrategyId());
+
+            VIPCardWithStrategyVO vo = new VIPCardWithStrategyVO(card, strategy) ;
+            return ResponseVO.buildSuccess(vo);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
