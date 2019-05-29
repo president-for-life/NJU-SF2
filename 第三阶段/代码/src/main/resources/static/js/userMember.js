@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 var isBuyState = true;
 var vipCardId;
+var selectedValue=0;
 
 function getVIP() {
     getRequest(
@@ -65,6 +66,7 @@ getChargeRecordsClick=function() {
    getRequest(
         '/vip/charge/records?userId='+16,
         function (res) {
+            var temp=0;//给id使用
             var data=res.content||[];
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
@@ -77,13 +79,16 @@ getChargeRecordsClick=function() {
                recordDomStr +=
                     "<tr>" +
                     "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
-                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
+                    "<td>"+"<span id=\'r\' class=\"caret\" value=temp></span>"+"</td>"+
                     "</tr>"+
-                    "<tr style=\"background-color: #e6e6e6;font-size: 100px\"  hidden=\"hidden\">"+
+                    "<tr  id=\'c\'+temp style=\'display: none\'>"+
+                   "<td>"+
                     "充值金额："+vipCardCharge.amount+
-                    "</tr>"
+                   "</td>"+
+                    "</tr>";
+               temp=temp+1;
             });
-            recordDomStr+="</div>"
+            recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
             $('#checkRecord').modal("show")
         },
@@ -93,13 +98,15 @@ getChargeRecordsClick=function() {
 
 };
 $(document).on('click', '#r', function () {
-    alert
-    if($(this).parent().next().is(":hidden")) {
-        $(this).parent().next().show()
+    var temp=$(this).value;
+    var tr1=document.getElementById("c"+temp);
+    if(tr1.style.display=='none') {
+        temp = '';
     }
-    else {
-        $(this).parents("tr").next().hide();
+    else{
+        temp = 'none';
     }
+    $(this).parents("tr").next().style.display=temp;
 
 });
 //时间转化
