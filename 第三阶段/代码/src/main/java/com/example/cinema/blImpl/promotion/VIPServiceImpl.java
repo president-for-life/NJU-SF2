@@ -56,9 +56,20 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    @Override
     public ResponseVO getStrategy(int strategyId) {
         try {
             return ResponseVO.buildSuccess(vipCardMapper.selectStrategyById(strategyId));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("获得会员卡充值优惠策略失败");
+        }
+    }
+
+    @Override
+    public ResponseVO getAllStrategies() {
+        try {
+            return ResponseVO.buildSuccess(vipCardMapper.selectStrategies());
         } catch(Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("获得会员卡充值优惠策略失败");

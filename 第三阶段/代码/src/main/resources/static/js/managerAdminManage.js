@@ -24,10 +24,6 @@ $(document).ready(function(){
             });
     });
 
-
-
-
-
     function getAdminForm() {
         return {
             username: $('#admin-username-input').val(),
@@ -83,13 +79,12 @@ $(document).ready(function(){
         var adminDomStr = '';
         list.forEach(function (user) {
             adminDomStr +=
+                "<div class='admin-item-container'>"+
                 "<li id='user-" + user.id + "' class='admin-item' data-user='" + JSON.stringify(user) + "'>" +
-                "<div class='admin-info'>" +
-                "<div class='admin-title'>" +
-                "<span class='primary-text'>" + user.username + "</span>" +
-                "</div>" +
-                "</div>" +
-                "</li>";
+                "<div style='margin: 0 auto' >" + user.username + "</div>" +
+                "</li>"+
+                "</div>"
+            ;
         });
         $('.admin-on-list').append(adminDomStr);
     }
@@ -102,7 +97,6 @@ $(document).ready(function(){
         $('#adminEditModal')[0].dataset.userId = user.id;
     });
 
-
     $('#admin-edit-form-btn').click(function () {
         var form = {
             id: Number($('#adminEditModal')[0].dataset.userId),
@@ -113,7 +107,6 @@ $(document).ready(function(){
         if (!validateEditAdminForm(form)){
             return
         }
-
 
         postRequest(
             '/update',
@@ -133,7 +126,7 @@ $(document).ready(function(){
     });
 
     $("#admin-edit-remove-btn").click(function () {
-        var r=confirm("确认要删除该Admin对象吗");
+        var r = confirm("确认要删除该Admin对象吗");
         if (r) {
             deleteRequest(
                 '/delete/' + Number($('#adminEditModal')[0].dataset.userId),

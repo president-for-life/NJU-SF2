@@ -57,16 +57,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
         try {
-            int validId = validUpdateUsername(userUpdateForm.getUsername());
-            if (validId != -1 && validId != userUpdateForm.getId()){
-                return ResponseVO.buildFailure(ACCOUNT_EXIST);
-            }
-            User user = userUpdateForm.getPO();
-            accountMapper.updateOneAccount(user);
+            accountMapper.updateOneAccount(userUpdateForm.getPO());
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
+            return ResponseVO.buildFailure(ACCOUNT_EXIST);
         }
     }
 
@@ -90,17 +84,5 @@ public class AccountServiceImpl implements AccountService {
         return userVOList;
     }
 
-    private int validUpdateUsername(String username){
-        try{
-            User user = accountMapper.getAccountByName(username);
-            if(user != null){
-                return user.getId();
-            }
-            return -1;
-        } catch (Exception e){
-            e.printStackTrace();
-            return -1;
-        }
-    }
 
 }

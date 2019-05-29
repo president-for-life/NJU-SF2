@@ -32,6 +32,11 @@ public class VIPCardController {
         return vipService.getStrategy(strategyId);
     }
 
+    @GetMapping("/strategy/get/all")
+    public ResponseVO getAllStrategies() {
+        return vipService.getAllStrategies();
+    }
+
     @PostMapping("/add")
     public ResponseVO addVIP(@RequestParam int userId, @RequestParam int strategyId) {
         return vipService.addVIPCard(userId, strategyId);

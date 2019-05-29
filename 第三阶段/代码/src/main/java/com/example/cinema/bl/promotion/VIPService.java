@@ -42,6 +42,13 @@ public interface VIPService {
      */
     ResponseVO getStrategy(int strategyId);
 
+    /**
+     * 获得所有会员卡充值优惠策略
+     *
+     * @author 梁正川
+     */
+    ResponseVO getAllStrategies();
+
     /*================================================================================
     会员卡
      */
