@@ -154,16 +154,16 @@
 .notice {
      margin-left: 12px;
 }
-.table
-{
-    width:100%;
-}
-.table.line hr {
-    flex-grow: 1;
-    margin-left: 10px;
+.table-wrapper {
+    padding: 20px;
 }
 
-.th
-{
-    height:50px;
+.table-wrapper .table b {
+    color: #1caf9a;
+    font-size: 20px;
+}
+
+.table-wrapper .table td{
+    height: 60px;
+    vertical-align: middle;
 }
