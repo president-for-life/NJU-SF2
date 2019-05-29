@@ -19,6 +19,7 @@ public interface VIPService {
 
     /**
      * 发布会员卡充值优惠策略
+     * TESTED
      *
      * @author 梁正川
      * @param strategyForm 发布会员卡表单
@@ -28,6 +29,7 @@ public interface VIPService {
 
     /**
      * 修改会员卡充值优惠策略
+     * TESTED
      *
      * @author 梁正川
      * @param strategyForm 修改会员卡表单
@@ -37,6 +39,7 @@ public interface VIPService {
 
     /**
      * 获得会员卡充值优惠策略
+     * TESTED
      *
      * @author 梁正川
      */
@@ -44,6 +47,7 @@ public interface VIPService {
 
     /**
      * 获得所有会员卡充值优惠策略
+     * TESTED
      *
      * @author 梁正川
      */
@@ -56,31 +60,31 @@ public interface VIPService {
     /**
      * 某用户获得使用某种策略的会员卡
      * 如果用户已持有会员卡，切换会员卡使用的策略
+     * TESTED
      */
     ResponseVO addVIPCard(int userId, int strategyId);
 
     /**
-     * 根据id获得某会员卡
-     */
-    ResponseVO getCardById(int id);
-
-    /**
      * 获得会员卡信息
+     * TESTED
      */
     ResponseVO getVIPCardStrategy(int strategyId);
 
     /**
      * 充值会员卡
+     * TESTED
      */
     ResponseVO charge(VIPCardChargeForm vipCardChargeForm);
 
     /**
      * 获得某用户的会员卡
+     * TESTED
      */
     ResponseVO getCardByUserId(int userId);
 
     /**
      * 查找某用户会员卡充值记录
+     * TESTED
      *
      * @author 梁正川
      */
