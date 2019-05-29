@@ -269,21 +269,22 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 		Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
 		boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
+		double actualPayment = scheduleItem.getFare() * ticketIdList.size()
+				- (noCoupon ? 0 : coupon.getDiscountAmount());
 
 		if (!this.areExpired(ticketIdList)) { // 电影票未超时
 			for (int ticketId : ticketIdList) {
 				ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
+				ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
 			}
-
-			int userId = firstTicket.getUserId();
 
 			// 删除用过的优惠券
 			if (!noCoupon) {
-				couponService.deleteCouponUser(coupon.getId(), userId);
+				couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
 			}
 
 			// 尝试赠送优惠券
-			this.issueCoupon(scheduleItem.getMovieId(), userId);
+			this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
 
 			return ResponseVO.buildSuccess("会员卡购票成功");
 		} else { // 电影票超时
@@ -309,7 +310,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			// 计算最终需要支付的金额
 			Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
 			boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
-			double pay = scheduleItem.getFare() * ticketIdList.size()
+			double actualPayment = scheduleItem.getFare() * ticketIdList.size()
 					- (noCoupon ? 0 : coupon.getDiscountAmount());
 
 			// 判断电影票是否超时
@@ -317,23 +318,22 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 			if (success) { // 未超时，尝试扣款
 				// 判断扣款是否成功
-				success = vipService.pay(firstTicket.getUserId(), pay);
+				success = vipService.pay(firstTicket.getUserId(), actualPayment);
 			}
 
 			if (success) { // 未超时且扣款成功
 				for (int ticketId : ticketIdList) {
 					ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
+					ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
 				}
-
-				int userId = firstTicket.getUserId();
 
 				// 删除用过的优惠券
 				if (!noCoupon) {
-					couponService.deleteCouponUser(coupon.getId(), userId);
+					couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
 				}
 
 				// 尝试赠送优惠券
-				this.issueCoupon(scheduleItem.getMovieId(), userId);
+				this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
 
 				return ResponseVO.buildSuccess("会员卡购票成功");
 			} else { // 电影票超时或扣款失败（会员卡余额不足）

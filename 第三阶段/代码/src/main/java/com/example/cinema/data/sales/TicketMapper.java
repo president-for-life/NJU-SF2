@@ -39,6 +39,14 @@ public interface TicketMapper {
     );
 
     /**
+     * 更新单一电影票实际支付金额
+     */
+    void updateTicketActualPayment(
+            @Param("ticketId") int ticketId,
+            @Param("actualPayment") double actualPayment
+    );
+
+    /**
      * 选择单一排片场次的所有电影票
      */
     List<Ticket> selectTicketsBySchedule(int scheduleId);

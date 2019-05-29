@@ -206,13 +206,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
             List<VIPCardCharge> chargeRecords = vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
 
-            ////////////////////控制台测试信息////////////////////
-            for(VIPCardCharge vipCardCharge : chargeRecords){
-                System.out.print(vipCardCharge.getAmount()+" "+vipCardCharge.getTime());
-            }
-            System.out.print("充值记录运行正常");
-            ////////////////////控制台测试信息////////////////////
-
             return ResponseVO.buildSuccess(vipCardChargeList2VipCardChargeVOList(chargeRecords));
         } catch (Exception e) {
             e.printStackTrace();
