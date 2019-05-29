@@ -5,7 +5,6 @@ $(document).ready(function () {
 
 var isBuyState = true;
 var vipCardId;
-var selectedValue=0;
 
 function getVIP() {
     getRequest(
@@ -21,27 +20,13 @@ function getVIP() {
                 $("#member-id").text(res.content.id);
                 $("#member-balance").text("¥" + res.content.balance.toFixed(2));
                 $("#member-joinDate").text(res.content.joinDate.substring(0, 10));
+                $("#member-type").text(res.content.strategy.description);
+                $("#member-description").text("满" + res.content.strategy.targetAmount + "送" + res.content.strategy.discountAmount);
             } else {
                 // 非会员
                 $("#member-card").css("display", "none");
                 $("#nonmember-card").css("display", "");
             }
-        },
-        function (error) {
-            alert(error);
-        });
-
-    getRequest(
-        '/vip/getVIPInfo',
-        function (res) {
-            if (res.success) {
-                $("#member-buy-price").text(res.content.price);
-                $("#member-buy-description").text("充值优惠：" + res.content.description + "。永久有效");
-                $("#member-description").text(res.content.description);
-            } else {
-                alert(res.content);
-            }
-
         },
         function (error) {
             alert(error);
@@ -61,12 +46,12 @@ function chargeClick() {
     $("#userMember-amount-group").css("display", "");
     isBuyState = false;
 }
-getChargeRecordsClick=function() {
+
+getChargeRecordsClick = function() {
     clearForm();
    getRequest(
         '/vip/charge/records?userId='+16,
         function (res) {
-            var temp=0;//给id使用
             var data=res.content||[];
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
@@ -79,36 +64,43 @@ getChargeRecordsClick=function() {
                recordDomStr +=
                     "<tr>" +
                     "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
-                    "<td>"+"<span id=\'r\' class=\"caret\" value=temp></span>"+"</td>"+
+                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                     "</tr>"+
-                    "<tr  id=\'c\'+temp style=\'display: none\'>"+
-                   "<td>"+
+                    "<tr style=\"background-color: #e6e6e6;font-size: 100px\"  hidden=\"hidden\">"+
                     "充值金额："+vipCardCharge.amount+
-                   "</td>"+
-                    "</tr>";
-               temp=temp+1;
+                    "</tr>"
             });
-            recordDomStr+="</div>";
+            recordDomStr+="</div>"
             $content_container_tbody.append(recordDomStr);
             $('#checkRecord').modal("show")
         },
         function (error) {
             alert(error);
         });
-
 };
+
+function switchCardClick() {
+    getRequest(
+        '/vip/strategy/get/all',
+        function(res) {
+            // TODO
+        },
+        function(error) {
+            alert(error);
+        }
+    )
+}
+
 $(document).on('click', '#r', function () {
-    var temp=$(this).value;
-    var tr1=document.getElementById("c"+temp);
-    if(tr1.style.display=='none') {
-        temp = '';
+    if($(this).parent().next().is(":hidden")) {
+        $(this).parent().next().show()
     }
-    else{
-        temp = 'none';
+    else {
+        $(this).parents("tr").next().hide();
     }
-    $(this).parents("tr").next().style.display=temp;
 
 });
+
 //时间转化
 function timetrans(date) {
     var date = new Date(date );//如果date为13位不需要乘1000
@@ -146,7 +138,7 @@ function confirmCommit() {
             } else {
                 postRequest(
                     '/vip/charge',
-                    {vipId: vipCardId, amount: parseInt($('#userMember-amount').val())},
+                    {vipCardId: vipCardId, payment: parseInt($('#userMember-amount').val())},
                     function (res) {
                         $('#buyModal').modal('hide');
                         alert("充值成功");
