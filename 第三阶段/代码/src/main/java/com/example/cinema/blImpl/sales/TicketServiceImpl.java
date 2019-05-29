@@ -269,21 +269,22 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 		Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
 		boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
+		double actualPayment = scheduleItem.getFare() * ticketIdList.size()
+				- (noCoupon ? 0 : coupon.getDiscountAmount());
 
 		if (!this.areExpired(ticketIdList)) { // 电影票未超时
 			for (int ticketId : ticketIdList) {
 				ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
+				ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
 			}
-
-			int userId = firstTicket.getUserId();
 
 			// 删除用过的优惠券
 			if (!noCoupon) {
-				couponService.deleteCouponUser(coupon.getId(), userId);
+				couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
 			}
 
 			// 尝试赠送优惠券
-			this.issueCoupon(scheduleItem.getMovieId(), userId);
+			this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
 
 			return ResponseVO.buildSuccess("会员卡购票成功");
 		} else { // 电影票超时
@@ -309,7 +310,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			// 计算最终需要支付的金额
 			Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
 			boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
-			double pay = scheduleItem.getFare() * ticketIdList.size()
+			double actualPayment = scheduleItem.getFare() * ticketIdList.size()
 					- (noCoupon ? 0 : coupon.getDiscountAmount());
 
 			// 判断电影票是否超时
@@ -317,23 +318,22 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 			if (success) { // 未超时，尝试扣款
 				// 判断扣款是否成功
-				success = vipService.pay(firstTicket.getUserId(), pay);
+				success = vipService.pay(firstTicket.getUserId(), actualPayment);
 			}
 
 			if (success) { // 未超时且扣款成功
 				for (int ticketId : ticketIdList) {
 					ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
+					ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
 				}
-
-				int userId = firstTicket.getUserId();
 
 				// 删除用过的优惠券
 				if (!noCoupon) {
-					couponService.deleteCouponUser(coupon.getId(), userId);
+					couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
 				}
 
 				// 尝试赠送优惠券
-				this.issueCoupon(scheduleItem.getMovieId(), userId);
+				this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
 
 				return ResponseVO.buildSuccess("会员卡购票成功");
 			} else { // 电影票超时或扣款失败（会员卡余额不足）
@@ -347,19 +347,9 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Override
 	public ResponseVO pickUpTicket(int ticketId) {
-		// TODO
-		/*
-		 * 订单状态：
-		 * 0：支付未完成
-		 * 1：支付已完成但未出票
-		 * 2：已失效
-		 * 3：已出票
-		 * 4：已退票
-		 */
-		// 只有：1 ==> 3
 		try {
-			if (ticketMapper.selectTicketById(ticketId).getState() == 1) {
-				ticketMapper.updateTicketState(ticketId, 3);
+			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
+				ticketMapper.updateTicketState(ticketId, 3); // 更改状态为“已出票”
 				return ResponseVO.buildSuccess("取票成功");
 			} else {
 				return ResponseVO.buildFailure("电影票不满足取票条件，取票失败");
@@ -372,13 +362,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Override
 	public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
-		// TODO
 		try {
-			TicketRefundStrategy ticketRefundStrategy = new TicketRefundStrategy();
-			ticketRefundStrategy.setId(strategyForm.getId());
-			ticketRefundStrategy.setRatio(strategyForm.getRatio());
-			ticketRefundStrategy.setRefundable(strategyForm.getRefundable());
-			ticketMapper.insertOneRefundStrategy(ticketRefundStrategy);
+			ticketMapper.insertOneRefundStrategy(strategyForm.getPO());
 			return ResponseVO.buildSuccess("新增退票策略成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -388,13 +373,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Override
 	public ResponseVO updateRefundStrategy(TicketRefundStrategyForm strategyForm) {
-		// TODO
 		try {
-			TicketRefundStrategy ticketRefundStrategy = new TicketRefundStrategy();
-			ticketRefundStrategy.setId(strategyForm.getId());
-			ticketRefundStrategy.setRefundable(strategyForm.getRefundable());
-			ticketRefundStrategy.setRatio(strategyForm.getRatio());
-			ticketMapper.updateOneRefundStrategy(ticketRefundStrategy);
+			ticketMapper.updateOneRefundStrategy(strategyForm.getPO());
 			return ResponseVO.buildSuccess("修改退票策略成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -404,7 +384,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Override
 	public ResponseVO addRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
-		// TODO
 		try {
 			ticketMapper.insertStrategyAndMovies(refundStrategyId, movieIdList);
 			return ResponseVO.buildSuccess("添加指定退票策略的电影列表成功");
@@ -414,8 +393,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+	@Override
 	public ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
-		// TODO
 		try {
 			ticketMapper.deleteStrategyAndMovies(refundStrategyId, movieIdList);
 			return ResponseVO.buildSuccess("删除指定退票策略的电影列表成功");
@@ -429,30 +408,25 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	public ResponseVO addRefundTicket(int ticketId) {
 		ticketMapper.lockTables(); // 锁数据库表，防止管理员修改退票策略
 
-		// TODO
 		try {
-			// 获取ticketRefundStrategy的ID
 			Ticket ticket = ticketMapper.selectTicketById(ticketId);
 			int scheduleId = ticket.getScheduleId();
+
 			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(scheduleId);
 			int movieId = scheduleItem.getMovieId();
-			TicketRefundStrategy ticketRefundStrategy=ticketMapper.selectRefundStrategyByMovie(movieId);
+
+			TicketRefundStrategy ticketRefundStrategy
+					= ticketMapper.selectRefundStrategyByMovie(movieId);
 
 			// 计算指定要退票的电影票所在场次的放映时间是否在允许退票的时间段
 			Date movieStartDate = scheduleService.getScheduleItemById(scheduleId).getStartTime();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date presentDate = new Date();  // 获取当前日期时间
-			long hourGap=(presentDate.getTime()-movieStartDate.getTime())/3600000;  // 毫秒 ==> 小时
-			/*
-			 * 订单状态：
-			 * 0：支付未完成
-			 * 1：支付已完成但未出票
-			 * 2：已失效
-			 * 3：已出票
-			 * 4：已退票
-			 */
+			long hourGap=(presentDate.getTime() - movieStartDate.getTime())/3600000;  // 毫秒 ==> 小时
+			long minuteGap=(presentDate.getTime()-movieStartDate.getTime())/60000;  // 毫秒 ==> 分钟
+
 			boolean canBeRefund =
-					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (hourGap >= (long) ticketRefundStrategy.getTime());
+					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (minuteGap >= (long) ticketRefundStrategy.getTime());
 			if (canBeRefund) {  // 如果满足所有的退票条件，就计算可退给用户的金额
 //				double actualPayment = ticket.getActualPayment();  // 获取用户实际付款的金额
 //				double refundPayment = actualPayment * ticketRefundStrategy.getRatio();  // 计算可退还给用户的金额
@@ -468,13 +442,10 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Override
 	public ResponseVO completeRefundTicket(int ticketId) {
-		// TODO
-		// 退还到银行卡中（因为可能没有办会员卡）
 		try {
 			ticketMapper.unlockTables(); // 解锁数据库表，管理员现在开始可以修改退票策略
-			if (ticketMapper.selectTicketById(ticketId).getState() == 1) {
-				// 修改电影票状态为"已退票"
-				ticketMapper.updateTicketState(ticketId, 4);
+			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
+				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
 				return ResponseVO.buildSuccess("退票成功");
 			} else {
 				return ResponseVO.buildFailure("电影票不满足退票条件，无法退票");

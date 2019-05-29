@@ -45,7 +45,11 @@
     </select>
 
     <update id="updateTicketState">
-        update ticket set state = #{state} where id=#{ticketId}
+        update ticket set state = #{state} where id = #{ticketId}
+    </update>
+
+    <update id="updateTicketActualPayment">
+        update ticket set actual_payment = #{actualPayment} where id = #{ticketId}
     </update>
 
     <delete id="deleteTicket">

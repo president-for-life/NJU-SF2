@@ -25,6 +25,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     会员卡策略
      */
 
+    // TESTED
     @Override
     public ResponseVO addStrategy(VIPCardStrategyForm strategyForm) {
         VIPCardStrategy strategy = strategyForm.getPO();
@@ -37,6 +38,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO updateStrategy(VIPCardStrategyForm strategyForm) {
         try {
@@ -56,6 +58,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO getStrategy(int strategyId) {
         try {
@@ -66,6 +69,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO getAllStrategies() {
         try {
@@ -80,6 +84,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     会员卡
      */
 
+    // TESTED
     @Override
     public ResponseVO addVIPCard(int userId, int strategyId) {
         try {
@@ -104,16 +109,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    @Override
-    public ResponseVO getCardById(int id) {
-        try {
-            return ResponseVO.buildSuccess(vipCardMapper.selectCardById(id));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
-        }
-    }
-
+    // TESTED
     @Override
     public ResponseVO getVIPCardStrategy(int strategyId) {
         try {
@@ -127,6 +123,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO charge(VIPCardChargeForm vipCardChargeForm) {
         try {
@@ -134,6 +131,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             VIPCard card = vipCardMapper.selectCardById(
                     vipCardChargeForm.getVipCardId()
             );
+
             VIPCardStrategy strategy = vipCardMapper.selectStrategyById(
                     card.getStrategyId()
             );
@@ -164,6 +162,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TODO UNTESTED
     @Override
     public boolean pay(int userId, double pay) {
         if (pay < 0) {
@@ -174,19 +173,8 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             VIPCard card = vipCardMapper.selectCardByUserId(userId);
             double balance = card.getBalance();
 
-            ////////////////////控制台测试信息////////////////////
-            System.out.println("扣款前余额：" + balance);
-            ////////////////////控制台测试信息////////////////////
-
             if (balance >= pay) { // 余额充足，扣款成功
                 vipCardMapper.updateCardBalance(card.getId(), balance - pay);
-
-                ////////////////////控制台测试信息////////////////////
-                card = vipCardMapper.selectCardByUserId(userId);
-                balance = card.getBalance();
-                System.out.println("扣款后余额：" + balance);
-                ////////////////////控制台测试信息////////////////////
-
                 return true;
             } else { // 余额不足，扣款失败
                 return false;
@@ -197,32 +185,34 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO getCardByUserId(int userId) {
         try {
-            VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
-            if (vipCard == null) {
+            // 会员卡
+            VIPCard card = vipCardMapper.selectCardByUserId(userId);
+            if (card == null) {
                 return ResponseVO.buildFailure("用户卡不存在");
             }
-            return ResponseVO.buildSuccess(vipCard);
+
+            // 会员卡使用的策略
+            VIPCardStrategy strategy
+                    = vipCardMapper.selectStrategyById(card.getStrategyId());
+
+            VIPCardWithStrategyVO vo = new VIPCardWithStrategyVO(card, strategy) ;
+            return ResponseVO.buildSuccess(vo);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
     }
 
+    // TESTED
     @Override
     public ResponseVO getChargeRecords(int userId) {
         try {
             VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
             List<VIPCardCharge> chargeRecords = vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
-
-            ////////////////////控制台测试信息////////////////////
-            for(VIPCardCharge vipCardCharge : chargeRecords){
-                System.out.print(vipCardCharge.getAmount()+" "+vipCardCharge.getTime());
-            }
-            System.out.print("充值记录运行正常");
-            ////////////////////控制台测试信息////////////////////
 
             return ResponseVO.buildSuccess(vipCardChargeList2VipCardChargeVOList(chargeRecords));
         } catch (Exception e) {
@@ -230,6 +220,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             return ResponseVO.buildFailure("查找会员卡充值记录失败！");
         }
     }
+
     private List<VIPCardChargeVO> vipCardChargeList2VipCardChargeVOList(List<VIPCardCharge> vipCardCharges) {
         List<VIPCardChargeVO> vipCardChargeVOS = new ArrayList<>();
         for (VIPCardCharge vipCardCharge : vipCardCharges) {

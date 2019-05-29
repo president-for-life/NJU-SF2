@@ -42,14 +42,14 @@ public interface TicketService {
     ResponseVO completeByVIPCard(List<Integer> ticketIdList, int couponId);
 
     /**
-     * 取票 TODO
+     * 取票
      *
      * @author 戴羽涵
      */
     ResponseVO pickUpTicket(int ticketId);
 
     /**
-     * 新增退票策略 TODO
+     * 新增退票策略
      *
      * @author 戴羽涵
      * @param strategyForm 没有用到movieList的form
@@ -57,7 +57,7 @@ public interface TicketService {
     ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm);
 
     /**
-     * 修改退票策略 TODO
+     * 修改退票策略
      *
      * @author 戴羽涵
      * @param strategyForm 没有用到movieList的form
@@ -65,21 +65,21 @@ public interface TicketService {
     ResponseVO updateRefundStrategy(TicketRefundStrategyForm strategyForm);
 
     /**
-     * 增加使用某退票策略的电影 TODO
+     * 增加使用某退票策略的电影
      *
      * @author 戴羽涵
      */
     ResponseVO addRefundMovies(int refundStrategyId, List<Integer> movieIdList);
 
     /**
-     * 减少使用某退票策略的电影 TODO
+     * 减少使用某退票策略的电影
      *
      * @author 戴羽涵
      */
     ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList);
 
     /**
-     * 用户请求退票 TODO
+     * 用户请求退票
      *
      * 根据退票策略，检查是否符合退票条件
      * 若符合，返回这张票使用的退票策略
@@ -89,7 +89,7 @@ public interface TicketService {
     ResponseVO addRefundTicket(int ticketId);
 
     /**
-     * 完成退票 TODO
+     * 完成退票
      *
      * @author 戴羽涵
      */

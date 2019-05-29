@@ -42,6 +42,7 @@
     </div>
 </div>
 <div class="content-container">
+
     <!--非会员-->
     <div class="card col-md-8 col-md-offset-2" id="nonmember-card" style="display: none;">
         <div class="header">
@@ -80,6 +81,10 @@
                     <div id="member-joinDate"></div>
                 </div>
                 <div class="line">
+                    <div><b>会员卡类型：</b></div>
+                    <div id="member-type"></div>
+                </div>
+                <div class="line">
                     <div><b>充值优惠：</b></div>
                     <div id="member-description"></div>
                 </div>
@@ -93,6 +98,7 @@
             </div>
             <button onclick="chargeClick()">立即充值</button>
             <button onclick="getChargeRecordsClick()">查看历史充值</button>
+            <button onclick="switchCardClick()">更换会员卡类型</button>
         </div>
 
     </div>
@@ -105,6 +111,8 @@
         <div id="coupon-list"></div>
     </div>
 </div>
+
+<!--历史充值-->
 <div class="modal fade" id="checkRecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="table">
         <div class="modal-content">
@@ -122,6 +130,8 @@
         </div>
     </div>
 </div>
+
+<!--购买会员卡-->
 <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
