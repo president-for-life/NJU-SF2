@@ -79,13 +79,12 @@ $(document).ready(function(){
         var adminDomStr = '';
         list.forEach(function (user) {
             adminDomStr +=
+                "<div class='admin-item-container'>"+
                 "<li id='user-" + user.id + "' class='admin-item' data-user='" + JSON.stringify(user) + "'>" +
-                "<div class='admin-info'>" +
-                "<div class='admin-title'>" +
-                "<span class='primary-text'>" + user.username + "</span>" +
-                "</div>" +
-                "</div>" +
-                "</li>";
+                "<div style='margin: 0 auto' >" + user.username + "</div>" +
+                "</li>"+
+                "</div>"
+            ;
         });
         $('.admin-on-list').append(adminDomStr);
     }
