@@ -1,18 +1,23 @@
+console.log("ready???");
+alert("ready???");
+
 $(document).ready(function () {
+	console.log("ready!!!");
 	getMovieList();
 
 	function getMovieList() {
 		getRequest(
 			'/ticket/get/' + sessionStorage.getItem('id'),
 			function (res) {
+				console.log(res.content);
 				renderTicketList(res.content);
 			},
 			function (error) {
+				console.log(error);
 				alert(error);
 			});
 	}
 
-	// TODO: 按照《测试要求》中的要求更改已购的电影票列表的显示格式
 	/**
 	 * 显示用户已购的电影票列表，每张电影票内容包括：
 	 * 电影名、电影开始时间、影厅名称、结束时间、票价、座位号（排号和列号），付款状态 （支付成功和未成功）
