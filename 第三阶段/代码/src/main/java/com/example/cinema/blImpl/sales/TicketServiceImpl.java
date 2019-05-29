@@ -424,19 +424,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			Date presentDate = new Date();  // 获取当前日期时间
 			long hourGap=(presentDate.getTime() - movieStartDate.getTime())/3600000;  // 毫秒 ==> 小时
 			long minuteGap=(presentDate.getTime()-movieStartDate.getTime())/60000;  // 毫秒 ==> 分钟
->>>>>>> 61bed5efef92adf377329f926691162208eb1da0
-			/*
-			 * 订单状态：
-			 * 0：支付未完成
-			 * 1：支付已完成但未出票
-			 * 2：已失效
-			 * 3：已出票
-			 * 4：已退票
-			 */
+
 			boolean canBeRefund =
-					ticket.getState() == 1
-					&& ticketRefundStrategy.getRefundable()
-					&& (hourGap >= (long) ticketRefundStrategy.getTime());
 					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (minuteGap >= (long) ticketRefundStrategy.getTime());
 			if (canBeRefund) {  // 如果满足所有的退票条件，就计算可退给用户的金额
 //				double actualPayment = ticket.getActualPayment();  // 获取用户实际付款的金额

@@ -171,7 +171,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         try {
             VIPCard card = vipCardMapper.selectCardByUserId(userId);
             double balance = card.getBalance();
-            
+
             if (balance >= pay) { // 余额充足，扣款成功
                 vipCardMapper.updateCardBalance(card.getId(), balance - pay);
                 return true;
