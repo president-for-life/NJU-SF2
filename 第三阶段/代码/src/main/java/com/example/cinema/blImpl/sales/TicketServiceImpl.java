@@ -275,7 +275,10 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		if (!this.areExpired(ticketIdList)) { // 电影票未超时
 			for (int ticketId : ticketIdList) {
 				ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
-				ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
+				ticketMapper.updateTicketActualPayment(
+						ticketId,
+						actualPayment / ticketIdList.size() // 平均每张票实际付款
+				);
 			}
 
 			// 删除用过的优惠券
@@ -324,7 +327,10 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			if (success) { // 未超时且扣款成功
 				for (int ticketId : ticketIdList) {
 					ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
-					ticketMapper.updateTicketActualPayment(ticketId, actualPayment);
+					ticketMapper.updateTicketActualPayment(
+							ticketId,
+							actualPayment / ticketIdList.size() // 平均每张票实际付款
+					);
 				}
 
 				// 删除用过的优惠券

@@ -104,4 +104,46 @@
         where id = #{id}
     </update>
 
+    <insert id="insertStrategyAndMovies">
+        insert into refund_strategy_movie(refund_strategy_id, movie_id) values
+        <foreach collection="movieIdList" item="item" index="index"
+                 separator=",">
+            (#{strategyId}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteStrategyAndMovies">
+        <foreach collection="movieIdList" item="item" index="index"
+                 separator=",">
+            delete from refund_strategy_movie
+            where refund_strategy_id = #{strategyId} and movie_id = #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectRefundStrategyById" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+        where r.id = #{strategyId}
+    </select>
+
+    <select id="selectRefundStrategyByMovie" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+        where movie_id = #{movieId}
+    </select>
+
+    <select id="selectRefundStrategies" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+    </select>
+
 </mapper>

@@ -4,6 +4,7 @@ $(document).ready(function () {
 });
 
 var isBuyState = true;
+var strategyId;
 var vipCardId;
 
 function getVIP() {
@@ -32,23 +33,23 @@ function getVIP() {
             alert(error);
         });
 
+    // 加载所有会员卡策略
     getRequest(
         '/vip/strategy/get/all',
         function (res) {
             let strategyList = res.content || [];
             let strategyListContent = "";
             for (let strategy of strategyList) {
-                strategyListContent += '<div class="col-md-6 coupon-wrapper">' +
-                    '<div class="coupon" ' + 'id="' + strategy.id + '"' + '>' +
-                    '<div class="content">' +
-                    '<div class="col-md-8">' +
+                strategyListContent +=
+                    '<div class="strategy" ' + 'id="strategy-' + strategy.id + '">' +
+                    '<div class="content" ' + 'onclick="chooseCard(' + strategy.id + ')"' + '>' +
                     '<div class="description">' +
                     strategy.description +
                     '</div>' +
                     '<div class="price">' +
                     '满' + strategy.targetAmount + '减' + strategy.discountAmount +
                     '</div>' +
-                    '</div></div></div></div>';
+                    '</div></div>';
             }
             $('#strategy-list').html(strategyListContent);
         },
@@ -56,6 +57,13 @@ function getVIP() {
             alert(error);
         }
     );
+}
+
+// 用户选择某类会员卡
+function chooseCard(id) {
+    strategyId = id;
+    let $strategy = $("#strategy-" + id);
+    $strategy.css('border-color', 'red');
 }
 
 function buyClick() {
@@ -144,7 +152,8 @@ function confirmCommit() {
         if ($('#userMember-cardNum').val() === "123123123" && $('#userMember-cardPwd').val() === "123123") {
             if (isBuyState) {
                 postRequest(
-                    '/vip/add?userId=' + sessionStorage.getItem('id'),
+                    '/vip/add?userId=' + sessionStorage.getItem('id')
+                    + '&strategyId=' + strategyId,
                     null,
                     function (res) {
                         $('#buyModal').modal('hide');

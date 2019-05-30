@@ -60,7 +60,6 @@
         movie m
         on
         am.movie_id=m.id
-
         where a.start_time &lt; Now() and a.end_time &gt; Now() and am.movie_id=#{movieId}
     </select>
 

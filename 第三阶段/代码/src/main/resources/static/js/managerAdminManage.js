@@ -81,7 +81,7 @@ $(document).ready(function(){
             adminDomStr +=
                 "<div class='admin-item-container'>"+
                 "<li id='user-" + user.id + "' class='admin-item' data-user='" + JSON.stringify(user) + "'>" +
-                "<div style='margin: 0 auto' >" + user.username + "</div>" +
+                "<div class='admin-item-text' ' >" + user.username + "</div>" +
                 "</li>"+
                 "</div>"
             ;
