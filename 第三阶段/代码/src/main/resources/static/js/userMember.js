@@ -81,11 +81,11 @@ getChargeRecordsClick = function() {
 };
 
 $(document).on('click', '#r', function () {
-    if($(this).parent().next().is(":hidden")) {
-        $(this).parent().next().show()
+    if($(this).parent().next().style.display=="none") {
+        $(this).parent().next().style.display=""
     }
     else {
-        $(this).parents("tr").next().hide();
+        $(this).parent().next().style.display="none"
     }
 
 });
