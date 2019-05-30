@@ -1,15 +1,10 @@
-console.log("ready???");
-alert("ready???");
-
 $(document).ready(function () {
-	console.log("ready!!!");
 	getMovieList();
 
 	function getMovieList() {
 		getRequest(
 			'/ticket/get/' + sessionStorage.getItem('id'),
 			function (res) {
-				console.log(res.content);
 				renderTicketList(res.content);
 			},
 			function (error) {

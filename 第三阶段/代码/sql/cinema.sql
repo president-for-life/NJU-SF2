@@ -293,7 +293,7 @@ CREATE TABLE `ticket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,6 +302,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (17,86,1,1,1,40,327,'2019-05-29 14:19:34');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +373,7 @@ CREATE TABLE `vip_card` (
   `join_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `vip_card_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -381,7 +382,7 @@ CREATE TABLE `vip_card` (
 
 LOCK TABLES `vip_card` WRITE;
 /*!40000 ALTER TABLE `vip_card` DISABLE KEYS */;
-INSERT INTO `vip_card` VALUES (9,1,2,500,'2019-05-27 00:57:07'),(10,1,16,2000,'2019-05-27 00:57:14');
+INSERT INTO `vip_card` VALUES (9,3,2,500,'2019-05-29 13:40:14'),(10,3,16,2190,'2019-05-29 14:06:10'),(11,5,17,705,'2019-05-29 14:19:38');
 /*!40000 ALTER TABLE `vip_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,7 +400,7 @@ CREATE TABLE `vip_card_charge` (
   `payment` float NOT NULL,
   `amount` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,6 +409,7 @@ CREATE TABLE `vip_card_charge` (
 
 LOCK TABLES `vip_card_charge` WRITE;
 /*!40000 ALTER TABLE `vip_card_charge` DISABLE KEYS */;
+INSERT INTO `vip_card_charge` VALUES (1,11,'2019-05-29 12:07:57',10,10),(2,11,'2019-05-29 12:08:52',40,40),(3,11,'2019-05-29 12:09:06',100,125),(4,11,'2019-05-29 12:10:04',60,85),(5,10,'2019-05-29 13:52:03',100,130),(6,10,'2019-05-29 14:06:10',50,60),(7,11,'2019-05-29 14:17:42',60,85);
 /*!40000 ALTER TABLE `vip_card_charge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,7 +427,7 @@ CREATE TABLE `vip_card_strategy` (
   `target_amount` float DEFAULT NULL,
   `discount_amount` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -434,6 +436,7 @@ CREATE TABLE `vip_card_strategy` (
 
 LOCK TABLES `vip_card_strategy` WRITE;
 /*!40000 ALTER TABLE `vip_card_strategy` DISABLE KEYS */;
+INSERT INTO `vip_card_strategy` VALUES (3,50,'青铜卡',30,10),(5,100,'白银卡',60,25);
 /*!40000 ALTER TABLE `vip_card_strategy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -446,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28 18:45:43
+-- Dump completed on 2019-05-30 10:53:15
