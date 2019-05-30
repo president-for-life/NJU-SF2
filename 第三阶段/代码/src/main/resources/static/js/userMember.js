@@ -31,6 +31,21 @@ function getVIP() {
         function (error) {
             alert(error);
         });
+
+    getRequest(
+        '/vip/strategy/get/all',
+        function (res) {
+            let strategyList = res.content || [];
+            let strategyListContent = "";
+            for (let strategy of strategyList) {
+                strategyListContent += ""; // TODO
+            }
+            $('#strategy-list').html(strategyListContent);
+        },
+        function (error) {
+            alert(error);
+        }
+    );
 }
 
 function buyClick() {
@@ -91,20 +106,10 @@ $(document).on('click', '#r', function () {
 });
 
 function switchCardClick() {
-    getRequest(
-        '/vip/strategy/get/all',
-        function(res) {
-            // TODO
-        },
-        function(error) {
-            alert(error);
-        }
-    )
+    // TODO
 }
 
-
-
-//时间转化
+// 时间转化
 function timetrans(date) {
     var date = new Date(date );//如果date为13位不需要乘1000
     var Y = date.getFullYear() + '-';
@@ -203,7 +208,6 @@ function getCoupon() {
                         '</div></div></div></div>'
                 }
                 $('#coupon-list').html(couponListContent);
-
             }
         },
         function (error) {
