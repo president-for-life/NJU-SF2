@@ -5,7 +5,6 @@ import com.example.cinema.data.user.AccountMapper;
 import com.example.cinema.po.User;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
-import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseVO updateUser(UserUpdateForm userUpdateForm) {
+    public ResponseVO updateUser(UserForm userUpdateForm) {
         try {
             accountMapper.updateOneAccount(userUpdateForm.getPO());
             return ResponseVO.buildSuccess();
