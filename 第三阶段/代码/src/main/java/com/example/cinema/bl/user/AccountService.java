@@ -2,7 +2,6 @@ package com.example.cinema.bl.user;
 
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
-import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 
 /**
@@ -32,7 +31,7 @@ public interface AccountService {
      * @return vo.ResponseVO
      */
 
-    ResponseVO updateUser(UserUpdateForm userUpdateForm);
+    ResponseVO updateUser(UserForm userUpdateForm);
 
 
     /**

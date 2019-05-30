@@ -3,11 +3,12 @@ package com.example.cinema.vo;
 import com.example.cinema.po.User;
 
 /**
- * @author 胡文
- * @date 2019/3/23
+ * @author 徐志乐
+ * @date 2019/5/27 7:22 PM
  */
 public class UserForm {
 
+    private Integer id;
     /**
      * 角色
      */
@@ -22,6 +23,10 @@ public class UserForm {
      * 用户密码
      */
     private String password;
+
+    public Integer getId() { return  id; }
+
+    public void  setId(Integer id) { this.id = id; }
 
     public String getRole() {
         return role;
@@ -49,6 +54,7 @@ public class UserForm {
 
     public User getPO() {
         User user = new User();
+        user.setId(this.getId());
         user.setRole(this.getRole());
         user.setUsername(this.getUsername());
         user.setPassword(this.getPassword());
