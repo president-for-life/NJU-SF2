@@ -5,11 +5,15 @@
 .cinema-hall-name {
     font-size: 18px;
     color: #000;
+
+    cursor: pointer;
 }
 
 .cinema-hall-size {
     font-size: 14px;
     color: #999;
+
+    cursor: pointer;
 }
 
 .cinema-hall-seat {
@@ -21,6 +25,8 @@
 
     border: none;
     outline: none;
+
+    cursor: pointer;
 }
 
 .cinema-hall-seat-choose {
@@ -49,3 +55,4 @@
     display: flex;
     justify-content: space-between;
 }
+
