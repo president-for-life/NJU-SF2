@@ -4,6 +4,7 @@ $(document).ready(function () {
 });
 
 var isBuyState = true;
+var strategyId;
 var vipCardId;
 
 function getVIP() {
@@ -32,23 +33,23 @@ function getVIP() {
             alert(error);
         });
 
+    // 加载所有会员卡策略
     getRequest(
         '/vip/strategy/get/all',
         function (res) {
             let strategyList = res.content || [];
             let strategyListContent = "";
             for (let strategy of strategyList) {
-                strategyListContent += '<div class="col-md-6 coupon-wrapper">' +
-                    '<div class="coupon" ' + 'id="' + strategy.id + '"' + '>' +
-                    '<div class="content">' +
-                    '<div class="col-md-8">' +
+                strategyListContent +=
+                    '<div class="strategy" ' + 'id="strategy-' + strategy.id + '>' +
+                    '<div class="content" ' + 'onclick="alert()"' + '>' +
                     '<div class="description">' +
                     strategy.description +
                     '</div>' +
                     '<div class="price">' +
                     '满' + strategy.targetAmount + '减' + strategy.discountAmount +
                     '</div>' +
-                    '</div></div></div></div>';
+                    '</div></div>';
             }
             $('#strategy-list').html(strategyListContent);
         },

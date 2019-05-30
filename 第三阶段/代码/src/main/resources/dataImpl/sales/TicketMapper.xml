@@ -120,4 +120,30 @@
         </foreach>
     </delete>
 
+    <select id="selectRefundStrategyById" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+        where r.id = #{strategyId}
+    </select>
+
+    <select id="selectRefundStrategyByMovie" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+        where movie_id = #{movieId}
+    </select>
+
+    <select id="selectRefundStrategies" resultMap="TicketRefundStrategy">
+        select * from refund_strategy r
+            left join refund_strategy_movie rm
+                on r.id = rm.refund_strategy_id
+            left join movie m
+                on rm.movie_id = m.id
+    </select>
+
 </mapper>

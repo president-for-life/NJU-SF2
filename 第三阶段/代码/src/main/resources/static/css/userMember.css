@@ -1,3 +1,26 @@
+.strategy {
+    float: left;
+    border-style: groove;
+    border-color: #1caf9a;
+}
+
+.strategy .content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    float: left;
+    width: 50px;
+}
+
+.strategy .content .description{
+    font-size: 15px;
+    color: #ec971f;
+}
+
+.strategy .content .price{
+    font-size: 24px;
+}
+
 .card {
     padding: 30px 40px;
     color: #444444;
