@@ -41,8 +41,8 @@ function getVIP() {
             let strategyListContent = "";
             for (let strategy of strategyList) {
                 strategyListContent +=
-                    '<div class="strategy" ' + 'id="strategy-' + strategy.id + '>' +
-                    '<div class="content" ' + 'onclick="alert()"' + '>' +
+                    '<div class="strategy" ' + 'id="strategy-' + strategy.id + '">' +
+                    '<div class="content" ' + 'onclick="chooseCard(' + strategy.id + ')"' + '>' +
                     '<div class="description">' +
                     strategy.description +
                     '</div>' +
@@ -57,6 +57,13 @@ function getVIP() {
             alert(error);
         }
     );
+}
+
+// 用户选择某类会员卡
+function chooseCard(id) {
+    strategyId = id;
+    let $strategy = $("#strategy-" + id);
+    $strategy.css('border-color', 'red');
 }
 
 function buyClick() {
@@ -145,7 +152,8 @@ function confirmCommit() {
         if ($('#userMember-cardNum').val() === "123123123" && $('#userMember-cardPwd').val() === "123123") {
             if (isBuyState) {
                 postRequest(
-                    '/vip/add?userId=' + sessionStorage.getItem('id'),
+                    '/vip/add?userId=' + sessionStorage.getItem('id')
+                    + '&strategyId=' + strategyId,
                     null,
                     function (res) {
                         $('#buyModal').modal('hide');

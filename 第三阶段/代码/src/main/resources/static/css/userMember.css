@@ -2,6 +2,7 @@
     float: left;
     border-style: groove;
     border-color: #1caf9a;
+    width: 50px;
 }
 
 .strategy .content {
