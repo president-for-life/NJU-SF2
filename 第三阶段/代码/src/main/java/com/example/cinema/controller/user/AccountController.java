@@ -4,7 +4,6 @@ import com.example.cinema.blImpl.user.AccountServiceImpl;
 import com.example.cinema.config.InterceptorConfiguration;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserForm;
-import com.example.cinema.vo.UserUpdateForm;
 import com.example.cinema.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +43,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseVO updateAccount(@RequestBody UserUpdateForm userUpdateForm) {
+    public ResponseVO updateAccount(@RequestBody UserForm userUpdateForm) {
         return accountService.updateUser(userUpdateForm);
     }
 
