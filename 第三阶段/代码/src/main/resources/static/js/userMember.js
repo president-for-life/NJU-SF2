@@ -38,7 +38,17 @@ function getVIP() {
             let strategyList = res.content || [];
             let strategyListContent = "";
             for (let strategy of strategyList) {
-                strategyListContent += ""; // TODO
+                strategyListContent += '<div class="col-md-6 coupon-wrapper">' +
+                    '<div class="coupon" ' + 'id="' + strategy.id + '"' + '>' +
+                    '<div class="content">' +
+                    '<div class="col-md-8">' +
+                    '<div class="description">' +
+                    strategy.description +
+                    '</div>' +
+                    '<div class="price">' +
+                    '满' + strategy.targetAmount + '减' + strategy.discountAmount +
+                    '</div>' +
+                    '</div></div></div></div>';
             }
             $('#strategy-list').html(strategyListContent);
         },
@@ -65,7 +75,7 @@ function chargeClick() {
 getChargeRecordsClick = function() {
     clearForm();
    getRequest(
-        '/vip/charge/records?userId='+16,
+        '/vip/charge/records?vipCardId='+vipCardId,
         function (res) {
             var data=res.content||[];
             var $content_container_tbody = $("#tbody");
@@ -79,14 +89,15 @@ getChargeRecordsClick = function() {
                recordDomStr +=
                     "<tr>" +
                     "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
+                   "<td></td>"+
                     "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                     "</tr>"+
-                    "<tr style=\'display: none\'>"+
+                    "<tr style=\"display: none\" >"+
                     "<td>"+"充值金额："+vipCardCharge.payment+"</td>"+
-                   "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"
-                    "</tr>"
+                   "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"+
+                    "</tr>";
             });
-            recordDomStr+="</div>"
+            recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
             $('#checkRecord').modal("show")
         },
@@ -96,11 +107,11 @@ getChargeRecordsClick = function() {
 };
 
 $(document).on('click', '#r', function () {
-    if($(this).parent().next().style.display=="none") {
-        $(this).parent().next().style.display=""
+    if($(this).get(0).parentNode.parentNode. nextSibling.style.display==="none") {
+        $(this).get(0).parentNode.parentNode. nextSibling.style.display="";
     }
     else {
-        $(this).parent().next().style.display="none"
+        $(this).get(0).parentNode.parentNode. nextSibling.style.display="none";
     }
 
 });

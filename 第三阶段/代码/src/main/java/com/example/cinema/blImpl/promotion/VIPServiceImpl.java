@@ -209,11 +209,9 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
 
     // TESTED
     @Override
-    public ResponseVO getChargeRecords(int userId) {
+    public ResponseVO getChargeRecords(int vipCardId) {
         try {
-            VIPCard vipCard = vipCardMapper.selectCardByUserId(userId);
-            List<VIPCardCharge> chargeRecords = vipCardMapper.selectChargeRecordsByCard(vipCard.getId());
-
+            List<VIPCardCharge> chargeRecords = vipCardMapper.selectChargeRecordsByCard(vipCardId);
             return ResponseVO.buildSuccess(vipCardChargeList2VipCardChargeVOList(chargeRecords));
         } catch (Exception e) {
             e.printStackTrace();

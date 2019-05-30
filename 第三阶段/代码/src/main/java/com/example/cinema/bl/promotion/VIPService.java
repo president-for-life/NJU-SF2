@@ -88,5 +88,5 @@ public interface VIPService {
      *
      * @author 梁正川
      */
-    ResponseVO getChargeRecords(int userId);
+    ResponseVO getChargeRecords(int vipCardId);
 }

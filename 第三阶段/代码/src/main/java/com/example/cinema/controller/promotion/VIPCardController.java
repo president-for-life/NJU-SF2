@@ -67,7 +67,7 @@ public class VIPCardController {
 
     // TESTED
     @GetMapping("/charge/records")
-    public ResponseVO getChargeRecords(@RequestParam int userId) {
-        return vipService.getChargeRecords(userId);
+    public ResponseVO getChargeRecords(@RequestParam int vipCardId) {
+        return vipService.getChargeRecords(vipCardId);
     }
 }
