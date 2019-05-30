@@ -38,7 +38,17 @@ function getVIP() {
             let strategyList = res.content || [];
             let strategyListContent = "";
             for (let strategy of strategyList) {
-                strategyListContent += ""; // TODO
+                strategyListContent += '<div class="col-md-6 coupon-wrapper">' +
+                    '<div class="coupon" ' + 'id="' + strategy.id + '"' + '>' +
+                    '<div class="content">' +
+                    '<div class="col-md-8">' +
+                    '<div class="description">' +
+                    strategy.description +
+                    '</div>' +
+                    '<div class="price">' +
+                    '满' + strategy.targetAmount + '减' + strategy.discountAmount +
+                    '</div>' +
+                    '</div></div></div></div>';
             }
             $('#strategy-list').html(strategyListContent);
         },
