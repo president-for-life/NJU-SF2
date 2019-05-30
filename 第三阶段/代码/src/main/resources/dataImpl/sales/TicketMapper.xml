@@ -104,4 +104,20 @@
         where id = #{id}
     </update>
 
+    <insert id="insertStrategyAndMovies">
+        insert into refund_strategy_movie(refund_strategy_id, movie_id) values
+        <foreach collection="movieIdList" item="item" index="index"
+                 separator=",">
+            (#{strategyId}, #{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteStrategyAndMovies">
+        <foreach collection="movieIdList" item="item" index="index"
+                 separator=",">
+            delete from refund_strategy_movie
+            where refund_strategy_id = #{strategyId} and movie_id = #{item}
+        </foreach>
+    </delete>
+
 </mapper>
