@@ -66,8 +66,9 @@ getChargeRecordsClick = function() {
                     "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
                     "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                     "</tr>"+
-                    "<tr style=\"background-color: #e6e6e6;font-size: 100px\"  hidden=\"hidden\">"+
-                    "充值金额："+vipCardCharge.amount+
+                    "<tr style=\'display: none\'>"+
+                    "<td>"+"充值金额："+vipCardCharge.payment+"</td>"+
+                   "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"
                     "</tr>"
             });
             recordDomStr+="</div>"
@@ -78,6 +79,16 @@ getChargeRecordsClick = function() {
             alert(error);
         });
 };
+
+$(document).on('click', '#r', function () {
+    if($(this).parent().next().is(":hidden")) {
+        $(this).parent().next().show()
+    }
+    else {
+        $(this).parents("tr").next().hide();
+    }
+
+});
 
 function switchCardClick() {
     getRequest(
@@ -91,15 +102,7 @@ function switchCardClick() {
     )
 }
 
-$(document).on('click', '#r', function () {
-    if($(this).parent().next().is(":hidden")) {
-        $(this).parent().next().show()
-    }
-    else {
-        $(this).parents("tr").next().hide();
-    }
 
-});
 
 //时间转化
 function timetrans(date) {
