@@ -95,6 +95,6 @@ public class ViewController {
         return "managerAdminManage";
     }
 
-    @RequestMapping(value="/user/check/onsumption")
+    @RequestMapping(value="/user/check/consumption")
     public String getCheckConsumption(){return "userCheckConsumption";}
 }
