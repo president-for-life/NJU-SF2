@@ -1,8 +1,8 @@
 .order-card {
-    padding: 10px;
+    /*padding: 10px;*/
     background-color: white;
     border-radius: 10px;
-    margin: 10px 0 10px 0
+    margin: 40px 0 10px 0
 }
 
 .order-container {
@@ -16,7 +16,16 @@
 }
 
 .seat {
-    padding: 5px 5px 5px 5px;
+    padding: 10px 5px 5px 10px;
+    border-radius: 10px;
+}
+
+.seat:hover {
+    background-color: rgba(28, 175, 154, 0.12);
+}
+
+.seat-info {
+    padding: 10px 20px 10px 20px;
 }
 
 .seat-card {
@@ -44,14 +53,22 @@
     /*color: #ffffff;*/
     /*background-color: #1caf9a;*/
     /*border-color: #189987;*/
-    padding: 0px 10px 0px 10px;
-    margin: 0px 10px 0px 10px;
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
+    float: right;
+}
+
+.proceed-btn {
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
+    float: right;
+
 }
 
 .card {
     padding: 30px 40px;
     color: #444444;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 
 .card .header {

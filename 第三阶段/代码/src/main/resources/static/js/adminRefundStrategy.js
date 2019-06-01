@@ -107,7 +107,7 @@ $(document).ready(function () {
 				"<li class='strategy-item card' id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
 				"    <div class='strategy-info'>" +
 				"        <div class='strategy-title'>" +
-				"            <span class='title'>退票策略" + strategy.id + "</span>" +
+				"            <span class='title'>退票策略号：" + strategy.id + "</span>" +
 				"        </div>" +
 				"        <div class='strategy-details'>" +
 				"            <span class='label strategy-detail " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>";
