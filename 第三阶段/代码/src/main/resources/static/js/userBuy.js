@@ -31,8 +31,8 @@ function renderOrderList(list) {
             let appendButton = "";
             if (seat.state === "支付已完成") {
                 appendButton =
-                    "<button class='pick-up-btn user-buy-btn' id='pick-up-" + seat.id + "'>取票</button>" +
-                    "<button class='refund-btn user-buy-btn' id='refund-" + seat.id + "'>退票</button>";
+                    "<button type='button' class='btn btn-primary pick-up-btn user-buy-btn ' id='pick-up-" + seat.id + "'>取票</button>" +
+                    "<button type='button' class='btn btn-primary refund-btn user-buy-btn' id='refund-" + seat.id + "'>退票</button>";
             }
 
 			seatsDomStr +=
@@ -163,14 +163,6 @@ $(document).on('click', '.refund-btn', function (e) {
 	let time = strategy.time;
 	let finalRefundable = (Number(timeDifference) >= Number(time)) && refundable;
 
-	// console.log(strategy);
-	// // console.log(strategy.id);
-	// console.log(refundable);
-	// console.log(ratio);
-	// console.log(time);
-	// console.log(finalRefundable);
-	// console.log(timeDifference);
-
 	// 如果最终允许退票
 	if (finalRefundable) {
 		var amount = ticket.actualPayment * ratio;  // 计算退款金额
@@ -180,8 +172,10 @@ $(document).on('click', '.refund-btn', function (e) {
 		$('#refund-ticket-hallname').text(schedule.hallName);  // 影厅号
 		$('#refund-ticket-time').text(timeDifference + " 分钟");  // 距离开影时间
 		$('#refund-ticket-seat').text((ticket.rowIndex + 1) + "排 " + (ticket.columnIndex + 1) + "座");  // 座位号
-		$('#refund-ticket-payment').text(ticket.actualPayment+" 元");
-		$('#refund-ticket-amount').text(amount + " 元");  // 退款金额
+		$('#refund-ticket-payment').text(ticket.actualPayment.toFixed(2)+" 元");
+		$('#refund-ticket-amount').text(amount.toFixed(2) + " 元");  // 退款金额
+		$('#refund-ticket-bank-card-input').parent().parent('.form-group').removeClass('has-error');
+		$('#refund-ticket-bank-card-input').val('');  // 清空银行卡号
 
 		// 显示"退票"的Modal
 		$('#refundTicketModal').modal('show');
@@ -201,13 +195,16 @@ $(document).on('click', '.refund-btn', function (e) {
 
 // 点击"退票"Modal的"确认退票"按钮
 $(document).on('click', '#refund-ticket-form-btn', function (e) {
+	// 银行卡号非空验证
+	if ($("#refund-ticket-bank-card-input").val() == "") {
+		$("#refund-ticket-bank-card-input").parent().parent('.form-group').addClass('has-error');
+		return;
+	}
 	var ticketId = Number($('#refund-ticket-ticketid').text());
 
 	var strategy_second = getStrategyForTicket(ticketId);  // 第二次获取的strategy
 	// 如果两次获取到的strategy不相同，说明退票策略已经被修改，用户需要重新进行退票
 	// todo：还没有进行测试
-	console.log(strategy_first);
-	console.log(strategy_second);
 
 	if (!isSameStrategies(strategy_first,strategy_second)) {
 		alert("所选电影票对应的退票策略已经被修改，请重新进行退票！")

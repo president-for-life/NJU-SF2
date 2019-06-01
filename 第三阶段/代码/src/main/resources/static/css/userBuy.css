@@ -41,11 +41,11 @@
 }
 
 .user-buy-btn {
-    color: #ffffff;
-    background-color: #1caf9a;
-    border-color: #189987;
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
+    /*color: #ffffff;*/
+    /*background-color: #1caf9a;*/
+    /*border-color: #189987;*/
+    padding: 0px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
 }
 
 .card {

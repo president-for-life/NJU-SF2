@@ -11,7 +11,7 @@ $(document).ready(function () {
 	 */
 	$("#add-strategy-form-btn").click(function () {
 		var formData = getStrategyForm();
-		if (!validateStrategyForm(formData)) {
+		if (!validateAddStrategyForm(formData)) {
 			alert("请确保输入值的有效性！");
 			return;
 		}
@@ -21,13 +21,41 @@ $(document).ready(function () {
 			formData,
 			function (res) {
 				getStrategyList();
+				// 还原Modal中的设置
+				$('#add-strategy-refundable-input').parent().parent('.form-group').removeClass('has-error');
+				$('#add-strategy-ratio-input').parent().parent('.form-group').removeClass('has-error');
+				$('#add-strategy-time-input').parent().parent('.form-group').removeClass('has-error');
 				$('#addStrategyModal').modal('hide');
 			},
 			function (error) {
 				alert(error);
 			}
 		);
+		initializeAddStratrgyModal();
 	});
+
+	/**
+	 * 当新增退票策略Modal的"是否允许退票"被修改
+	 */
+	$('#add-strategy-refundable-input').change(function () {
+		console.log('"是否允许退票"被修改")');
+		if ($('#add-strategy-refundable-input').val() == '是') {
+			initializeAddStratrgyModal();
+			$('#add-strategy-ratio-input').parent().parent('.form-group').show();
+			$('#add-strategy-time-input').parent().parent('.form-group').show();
+		} else {
+			$('#add-strategy-ratio-input').parent().parent('.form-group').hide();
+			$('#add-strategy-time-input').parent().parent('.form-group').hide();
+			initializeUpdateStratrgyModal();
+		}
+	});
+
+	function initializeAddStratrgyModal() {
+		$('#add-strategy-ratio-input').val('');
+		$('#add-strategy-time-input').val('');
+		$('#add-strategy-ratio-input').parent().parent('.form-group').removeClass('has-error');
+		$('#add-strategy-time-input').parent().parent('.form-group').removeClass('has-error');
+	}
 
 	/**
 	 * 获取当前新增的退票策略的Form
@@ -46,25 +74,30 @@ $(document).ready(function () {
 	 * @param data
 	 * @returns {boolean}
 	 */
-	function validateStrategyForm(data) {
+	function validateAddStrategyForm(data) {
 		var isValidate = true;
+		if (data.refundable=='') {
+			isValidate = false;
+			$('#add-strategy-refundable-input').parent().parent('.form-group').addClass('has-error');
+		}
+		// 如果不允许退票
 		if (!data.refundable) {
-			isValidate = false;
-			$('#add-strategy-refundable-input').parent('.form-group').addClass('has-error');
+			return true;
 		}
-		if (!data.ratio) {
+		if (data.ratio=='') {
 			isValidate = false;
-			$('#add-strategy-ratio-input').parent('.form-group').addClass('has-error');
+			$('#add-strategy-ratio-input').parent().parent('.form-group').addClass('has-error');
 		}
-		if (!data.time) {
+		if (data.time=='') {
 			isValidate = false;
-			$('#add-strategy-time-input').parent('.form-group').addClass('has-error');
+			$('#add-strategy-time-input').parent().parent('.form-group').addClass('has-error');
 		}
 		return isValidate;
 	}
 
 	/**
 	 * 渲染已有的退票策略
+	 * 如果是"不允许退票"，则不显示"返还比例"、"时间限制"
 	 */
 	function renderStrategyList(strategyList) {
 		$('.strategy-on-list').empty();
@@ -77,16 +110,19 @@ $(document).ready(function () {
 				"            <span class='title'>退票策略" + strategy.id + "</span>" +
 				"        </div>" +
 				"        <div class='strategy-details'>" +
-				"            <span class='label strategy-detail " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
-				"            <span class='strategy-detail'>返还比例：" + strategy.ratio + "</span>" +
-				"            <span class='strategy-detail'>开场前 " + strategy.time + " 分钟不允许退票</span>" +
-				"        </div>" +
+				"            <span class='label strategy-detail " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>";
+			if (strategy.refundable) {
+				// 如果允许退票
+				strategyDomStr +=
+					"        <span class='strategy-detail'>返还比例：" + strategy.ratio + "</span>" +
+					"        <span class='strategy-detail'>开场前 " + strategy.time + " 分钟不允许退票</span>" +
+					"    </div>";
+			}
+			strategyDomStr+="        " +
 				"        <div class='movie-list-for-strategy' >" +
 				"            <span>使用本退票策略的电影：</span>" +
 				"            <button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
-				"            class='icon-plus-sign'></i>新增电影</button>" +
-				// "            <button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
-				// "            class='icon-minus-sign'></i>删除电影</button>" +
+				" class='icon-plus-sign'></i>新增电影</button>" +
 				"        </div>" +
 				"    </div>" +
 				"</li>";
@@ -97,8 +133,8 @@ $(document).ready(function () {
 		strategyList.forEach(function (strategy) {
 			var movieDomStr = '';
 			strategy.movieList.forEach(function (movie) {
-				movieDomStr += "<span class='label label-primary movie-for-strategy'"+" data-movieid="+movie.id+" data-strategyid="+strategy.id+">" +
-					movie.name +" </span>";
+				movieDomStr += "<span class='label label-primary movie-for-strategy'" + " data-movieid=" + movie.id + " data-strategyid=" + strategy.id + ">" +
+					movie.name + " </span>";
 				// console.log(movie.name);
 			});
 			// console.log(movieDomStr);
@@ -151,6 +187,10 @@ $(document).ready(function () {
 
 	}
 
+	// =============================================================================
+	// ===============================修改退票策略===========================
+	// =============================================================================
+
 	/**
 	 * 点击"修改退票策略"Modal的"确定"按钮：将新输入的Form提交给后端
 	 */
@@ -161,6 +201,10 @@ $(document).ready(function () {
 			ratio: $('#update-strategy-ratio-input').val(),
 			time: $('#update-strategy-time-input').val()
 		};
+		if (!validateUpdateStrategyForm(formData)) {
+			alert("请确保输入值的有效性！");
+			return;
+		}
 
 		postRequest(
 			'/ticket/refundStrategy/update',
@@ -180,8 +224,33 @@ $(document).ready(function () {
 	});
 
 	/**
+	 * 判断当前修改的退票策略的Form中的数据是否有效
+	 * @param data
+	 * @returns {boolean}
+	 */
+	function validateUpdateStrategyForm(data) {
+		var isValidate = true;
+		if (data.refundable=='') {
+			isValidate = false;
+			$('#update-strategy-refundable-input').parent().parent('.form-group').addClass('has-error');
+		}
+		// 如果不允许退票
+		if (!data.refundable) {
+			return true;
+		}
+		if (data.ratio=='') {
+			isValidate = false;
+			$('#update-strategy-ratio-input').parent().parent('.form-group').addClass('has-error');
+		}
+		if (data.time=='') {
+			isValidate = false;
+			$('#update-strategy-time-input').parent().parent('.form-group').addClass('has-error');
+		}
+		return isValidate;
+	}
+
+	/**
 	 * 如果点击了特定的退票策略，就进入了"修改退票策略"Modal
-	 * todo
 	 */
 	$(document).on('click', '.strategy-item', function (e) {
 		var strategy = JSON.parse(e.currentTarget.dataset.strategy);
@@ -190,9 +259,41 @@ $(document).ready(function () {
 		$("#update-strategy-ratio-input").val(strategy.ratio);
 		$("#update-strategy-time-input").val(strategy.time);
 
+		// 如果不允许退票，则不显示ratio、time
+		if (!strategy.refundable) {
+			$("#update-strategy-ratio-input").parent().parent('.form-group').hide();
+			$("#update-strategy-time-input").parent().parent('.form-group').hide();
+		}
+
+		initializeUpdateStratrgyModal();
+
 		$("#updateStrategyModal").modal('show');
 		$("#updateStrategyModal")[0].dataset.strategyId = strategy.id;
 	});
+
+	/**
+	 * 当新增退票策略Modal的"是否允许退票"被修改
+	 */
+	$('#update-strategy-refundable-input').change(function () {
+		console.log('"是否允许退票"被修改")');
+		if ($('#update-strategy-refundable-input').val() == '是') {
+			initializeUpdateStratrgyModal();
+			$('#update-strategy-ratio-input').parent().parent('.form-group').show();
+			$('#update-strategy-time-input').parent().parent('.form-group').show();
+		} else {
+			$('#update-strategy-ratio-input').parent().parent('.form-group').hide();
+			$('#update-strategy-time-input').parent().parent('.form-group').hide();
+			initializeUpdateStratrgyModal();
+		}
+	});
+
+	function initializeUpdateStratrgyModal() {
+		$('#update-strategy-ratio-input').val('');
+		$('#update-strategy-time-input').val('');
+		$('#update-strategy-ratio-input').parent().parent('.form-group').removeClass('has-error');
+		$('#update-strategy-time-input').parent().parent('.form-group').removeClass('has-error');
+	}
+
 
 	// =============================================================================
 	// ===============================为退票策略新增电影列表===========================
@@ -275,36 +376,6 @@ $(document).ready(function () {
 			}
 		);
 	});
-
-
-	// /**
-	//  * 为指定的退票策略删除电影
-	//  */
-	// $('.remove-movie-for-strategy').click(function () {
-	//
-	//
-	// });
-	//
-	// /**
-	//  * 点击"为退票策略删除电影"Modal的"确定"按钮：将选择的要删除的电影列表提交给后端
-	//  */
-	// $('#remove-movie-for-strategy-form-btn').click(function () {
-	// 	// todo
-	// 	var formData={
-	//
-	// 	};
-	//
-	// 	postRequest(
-	// 		'/ticket//refundStrategy/removeMovies',
-	// 		formData,
-	// 		function (res) {
-	// 			// todo: 渲染指定退票策略的电影列表
-	// 		},
-	// 		function (error) {
-	// 			alert(JSON.stringify(error));
-	// 		}
-	// 	);
-	// });
 
 	// ===================================================================================
 	// ===============================为退票策略删除指定的电影列表============================
