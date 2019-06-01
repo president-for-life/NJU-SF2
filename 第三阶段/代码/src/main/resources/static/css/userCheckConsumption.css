@@ -1,9 +1,17 @@
-.table {
-    flex: 1;
-    min-height: 100px;
-    min-width: 100%;
+.card{
+   background-color: white;
     padding: 20px;
 }
-.card{
-    padding: 20px;
+.item{
+    border-style:solid;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 10px;
+    flex-direction: row;
+    flex: 1;
+    background-color: #fefff9;
+}
+.item:hover{
+    background:#dff0d8;
 }
