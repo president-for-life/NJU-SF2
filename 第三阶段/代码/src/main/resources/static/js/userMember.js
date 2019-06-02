@@ -81,7 +81,7 @@ function getVIP() {
 }
 
 // 点击选择某种会员卡
-$(document).on('click','#buy-strategy-list .strategy-container .strategy-item',function (e) {
+$(document).on('click','#buy-strategy-list .strategy-container .strategy-item', function (e) {
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#buy-strategy-' + strategy.id);
 
@@ -96,7 +96,7 @@ $(document).on('click','#buy-strategy-list .strategy-container .strategy-item',f
     }
 });
 
-$(document).on('click','#switch-strategy-list .strategy-container .strategy-item',function (e) {
+$(document).on('click','#switch-strategy-list .strategy-container .strategy-item', function (e) {
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#switch-strategy-' + strategy.id);
 
@@ -209,6 +209,10 @@ function confirmCommit() {
     if (validateForm()) {
         if ($('#userMember-cardNum').val() === "123123123" && $('#userMember-cardPwd').val() === "123123") {
             if (isBuyState) {
+                if($('#buyModal')[0].dataset.strategyId == undefined) {
+                    alert("请选择会员卡！");
+                    return;
+                }
                 postRequest(
                     '/vip/add?userId=' + sessionStorage.getItem('id')
                     + '&strategyId=' + $('#buyModal')[0].dataset.strategyId,

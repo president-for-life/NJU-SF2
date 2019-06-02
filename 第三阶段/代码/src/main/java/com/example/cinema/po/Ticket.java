@@ -145,7 +145,7 @@ public class Ticket {
                 stateString = "已退票";
                 break;
             default:
-                stateString = "未完成";
+                stateString = "支付未完成";
         }
         vo.setState(stateString);
         vo.setActualPayment(this.getActualPayment());
@@ -179,7 +179,7 @@ public class Ticket {
                 stateString = "已退票";
                 break;
             default:
-                stateString = "未完成";
+                stateString = "支付未完成";
         }
         vo.setState(stateString);
         vo.setActualPayment(this.getActualPayment());
