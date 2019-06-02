@@ -29,6 +29,11 @@ public class VIPCardController {
         return vipService.updateStrategy(strategyForm);
     }
 
+    @DeleteMapping("/strategy/remove")
+    public ResponseVO removeStrategy(@RequestParam int strategyId) {
+        return vipService.removeStrategy(strategyId);
+    }
+
     // TESTED
     @GetMapping("/strategy/get")
     public ResponseVO getStrategy(@RequestParam int strategyId) {

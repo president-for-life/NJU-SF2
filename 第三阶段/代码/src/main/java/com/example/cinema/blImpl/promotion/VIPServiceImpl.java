@@ -58,6 +58,16 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    public ResponseVO removeStrategy(int strategyId) {
+        try {
+            vipCardMapper.deleteStrategy(strategyId);
+            return ResponseVO.buildSuccess("删除会员卡充值优惠策略成功！");
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("删除会员卡充值优惠策略失败！");
+        }
+    }
+
     // TESTED
     @Override
     public ResponseVO getStrategy(int strategyId) {

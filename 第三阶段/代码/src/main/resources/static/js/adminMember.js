@@ -47,7 +47,7 @@ $(document).ready(function() {
             function (res) {
                 if(res.success){
                     getStrategies();
-                    $("#editMemberModal").modal('hide');
+                    $("#addMemberModal").modal('hide');
                 } else {
                     alert(res.message);
                 }
@@ -58,7 +58,7 @@ $(document).ready(function() {
         );
     });
 
-    // 修改会员卡充值优惠策略
+    // 更改（修改、删除）会员卡充值优惠策略
     $(document).on('click','.strategy-item',function (e) {
         var strategy = JSON.parse(e.currentTarget.dataset.strategy);
 
@@ -68,10 +68,10 @@ $(document).ready(function() {
         $("#member-edit-discount-input").val(strategy.discountAmount);
 
         $('#editMemberModal').modal('show');
-
         $('#editMemberModal')[0].dataset.strategyId = strategy.id;
     });
 
+    // 修改会员卡充值优惠策略
     $('#strategy-edit-form-btn').click(function () {
         var form = {
             id: Number($('#editMemberModal')[0].dataset.strategyId),
@@ -80,15 +80,14 @@ $(document).ready(function() {
             targetAmount: $("#member-edit-target-input").val(),
             discountAmount : $("#member-edit-discount-input").val()
         };
-        console.log(form);
 
         postRequest(
             '/vip/strategy/update',
             form,
             function (res) {
                 if(res.success){
-                    // TODO
                     getStrategies();
+                    $("#editMemberModal").modal('hide');
                 } else{
                     alert(res.message);
                 }
@@ -97,5 +96,27 @@ $(document).ready(function() {
                 alert(JSON.stringify(error));
             }
         );
+    });
+
+    // 删除会员卡充值优惠策略
+    $("#admin-edit-remove-btn").click(function () {
+        var r = confirm("确认要删除该充值优惠策略吗？");
+        if (r) {
+            deleteRequest(
+                '/vip/strategy/remove?strategyId=' + Number($('#editMemberModal')[0].dataset.strategyId),
+                null,
+                function (res) {
+                    if(res.success){
+                        getStrategies();
+                        $("#editMemberModal").modal('hide');
+                    } else{
+                        alert(res.message);
+                    }
+                },
+                function (error) {
+                    alert(JSON.stringify(error));
+                }
+            );
+        }
     });
 });

@@ -34,6 +34,13 @@ public interface VIPCardMapper {
     void updateStrategy(VIPCardStrategy vipCardStrategy);
 
     /**
+     * 删除会员卡策略
+     *
+     * @author 梁正川
+     */
+    void deleteStrategy(@Param("id") int id);
+
+    /**
      * 选择单一会员卡策略
      *
      * @author 梁正川

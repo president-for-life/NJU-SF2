@@ -23,6 +23,11 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteStrategy">
+        delete from vip_card_strategy
+        where id = #{id}
+    </delete>
+
     <select id="selectStrategyById" resultMap="VIPCardStrategy">
         select * from vip_card_strategy where id=#{id}
     </select>

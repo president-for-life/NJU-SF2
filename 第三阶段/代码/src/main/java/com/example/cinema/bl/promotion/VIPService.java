@@ -22,8 +22,6 @@ public interface VIPService {
      * TESTED
      *
      * @author 梁正川
-     * @param strategyForm 发布会员卡表单
-     * @return vo.ResponseVO
      */
     ResponseVO addStrategy(VIPCardStrategyForm strategyForm);
 
@@ -32,8 +30,6 @@ public interface VIPService {
      * TESTED
      *
      * @author 梁正川
-     * @param strategyForm 修改会员卡表单
-     * @return vo.ResponseVO
      */
     ResponseVO updateStrategy(VIPCardStrategyForm strategyForm);
 
@@ -44,6 +40,13 @@ public interface VIPService {
      * @author 梁正川
      */
     ResponseVO getStrategy(int strategyId);
+
+    /**
+     * 删除会员卡充值优惠策略
+     *
+     * @author 梁正川
+     */
+    ResponseVO removeStrategy(int strategyId);
 
     /**
      * 获得所有会员卡充值优惠策略
