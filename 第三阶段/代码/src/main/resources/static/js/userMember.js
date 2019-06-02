@@ -37,40 +37,58 @@ function getVIP() {
     getRequest(
         '/vip/strategy/get/all',
         function (res) {
-            renderStrategies(res.content);
+            renderStrategiesForBuy(res.content);
+            renderStrategiesForSwitch(res.content);
         },
         function (error) {
             alert(error);
         }
     );
 
-    function renderStrategies(strategies) {
-        $('.strategy-list').empty();
+    function renderStrategiesForBuy(strategies) {
+        $('#buy-strategy-list').empty();
         strategies = strategies || [];
         let strategiesDomStr = "";
         for (let strategy of strategies) {
             strategiesDomStr +=
                 "<div class='strategy-container'>" +
-                "    <div class='strategy-item primary-bg' " + "id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "    <div class='strategy-item primary-bg' " + "id='buy-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
                 "        <span class='gray-text'>"+strategy.description+"</span>" +
                 "        <span class='title'>价格："+strategy.price+"</span>" +
                 "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
                 "    </div>" +
                 "</div>";
         }
-        $('.strategy-list').html(strategiesDomStr);
+        $('#buy-strategy-list').html(strategiesDomStr);
+    }
+
+    function renderStrategiesForSwitch(strategies) {
+        $('#switch-strategy-list').empty();
+        strategies = strategies || [];
+        let strategiesDomStr = "";
+        for (let strategy of strategies) {
+            strategiesDomStr +=
+                "<div class='strategy-container'>" +
+                "    <div class='strategy-item primary-bg' " + "id='switch-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "        <span class='gray-text'>"+strategy.description+"</span>" +
+                "        <span class='title'>价格："+strategy.price+"</span>" +
+                "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
+                "    </div>" +
+                "</div>";
+        }
+        $('#switch-strategy-list').html(strategiesDomStr);
     }
 }
 
 // 点击选择某种会员卡
-$(document).on('click','.strategy-item',function (e) {
+$(document).on('click','#buy-strategy-list .strategy-container .strategy-item',function (e) {
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
-    let $item = $('#strategy-' + strategy.id);
+    let $item = $('#buy-strategy-' + strategy.id);
 
     if($('#buyModal')[0].dataset.strategyId === undefined
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
         $item.parent().siblings().children().css('background', '#1caf9a');
-        $item.css('background', '#ed5565');
+        $item.css('background', '#ff9900');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
     } else { // 已选该卡
         $item.css('background', '#1caf9a');
@@ -78,10 +96,30 @@ $(document).on('click','.strategy-item',function (e) {
     }
 });
 
+$(document).on('click','#switch-strategy-list .strategy-container .strategy-item',function (e) {
+    let strategy = JSON.parse(e.currentTarget.dataset.strategy);
+    let $item = $('#switch-strategy-' + strategy.id);
+
+    console.log($('#buyModal')[0].dataset.strategyId);
+    console.log(strategy.id);
+    if($('#buyModal')[0].dataset.strategyId === undefined
+        || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
+        $item.parent().siblings().children().css('background', '#1caf9a');
+        $item.css('background', '#ff9900');
+        $('#buyModal')[0].dataset.strategyId = strategy.id;
+        console.log("hey");
+    } else { // 已选该卡
+        $item.css('background', '#1caf9a');
+        $('#buyModal')[0].dataset.strategyId = undefined;
+        console.log("haha");
+    }
+});
+
 // 点击购买会员卡
 function buyClick() {
     clearForm();
     $('#buyModal').modal('show');
+    $('#switch-strategy-list').css("display", "none"); // 不显示会员卡列表
     $("#userMember-amount-group").css("display", "none"); // 不显示充值金额输入框
     isBuyState = true;
 }
@@ -90,6 +128,7 @@ function buyClick() {
 function chargeClick() {
     clearForm();
     $('#buyModal').modal('show');
+    $('#switch-strategy-list').css("display", "none"); // 不显示会员卡列表
     $("#userMember-amount-group").css("display", "");
     isBuyState = false;
 }
@@ -138,8 +177,13 @@ $(document).on('click', '#r', function () {
 
 });
 
+// 点击更换会员卡
 function switchCardClick() {
-    // TODO
+    clearForm();
+    $('#buyModal').modal('show');
+    $('#switch-strategy-list').css("display", "");
+    $("#userMember-amount-group").css("display", "none"); // 不显示充值金额输入框
+    isBuyState = true;
 }
 
 // 时间转化
