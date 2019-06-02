@@ -4,10 +4,10 @@ $(document).ready(function () {
 });
 
 var isBuyState = true;
-var strategyId;
 var vipCardId;
 
 function getVIP() {
+    // 加载用户会员信息
     getRequest(
         '/vip/' + sessionStorage.getItem('id') + '/get',
         function (res) {
@@ -37,42 +37,56 @@ function getVIP() {
     getRequest(
         '/vip/strategy/get/all',
         function (res) {
-            let strategyList = res.content || [];
-            let strategyListContent = "";
-            for (let strategy of strategyList) {
-                strategyListContent +=
-                    '<div class="strategy" ' + 'id="strategy-' + strategy.id + '">' +
-                    '<div class="content" ' + 'onclick="chooseCard(' + strategy.id + ')"' + '>' +
-                    '<div class="description">' +
-                    strategy.description +
-                    '</div>' +
-                    '<div class="price">' +
-                    '满' + strategy.targetAmount + '减' + strategy.discountAmount +
-                    '</div>' +
-                    '</div></div>';
-            }
-            $('#strategy-list').html(strategyListContent);
+            renderStrategies(res.content);
         },
         function (error) {
             alert(error);
         }
     );
+
+    function renderStrategies(strategies) {
+        $('.strategy-list').empty();
+        strategies = strategies || [];
+        let strategiesDomStr = "";
+        for (let strategy of strategies) {
+            strategiesDomStr +=
+                "<div class='strategy-container'>" +
+                "    <div class='strategy-item primary-bg' " + "id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "        <span class='gray-text'>"+strategy.description+"</span>" +
+                "        <span class='title'>价格："+strategy.price+"</span>" +
+                "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
+                "    </div>" +
+                "</div>";
+        }
+        $('.strategy-list').html(strategiesDomStr);
+    }
 }
 
-// 用户选择某类会员卡
-function chooseCard(id) {
-    strategyId = id;
-    let $strategy = $("#strategy-" + id);
-    $strategy.css('border-color', 'red');
-}
+// 点击选择某种会员卡
+$(document).on('click','.strategy-item',function (e) {
+    let strategy = JSON.parse(e.currentTarget.dataset.strategy);
+    let $item = $('#strategy-' + strategy.id);
 
+    if($('#buyModal')[0].dataset.strategyId === undefined
+        || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
+        $item.parent().siblings().children().css('background', '#1caf9a');
+        $item.css('background', '#ed5565');
+        $('#buyModal')[0].dataset.strategyId = strategy.id;
+    } else { // 已选该卡
+        $item.css('background', '#1caf9a');
+        $('#buyModal')[0].dataset.strategyId = undefined;
+    }
+});
+
+// 点击购买会员卡
 function buyClick() {
     clearForm();
     $('#buyModal').modal('show');
-    $("#userMember-amount-group").css("display", "none");
+    $("#userMember-amount-group").css("display", "none"); // 不显示充值金额输入框
     isBuyState = true;
 }
 
+// 点击充值会员卡
 function chargeClick() {
     clearForm();
     $('#buyModal').modal('show');
@@ -153,7 +167,7 @@ function confirmCommit() {
             if (isBuyState) {
                 postRequest(
                     '/vip/add?userId=' + sessionStorage.getItem('id')
-                    + '&strategyId=' + strategyId,
+                    + '&strategyId=' + $('#buyModal')[0].dataset.strategyId,
                     null,
                     function (res) {
                         $('#buyModal').modal('hide');
