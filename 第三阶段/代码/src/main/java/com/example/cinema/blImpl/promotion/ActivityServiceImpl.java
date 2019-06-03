@@ -80,9 +80,9 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
     }
 
     @Override
-    public List<Activity> getActivitiesForBl() {
+    public List<Activity> getOngoingActivities() {
         try {
-            return activityMapper.selectActivities();
+            return activityMapper.selectOngoingActivities();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

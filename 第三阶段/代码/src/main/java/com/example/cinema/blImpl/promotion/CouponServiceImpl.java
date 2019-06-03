@@ -88,9 +88,9 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public Coupon getCouponById(int id) {
+    public Coupon getCouponById(int couponId) {
         try {
-            return couponMapper.selectById(id);
+            return couponMapper.selectById(couponId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

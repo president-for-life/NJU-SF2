@@ -15,6 +15,8 @@ public interface ActivityMapper {
 
     /**
      * 插入优惠活动
+     *
+     * @author 李莹
      */
     void insertActivity(Activity activity);
 
@@ -30,6 +32,13 @@ public interface ActivityMapper {
      * 选择所有优惠活动
      */
     List<Activity> selectActivities();
+
+    /**
+     * 选择正在生效的优惠活动
+     *
+     * @author 梁正川
+     */
+    List<Activity> selectOngoingActivities();
 
     /**
      * 选择优惠电影列表中含有某电影的优惠活动

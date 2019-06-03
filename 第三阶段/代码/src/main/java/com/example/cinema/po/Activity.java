@@ -126,6 +126,10 @@ public class Activity {
         this.movieList = movieList;
     }
 
+    public boolean involvesAllMovies() {
+        return this.getMovieList() == null || this.getMovieList().size() == 0;
+    }
+
     public Coupon getCoupon() {
         return coupon;
     }

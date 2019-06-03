@@ -10,10 +10,10 @@ import java.util.List;
 public interface ActivityServiceForBl {
 
     /**
-     * 查找所有优惠活动
+     * 查找所有正在进行的优惠活动
      *
      * @author 梁正川
      */
-    List<Activity> getActivitiesForBl();
+    List<Activity> getOngoingActivities();
 
 }

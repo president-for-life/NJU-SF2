@@ -206,20 +206,13 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
 			// 当前正在进行的优惠活动
-			List<Activity> activities = activityService.getActivitiesForBl()
-					.stream()
-					.filter(activity -> currentTime.after(activity.getStartTime())
-							&& activity.getEndTime().after(currentTime))
-					.collect(Collectors.toList());
+			List<Activity> activities = activityService.getOngoingActivities();
 
 			List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
 			for (Activity activity : activities) {
-				// 活动参与条件是某时间段购买任意电影票
-				if (activity.getMovieList() == null || activity.getMovieList().size() == 0) {
+				if (activity.involvesAllMovies()) {
 					couponsToBeIssued.add(activity.getCoupon());
-				}
-				// 活动参与条件是某时间段购买指定电影票
-				else {
+				} else {
 					// 享受优惠的电影id数组
 					List<Integer> movies = activity.getMovieList()
 							.stream()
