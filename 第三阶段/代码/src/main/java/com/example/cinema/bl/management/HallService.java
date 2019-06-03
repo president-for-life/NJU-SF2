@@ -11,19 +11,21 @@ public interface HallService {
     /**
      * 搜索所有影厅
      *
-     * @return vo.ResponseVO
+     * @author 范佳杰
      */
     ResponseVO searchAllHall();
+
     /**
      * 插入一个新的影厅
      *
-     * @return vo.ResponseVO
+     * @author 范佳杰
      */
     ResponseVO insertOneHall(HallForm hallForm);
+
     /**
      * 更新一个影厅信息
      *
-     * @return vo.ResponseVO
+     * @author 徐志乐
      */
     ResponseVO updateOneHall(HallForm hallUpdateForm);
 }

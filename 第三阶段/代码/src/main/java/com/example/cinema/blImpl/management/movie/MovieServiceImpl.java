@@ -42,9 +42,9 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
     }
 
     @Override
-    public ResponseVO searchOneMovieByIdAndUserId(int id, int userId) {
+    public ResponseVO searchOneMovieByIdAndUserId(int movieId, int userId) {
         try {
-            Movie movie = movieMapper.selectMovieByIdAndUserId(id, userId);
+            Movie movie = movieMapper.selectMovieByIdAndUserId(movieId, userId);
             if (movie != null) {
                 return ResponseVO.buildSuccess(new MovieVO(movie));
             } else {

@@ -64,24 +64,32 @@ public interface VIPService {
      * 某用户获得使用某种策略的会员卡
      * 如果用户已持有会员卡，切换会员卡使用的策略
      * TESTED
+     *
+     * @author 李莹
      */
     ResponseVO addVIPCard(int userId, int strategyId);
 
     /**
      * 获得会员卡信息
      * TESTED
+     *
+     * @author 李莹
      */
     ResponseVO getVIPCardStrategy(int strategyId);
 
     /**
      * 充值会员卡
      * TESTED
+     *
+     * @author 李莹
      */
     ResponseVO charge(VIPCardChargeForm vipCardChargeForm);
 
     /**
      * 获得某用户的会员卡
      * TESTED
+     *
+     * @author 李莹
      */
     ResponseVO getCardByUserId(int userId);
 

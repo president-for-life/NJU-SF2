@@ -76,9 +76,9 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
     }
 
     @Override
-    public ResponseVO getScheduleById(int id) {
+    public ResponseVO getScheduleById(int scheduleId) {
         try {
-            ScheduleItem scheduleItem = scheduleMapper.selectScheduleById(id);
+            ScheduleItem scheduleItem = scheduleMapper.selectScheduleById(scheduleId);
             if (scheduleItem != null) {
                 return ResponseVO.buildSuccess(new ScheduleItemVO(scheduleItem));
             } else {

@@ -13,42 +13,37 @@ public interface AccountService {
     /**
      * 注册账号
      *
-     * @return vo.ResponseVO
+     * @author 胡文
      */
     ResponseVO registerAccount(UserForm userForm);
 
     /**
      * 用户登录，登录成功会将用户信息保存在session中
      *
-     * @return vo.UserVO
+     * @author 胡文
      */
     UserVO login(UserForm userForm);
 
-
     /**
-     * 更新一个user
+     * 更新账号信息
      *
-     * @return vo.ResponseVO
+     * @author 徐志乐
      */
-
     ResponseVO updateUser(UserForm userUpdateForm);
 
 
     /**
-     * 搜索全部Admin
+     * 搜索全部管理员账号信息
      *
-     * @return vo.ResponseVO
+     * @author 徐志乐
      */
-
     ResponseVO searchAllAdmin();
 
     /**
-     * 搜索全部Admin
+     * 删除账号
      *
-     * @param id
-     * @return vo.ResponseVO
+     * @author 徐志乐
      */
-
     ResponseVO deleteOneAccount(Integer id);
 
 }

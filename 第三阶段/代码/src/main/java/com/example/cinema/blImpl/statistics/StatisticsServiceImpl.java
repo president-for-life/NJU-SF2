@@ -127,10 +127,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
     }
 
-    /**
-     * @author 梁正川
-     * @author 石創烽
-     */
     @Override
     public ResponseVO getMoviePlacingRateByDate(Date date) {
         try {
@@ -164,10 +160,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
     }
 
-    /**
-     * @author 梁正川
-     * @author 石創烽
-     */
     @Override
     public ResponseVO getPopularMovies(int days, int movieNum) {
         try {
@@ -198,11 +190,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
     }
 
-    /**h
-     * @autor 石創烽
-     * @param amount
-     * @return
-     */
     @Override
     public ResponseVO getConsumption(double amount){
         try{
