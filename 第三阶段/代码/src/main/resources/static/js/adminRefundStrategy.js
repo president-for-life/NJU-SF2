@@ -86,8 +86,8 @@ $(document).ready(function () {
 				"            <span>使用本退票策略的电影：</span>" +
 				"            <button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
 				"            class='icon-plus-sign'></i>新增电影</button>" +
-				"            <button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
-				"            class='icon-minus-sign'></i>删除电影</button>" +
+				// "            <button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
+				// "            class='icon-minus-sign'></i>删除电影</button>" +
 				"        </div>" +
 				"    </div>" +
 				"</li>";
