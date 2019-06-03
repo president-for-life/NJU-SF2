@@ -16,12 +16,12 @@ public interface ActivityMapper {
     /**
      * 插入优惠活动
      */
-    int insertActivity(Activity activity);
+    void insertActivity(Activity activity);
 
     /**
      * 为某优惠活动插入优惠电影列表
      */
-    int insertActivityAndMovie(
+    void insertActivityAndMovie(
             @Param("activityId") int activityId,
             @Param("movieId") List<Integer> movieId
     );

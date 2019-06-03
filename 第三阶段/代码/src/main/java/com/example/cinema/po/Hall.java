@@ -5,9 +5,25 @@ package com.example.cinema.po;
  * @date 2019/4/28 5:09 PM
  */
 public class Hall {
+
+    /**
+     * 影厅id
+     */
     private Integer id;
+
+    /**
+     * 影厅名
+     */
     private String name;
+
+    /**
+     * 排数
+     */
     private Integer row;
+
+    /**
+     * 列数
+     */
     private Integer column;
 
     public Integer getId() {
@@ -42,7 +58,12 @@ public class Hall {
         this.column = column;
     }
 
+    /**
+     * 获得影厅座位数
+     *
+     * @author 梁正川
+     */
     public Integer getNumSeats() {
-        return this.row * this.column;
+        return this.getRow() * this.getColumn();
     }
 }

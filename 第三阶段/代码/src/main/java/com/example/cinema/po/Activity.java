@@ -76,7 +76,6 @@ public class Activity {
             return mvo;
         }).collect(Collectors.toList()));
         return vo;
-
     }
 
     public int getId() {
