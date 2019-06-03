@@ -2,6 +2,9 @@ $(document).ready(function(){
 
     getAdminList();
 
+
+
+
     $("#admin-form-btn").click(function () {
         var formData = getAdminForm();
         if(!validateAdminForm(formData)) {
@@ -36,12 +39,10 @@ $(document).ready(function(){
         var isValidate = true;
         if(!data.username) {
             isValidate = false;
-            $('#admin-username-input').parent('.form-group').addClass('has-error');
             alert("用户名不能为空")
         }
         if(!data.password) {
             isValidate = false;
-            $('#admin-password-input').parent('.form-group').addClass('has-error');
             alert("密码不能为空")
         }
         return isValidate;
@@ -51,12 +52,10 @@ $(document).ready(function(){
         var isValidate = true;
         if(!data.username) {
             isValidate = false;
-            $('#admin-edit-username-input').parent('.form-group').addClass('has-error');
             alert("用户名不能为空")
         }
         if(!data.password) {
             isValidate = false;
-            $('#admin-edit-password-input').parent('.form-group').addClass('has-error');
             alert("密码不能为空")
         }
         return isValidate;

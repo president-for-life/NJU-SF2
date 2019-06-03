@@ -43,17 +43,14 @@ $(document).ready(function() {
         var isValidate = true;
         if(!data.name) {
             isValidate = false;
-            $('#hall-edit-name-input').parent('.form-group').addClass('has-error');
             alert("影厅名不能为空")
         }
         if(!data.column) {
             isValidate = false;
-            $('#hall-edit-column-input').parent('.form-group').addClass('has-error');
             alert("列数不能为空")
         }
         if(!data.row) {
             isValidate = false;
-            $('#hall-edit-row-input').parent('.form-group').addClass('has-error');
             alert("行数不能为空")
         }
         return isValidate;
