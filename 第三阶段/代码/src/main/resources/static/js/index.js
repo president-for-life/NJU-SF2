@@ -1,12 +1,18 @@
 $(document).ready(function () {
 
+
+    $(document).keyup(function(event){
+        if(event.keyCode == 13){
+            $("#login-btn").trigger("click");
+        }
+    });
+
     $("#login-btn").click(function () {
         var formData = getLoginForm();
         if (!validateLoginForm(formData)) {
             return;
         }
 
-        // 传送表单，判断身份的role
 
         postRequest(
             '/login',
