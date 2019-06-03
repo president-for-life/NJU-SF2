@@ -111,6 +111,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	/**
 	 * 获得用户拥有的、且满足本次订单使用门槛的优惠券
 	 *
+	 * // TODO 是couponServiceForBl的职责
 	 * @param userId 用户id
 	 * @param total  订单总金额
 	 * @author 梁正川
@@ -206,6 +207,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
 			// 当前正在进行的优惠活动
+			// TODO 在activityServiceForB内使用withoutMovies/byMovie
 			List<Activity> activities = activityService.getOngoingActivities();
 
 			List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
