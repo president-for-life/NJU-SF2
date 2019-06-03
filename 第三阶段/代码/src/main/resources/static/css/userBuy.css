@@ -1,23 +1,28 @@
 .order-card {
     padding: 10px;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: 10px 0 10px 0
 }
 
 .order-container {
     font-size: 25px;
-    padding: 10px;
+    padding: 0 0 20px 0;
 }
 
 .order-detail {
     display: block;
-    margin: 10px 10px 10px 10px
+    margin: 10px 10px 10px 10px;
+}
+
+.seat {
+    padding: 5px 5px 5px 5px;
 }
 
 .seat-card {
     padding: 10px;
     background-color: white;
+    border-radius: 10px;
     font-size: 15px;
 }
 
@@ -33,6 +38,14 @@
 .table-wrapper .table td{
     height: 60px;
     vertical-align: middle;
+}
+
+.user-buy-btn {
+    color: #ffffff;
+    background-color: #1caf9a;
+    border-color: #189987;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
 }
 
 .card {

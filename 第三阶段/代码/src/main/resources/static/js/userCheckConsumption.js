@@ -7,33 +7,40 @@ $(document).ready(function () {
             console.log(res);
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
-            var recordDomStr = "<tr>"+
-                "<td>"+"购买时间"+"</td>"+
-                "<td></td>" +
-                "<td></td>" +
-                "</tr>"+"<div>";
+            if(data.length!==0) {
+                var recordDomStr = "<tr>" +
+                    "<td>" + "购买时间" + "</td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "</tr>" + "<div>";
+            }
+            else{
+
+            }
             data.forEach(function (ticket) {
-                if(ticket.state == "支付已完成" || ticket.state == "已出票") {
+                if(ticket.state == "支付已完成" || ticket.state =="已出票") {
                     recordDomStr +=
                         "<tr> " +
                         "<td>" + timetrans(ticket.time)+ "</td>" +
                         "<td></td>" +
                         "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                         "</tr>"+
-                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" >"+
                         "<td>"+"票价："+ticket.schedule.fare.toFixed(2)+"</td>"+
                         "<td></td>" +
                         "<td></td>" +
                         "</tr>"+
-                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
-                        "<td>"+"实际消费金额："+ticket.actualPayment.toFixed(2)+"</td>"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" >"+
+                        "<td>"+"消费金额："+ticket.actualPayment.toFixed(2)+"</td>"+
                         "<td></td>" +
                         "<td></td>" +
                         "</tr>";
                 }
             });
-            recordDomStr+="</div>";
-            $content_container_tbody.append(recordDomStr);
+            if(data.length!==0) {
+                recordDomStr += "</div>";
+                $content_container_tbody.append(recordDomStr);
+            }
         },
         function (error) {
             alert(error);
