@@ -10,20 +10,25 @@ $(document).ready(function () {
             var recordDomStr = "<tr>"+
                 "<td>"+"购买时间"+"</td>"+
                 "<td></td>" +
+                "<td></td>" +
                 "</tr>"+"<div>";
             data.forEach(function (ticket) {
                 if(ticket.state == "支付已完成" || ticket.state == "已出票") {
                     recordDomStr +=
-                        "<tr bgcolor=>" +
+                        "<tr> " +
                         "<td>" + timetrans(ticket.time)+ "</td>" +
-                        "<td></td>"+
+                        "<td></td>" +
                         "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                         "</tr>"+
-                        "<tr style=\"display: none\" >"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
                         "<td>"+"票价："+ticket.schedule.fare.toFixed(2)+"</td>"+
+                        "<td></td>" +
+                        "<td></td>" +
                         "</tr>"+
-                        "<tr style=\"display: none\" >"+
-                        "<td>"+"实际消费金额:"+ticket.actualPayment.toFixed(2)+"</td>"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
+                        "<td>"+"实际消费金额："+ticket.actualPayment.toFixed(2)+"</td>"+
+                        "<td></td>" +
+                        "<td></td>" +
                         "</tr>";
                 }
             });

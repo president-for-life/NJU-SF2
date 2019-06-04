@@ -72,24 +72,24 @@ $(document).ready(function () {
 		strategyList.forEach(function (strategy) {
 			strategyDomStr +=
 				"<li class='strategy-item card' id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
-				"<div class='strategy-info'>" +
-				"<div class='strategy-title'>" +
-				"<span class='primary-text'>退票策略id：" + strategy.id + "</span>" +
+				"    <div class='strategy-info'>" +
+				"        <div class='strategy-title'>" +
+				"            <span class='primary-text'>退票策略id：" + strategy.id + "</span>" +
 				// "<span class='strategy-operation'>修改退票策略</span>"+
-				"</div>" +
-				"<div style='display: flex'>" +
-				"<span class='label " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
-				"<span>返还比例：" + strategy.ratio + "</span>" +
-				"<span>开场前 " + strategy.time + " 分钟不允许退票</span>" +
-				"</div>" +
-				"<div class='movie-list-for-strategy' >" +
-				"<span>使用本退票策略的电影：</span>" +
-				"<button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
-				" class='icon-plus-sign'></i>新增电影</button>" +
-				"<button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
-				" class='icon-minus-sign'></i>删除电影</button>" +
-				"</div>" +
-				"</div>" +
+				"        </div>" +
+				"        <div style='display: flex'>" +
+				"            <span class='label " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
+				"            <span>返还比例：" + strategy.ratio + "</span>" +
+				"            <span>开场前 " + strategy.time + " 分钟不允许退票</span>" +
+				"        </div>" +
+				"        <div class='movie-list-for-strategy' >" +
+				"            <span>使用本退票策略的电影：</span>" +
+				"            <button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
+				"            class='icon-plus-sign'></i>新增电影</button>" +
+				"            <button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
+				"            class='icon-minus-sign'></i>删除电影</button>" +
+				"        </div>" +
+				"    </div>" +
 				"</li>";
 		});
 		$('.strategy-on-list').append(strategyDomStr);
@@ -188,7 +188,7 @@ $(document).ready(function () {
 		var strategy = JSON.parse(e.currentTarget.dataset.strategy);
 
 		$("#update-strategy-refundable-input").val(strategy.refundable ? "是" : "否");
-		$("#update-strategy-ratio-input").val(strategy.radio);
+		$("#update-strategy-ratio-input").val(strategy.ratio);
 		$("#update-strategy-time-input").val(strategy.time);
 
 		$("#updateStrategyModal").modal('show');
@@ -328,7 +328,7 @@ $(document).ready(function () {
 	 */
 	function removeSelectedMovie(strategyId,movieId) {
 		postRequest(
-			'/ticket//refundStrategy/removeMovies?refundStrategyId=' + strategyId,
+			'/ticket/refundStrategy/removeMovies?refundStrategyId=' + strategyId,
 			[movieId],
 			function (res) {
 				if (res.success) {

@@ -146,18 +146,21 @@ getChargeRecordsClick = function() {
                                "<td></td>" +
                                "</tr>"+"<div>";
             data.forEach(function (vipCardCharge) {
-
                recordDomStr +=
                     "<tr>" +
                     "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
                    "<td></td>"+
                     "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                     "</tr>"+
-                    "<tr style=\"display: none\" >"+
-                    "<td>"+"充值金额："+vipCardCharge.payment+"</td>"+
+                    "<tr style=\"display: none; able-layout:fixed\"   bgcolor=\"#e4e7ea\" width='100%'>"+
+                    "<td>"+"充值金额："+vipCardCharge.payment.toFixed(2)+"</td>"+
+                   "<td></td>"+
+                   "<td></td>"+
                     "</tr>"+
-                     "<tr style=\"display: none\" >"+
-                    "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"+
+                     "<tr style=\"display: none; able-layout:fixed\"  bgcolor=\"#e4e7ea\" width='100%'>"+
+                    "<td>"+"冲入金额："+vipCardCharge.amount.toFixed(2)+"</td>"+
+                    "<td></td>"+
+                   "<td></td>"+
                     "</tr>";
             });
             recordDomStr+="</div>";

@@ -1,40 +1,14 @@
-.strategy-container {
-    flex-basis: 30%;
-    display: flex;
-    width: 100%;
-    min-height: 50px;
-    margin: 20px 0;
-}
-
-.strategy-item1 {
-    flex-shrink:0;
-    flex-direction: column;
-    padding: 30px;
-    justify-content: space-around;
-    overflow:auto
-}
-.strategy-item2 {
-    flex-shrink:0;
-    flex-direction: column;
-    padding: 30px;
-    justify-content: space-around;
-    overflow:auto
-}
 .content-header {
     display: flex;
     justify-content: space-between;
 }
 
-.content-card{
-    padding: 20px;
-    min-height: 30%;
-    min-width: 100%;
-    margin: 20px 0;
-}
+
 .card{
+    flex: 1;
     padding: 20px;
-    min-height: 50%;
-    min-width: 100%;
+    width: 100%;
+    min-height:150px;
     color: black;
     background-color: white;
 
