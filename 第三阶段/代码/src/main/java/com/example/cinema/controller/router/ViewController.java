@@ -30,6 +30,11 @@ public class ViewController {
         return "adminScheduleManage";
     }
 
+    @RequestMapping(value = "/admin/coupon/manage")
+    public String getAdminCouponManage() {
+        return "adminCouponManage";
+    }
+
     @RequestMapping(value = "/admin/cinema/manage")
     public String getAdminCinemaManage() {
         return "adminCinemaManage";
