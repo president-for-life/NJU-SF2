@@ -9,7 +9,7 @@ import java.util.List;
  * @author 李莹
  * @date 2019/4/16
  */
-public class TicketForm {
+public class OrderForm {
 
     /**
      * 用户id
@@ -22,7 +22,7 @@ public class TicketForm {
     private int scheduleId;
 
     /**
-     * 用户选择的座位list
+     * 用户选择的座位
      */
     private List<SeatForm> seats;
 

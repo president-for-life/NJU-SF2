@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author 李莹
@@ -66,14 +64,14 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	 *
 	 * @author 戴羽涵
 	 */
-	private void lockSeat(TicketForm ticketForm) {
+	private void lockSeat(OrderForm orderForm) {
 		try {
-			List<Ticket> tickets = ticketForm.getTicketPOs();
+			List<Ticket> tickets = orderForm.getTicketPOs();
 			ticketMapper.insertTickets(tickets);
 
 			////////////////////控制台测试信息////////////////////
 			System.out.print("锁座：");
-			for (SeatForm seat : ticketForm.getSeats()) {
+			for (SeatForm seat : orderForm.getSeats()) {
 				System.out.print(" " + (seat.getRowIndex() + 1) + "排" + (seat.getColumnIndex() + 1) + "列");
 			}
 			System.out.println();
@@ -84,29 +82,29 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	}
 
 	/**
-	 * @see #lockSeat(TicketForm)
+	 * @see #lockSeat(OrderForm)
 	 */
 	@Override
 	@Transactional
-	public ResponseVO addTicket(TicketForm ticketForm) {
+	public ResponseVO addTicket(OrderForm orderForm) {
 		try {
 			////////////////////控制台测试信息////////////////////
 			System.out.println("----------TicketServiceImpl.addTicket测试信息----------");
 			////////////////////控制台测试信息////////////////////
 
 			// 锁座
-			this.lockSeat(ticketForm);
+			this.lockSeat(orderForm);
 
 			// 计算总金额
-			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(ticketForm.getScheduleId());
-			double total = scheduleItem.getFare() * ticketForm.getSeats().size();
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(orderForm.getScheduleId());
+			double total = scheduleItem.getFare() * orderForm.getSeats().size();
 
 			// 用户拥有的、且满足本次订单使用门槛的优惠券
-			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserForBl(ticketForm.getUserId(), total);
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserForBl(orderForm.getUserId(), total);
 
 			// 根据座位生成ticketVO数组
 			List<TicketVO> ticketVOList = new ArrayList<>();
-			for (SeatForm seat : ticketForm.getSeats()) {
+			for (SeatForm seat : orderForm.getSeats()) {
 				Ticket ticket = ticketMapper.selectTicketByScheduleIdAndSeat(
 						scheduleItem.getId(),
 						seat.getColumnIndex(),

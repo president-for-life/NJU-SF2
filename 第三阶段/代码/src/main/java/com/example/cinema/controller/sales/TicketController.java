@@ -2,7 +2,7 @@ package com.example.cinema.controller.sales;
 
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.TicketForm;
+import com.example.cinema.vo.OrderForm;
 import com.example.cinema.vo.TicketRefundStrategyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +25,8 @@ public class TicketController {
     }
 
     @PostMapping("/lockSeat")
-    public ResponseVO lockSeat(@RequestBody TicketForm ticketForm) {
-        return ticketService.addTicket(ticketForm);
+    public ResponseVO lockSeat(@RequestBody OrderForm orderForm) {
+        return ticketService.addTicket(orderForm);
     }
 
     @PostMapping("/buy")
