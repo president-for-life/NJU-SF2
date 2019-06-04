@@ -155,7 +155,9 @@ getChargeRecordsClick = function() {
                     "</tr>"+
                     "<tr style=\"display: none\" >"+
                     "<td>"+"充值金额："+vipCardCharge.payment+"</td>"+
-                   "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"+
+                    "</tr>"+
+                     "<tr style=\"display: none\" >"+
+                    "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"+
                     "</tr>";
             });
             recordDomStr+="</div>";
@@ -173,6 +175,12 @@ $(document).on('click', '#r', function () {
     }
     else {
         $(this).get(0).parentNode.parentNode. nextSibling.style.display="none";
+    }
+    if($(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display==="none") {
+        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="";
+    }
+    else {
+        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="none";
     }
 
 });
