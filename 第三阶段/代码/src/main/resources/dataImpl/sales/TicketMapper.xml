@@ -3,6 +3,7 @@
 <mapper namespace="com.example.cinema.data.sales.TicketMapper">
 
     <resultMap id="Ticket" type="com.example.cinema.po.Ticket">
+        <result column="order_id" property="orderId"></result>
         <result column="schedule_id" property="scheduleId"></result>
         <result column="id" property="id"></result>
         <result column="user_id" property="userId"></result>
@@ -13,19 +14,13 @@
         <result column="time" property="time"></result>
     </resultMap>
 
-    <insert id="insertTicket" parameterType="com.example.cinema.po.Ticket"
-            useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id, schedule_id, column_index, row_index, state)
-        values(#{userId}, #{scheduleId}, #{columnIndex}, #{rowIndex}, #{state})
-    </insert>
-
     <insert id="insertTickets" parameterType="java.util.List"
             useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id,schedule_id,column_index,row_index,state)
+        insert into ticket(order_id, user_id, schedule_id, column_index, row_index, state)
         values
         <foreach collection="list" item="item" index="index"
                  separator=",">
-            (#{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state})
+            (#{item.orderId}, #{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state})
         </foreach>
     </insert>
 
@@ -34,7 +29,7 @@
     </select>
 
     <select id="selectTicketsBySchedule" resultMap="Ticket">
-        select * from ticket where schedule_id=#{scheduleId} and state!=2
+        select * from ticket where schedule_id = #{scheduleId} and state != 2
     </select>
 
     <select id="selectTicketByScheduleIdAndSeat" resultMap="Ticket">
@@ -42,7 +37,7 @@
     </select>
 
     <select id="selectTicketsByUser" resultMap="Ticket">
-        select * from ticket where user_id=#{userId}
+        select * from ticket where user_id=#{userId} order by time desc
     </select>
 
     <update id="updateTicketState">
@@ -52,10 +47,6 @@
     <update id="updateTicketActualPayment">
         update ticket set actual_payment = #{actualPayment} where id = #{ticketId}
     </update>
-
-    <delete id="deleteTicket">
-        delete from ticket where id=#{ticketId}
-    </delete>
 
     <update id="cleanExpiredTicket">
         update ticket SET  state =2 WHERE minute(timediff(now(),time))>15 and state=0;

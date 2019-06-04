@@ -16,19 +16,9 @@ import java.util.List;
 public interface TicketMapper {
 
     /**
-     * 插入单一电影票
-     */
-    int insertTicket(Ticket ticket);
-
-    /**
      * 插入多个电影票
      */
     int insertTickets(List<Ticket> tickets);
-
-    /**
-     * 删除单一电影票
-     */
-    void deleteTicket(int ticketId);
 
     /**
      * 更新单一电影票状态

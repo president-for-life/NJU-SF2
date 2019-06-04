@@ -5,6 +5,11 @@ import java.sql.Timestamp;
 public class TicketVO {
 
     /**
+     * 订单id
+     */
+    private int orderId;
+
+    /**
      * 电影票id
      */
     private int id;
@@ -46,6 +51,14 @@ public class TicketVO {
     private double actualPayment;
 
     private Timestamp time;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     public int getId() {
         return id;
