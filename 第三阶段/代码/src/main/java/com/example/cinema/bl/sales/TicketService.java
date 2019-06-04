@@ -1,7 +1,7 @@
 package com.example.cinema.bl.sales;
 
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.TicketForm;
+import com.example.cinema.vo.OrderForm;
 import com.example.cinema.vo.TicketRefundStrategyForm;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface TicketService {
      *
      * @author 梁正川
      */
-    ResponseVO addTicket(TicketForm ticketForm);
+    ResponseVO addTicket(OrderForm orderForm);
 
     /**
      * 使用银行卡完成购票

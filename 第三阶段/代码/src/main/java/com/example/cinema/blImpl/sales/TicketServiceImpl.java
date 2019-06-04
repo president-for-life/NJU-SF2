@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author 李莹
@@ -47,7 +45,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			ScheduleItem schedule = scheduleService.getScheduleItemById(scheduleId);
 			Hall hall = hallService.getHallById(schedule.getHallId());
 			int[][] seats = new int[hall.getRow()][hall.getColumn()];
-			tickets.stream().forEach(ticket -> {
+			tickets.forEach(ticket -> {
 				seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;
 			});
 
@@ -66,94 +64,47 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	 *
 	 * @author 戴羽涵
 	 */
-	private void lockSeat(TicketForm ticketForm) {
+	private void lockSeat(OrderForm orderForm) {
 		try {
-			List<SeatForm> seats = ticketForm.getSeats();
-
-			if (seats.size() == 1) { // 用户只选择一个座位
-				Ticket ticket = new Ticket();
-				ticket.setUserId(ticketForm.getUserId());
-				ticket.setScheduleId(ticketForm.getScheduleId());
-				ticket.setColumnIndex(seats.get(0).getColumnIndex());
-				ticket.setRowIndex(seats.get(0).getRowIndex());
-				ticket.setState(0);
-				ticketMapper.insertTicket(ticket);
-			} else { // 用户选择了多个座位
-				List<Ticket> tickets = new ArrayList<>();
-				for (SeatForm seat : seats) {
-					Ticket ticket = new Ticket();
-					ticket.setUserId(ticketForm.getUserId());
-					ticket.setScheduleId(ticketForm.getScheduleId());
-					ticket.setColumnIndex(seat.getColumnIndex());
-					ticket.setRowIndex(seat.getRowIndex());
-					ticket.setState(0);
-					tickets.add(ticket);
-				}
-				ticketMapper.insertTickets(tickets);
-			}
+			List<Ticket> tickets = orderForm.getTicketPOs();
+			ticketMapper.insertTickets(tickets);
 
 			////////////////////控制台测试信息////////////////////
 			System.out.print("锁座：");
-			for (SeatForm seat : seats) {
+			for (SeatForm seat : orderForm.getSeats()) {
 				System.out.print(" " + (seat.getRowIndex() + 1) + "排" + (seat.getColumnIndex() + 1) + "列");
 			}
-			System.out.println("成功！");
+			System.out.println();
 			////////////////////控制台测试信息////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			////////////////////控制台测试信息////////////////////
-			System.out.println("锁座失败！");
-			////////////////////控制台测试信息////////////////////
 		}
 	}
 
 	/**
-	 * 获得用户拥有的、且满足本次订单使用门槛的优惠券
-	 *
-	 * // TODO 是couponServiceForBl的职责
-	 * @param userId 用户id
-	 * @param total  订单总金额
-	 * @author 梁正川
-	 */
-	private List<Coupon> getCoupons(int userId, double total) {
-		try {
-			return couponService.getCouponsByUserForBl(userId)
-					.stream()
-					.filter(coupon -> coupon.getTargetAmount() <= total)
-					.sorted(Comparator.comparing(Coupon::getDiscountAmount).reversed()) // 优惠金额多的排前面
-					.collect(Collectors.toList());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ArrayList<>();
-		}
-	}
-
-	/**
-	 * @see #lockSeat(TicketForm)
-	 * @see #getCoupons(int, double)
+	 * @see #lockSeat(OrderForm)
 	 */
 	@Override
 	@Transactional
-	public ResponseVO addTicket(TicketForm ticketForm) {
+	public ResponseVO addTicket(OrderForm orderForm) {
 		try {
 			////////////////////控制台测试信息////////////////////
 			System.out.println("----------TicketServiceImpl.addTicket测试信息----------");
 			////////////////////控制台测试信息////////////////////
 
 			// 锁座
-			this.lockSeat(ticketForm);
+			this.lockSeat(orderForm);
 
 			// 计算总金额
-			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(ticketForm.getScheduleId());
-			double total = scheduleItem.getFare() * ticketForm.getSeats().size();
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(orderForm.getScheduleId());
+			double total = scheduleItem.getFare() * orderForm.getSeats().size();
 
 			// 用户拥有的、且满足本次订单使用门槛的优惠券
-			List<Coupon> couponsOwnedByUser = this.getCoupons(ticketForm.getUserId(), total);
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserForBl(orderForm.getUserId(), total);
 
 			// 根据座位生成ticketVO数组
 			List<TicketVO> ticketVOList = new ArrayList<>();
-			for (SeatForm seat : ticketForm.getSeats()) {
+			for (SeatForm seat : orderForm.getSeats()) {
 				Ticket ticket = ticketMapper.selectTicketByScheduleIdAndSeat(
 						scheduleItem.getId(),
 						seat.getColumnIndex(),
@@ -204,27 +155,15 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	 */
 	private void issueCoupon(int movieId, int userId) {
 		try {
-			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-
-			// 当前正在进行的优惠活动
-			// TODO 在activityServiceForB内使用withoutMovies/byMovie
-			List<Activity> activities = activityService.getOngoingActivities();
+			List<Activity> activitiesWithMovie
+					= activityService.getActivitiesByMovie(movieId);
+			List<Activity> activitiesWithoutMovie
+					= activityService.getActivitiesWithoutMovie();
+			activitiesWithMovie.addAll(activitiesWithoutMovie);
 
 			List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
-			for (Activity activity : activities) {
-				if (activity.involvesAllMovies()) {
-					couponsToBeIssued.add(activity.getCoupon());
-				} else {
-					// 享受优惠的电影id数组
-					List<Integer> movies = activity.getMovieList()
-							.stream()
-							.map(Movie::getId)
-							.collect(Collectors.toList());
-
-					if (movies.contains(movieId)) {
-						couponsToBeIssued.add(activity.getCoupon());
-					}
-				}
+			for(Activity activity : activitiesWithMovie) {
+				couponsToBeIssued.add(activity.getCoupon());
 			}
 
 			// 赠送优惠券
@@ -241,10 +180,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			////////////////////控制台测试信息////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			////////////////////控制台测试信息////////////////////
-			System.out.println("赠送优惠券失败！");
-			////////////////////控制台测试信息////////////////////
 		}
 	}
 

@@ -1,12 +1,15 @@
 package com.example.cinema.vo;
 
+import com.example.cinema.po.Ticket;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author 李莹
  * @date 2019/4/16
  */
-public class TicketForm {
+public class OrderForm {
 
     /**
      * 用户id
@@ -19,7 +22,7 @@ public class TicketForm {
     private int scheduleId;
 
     /**
-     * 用户选择的座位list
+     * 用户选择的座位
      */
     private List<SeatForm> seats;
 
@@ -45,6 +48,22 @@ public class TicketForm {
 
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
+    }
+
+    public List<Ticket> getTicketPOs() {
+        List<Ticket> tickets = new ArrayList<>();
+        for (SeatForm seat : this.getSeats()) {
+            Ticket ticket = new Ticket();
+
+            ticket.setUserId(this.getUserId());
+            ticket.setScheduleId(this.getScheduleId());
+            ticket.setColumnIndex(seat.getColumnIndex());
+            ticket.setRowIndex(seat.getRowIndex());
+            ticket.setState(0); // 支付未完成
+
+            tickets.add(ticket);
+        }
+        return tickets;
     }
 
 }
