@@ -26,8 +26,9 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     @Override
     public ResponseVO getValidCoupons() {
         try {
-            return ResponseVO.buildSuccess(
+            return ResponseVO.buildSuccess(coupons2CouponForms(
                     couponMapper.selectValidCoupons()
+                    )
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,5 +114,12 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
             e.printStackTrace();
             return null;
         }
+    }
+    private List<CouponForm> coupons2CouponForms(List<Coupon> coupons){
+        List<CouponForm> couponForms=new ArrayList();
+        for(Coupon coupon:coupons){
+            couponForms.add(new CouponForm(coupon));
+        }
+        return couponForms;
     }
 }

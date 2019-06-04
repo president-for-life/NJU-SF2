@@ -6,14 +6,20 @@
     margin: 20px 0;
 }
 
-.strategy-item {
+.strategy-item1 {
     flex-shrink:0;
-    min-width:50%;
+    min-width:35%;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
     justify-content: space-around;
 }
-
+.strategy-item2 {
+    flex-shrink:0;
+    min-width:75%;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: space-around;
+}
 .content-header {
     display: flex;
     justify-content: space-between;
@@ -31,22 +37,11 @@
     width:100%;
     display: flex;
     flex-direction: row;
-    padding: 20px;
     flex-wrap: nowrap;
-    color: white;
+    color: black;
+    background-color: white;
     height: auto;
+
 }
 
-.table-wrapper {
-    padding: 20px;
-}
 
-.table-wrapper .table b {
-    color: #1caf9a;
-    font-size: 20px;
-}
-
-.table-wrapper .table td{
-    height: 60px;
-    vertical-align: middle;
-}
