@@ -21,6 +21,13 @@ public interface CouponMapper {
     int insertCoupon(Coupon coupon);
 
     /**
+     * 获得当前处于有效期的优惠劵
+     *
+     * @author 梁正川
+     */
+    List<Coupon> selectValidCoupons();
+
+    /**
      * 选择某用户拥有的优惠劵
      *
      * @param userId 用户id

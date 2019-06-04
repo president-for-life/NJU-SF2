@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.cinema.data.statistics.StatisticsMapper">
 
-    <select id="selectConsumption" resultType="com.example.cinema.po.MovieScheduleTime">
+    <select id="selectConsumption" resultType="com.example.cinema.po.Consumption">
         select user_id as userId, sum(actual_payment) as amount
         from ticket
         group by userId

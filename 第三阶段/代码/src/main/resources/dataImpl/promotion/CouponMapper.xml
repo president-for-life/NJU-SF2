@@ -17,6 +17,10 @@
         delete from coupon_user where coupon_id=#{couponId} and user_id =#{userId} limit 1
     </delete>
 
+    <select id="selectValidCoupons" resultMap="Coupon">
+        select * from coupon where start_time &lt; now() and end_time &gt; now()
+    </select>
+
     <select id="selectById" resultMap="Coupon">
         select * from coupon where id=#{id}
     </select>

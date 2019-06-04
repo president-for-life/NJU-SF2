@@ -12,6 +12,13 @@ import java.util.List;
 public interface CouponService {
 
     /**
+     * 获得当前处于有效期的优惠劵
+     *
+     * @author 梁正川
+     */
+    ResponseVO getValidCoupons();
+
+    /**
      * 获得某用户拥有的优惠劵
      *
      * @author 李莹
