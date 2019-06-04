@@ -12,6 +12,11 @@ import java.util.List;
 public class OrderForm {
 
     /**
+     * 订单id
+     */
+    private int orderId;
+
+    /**
      * 用户id
      */
     private int userId;
@@ -25,6 +30,18 @@ public class OrderForm {
      * 用户选择的座位
      */
     private List<SeatForm> seats;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void generateOrderId() {
+        this.orderId = 0;
+    }
 
     public List<SeatForm> getSeats() {
         return seats;
@@ -55,6 +72,7 @@ public class OrderForm {
         for (SeatForm seat : this.getSeats()) {
             Ticket ticket = new Ticket();
 
+            ticket.setOrderId(this.getOrderId());
             ticket.setUserId(this.getUserId());
             ticket.setScheduleId(this.getScheduleId());
             ticket.setColumnIndex(seat.getColumnIndex());

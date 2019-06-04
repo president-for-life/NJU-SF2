@@ -123,12 +123,23 @@ function orderConfirmClick() {
 		seat['columnIndex'] = value[1];
 		seat['rowIndex']=value[0];
 		seats.push(seat);
-		// alert("行：" + value[0] + "  列：" + value[1]);
 	});
-	// seats.forEach(function (value, index, array) {
-	// 	alert(value['columnIndex'] + " " + value['rowIndex']);
-	// });
-	var ticketForm={
+
+	// 随机生成订单号
+	function randomOrderId() {
+		const now = new Date();
+		return now.getFullYear()
+			+ now.getMonth()
+			+ now.getDate()
+			+ now.getHours()
+			+ now.getMinutes()
+			+ now.getSeconds()
+			+ sessionStorage.getItem('id')
+			+ Math.floor(Math.random() * 1000);
+	}
+	
+	var orderForm={
+		orderId: randomOrderId(),
 		userId: sessionStorage.getItem('id'),
 		scheduleId: scheduleId,
 		seats: seats
@@ -137,7 +148,7 @@ function orderConfirmClick() {
 	// 向后端提交TicketForm
 	postRequest(
 		'/ticket/lockSeat',
-		ticketForm,
+		orderForm,
 		function (res) {
 			if (res.success) {
 				var orderInfo = res.content;  // 从后端res中获取返回的数据

@@ -5,9 +5,15 @@ import com.example.cinema.po.ScheduleItem;
 import java.sql.Timestamp;
 
 /**
- * Created by liying on 2019/4/16.
+ * @author 李莹
+ * @date 2019/4/16
  */
 public class TicketWithScheduleVO {
+
+    /**
+     * 订单id
+     */
+    private int orderId;
 
     /**
      * 电影票id
@@ -45,6 +51,14 @@ public class TicketWithScheduleVO {
     private double actualPayment;
 
     private Timestamp time;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     public Timestamp getTime() {
         return time;

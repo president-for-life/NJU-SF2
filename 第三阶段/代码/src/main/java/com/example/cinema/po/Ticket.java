@@ -12,6 +12,11 @@ import java.sql.Timestamp;
 public class Ticket {
 
     /**
+     * 订单id
+     */
+    private int orderId;
+
+    /**
      * 电影票id
      */
     private int id;
@@ -55,6 +60,14 @@ public class Ticket {
      * 下单时间
      */
     private Timestamp time;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     public int getId() {
         return id;
@@ -126,6 +139,7 @@ public class Ticket {
         vo.setColumnIndex(this.getColumnIndex());
         vo.setScheduleId(this.getScheduleId());
         vo.setId(this.getId());
+        vo.setOrderId(this.getOrderId());
         vo.setUserId(this.getUserId());
         String stateString;
         switch (state) {
@@ -158,6 +172,7 @@ public class Ticket {
         TicketWithScheduleVO vo = new TicketWithScheduleVO();
         vo.setRowIndex(this.getRowIndex());
         vo.setColumnIndex(this.getColumnIndex());
+        vo.setOrderId(this.getOrderId());
         vo.setId(this.getId());
         vo.setUserId(this.getUserId());
         // 需要设置ScheduleItem
