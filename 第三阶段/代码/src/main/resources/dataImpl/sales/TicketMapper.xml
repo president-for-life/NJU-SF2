@@ -9,6 +9,7 @@
         <result column="column_index" property="columnIndex"></result>
         <result column="row_index" property="rowIndex"></result>
         <result column="state" property="state"></result>
+        <result column="actual_payment" property="actualPayment"></result>
         <result column="time" property="time"></result>
     </resultMap>
 

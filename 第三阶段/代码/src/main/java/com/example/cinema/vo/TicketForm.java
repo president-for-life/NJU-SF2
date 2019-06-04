@@ -3,7 +3,8 @@ package com.example.cinema.vo;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/16.
+ * @author 李莹
+ * @date 2019/4/16
  */
 public class TicketForm {
 
@@ -11,6 +12,7 @@ public class TicketForm {
      * 用户id
      */
     private int userId;
+
     /**
      * 排片id
      */
@@ -20,9 +22,6 @@ public class TicketForm {
      * 用户选择的座位list
      */
     private List<SeatForm> seats;
-
-    public TicketForm() {
-    }
 
     public List<SeatForm> getSeats() {
         return seats;
@@ -47,6 +46,5 @@ public class TicketForm {
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
     }
-
 
 }

@@ -80,16 +80,10 @@ public class MovieLikeServiceImpl implements MovieLikeService {
         }
     }
 
-    /**
-     * 判断某用户是否想看某电影
-     */
     private boolean userLikeTheMovie(int userId, int movieId) {
         return movieLikeMapper.selectLikeMovie(movieId, userId) != 0;
     }
 
-    /**
-     * po.DateLike数组转vo.DateLikeVO数组
-     */
     private List<DateLikeVO> dateLikeList2DateLikeVOList(List<DateLike> dateLikeList) {
         List<DateLikeVO> dateLikeVOList = new ArrayList<>();
         for (DateLike dateLike : dateLikeList) {
