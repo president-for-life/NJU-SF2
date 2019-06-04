@@ -48,13 +48,9 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public List<Coupon> getCouponsByUserForBl(int userId, double total) {
+    public List<Coupon> getCouponsByUserAndAmount(int userId, double amount) {
         try {
-            return couponMapper.selectCouponByUser(userId)
-                    .stream()
-                    .filter(coupon -> coupon.getTargetAmount() <= total)
-                    .sorted(Comparator.comparing(Coupon::getDiscountAmount).reversed()) // 优惠金额多的排前面
-                    .collect(Collectors.toList());
+            return couponMapper.selectCouponByUserAndAmount(userId, amount);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

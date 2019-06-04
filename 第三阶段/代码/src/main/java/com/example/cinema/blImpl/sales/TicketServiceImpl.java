@@ -100,7 +100,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			double total = scheduleItem.getFare() * orderForm.getSeats().size();
 
 			// 用户拥有的、且满足本次订单使用门槛的优惠券
-			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserForBl(orderForm.getUserId(), total);
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserAndAmount(orderForm.getUserId(), total);
 
 			// 根据座位生成ticketVO数组
 			List<TicketVO> ticketVOList = new ArrayList<>();
