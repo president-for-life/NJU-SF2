@@ -76,7 +76,6 @@ public class Activity {
             return mvo;
         }).collect(Collectors.toList()));
         return vo;
-
     }
 
     public int getId() {
@@ -125,6 +124,10 @@ public class Activity {
 
     public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
+    }
+
+    public boolean involvesAllMovies() {
+        return this.getMovieList() == null || this.getMovieList().size() == 0;
     }
 
     public Coupon getCoupon() {

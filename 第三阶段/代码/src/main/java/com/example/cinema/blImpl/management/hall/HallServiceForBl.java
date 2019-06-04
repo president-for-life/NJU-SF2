@@ -10,10 +10,9 @@ public interface HallServiceForBl {
     /**
      * 搜索影厅
      *
-     * @param id 影厅id
-     * @return po.Hall
+     * @author 范佳杰
      */
-    Hall getHallById(int id);
+    Hall getHallById(int hallId);
 
     /**
      * 影厅数目

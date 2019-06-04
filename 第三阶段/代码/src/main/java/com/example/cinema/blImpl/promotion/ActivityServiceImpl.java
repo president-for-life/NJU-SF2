@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 李莹
@@ -41,18 +43,21 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
             activity.setEndTime(activityForm.getEndTime());
             activity.setCoupon(coupon);
 
-            // 插入优惠活动 TODO activity中的id会自动生成吗？
+            // 插入优惠活动
             activityMapper.insertActivity(activity);
 
             // 优惠活动的条件为“购买指定电影”
             if (activityForm.getMovieList() != null
                     && activityForm.getMovieList().size() != 0) {
                 activityMapper.insertActivityAndMovie(
-                        activity.getId(), activityForm.getMovieList()
+                        activity.getId(),
+                        activityForm.getMovieList()
                 );
             }
 
-            return ResponseVO.buildSuccess(activityMapper.selectById(activity.getId()));
+            return ResponseVO.buildSuccess(
+                    activityMapper.selectById(activity.getId())
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -62,7 +67,12 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
     @Override
     public ResponseVO getActivities() {
         try {
-            return ResponseVO.buildSuccess(activityMapper.selectActivities().stream().map(Activity::getVO));
+            return ResponseVO.buildSuccess(
+                    activityMapper.selectActivities()
+                            .stream()
+                            .map(Activity::getVO)
+                            .collect(Collectors.toList())
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -70,12 +80,12 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
     }
 
     @Override
-    public List<Activity> getActivitiesForBl() {
+    public List<Activity> getOngoingActivities() {
         try {
-            return activityMapper.selectActivities();
+            return activityMapper.selectOngoingActivities();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 

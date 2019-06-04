@@ -16,7 +16,7 @@ public interface AccountMapper {
     /**
      * 创建一个新的账号
      *
-     * @author 梁正川
+     * @author 胡文
      */
     int insertOneAccount(User user);
 

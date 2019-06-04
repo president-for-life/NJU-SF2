@@ -15,13 +15,15 @@ public interface ActivityMapper {
 
     /**
      * 插入优惠活动
+     *
+     * @author 李莹
      */
-    int insertActivity(Activity activity);
+    void insertActivity(Activity activity);
 
     /**
      * 为某优惠活动插入优惠电影列表
      */
-    int insertActivityAndMovie(
+    void insertActivityAndMovie(
             @Param("activityId") int activityId,
             @Param("movieId") List<Integer> movieId
     );
@@ -30,6 +32,13 @@ public interface ActivityMapper {
      * 选择所有优惠活动
      */
     List<Activity> selectActivities();
+
+    /**
+     * 选择正在生效的优惠活动
+     *
+     * @author 梁正川
+     */
+    List<Activity> selectOngoingActivities();
 
     /**
      * 选择优惠电影列表中含有某电影的优惠活动

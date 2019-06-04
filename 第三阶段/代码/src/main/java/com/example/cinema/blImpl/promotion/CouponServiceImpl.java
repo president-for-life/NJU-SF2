@@ -8,6 +8,7 @@ import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,9 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     @Override
     public ResponseVO getCouponsByUser(int userId) {
         try {
-            return ResponseVO.buildSuccess(couponMapper.selectCouponByUser(userId));
+            return ResponseVO.buildSuccess(
+                    couponMapper.selectCouponByUser(userId)
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -36,7 +39,7 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
             return couponMapper.selectCouponByUser(userId);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -85,9 +88,9 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public Coupon getCouponById(int id) {
+    public Coupon getCouponById(int couponId) {
         try {
-            return couponMapper.selectById(id);
+            return couponMapper.selectById(couponId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

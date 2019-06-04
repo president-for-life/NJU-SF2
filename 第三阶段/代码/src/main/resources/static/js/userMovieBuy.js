@@ -246,8 +246,6 @@ function payConfirmClick() {
 function postPayByVIPCardRequest() {
 	$('#order-state').css("display", "none");
 
-
-	// TODO: 调用后端的completeByVIPCard()
 	postRequest(
 		'/ticket/vip/buy?couponId='+order.couponId,
 		order.ticketId,
@@ -258,6 +256,7 @@ function postPayByVIPCardRequest() {
 			} else {
 				$('#failure-state').css("display", "");
 				$('#buyModal').modal('hide');
+				alert("会员卡余额不足，请及时充值");
 			}
 		},
 		function (error) {
@@ -270,7 +269,6 @@ function postPayRequest() {
 	// 退出订单页面，进入付款页面
 	$('#order-state').css("display", "none");
 
-	// TODO: 调用后端的completeTicket()
 	postRequest(
 		'/ticket/buy?couponId='+order.couponId,
 		order.ticketId,

@@ -26,11 +26,11 @@ function renderTicketList(list) {
 		let appendButton = "";
 		if(ticket.state === "支付未完成") {
 			appendButton =
-				"<td><button>继续支付</button></td>";
+				"<td><button class='proceed-btn btn-primary' id='proceed-" + ticket.id + "'>继续支付</button></td>";
 		} else if (ticket.state === "支付已完成") {
 			appendButton =
-				"<td><button class='pick-up-btn' id='pick-up-" + ticket.id + "'>取票</button></td>" +
-				"<td><button class='refund-btn' id='refund-" + ticket.id + "'>退票</button></td>";
+				"<td><button class='pick-up-btn btn-primary' id='pick-up-" + ticket.id + "'>取票</button></td>" +
+				"<td><button class='refund-btn btn-primary' id='refund-" + ticket.id + "'>退票</button></td>";
 		}
 
 		// 这里的座位行号、列号需要+1

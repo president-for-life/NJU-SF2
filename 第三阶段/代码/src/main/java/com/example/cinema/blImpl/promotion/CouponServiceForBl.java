@@ -14,8 +14,6 @@ public interface CouponServiceForBl {
     /**
      * 获得某用户拥有的优惠劵
      *
-     * @param userId 用户id
-     * @return po.Coupon数组
      * @author 梁正川
      */
     List<Coupon> getCouponsByUserForBl(int userId);
@@ -23,7 +21,6 @@ public interface CouponServiceForBl {
     /**
      * 发布优惠券
      *
-     * @param couponForm 优惠券表单
      * @return vo.ResponseVO
      */
     ResponseVO addCoupon(CouponForm couponForm);
@@ -31,8 +28,6 @@ public interface CouponServiceForBl {
     /**
      * 删除某用户拥有的某优惠券
      *
-     * @param couponId 优惠券id
-     * @param userId   用户id
      * @author 梁正川
      */
     void deleteCouponUser(int couponId, int userId);
@@ -40,11 +35,11 @@ public interface CouponServiceForBl {
     /**
      * 根据id查找优惠券
      *
-     * @param id 优惠券id
+     * @param couponId 优惠券id
      * @return po.Coupon
      * @author 梁正川
      */
-    Coupon getCouponById(int id);
+    Coupon getCouponById(int couponId);
 
     /**
      * 让多个观众获得某优惠劵
