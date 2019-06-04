@@ -12,17 +12,18 @@ $(document).ready(function () {
                 "<td></td>" +
                 "</tr>"+"<div>";
             data.forEach(function (ticket) {
-
-                recordDomStr +=
-                    "<tr>" +
-                    "<td>" + timetrans(ticket.time)+ "</td>" +
-                    "<td></td>"+
-                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
-                    "</tr>"+
-                    "<tr style=\"display: none\" >"+
-                    "<td>"+"票价："+ticket.schedule.fare+"</td>"+
-                    "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
-                    "</tr>";
+                if(ticket.state == "支付已完成" || ticket.state == "已出票") {
+                    recordDomStr +=
+                        "<tr>" +
+                        "<td>" + timetrans(ticket.time)+ "</td>" +
+                        "<td></td>"+
+                        "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
+                        "</tr>"+
+                        "<tr style=\"display: none\" >"+
+                        "<td>"+"票价："+ticket.schedule.fare+"</td>"+
+                        "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
+                        "</tr>";
+                }
             });
             recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
