@@ -21,7 +21,7 @@ $(document).ready(function () {
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
                         "<td>"+"票价："+ticket.schedule.fare+"</td>"+
-                        "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
+                        
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
                         "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
