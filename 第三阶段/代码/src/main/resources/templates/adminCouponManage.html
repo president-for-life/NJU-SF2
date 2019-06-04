@@ -28,10 +28,10 @@
             <p class="title">Admin</p>
         </div>
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active"><a href="#"><i class="icon-film"></i> 电影管理</a></li>
+            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
             <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
             <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-            <li role="presentation"><a href="/admin/coupon/manage"><i class="icon-inbox"></i>优惠券管理</a> </li>
+            <li role="presentation" class="active"><a href="#"><i class="icon-inbox"></i>优惠券管理</a> </li>
             <li role="presentation"><a href="/admin/member"><i class="icon-credit-card"></i> 会员卡管理</a></li>
             <li role="presentation"><a href="/admin/refund/strategy"><i class="icon-ticket"></i> 退票策略管理</a></li>
             <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
@@ -43,16 +43,28 @@
             <span class="title gray-text">赠送优惠券</span>
         </div>
         <div class="content-card">
-
+            <div class="card">
                 <ul class="strategy-item">
-                    <font color="black">金额下限： </font>
-                    <input type="number" class="form-control" id="money-input" style="display: inline-block;width: 180px;">
-
+                    <font color="black">金额下限： <input type="number" class="form-control" id="money-input" style="display: inline-block;width: 180px;">
+                        <button type="button" class="btn btn-primary" id="consumption-btn">确认</button></font>
+                    <div class="table-container">
+                        <table class="table">
+                            <tbody id="tbody1">
+                            </tbody>
+                        </table>
+                    </div>
                 </ul>
                 <ul class="strategy-item">
+                    <font color="black">可用的优惠券：</font>
+                    <div class="table-container">
+                        <table class="table">
+                            <tbody id="tbody2">
+                            </tbody>
+                        </table>
+                    </div>
                 </ul>
         </div>
-        <div type="button"></div>
+    </div>
     </div>
 </div>
 </body>

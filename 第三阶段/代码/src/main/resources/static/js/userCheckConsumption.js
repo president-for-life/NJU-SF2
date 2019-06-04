@@ -21,7 +21,7 @@ $(document).ready(function () {
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
                         "<td>"+"票价："+ticket.schedule.fare+"</td>"+
-                        
+
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
                         "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
@@ -30,7 +30,6 @@ $(document).ready(function () {
             });
             recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
-            $('#checkRecord').modal("show")
         },
         function (error) {
             alert(error);

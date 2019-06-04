@@ -7,11 +7,10 @@
 }
 
 .strategy-item {
-    display: flex;
+    flex-shrink:0;
+    min-width:50%;
     flex-direction: column;
-    min-width: 100px;
     padding: 20px;
-    color: white;
     justify-content: space-around;
 }
 
@@ -26,4 +25,28 @@
     flex-direction: row;
     padding: 20px;
     flex-wrap: nowrap;
+    color: white;
+}
+.card{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    flex-wrap: nowrap;
+    color: white;
+    height: auto;
+}
+
+.table-wrapper {
+    padding: 20px;
+}
+
+.table-wrapper .table b {
+    color: #1caf9a;
+    font-size: 20px;
+}
+
+.table-wrapper .table td{
+    height: 60px;
+    vertical-align: middle;
 }

@@ -10,6 +10,7 @@ import com.example.cinema.po.MovieTotalBoxOffice;
 import com.example.cinema.vo.AudiencePriceVO;
 import com.example.cinema.vo.MovieScheduleTimeVO;
 import com.example.cinema.vo.MovieTotalBoxOfficeVO;
+import com.example.cinema.vo.ConsumptionVO;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -191,13 +192,21 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public ResponseVO getConsumption(double amount){
-        try{
-            List<Consumption> consumptionList=statisticsMapper.selectConsumption(amount);
-            return ResponseVO.buildSuccess(consumptionList);
-        }catch(Exception e){
+    public ResponseVO getConsumption(double amount) {
+        try {
+            List<Consumption> consumptionList = statisticsMapper.selectConsumption(amount);
+            return ResponseVO.buildSuccess(consumptionList2ConsumptionVOList(consumptionList));
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
+    }
+
+    private List<ConsumptionVO> consumptionList2ConsumptionVOList(List<Consumption> consumptionList) {
+        List<ConsumptionVO> consumptionVOS = new ArrayList<>();
+        for(Consumption consumption:consumptionList){
+            consumptionVOS.add(new ConsumptionVO(consumption));
+        }
+        return consumptionVOS;
     }
 }
