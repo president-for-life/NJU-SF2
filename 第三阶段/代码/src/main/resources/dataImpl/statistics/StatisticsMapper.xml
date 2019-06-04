@@ -6,6 +6,7 @@
         select user_id as userId, sum(actual_payment) as amount
         from ticket
         group by userId
+        having amount &gt;= #{amount}
         order by amount desc
     </select>
 
