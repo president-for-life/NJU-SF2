@@ -21,6 +21,9 @@ $(document).ready(function () {
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
                         "<td>"+"票价："+ticket.schedule.fare+"</td>"+
+                        
+                        "</tr>"+
+                        "<tr style=\"display: none\" >"+
                         "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
                         "</tr>";
                 }
@@ -39,6 +42,12 @@ $(document).on('click', '#r', function () {
     }
     else {
         $(this).get(0).parentNode.parentNode. nextSibling.style.display="none";
+    }
+    if($(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display==="none") {
+        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="";
+    }
+    else {
+        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="none";
     }
 
 });
