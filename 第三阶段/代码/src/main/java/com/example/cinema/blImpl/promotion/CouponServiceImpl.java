@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 李莹
@@ -34,9 +36,13 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public List<Coupon> getCouponsByUserForBl(int userId) {
+    public List<Coupon> getCouponsByUserForBl(int userId, double total) {
         try {
-            return couponMapper.selectCouponByUser(userId);
+            return couponMapper.selectCouponByUser(userId)
+                    .stream()
+                    .filter(coupon -> coupon.getTargetAmount() <= total)
+                    .sorted(Comparator.comparing(Coupon::getDiscountAmount).reversed()) // 优惠金额多的排前面
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

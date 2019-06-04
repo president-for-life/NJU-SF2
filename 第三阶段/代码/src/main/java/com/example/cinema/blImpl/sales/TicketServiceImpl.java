@@ -109,29 +109,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	}
 
 	/**
-	 * 获得用户拥有的、且满足本次订单使用门槛的优惠券
-	 *
-	 * // TODO 是couponServiceForBl的职责
-	 * @param userId 用户id
-	 * @param total  订单总金额
-	 * @author 梁正川
-	 */
-	private List<Coupon> getCoupons(int userId, double total) {
-		try {
-			return couponService.getCouponsByUserForBl(userId)
-					.stream()
-					.filter(coupon -> coupon.getTargetAmount() <= total)
-					.sorted(Comparator.comparing(Coupon::getDiscountAmount).reversed()) // 优惠金额多的排前面
-					.collect(Collectors.toList());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ArrayList<>();
-		}
-	}
-
-	/**
 	 * @see #lockSeat(TicketForm)
-	 * @see #getCoupons(int, double)
 	 */
 	@Override
 	@Transactional
@@ -149,7 +127,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			double total = scheduleItem.getFare() * ticketForm.getSeats().size();
 
 			// 用户拥有的、且满足本次订单使用门槛的优惠券
-			List<Coupon> couponsOwnedByUser = this.getCoupons(ticketForm.getUserId(), total);
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserForBl(ticketForm.getUserId(), total);
 
 			// 根据座位生成ticketVO数组
 			List<TicketVO> ticketVOList = new ArrayList<>();

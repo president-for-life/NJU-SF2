@@ -12,11 +12,11 @@ import java.util.List;
 public interface CouponServiceForBl {
 
     /**
-     * 获得某用户拥有的优惠劵
+     * 获得某用户拥有的、使用门槛低于total的优惠劵
      *
      * @author 梁正川
      */
-    List<Coupon> getCouponsByUserForBl(int userId);
+    List<Coupon> getCouponsByUserForBl(int userId, double total);
 
     /**
      * 发布优惠券
