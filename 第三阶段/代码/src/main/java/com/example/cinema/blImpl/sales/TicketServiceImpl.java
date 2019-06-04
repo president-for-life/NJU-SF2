@@ -47,7 +47,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			ScheduleItem schedule = scheduleService.getScheduleItemById(scheduleId);
 			Hall hall = hallService.getHallById(schedule.getHallId());
 			int[][] seats = new int[hall.getRow()][hall.getColumn()];
-			tickets.stream().forEach(ticket -> {
+			tickets.forEach(ticket -> {
 				seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;
 			});
 
@@ -68,43 +68,18 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	 */
 	private void lockSeat(TicketForm ticketForm) {
 		try {
-			List<SeatForm> seats = ticketForm.getSeats();
-
-			if (seats.size() == 1) { // 用户只选择一个座位
-				Ticket ticket = new Ticket();
-				ticket.setUserId(ticketForm.getUserId());
-				ticket.setScheduleId(ticketForm.getScheduleId());
-				ticket.setColumnIndex(seats.get(0).getColumnIndex());
-				ticket.setRowIndex(seats.get(0).getRowIndex());
-				ticket.setState(0);
-				ticketMapper.insertTicket(ticket);
-			} else { // 用户选择了多个座位
-				List<Ticket> tickets = new ArrayList<>();
-				for (SeatForm seat : seats) {
-					Ticket ticket = new Ticket();
-					ticket.setUserId(ticketForm.getUserId());
-					ticket.setScheduleId(ticketForm.getScheduleId());
-					ticket.setColumnIndex(seat.getColumnIndex());
-					ticket.setRowIndex(seat.getRowIndex());
-					ticket.setState(0);
-					tickets.add(ticket);
-				}
-				ticketMapper.insertTickets(tickets);
-			}
+			List<Ticket> tickets = ticketForm.getTicketPOs();
+			ticketMapper.insertTickets(tickets);
 
 			////////////////////控制台测试信息////////////////////
 			System.out.print("锁座：");
-			for (SeatForm seat : seats) {
+			for (SeatForm seat : ticketForm.getSeats()) {
 				System.out.print(" " + (seat.getRowIndex() + 1) + "排" + (seat.getColumnIndex() + 1) + "列");
 			}
-			System.out.println("成功！");
+			System.out.println();
 			////////////////////控制台测试信息////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			////////////////////控制台测试信息////////////////////
-			System.out.println("锁座失败！");
-			////////////////////控制台测试信息////////////////////
 		}
 	}
 
@@ -182,27 +157,15 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	 */
 	private void issueCoupon(int movieId, int userId) {
 		try {
-			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-
-			// 当前正在进行的优惠活动
-			// TODO 在activityServiceForB内使用withoutMovies/byMovie
-			List<Activity> activities = activityService.getOngoingActivities();
+			List<Activity> activitiesWithMovie
+					= activityService.getActivitiesByMovie(movieId);
+			List<Activity> activitiesWithoutMovie
+					= activityService.getActivitiesWithoutMovie();
+			activitiesWithMovie.addAll(activitiesWithoutMovie);
 
 			List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
-			for (Activity activity : activities) {
-				if (activity.involvesAllMovies()) {
-					couponsToBeIssued.add(activity.getCoupon());
-				} else {
-					// 享受优惠的电影id数组
-					List<Integer> movies = activity.getMovieList()
-							.stream()
-							.map(Movie::getId)
-							.collect(Collectors.toList());
-
-					if (movies.contains(movieId)) {
-						couponsToBeIssued.add(activity.getCoupon());
-					}
-				}
+			for(Activity activity : activitiesWithMovie) {
+				couponsToBeIssued.add(activity.getCoupon());
 			}
 
 			// 赠送优惠券
@@ -219,10 +182,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			////////////////////控制台测试信息////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			////////////////////控制台测试信息////////////////////
-			System.out.println("赠送优惠券失败！");
-			////////////////////控制台测试信息////////////////////
 		}
 	}
 

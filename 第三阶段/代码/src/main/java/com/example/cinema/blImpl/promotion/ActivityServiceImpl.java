@@ -89,4 +89,24 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
+    @Override
+    public List<Activity> getActivitiesByMovie(int movieId) {
+        try {
+            return activityMapper.selectActivitiesByMovie(movieId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Activity> getActivitiesWithoutMovie() {
+        try {
+            return activityMapper.selectActivitiesWithoutMovie();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
 }

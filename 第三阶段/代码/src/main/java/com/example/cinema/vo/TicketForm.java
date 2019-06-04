@@ -1,5 +1,8 @@
 package com.example.cinema.vo;
 
+import com.example.cinema.po.Ticket;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +48,22 @@ public class TicketForm {
 
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
+    }
+
+    public List<Ticket> getTicketPOs() {
+        List<Ticket> tickets = new ArrayList<>();
+        for (SeatForm seat : this.getSeats()) {
+            Ticket ticket = new Ticket();
+
+            ticket.setUserId(this.getUserId());
+            ticket.setScheduleId(this.getScheduleId());
+            ticket.setColumnIndex(seat.getColumnIndex());
+            ticket.setRowIndex(seat.getRowIndex());
+            ticket.setState(0); // 支付未完成
+
+            tickets.add(ticket);
+        }
+        return tickets;
     }
 
 }
