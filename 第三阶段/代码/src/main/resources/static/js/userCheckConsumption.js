@@ -20,7 +20,7 @@ $(document).ready(function () {
                     "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                     "</tr>"+
                     "<tr style=\"display: none\" >"+
-                    "<td>"+"充值金额："+ticket.columnIndex+"</td>"+
+                    "<td>"+"票价："+ticket.schedule.fare+"</td>"+
                     "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
                     "</tr>";
             });
