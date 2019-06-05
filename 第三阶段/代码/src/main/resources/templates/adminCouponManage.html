@@ -44,7 +44,7 @@
         </div>
         <div class="content-card">
             <div class="card">
-                <ul class="strategy-item1">
+
                     <font color="black">金额下限： <input type="number" class="form-control" id="money-input" style="display: inline-block;width: 180px;">
                         <button type="button" class="btn btn-primary" id="consumption-btn">确认</button></font>
                     <div class="table-container">
@@ -53,18 +53,27 @@
                             </tbody>
                         </table>
                     </div>
-                </ul>
-                <ul class="strategy-item2">
-                    <font color="black">可用的优惠券：</font>
-                    <div class="table-container">
-                        <table class="table">
-                            <tbody id="tbody2">
-                            </tbody>
-                        </table>
-                    </div>
-                </ul>
+
+
         </div>
     </div>
+    </div>
+</div>
+<div class="modal fade" id="coupon-list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="table">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" aria-labelledby="myModalLabel">优惠券</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody id="tbody2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 </body>

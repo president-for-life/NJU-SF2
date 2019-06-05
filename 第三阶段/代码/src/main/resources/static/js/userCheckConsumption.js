@@ -14,17 +14,16 @@ $(document).ready(function () {
             data.forEach(function (ticket) {
                 if(ticket.state == "支付已完成" || ticket.state == "已出票") {
                     recordDomStr +=
-                        "<tr>" +
+                        "<tr bgcolor=>" +
                         "<td>" + timetrans(ticket.time)+ "</td>" +
                         "<td></td>"+
                         "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
-                        "<td>"+"票价："+ticket.schedule.fare+"</td>"+
-
+                        "<td>"+"票价："+ticket.schedule.fare.toFixed(2)+"</td>"+
                         "</tr>"+
                         "<tr style=\"display: none\" >"+
-                        "<td>"+"实际消费金额:"+ticket.actualPayment+"</td>"+
+                        "<td>"+"实际消费金额:"+ticket.actualPayment.toFixed(2)+"</td>"+
                         "</tr>";
                 }
             });

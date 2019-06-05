@@ -183,3 +183,8 @@
     height: 60px;
     vertical-align: middle;
 }
+.modal-body {
+    background-color: white;
+    position: relative;
+    padding: 15px;
+}

@@ -1,5 +1,4 @@
-$(document).ready(function () {
-    getCoupon();
+$(document).ready(function () {;
     function getMoney() {
         return $('#money-input').val();
     }
@@ -9,35 +8,39 @@ $(document).ready(function () {
             '/statistics/consumption?amount='+amount,
             function (res) {
                 var data=res.content||[];
-
                 var $content_container_tbody = $("#tbody1");
                 $content_container_tbody.empty();
-                var consumptionDomStr = "<tr>"+
-                    "<td >"+"用户id"+"</td>"+
-                    "<td>"+"消费金额"+"</td>" +
-                    "<td></td>" +
+                var consumptionDomStr =  "<tr>" +
+                    "<td>" + "</td>" +
+                    "<td>"+"</td>"+
+                    "<td >"+ "</td>"+
                     "</tr>"+"<div>";
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
                         "<tr>" +
-                        "<td>" + consumption.userId+ "</td>" +
-                        "<td>"+consumption.amount+"</td>"+
+                        "<td>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
+                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount+"</td>"+
                         "<td >"+
-                        "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox checkbox\">"+
+                        "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox checkbox\"  id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
 
                 });
-                consumptionDomStr+="</div>";
-                console.log(consumptionDomStr)
+                consumptionDomStr+= "<tr>" +
+                    "<td>" + "</td>" +
+                    "<td>"+"</td>"+
+                    "<td >"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
+                    "</tr>"+
+                    "</div>";
+                console.log(consumptionDomStr);
                 $content_container_tbody.append(consumptionDomStr);
             },
             function (error) {
                 alert(error);
             });
     });
-    function getCoupon(){
+    getCouponClick =    function(){
         getRequest(
             '/coupon/get/all',
             function (res) {
@@ -46,35 +49,47 @@ $(document).ready(function () {
                 var $content_container_tbody = $("#tbody2");
                 $content_container_tbody.empty();
                 var consumptionDomStr = "<tr>"+
-                    "<td >"+"用户id"+"</td>"+
-                    "<td>"+"消费金额"+"</td>" +
-                    "<td></td>" +
+                    "<td >"+"名称"+"</td>"+
+                    "<td>"+"描述"+"</td>" +
+                    "<td >"+"使用门槛"+"</td>"+
+                    "<td>"+"优惠金额"+"</td>" +
+                    "<td >"+"可用时间"+"</td>"+
+                    "<td>"+"失效时间"+"</td>" +
                     "</tr>"+"<div>";
                 data.forEach(function (coupon) {
 
                     consumptionDomStr+=
                         "<tr>" +
-                        "<td>" + coupon.name+ "</td>" +
-                        "<td>"+coupon.description+"</td>"+
-                        "<td>" + coupon.targetAmount+ "</td>" +
-                        "<td>"+coupon.discountAmount+"</td>"+
-                        "<td>" + timetrans(coupon.startTime)+ "</td>" +
-                        "<td>"+timetrans(coupon.endTime)+"</td>"+
-                        "<td >"+
-                        "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox checkbox\">"+
+                        "<td style=\"width: 100px; overflow: auto\">" + coupon.name+ "</td>" +
+                        "<td  style=\"width: 100px; overflow: auto\">"+coupon.description+"</td>"+
+                        "<td  style=\"width: 50px; overflow: auto\">" + coupon.targetAmount+ "</td>" +
+                        "<td  style=\"width: 50px; overflow: auto\">"+coupon.discountAmount+"</td>"+
+                        "<td  style=\"width: 100px; overflow: auto\">" + timetrans(coupon.startTime)+ "</td>" +
+                        "<td  style=\"width: 100px; overflow: auto\">"+timetrans(coupon.endTime)+"</td>"+
+                        "<td   style=\"width: 30px; overflow: auto\">"+
+                        "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox checkbox\"  id=\"coupon-check\" style=\"width:20px\">"+
                         "</td>"+
                         "</tr>"
 
                 });
-                consumptionDomStr+="</div>";
-                console.log(consumptionDomStr)
+                consumptionDomStr+="<tr>"+
+                    "<td >"+"</td>"+
+                    "<td>"+"</td>" +
+                    "<td >"+"</td>"+
+                    "<td>"+"</td>" +
+                    "<td >"+"</td>"+
+                    "<td>"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送</button>"+"</td>" +
+                    "</tr>"+
+                    "</div>"
+                console.log(consumptionDomStr);
                 $content_container_tbody.append(consumptionDomStr);
+                $('#coupon-list').modal("show")
             },
             function (error) {
                 alert(error);
             });
 
-    }
+    };
     function timetrans(date) {
         var date = new Date(date );//如果date为13位不需要乘1000
         var Y = date.getFullYear() + '-';
@@ -86,4 +101,4 @@ $(document).ready(function () {
         return Y + M + D + h + m + s;
     }
 
-})
+});
