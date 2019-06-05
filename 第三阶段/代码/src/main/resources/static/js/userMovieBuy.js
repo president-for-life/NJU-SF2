@@ -9,7 +9,11 @@ var isVIP = false;
 var useVIP = true;
 
 $(document).ready(function () {
-	scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
+	if(window.location.href.indexOf("orderId") > -1) { // 继续支付订单
+		// TODO
+	} else { // 从头购票
+		scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
+	}
 
 	getInfo();
 
