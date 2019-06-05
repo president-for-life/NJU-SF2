@@ -411,6 +411,47 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	}
 
 	@Override
+	public ResponseVO getOrdersByUser(int userId) {
+		try {
+			List<OrderVO> orders = new ArrayList<>();
+			List<Ticket> tickets = ticketMapper.selectTicketsByUser(userId);
+
+			int tempOrderId = -1;
+			OrderVO tempOrder = null;
+			for(Ticket ticket : tickets) {
+				if(ticket.getOrderId() != tempOrderId) { // 下一个订单
+					if(tempOrder != null) {
+						orders.add(tempOrder); // 前一个订单完成
+					}
+
+					tempOrder = new OrderVO();
+
+					tempOrder.setOrderId(ticket.getOrderId());
+					tempOrderId = ticket.getOrderId();
+
+					tempOrder.setUserId(userId);
+					tempOrder.setTicketVOList(new ArrayList<>());
+
+					ScheduleItem scheduleItem
+							= scheduleService.getScheduleItemById(ticket.getScheduleId());
+					tempOrder.setSchedule(scheduleItem);
+
+					tempOrder.setTime(ticket.getTime());
+					tempOrder.setState(ticket.getStateString());
+					// TODO setActualPayment
+				}
+				tempOrder.getTicketVOList().add(ticket.getVO());
+			}
+			orders.add(tempOrder); // 最后一个订单
+
+			return ResponseVO.buildSuccess(orders);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取用户订单失败");
+		}
+	}
+
+	@Override
 	public List<Ticket> getTicketsByUserForBl(int userId) {
 		try {
 			return ticketMapper.selectTicketsByUser(userId);

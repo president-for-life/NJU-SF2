@@ -101,4 +101,11 @@ public interface TicketService {
      * @author 戴羽涵
      */
     ResponseVO getTicketsByUser(int userId);
+
+    /**
+     * 获得用户的所有订单（包括所有状态）
+     *
+     * @author 戴羽涵
+     */
+    ResponseVO getOrdersByUser(int userId);
 }

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	getTicketList();
+	getOrderList();
 });
 
 function getTicketList() {
@@ -14,14 +15,26 @@ function getTicketList() {
 		});
 }
 
+function getOrderList() {
+	getRequest(
+		'/ticket/get/order/' + sessionStorage.getItem('id'),
+		function (res) {
+			renderOrderList(res.content);
+		},
+		function (error) {
+			console.log(error);
+			alert(error);
+		});
+}
+
 /**
  * 显示用户已购的电影票列表，每张电影票内容包括：
  * 电影名、电影开始时间、影厅名称、结束时间、票价、座位号（排号和列号），付款状态 （支付成功和未成功）
  */
 function renderTicketList(list) {
-	var $content_container_tbody = $("#tbody");
+	let $content_container_tbody = $("#tbody");
 	$content_container_tbody.empty();
-	var ticketDomStr = '';
+	let ticketDomStr = '';
 	list.forEach(function (ticket) {
 		let appendButton = "";
 		if(ticket.state === "支付未完成") {
@@ -46,6 +59,34 @@ function renderTicketList(list) {
 			"</tr>";
 	});
 	$content_container_tbody.append(ticketDomStr);
+}
+
+function renderOrderList(list) {
+	let $tryIt = $("#try-it");
+	$tryIt.empty();
+	let ordersDomStr = "";
+	list.forEach(function (order) {
+
+		let ticketList = order.ticketVOList;
+		let seatsDomStr = "";
+		ticketList.forEach(function (ticket) {
+			seatsDomStr += "        <span class='title'>" + (ticket.rowIndex + 1) + "排" +(ticket.columnIndex + 1) + "座" + "</span>";
+		});
+
+		ordersDomStr +=
+			"<div class='order-container'>" +
+			"    <div class='order-card'>" +
+			"        <span class='title'>" + order.schedule.movieName + "</span>" +
+			"        <span class='title'>" + order.schedule.hallName + "</span>" +
+			"        <span class='title'>" + formatDateAndTime(new Date(order.schedule.startTime)) + "</span>" +
+			"        <span class='title'>" + formatDateAndTime(new Date(order.schedule.endTime)) + "</span>" +
+			"    </div>" +
+			"    <div class='seat-card'>" +
+			seatsDomStr +
+			"    </div>" +
+			"</div>";
+	});
+	$tryIt.append(ordersDomStr);
 }
 
 // 点击取票

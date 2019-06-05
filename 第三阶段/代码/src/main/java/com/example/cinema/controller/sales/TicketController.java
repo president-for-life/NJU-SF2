@@ -39,6 +39,11 @@ public class TicketController {
         return ticketService.getTicketsByUser(userId);
     }
 
+    @GetMapping("/get/order/{userId}")
+    public ResponseVO getOrdersByUserId(@PathVariable int userId) {
+        return ticketService.getOrdersByUser(userId);
+    }
+
     @GetMapping("/get/occupiedSeats")
     public ResponseVO getOccupiedSeats(@RequestParam int scheduleId) {
         return ticketService.getBySchedule(scheduleId);

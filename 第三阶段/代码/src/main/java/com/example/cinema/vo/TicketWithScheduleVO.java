@@ -41,7 +41,7 @@ public class TicketWithScheduleVO {
     private int rowIndex;
 
     /**
-     * 订单状态
+     * 电影票状态
      */
     private String state;
 
@@ -50,6 +50,9 @@ public class TicketWithScheduleVO {
      */
     private double actualPayment;
 
+    /**
+     * 下单时间
+     */
     private Timestamp time;
 
     public int getOrderId() {
