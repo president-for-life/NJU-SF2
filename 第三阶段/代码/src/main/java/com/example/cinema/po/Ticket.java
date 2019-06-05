@@ -42,7 +42,7 @@ public class Ticket {
     private int rowIndex;
 
     /**
-     * 订单状态：
+     * 电影票状态：
      * 0：支付未完成
      * 1：支付已完成但未出票
      * 2：已失效

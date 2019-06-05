@@ -6,23 +6,28 @@ import com.example.cinema.po.Coupon;
 import java.util.List;
 
 /**
- * Created by liying on 2019/4/21.
+ * @author 李莹
+ * @date 2019/4/21
  */
 public class TicketWithCouponVO {
+
     /**
      * 订单内的所有电影票
      */
     private List<TicketVO> ticketVOList;
+
     /**
      * 不包括优惠的总金额
      */
     private double total;
+
     /**
      * 用户拥有且达到使用门槛的优惠券
      */
     private List<Coupon> coupons;
+
     /**
-     * TODO: 梁正川认为这个属性无用
+     * TODO: 这个属性无用
      */
     private List<Activity> activities;
 
