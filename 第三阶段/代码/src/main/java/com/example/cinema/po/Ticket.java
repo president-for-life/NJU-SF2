@@ -1,5 +1,6 @@
 package com.example.cinema.po;
 
+import com.example.cinema.vo.SeatVO;
 import com.example.cinema.vo.TicketVO;
 import com.example.cinema.vo.TicketWithScheduleVO;
 
@@ -169,7 +170,16 @@ public class Ticket {
         vo.setActualPayment(this.getActualPayment());
         vo.setTime(this.getTime());
         return vo;
+    }
 
+    public SeatVO getSeatVO() {
+        SeatVO vo = new SeatVO();
+        vo.setId(this.getId());
+        vo.setColumnIndex(this.getColumnIndex());
+        vo.setRowIndex(this.getRowIndex());
+        vo.setState(this.getStateString());
+        vo.setActualPayment(this.getActualPayment());
+        return vo;
     }
 
     public TicketWithScheduleVO getWithScheduleVO() {
