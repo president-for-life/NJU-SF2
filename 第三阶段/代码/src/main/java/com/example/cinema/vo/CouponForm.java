@@ -9,6 +9,10 @@ import java.sql.Timestamp;
  * @date 2019/4/16
  */
 public class CouponForm {
+    /**
+     * 优惠券id
+     */
+    private int id;
 
     /**
      * 优惠券描述
@@ -48,6 +52,7 @@ public class CouponForm {
         this.startTime=coupon.getStartTime();
         this.endTime=coupon.getEndTime();
         this.targetAmount=coupon.getTargetAmount();
+        this.id=coupon.getId();
     }
 
 
