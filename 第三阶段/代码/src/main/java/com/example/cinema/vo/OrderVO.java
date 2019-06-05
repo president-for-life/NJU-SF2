@@ -21,14 +21,14 @@ public class OrderVO {
     private int userId;
 
     /**
-     * 订单内的所有电影票
-     */
-    private List<TicketVO> ticketVOList;
-
-    /**
      * 排片
      */
     private ScheduleItem schedule;
+
+    /**
+     * 订单内的座位
+     */
+    private List<SeatVO> seatVOList;
 
     /**
      * 下单时间
@@ -66,20 +66,20 @@ public class OrderVO {
         this.userId = userId;
     }
 
-    public List<TicketVO> getTicketVOList() {
-        return ticketVOList;
-    }
-
-    public void setTicketVOList(List<TicketVO> ticketVOList) {
-        this.ticketVOList = ticketVOList;
-    }
-
     public ScheduleItem getSchedule() {
         return schedule;
     }
 
     public void setSchedule(ScheduleItem schedule) {
         this.schedule = schedule;
+    }
+
+    public List<SeatVO> getSeatVOList() {
+        return seatVOList;
+    }
+
+    public void setSeatVOList(List<SeatVO> seatVOList) {
+        this.seatVOList = seatVOList;
     }
 
     public Timestamp getTime() {

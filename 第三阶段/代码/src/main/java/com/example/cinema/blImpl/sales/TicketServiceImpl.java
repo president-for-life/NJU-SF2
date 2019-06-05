@@ -168,7 +168,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 			// 赠送优惠券
 			for (Coupon coupon : couponsToBeIssued) {
-				couponService.issueCoupon(coupon.getId(), Arrays.asList(userId));
+				couponService.issueCoupon(Arrays.asList(coupon.getId()), Arrays.asList(userId));
 			}
 
 			////////////////////控制台测试信息////////////////////
@@ -430,7 +430,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 					tempOrderId = ticket.getOrderId();
 
 					tempOrder.setUserId(userId);
-					tempOrder.setTicketVOList(new ArrayList<>());
+					tempOrder.setSeatVOList(new ArrayList<>());
 
 					ScheduleItem scheduleItem
 							= scheduleService.getScheduleItemById(ticket.getScheduleId());
@@ -440,7 +440,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 					tempOrder.setState(ticket.getStateString());
 					// TODO setActualPayment
 				}
-				tempOrder.getTicketVOList().add(ticket.getVO());
+				tempOrder.getSeatVOList().add(ticket.getSeatVO());
 			}
 			orders.add(tempOrder); // 最后一个订单
 
