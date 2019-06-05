@@ -61,7 +61,7 @@ $(document).ready(function () {;
                     "<td>"+"失效时间"+"</td>" +
                     "</tr>"+"<div>";
                 data.forEach(function (coupon) {
-                    console.log(coupon.id);
+                    console.log( coupon.name);
                     consumptionDomStr+=
                         "<tr>" +
                         "<td style=\"display: none\" class='coupon-id'>" + coupon.id+ "</td>" +

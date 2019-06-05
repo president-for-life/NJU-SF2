@@ -88,6 +88,14 @@ public class CouponForm {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public double getTargetAmount() {
         return targetAmount;
     }
