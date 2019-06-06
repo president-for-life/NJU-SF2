@@ -54,7 +54,7 @@ public class TicketController {
         return ticketService.getBySchedule(scheduleId);
     }
 
-    @PostMapping("/pickUp")
+    @GetMapping("/pickUp")
     public ResponseVO pickUpTicket(@RequestParam int ticketId){
         return ticketService.pickUpTicket(ticketId);
     }
@@ -77,6 +77,11 @@ public class TicketController {
     @PostMapping("/refundStrategy/removeMovies")
     public ResponseVO removeRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
+    }
+
+    @PostMapping("/refundStrategy/get")
+    public ResponseVO removeRefundMovies() {
+        return ticketService.getRefundStrategies();
     }
 
     @PostMapping("/refund/choose")

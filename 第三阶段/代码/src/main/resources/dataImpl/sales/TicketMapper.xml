@@ -56,15 +56,6 @@
         update ticket SET  state =2 WHERE minute(timediff(now(),time))>15 and state=0;
     </update>
 
-    <update id="lockTables">
-        lock tables refund_strategy read;
-        lock tables refund_strategy_movie read
-    </update>
-
-    <update id="unlockTables">
-        unlock tables
-    </update>
-
     <resultMap id="TicketRefundStrategy" type="com.example.cinema.po.TicketRefundStrategy">
         <result column="id" property="id"></result>
         <result column="refundable" property="refundable"></result>
@@ -109,11 +100,14 @@
     </insert>
 
     <delete id="deleteStrategyAndMovies">
+        delete from refund_strategy_movie
+        where refund_strategy_id = #{strategyId}
+        and movie_id in (
         <foreach collection="movieIdList" item="item" index="index"
                  separator=",">
-            delete from refund_strategy_movie
-            where refund_strategy_id = #{strategyId} and movie_id = #{item}
+              #{item}
         </foreach>
+        )
     </delete>
 
     <select id="selectRefundStrategyById" resultMap="TicketRefundStrategy">

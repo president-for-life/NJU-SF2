@@ -86,6 +86,13 @@ public interface TicketService {
     ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList);
 
     /**
+     * 获得所有退票策略
+     *
+     * @author 戴羽涵
+     */
+    ResponseVO getRefundStrategies();
+
+    /**
      * 用户请求退票
      *
      * 根据退票策略，检查是否符合退票条件

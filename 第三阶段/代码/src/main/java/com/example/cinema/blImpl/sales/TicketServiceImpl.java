@@ -366,10 +366,20 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+    @Override
+	public ResponseVO getRefundStrategies() {
+        try {
+            return ResponseVO.buildSuccess(
+                    ticketMapper.selectRefundStrategies()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("删除指定退票策略的电影列表失败");
+        }
+    }
+
 	@Override
 	public ResponseVO addRefundTicket(int ticketId) {
-		ticketMapper.lockTables(); // 锁数据库表，防止管理员修改退票策略
-
 		try {
 			Ticket ticket = ticketMapper.selectTicketById(ticketId);
 			int scheduleId = ticket.getScheduleId();
@@ -405,7 +415,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Override
 	public ResponseVO completeRefundTicket(int ticketId) {
 		try {
-			ticketMapper.unlockTables(); // 解锁数据库表，管理员现在开始可以修改退票策略
 			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
 				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
 				return ResponseVO.buildSuccess("退票成功");

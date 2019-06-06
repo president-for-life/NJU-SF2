@@ -76,19 +76,6 @@ public interface TicketMapper {
      */
 
     /**
-     * 锁退票策略表、退票策略电影表
-     * 用户进入退票流程前使用
-     * 防止管理员在退票流程中修改退票策略
-     */
-    void lockTables();
-
-    /**
-     * 解锁退票策略表、退票策略电影表
-     * 用户完成退票流程后使用
-     */
-    void unlockTables();
-
-    /**
      * 插入单一退票策略
      *
      * @param strategy 没有用到movieList的po
