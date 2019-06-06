@@ -61,7 +61,7 @@ $(document).ready(function () {;
                     "<td>"+"失效时间"+"</td>" +
                     "</tr>"+"<div>";
                 data.forEach(function (coupon) {
-                    console.log( coupon.name);
+
                     consumptionDomStr+=
                         "<tr>" +
                         "<td style=\"display: none\" class='coupon-id'>" + coupon.id+ "</td>" +
@@ -85,7 +85,7 @@ $(document).ready(function () {;
                     "<td >"+"</td>"+
                     "<td>"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"sendCouponClick()\">赠送</button>"+"</td>" +
                     "</tr>"+
-                    "</div>"
+                    "</div>";
 
                 $content_container_tbody.append(consumptionDomStr);
                 $('#coupon-list').modal("show")
@@ -127,11 +127,20 @@ $(document).ready(function () {;
         {
             if(  couponCheak[i].checked)//判断全选按钮的状态是不是选中的
             {
-                console.log(coupons.innerHTML);
-                validCoupons.push(coupons.innerHTML);
-
+                validCoupons.push(coupons[i].innerHTML);
             }
         }
+        validCoupons=validCoupons.toString();
+        validConsumptions=validConsumptions.toString();
+        postRequest(
+            '/coupon/issue?couponIdList='+validCoupons+"&userIdList="+validConsumptions,
+            null,
+            function (res) {
+                $('#coupon-list').modal("hide");
+            },
+            function (error) {
+            alert(error);
+        });
 
     };
 

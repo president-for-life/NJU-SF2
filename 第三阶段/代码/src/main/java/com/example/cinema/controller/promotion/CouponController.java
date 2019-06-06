@@ -34,8 +34,8 @@ public class CouponController {
         return couponService.addCoupon(couponForm);
     }
 
-    @GetMapping("/issue")
-    public ResponseVO issueCoupon(@PathVariable List<Integer> couponIdList, @PathVariable List<Integer> userIdList) {
+    @PostMapping("/issue")
+    public ResponseVO issueCoupon(@RequestParam List<Integer> couponIdList, @RequestParam List<Integer> userIdList) {
         return couponService.issueCoupon(couponIdList, userIdList);
     }
 }
