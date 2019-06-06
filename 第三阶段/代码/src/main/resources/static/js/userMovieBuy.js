@@ -10,8 +10,10 @@ var useVIP = true;
 
 $(document).ready(function () {
 	if(window.location.href.indexOf("orderId") > -1) { // 继续支付订单
-	    // TODO bug 电影票张数为0，超时提示
+	    // TODO bug 超时提示
         let orderId = parseInt(window.location.href.split('?')[1].split('&')[2].split('=')[1]);
+        scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
+
         // 退出选座页面，进入订单页面
         $('#seat-state').css("display", "none");
         $('#order-state').css("display", "");
@@ -22,6 +24,13 @@ $(document).ready(function () {
             function (res) {
                 if (res.success) {
                     var orderInfo = res.content;  // 从后端res中获取返回的数据
+
+                    for(let ticket of res.content.ticketVOList) {
+                        selectedSeats.push([ticket.columnIndex, ticket.rowIndex]);
+                    }
+
+                    getScheduleAndSeatsInfo();
+
                     renderOrder(orderInfo);
                 } else {
                     alert(res.message);
@@ -37,24 +46,24 @@ $(document).ready(function () {
 	} else { // 从头购票
 		scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
 
-        getInfo();
-
-        function getInfo() {
-            // 获得被锁座位信息
-            getRequest(
-                '/ticket/get/occupiedSeats?scheduleId=' + scheduleId,
-                function (res) {
-                    if (res.success) {
-                        renderSchedule(res.content.scheduleItem, res.content.seats);
-                    }
-                },
-                function (error) {
-                    alert(JSON.stringify(error));
-                }
-            );
-        }
+        getScheduleAndSeatsInfo();
 	}
 });
+
+function getScheduleAndSeatsInfo() {
+    // 获得被锁座位信息
+    getRequest(
+        '/ticket/get/occupiedSeats?scheduleId=' + scheduleId,
+        function (res) {
+            if (res.success) {
+                renderSchedule(res.content.scheduleItem, res.content.seats);
+            }
+        },
+        function (error) {
+            alert(JSON.stringify(error));
+        }
+    );
+}
 
 // 加载某场次的座位
 // schedule：场次号
