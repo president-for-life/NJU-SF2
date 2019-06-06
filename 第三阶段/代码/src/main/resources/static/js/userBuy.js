@@ -45,13 +45,13 @@ function renderOrderList(list) {
             proceedToPayButton =
                 "<span>" +
                 "<button class='proceed-btn btn-primary' id='proceed-" + order.orderId + "'>" +
-                "<a herf='/user/movieDetail/buy?orderId=" + order.orderId + "'>继续支付</a>>" +
+                "继续支付" +
                 "</button>" +
                 "</span>";
         }
 
 		ordersDomStr +=
-			"<div class='order-container' id='" + order.orderId + "' data-order='" + JSON.stringify(order) + "'>" +
+			"<div class='order-container' id='order-" + order.orderId + "' data-order='" + JSON.stringify(order) + "'>" +
             proceedToPayButton +
 			"    <div class='order-card'>" +
             "        <span class='title'>" + "订单号：" + order.orderId + "</span>" +
@@ -68,10 +68,24 @@ function renderOrderList(list) {
 	$tryIt.append(ordersDomStr);
 }
 
+// 点击继续购票
+$(document).on('click','.proceed-btn', function (e) {
+	// TODO 失效验证
+	let orderId = parseInt(this.id.replace("proceed-", ""));
+	let order = JSON.parse($('#order-' + orderId)[0].dataset.order);
+	console.log(order);
+	console.log(order.orderId);
+	console.log(order.schedule);
+	window.location.href =
+		'/user/movieDetail/buy?id=' + order.schedule.movieId +
+		'&scheduleId=' + order.schedule.id +
+		'&orderId=' + orderId;
+});
+
 // 点击取票
 $(document).on('click','.pick-up-btn', function (e) {
 	let ticketId = parseInt(this.id.replace("pick-up-", ""));
-	let ticket = $('#ticket-' + ticketId)[0].dataset.ticket;
+	let ticket = JSON.parse($('#ticket-' + ticketId)[0].dataset.ticket);
 	console.log(ticket);
 	// TODO
 	getOrderList(); // 刷新页面
@@ -80,7 +94,7 @@ $(document).on('click','.pick-up-btn', function (e) {
 // 点击退票
 $(document).on('click','.refund-btn', function (e) {
 	let ticketId = parseInt(this.id.replace("refund-", ""));
-	let ticket = $('#ticket-' + ticketId)[0].dataset.ticket;
+	let ticket = JSON.parse($('#ticket-' + ticketId)[0].dataset.ticket);
 	console.log(ticket);
 	// TODO
     getOrderList(); // 刷新页面
