@@ -126,6 +126,32 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+	@Override
+	public ResponseVO proceedWithOrder(int orderId) {
+		try {
+			List<Ticket> tickets = ticketMapper.selectTicketsByOrder(orderId);
+			List<TicketVO> ticketVOList = Ticket.ticketList2TicketVOList(tickets);
+
+			// 计算总金额
+			Ticket firstTicket = tickets.get(0);
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
+			double total = scheduleItem.getFare() * tickets.size();
+
+			// 用户拥有的、且满足本次订单使用门槛的优惠券
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserAndAmount(firstTicket.getUserId(), total);
+
+			// 返回的TicketWithCouponVO
+			TicketWithCouponVO vo = new TicketWithCouponVO();
+			vo.setTicketVOList(ticketVOList);
+			vo.setTotal(total);
+			vo.setCoupons(couponsOwnedByUser);
+
+			return ResponseVO.buildSuccess(vo);
+		} catch(Exception e) {
+			return ResponseVO.buildFailure("失败");
+		}
+	}
+
 	/**
 	 * 判断电影票是否已过期
 	 *

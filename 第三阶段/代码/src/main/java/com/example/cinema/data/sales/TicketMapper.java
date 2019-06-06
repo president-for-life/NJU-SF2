@@ -61,6 +61,11 @@ public interface TicketMapper {
     List<Ticket> selectTicketsByUser(int userId);
 
     /**
+     * 选择某订单的电影票
+     */
+    List<Ticket> selectTicketsByOrder(int orderId);
+
+    /**
      * 定时删除已失效的多个电影票
      */
     @Scheduled(cron = "0/1 * * * * ?")

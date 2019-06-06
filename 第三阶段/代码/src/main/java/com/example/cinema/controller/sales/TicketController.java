@@ -34,6 +34,11 @@ public class TicketController {
         return ticketService.completeTicket(ticketId, couponId);
     }
 
+    @PostMapping("/proceed")
+    public ResponseVO proceedWithOrder(@RequestParam int orderId) {
+        return ticketService.proceedWithOrder(orderId);
+    }
+
     @GetMapping("/get/{userId}")
     public ResponseVO getTicketsByUserId(@PathVariable int userId) {
         return ticketService.getTicketsByUser(userId);

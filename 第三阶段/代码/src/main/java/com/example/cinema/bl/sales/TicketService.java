@@ -26,6 +26,13 @@ public interface TicketService {
     ResponseVO addTicket(OrderForm orderForm);
 
     /**
+     * 继续支付订单
+     *
+     * @author 梁正川
+     */
+    ResponseVO proceedWithOrder(int orderId);
+
+    /**
      * 使用银行卡完成购票
      * 判断支付是否超时，完成购票，删除使用的优惠券，尝试赠送优惠券
      *
