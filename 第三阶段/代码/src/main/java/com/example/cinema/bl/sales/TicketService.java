@@ -26,6 +26,13 @@ public interface TicketService {
     ResponseVO addTicket(OrderForm orderForm);
 
     /**
+     * 继续支付订单
+     *
+     * @author 梁正川
+     */
+    ResponseVO proceedWithOrder(int orderId);
+
+    /**
      * 使用银行卡完成购票
      * 判断支付是否超时，完成购票，删除使用的优惠券，尝试赠送优惠券
      *
@@ -79,6 +86,13 @@ public interface TicketService {
     ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList);
 
     /**
+     * 获得所有退票策略
+     *
+     * @author 戴羽涵
+     */
+    ResponseVO getRefundStrategies();
+
+    /**
      * 用户请求退票
      *
      * 根据退票策略，检查是否符合退票条件
@@ -125,4 +139,11 @@ public interface TicketService {
      * @return
      */
     ResponseVO getMoviesByRefundStrategy(int strategyId);
+
+    /**
+     * 获得用户的所有订单（包括所有状态）
+     *
+     * @author 戴羽涵
+     */
+    ResponseVO getOrdersByUser(int userId);
 }

@@ -1,9 +1,12 @@
 package com.example.cinema.po;
 
+import com.example.cinema.vo.SeatVO;
 import com.example.cinema.vo.TicketVO;
 import com.example.cinema.vo.TicketWithScheduleVO;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 李莹
@@ -42,7 +45,7 @@ public class Ticket {
     private int rowIndex;
 
     /**
-     * 订单状态：
+     * 电影票状态：
      * 0：支付未完成
      * 1：支付已完成但未出票
      * 2：已失效
@@ -121,6 +124,30 @@ public class Ticket {
         return state;
     }
 
+    public String getStateString() {
+        String stateString;
+        switch (this.getState()) {
+            case 0:
+                stateString = "支付未完成";
+                break;
+            case 1:
+                stateString = "支付已完成";
+                break;
+            case 2:
+                stateString = "已失效";
+                break;
+            case 3:
+                stateString = "已出票";
+                break;
+            case 4:
+                stateString = "已退票";
+                break;
+            default:
+                stateString = "支付未完成";
+        }
+        return stateString;
+    }
+
     public void setState(int state) {
         this.state = state;
     }
@@ -141,31 +168,20 @@ public class Ticket {
         vo.setId(this.getId());
         vo.setOrderId(this.getOrderId());
         vo.setUserId(this.getUserId());
-        String stateString;
-        switch (state) {
-            case 0:
-                stateString = "支付未完成";
-                break;
-            case 1:
-                stateString = "支付已完成";
-                break;
-            case 2:
-                stateString = "已失效";
-                break;
-            case 3:
-                stateString = "已出票";
-                break;
-            case 4:
-                stateString = "已退票";
-                break;
-            default:
-                stateString = "支付未完成";
-        }
-        vo.setState(stateString);
+        vo.setState(this.getStateString());
         vo.setActualPayment(this.getActualPayment());
         vo.setTime(this.getTime());
         return vo;
+    }
 
+    public SeatVO getSeatVO() {
+        SeatVO vo = new SeatVO();
+        vo.setId(this.getId());
+        vo.setColumnIndex(this.getColumnIndex());
+        vo.setRowIndex(this.getRowIndex());
+        vo.setState(this.getStateString());
+        vo.setActualPayment(this.getActualPayment());
+        return vo;
     }
 
     public TicketWithScheduleVO getWithScheduleVO() {
@@ -176,29 +192,17 @@ public class Ticket {
         vo.setId(this.getId());
         vo.setUserId(this.getUserId());
         // 需要设置ScheduleItem
-        String stateString;
-        switch (state) {
-            case 0:
-                stateString = "支付未完成";
-                break;
-            case 1:
-                stateString = "支付已完成";
-                break;
-            case 2:
-                stateString = "已失效";
-                break;
-            case 3:
-                stateString = "已出票";
-                break;
-            case 4:
-                stateString = "已退票";
-                break;
-            default:
-                stateString = "支付未完成";
-        }
-        vo.setState(stateString);
+        vo.setState(this.getStateString());
         vo.setActualPayment(this.getActualPayment());
         vo.setTime(this.getTime());
         return vo;
+    }
+
+    public static List<TicketVO> ticketList2TicketVOList(List<Ticket> ticketList) {
+        List<TicketVO> res = new ArrayList<>();
+        for(Ticket ticket : ticketList) {
+            res.add(ticket.getVO());
+        }
+        return res;
     }
 }

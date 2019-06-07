@@ -42,9 +42,9 @@ public interface CouponServiceForBl {
     Coupon getCouponById(int couponId);
 
     /**
-     * 让多个观众获得某优惠劵
+     * 让多个观众获得多个优惠劵
      *
      * @author 梁正川
      */
-    ResponseVO issueCoupon(int couponId, List<Integer> userIdList);
+    ResponseVO issueCoupon(List<Integer> couponIdList, List<Integer> userIdList);
 }

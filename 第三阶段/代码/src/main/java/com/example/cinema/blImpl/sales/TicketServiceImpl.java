@@ -126,6 +126,32 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+	@Override
+	public ResponseVO proceedWithOrder(int orderId) {
+		try {
+			List<Ticket> tickets = ticketMapper.selectTicketsByOrder(orderId);
+			List<TicketVO> ticketVOList = Ticket.ticketList2TicketVOList(tickets);
+
+			// 计算总金额
+			Ticket firstTicket = tickets.get(0);
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
+			double total = scheduleItem.getFare() * tickets.size();
+
+			// 用户拥有的、且满足本次订单使用门槛的优惠券
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserAndAmount(firstTicket.getUserId(), total);
+
+			// 返回的TicketWithCouponVO
+			TicketWithCouponVO vo = new TicketWithCouponVO();
+			vo.setTicketVOList(ticketVOList);
+			vo.setTotal(total);
+			vo.setCoupons(couponsOwnedByUser);
+
+			return ResponseVO.buildSuccess(vo);
+		} catch(Exception e) {
+			return ResponseVO.buildFailure("失败");
+		}
+	}
+
 	/**
 	 * 判断电影票是否已过期
 	 *
@@ -168,7 +194,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 			// 赠送优惠券
 			for (Coupon coupon : couponsToBeIssued) {
-				couponService.issueCoupon(coupon.getId(), Arrays.asList(userId));
+				couponService.issueCoupon(Arrays.asList(coupon.getId()), Arrays.asList(userId));
 			}
 
 			////////////////////控制台测试信息////////////////////
@@ -340,10 +366,20 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+    @Override
+	public ResponseVO getRefundStrategies() {
+        try {
+            return ResponseVO.buildSuccess(
+                    ticketMapper.selectRefundStrategies()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("删除指定退票策略的电影列表失败");
+        }
+    }
+
 	@Override
 	public ResponseVO addRefundTicket(int ticketId) {
-		ticketMapper.lockTables(); // 锁数据库表，防止管理员修改退票策略
-
 		try {
 			Ticket ticket = ticketMapper.selectTicketById(ticketId);
 			int scheduleId = ticket.getScheduleId();
@@ -379,7 +415,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Override
 	public ResponseVO completeRefundTicket(int ticketId) {
 		try {
-			ticketMapper.unlockTables(); // 解锁数据库表，管理员现在开始可以修改退票策略
 			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
 				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
 				return ResponseVO.buildSuccess("退票成功");
@@ -407,6 +442,47 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseVO.buildFailure("获取用户买过的票失败");
+		}
+	}
+
+	@Override
+	public ResponseVO getOrdersByUser(int userId) {
+		try {
+			List<OrderVO> orders = new ArrayList<>();
+			List<Ticket> tickets = ticketMapper.selectTicketsByUser(userId);
+
+			int tempOrderId = -1;
+			OrderVO tempOrder = null;
+			for(Ticket ticket : tickets) {
+				if(ticket.getOrderId() != tempOrderId) { // 下一个订单
+					if(tempOrder != null) {
+						orders.add(tempOrder); // 前一个订单完成
+					}
+
+					tempOrder = new OrderVO();
+
+					tempOrder.setOrderId(ticket.getOrderId());
+					tempOrderId = ticket.getOrderId();
+
+					tempOrder.setUserId(userId);
+					tempOrder.setSeatVOList(new ArrayList<>());
+
+					ScheduleItem scheduleItem
+							= scheduleService.getScheduleItemById(ticket.getScheduleId());
+					tempOrder.setSchedule(scheduleItem);
+
+					tempOrder.setTime(ticket.getTime());
+					tempOrder.setState(ticket.getStateString());
+					// TODO setActualPayment
+				}
+				tempOrder.getSeatVOList().add(ticket.getSeatVO());
+			}
+			orders.add(tempOrder); // 最后一个订单
+
+			return ResponseVO.buildSuccess(orders);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取用户订单失败");
 		}
 	}
 

@@ -34,9 +34,19 @@ public class TicketController {
         return ticketService.completeTicket(ticketId, couponId);
     }
 
+    @PostMapping("/proceed")
+    public ResponseVO proceedWithOrder(@RequestParam int orderId) {
+        return ticketService.proceedWithOrder(orderId);
+    }
+
     @GetMapping("/get/{userId}")
     public ResponseVO getTicketsByUserId(@PathVariable int userId) {
         return ticketService.getTicketsByUser(userId);
+    }
+
+    @GetMapping("/get/order/{userId}")
+    public ResponseVO getOrdersByUserId(@PathVariable int userId) {
+        return ticketService.getOrdersByUser(userId);
     }
 
     @GetMapping("/get/occupiedSeats")
@@ -44,7 +54,7 @@ public class TicketController {
         return ticketService.getBySchedule(scheduleId);
     }
 
-    @PostMapping("/pickUp")
+    @GetMapping("/pickUp")
     public ResponseVO pickUpTicket(@RequestParam int ticketId){
         return ticketService.pickUpTicket(ticketId);
     }
@@ -71,6 +81,11 @@ public class TicketController {
     public ResponseVO removeRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
         System.out.println("removeRefundMovies()");
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
+    }
+
+    @PostMapping("/refundStrategy/get")
+    public ResponseVO removeRefundMovies() {
+        return ticketService.getRefundStrategies();
     }
 
     @PostMapping("/refund/choose")

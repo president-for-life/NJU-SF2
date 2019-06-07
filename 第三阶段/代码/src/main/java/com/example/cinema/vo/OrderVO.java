@@ -3,22 +3,17 @@ package com.example.cinema.vo;
 import com.example.cinema.po.ScheduleItem;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
- * @author 李莹
- * @date 2019/4/16
+ * @author 梁正川
  */
-public class TicketWithScheduleVO {
+public class OrderVO {
 
     /**
      * 订单id
      */
     private int orderId;
-
-    /**
-     * 电影票id
-     */
-    private int id;
 
     /**
      * 用户id
@@ -31,19 +26,14 @@ public class TicketWithScheduleVO {
     private ScheduleItem schedule;
 
     /**
-     * 列号
+     * 订单内的座位
      */
-    private int columnIndex;
+    private List<SeatVO> seatVOList;
 
     /**
-     * 排号
+     * 下单时间
      */
-    private int rowIndex;
-
-    /**
-     * 电影票状态
-     */
-    private String state;
+    private Timestamp time;
 
     /**
      * 实际支付金额
@@ -51,9 +41,14 @@ public class TicketWithScheduleVO {
     private double actualPayment;
 
     /**
-     * 下单时间
+     * 订单状态：
+     * 0：支付未完成
+     * 1：支付已完成但未出票
+     * 2：已失效
+     * 3：已出票
+     * 4：已退票
      */
-    private Timestamp time;
+    private String state;
 
     public int getOrderId() {
         return orderId;
@@ -61,22 +56,6 @@ public class TicketWithScheduleVO {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getUserId() {
@@ -95,20 +74,20 @@ public class TicketWithScheduleVO {
         this.schedule = schedule;
     }
 
-    public int getColumnIndex() {
-        return columnIndex;
+    public List<SeatVO> getSeatVOList() {
+        return seatVOList;
     }
 
-    public void setColumnIndex(int columnIndex) {
-        this.columnIndex = columnIndex;
+    public void setSeatVOList(List<SeatVO> seatVOList) {
+        this.seatVOList = seatVOList;
     }
 
-    public int getRowIndex() {
-        return rowIndex;
+    public Timestamp getTime() {
+        return time;
     }
 
-    public void setRowIndex(int rowIndex) {
-        this.rowIndex = rowIndex;
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
     public double getActualPayment() {

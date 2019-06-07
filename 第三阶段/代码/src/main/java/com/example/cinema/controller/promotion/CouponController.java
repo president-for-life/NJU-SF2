@@ -18,7 +18,7 @@ public class CouponController {
 
     @Autowired
     CouponService couponService;
-
+ 
     @GetMapping("/get/all")
     public ResponseVO getValidCoupons() {
         return couponService.getValidCoupons();
@@ -35,7 +35,7 @@ public class CouponController {
     }
 
     @PostMapping("/issue")
-    public ResponseVO issueCoupon(@PathVariable int couponId, @RequestBody List<Integer> userIdList) {
-        return couponService.issueCoupon(couponId, userIdList);
+    public ResponseVO issueCoupon(@RequestParam List<Integer> couponIdList, @RequestParam List<Integer> userIdList) {
+        return couponService.issueCoupon(couponIdList, userIdList);
     }
 }

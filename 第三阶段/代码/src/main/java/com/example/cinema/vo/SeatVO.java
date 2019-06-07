@@ -2,27 +2,12 @@ package com.example.cinema.vo;
 
 import java.sql.Timestamp;
 
-public class TicketVO {
-
-    /**
-     * 订单id
-     */
-    private int orderId;
+public class SeatVO {
 
     /**
      * 电影票id
      */
     private int id;
-
-    /**
-     * 用户id
-     */
-    private int userId;
-
-    /**
-     * 排片id
-     */
-    private int scheduleId;
 
     /**
      * 列号
@@ -50,41 +35,12 @@ public class TicketVO {
      */
     private double actualPayment;
 
-    /**
-     * 下单时间
-     */
-    private Timestamp time;
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
     }
 
     public int getColumnIndex() {
@@ -117,13 +73,5 @@ public class TicketVO {
 
     public void setActualPayment(double actualPayment) {
         this.actualPayment = actualPayment;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
     }
 }
