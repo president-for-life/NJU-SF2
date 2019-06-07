@@ -47,22 +47,6 @@
             am.movie_id=m.id
     </select>
 
-    <select id="selectOngoingActivities" resultMap="Activity">
-        select
-            *
-        from
-            activity a
-                left join
-            activity_movie am
-            on
-                a.id=am.activity_id
-                left join
-            movie m
-            on
-                am.movie_id=m.id
-        where a.start_time &lt; Now() and a.end_time &gt; Now()
-    </select>
-
     <select id="selectActivitiesByMovie" resultMap="Activity">
         select
         *

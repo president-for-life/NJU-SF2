@@ -38,7 +38,7 @@ public interface TicketService {
      *
      * @author 梁正川
      */
-    ResponseVO completeTicket(List<Integer> ticketIdList, int couponId);
+    ResponseVO completeByCreditCard(List<Integer> ticketIdList, int couponId);
 
     /**
      * 使用会员卡完成购票
