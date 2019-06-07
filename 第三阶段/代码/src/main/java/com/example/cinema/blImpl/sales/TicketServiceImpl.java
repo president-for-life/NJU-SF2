@@ -170,10 +170,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	private ResponseVO completeTickets(List<Integer> ticketIdList, int couponId, boolean byVIPCard) {
         try {
-            ////////////////////控制台测试信息////////////////////
-            System.out.println("----------TicketServiceImpl.completeByVIPCard测试信息----------");
-            ////////////////////控制台测试信息////////////////////
-
             // 根据第一张电影票就能够获取排片信息
             Ticket firstTicket = ticketMapper.selectTicketById(ticketIdList.get(0));
             ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
