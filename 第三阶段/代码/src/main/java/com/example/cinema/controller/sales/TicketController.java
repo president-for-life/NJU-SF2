@@ -31,7 +31,7 @@ public class TicketController {
 
     @PostMapping("/buy")
     public ResponseVO buyTicket(@RequestBody List<Integer> ticketId, @RequestParam int couponId) {
-        return ticketService.completeTicket(ticketId, couponId);
+        return ticketService.completeByCreditCard(ticketId, couponId);
     }
 
     @PostMapping("/proceed")

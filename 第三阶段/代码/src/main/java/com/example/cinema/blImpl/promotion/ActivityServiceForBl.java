@@ -24,10 +24,9 @@ public interface ActivityServiceForBl {
     List<Activity> getActivitiesWithoutMovie();
 
     /**
-     * 查找所有正在进行的优惠活动
+     * 某用户观看某电影，尝试参与优惠活动
      *
      * @author 梁正川
      */
-    List<Activity> getOngoingActivities();
-
+    void participate(int movieId, int userId);
 }
