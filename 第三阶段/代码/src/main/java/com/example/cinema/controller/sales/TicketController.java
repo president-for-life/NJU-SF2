@@ -68,6 +68,7 @@ public class TicketController {
     @PostMapping("/refundStrategy/update")
     public ResponseVO updateRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
         System.out.println("updateRefundStrategy()");
+        System.out.println(ticketRefundStrategyForm.getRefundable()+" "+ticketRefundStrategyForm.getRatio()+" "+ticketRefundStrategyForm.getTime());
         return ticketService.updateRefundStrategy(ticketRefundStrategyForm);
     }
 
@@ -83,10 +84,10 @@ public class TicketController {
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
     }
 
-    @PostMapping("/refundStrategy/get")
-    public ResponseVO getRefundStrategy() {
-        return ticketService.getRefundStrategies();
-    }
+//    @PostMapping("/refundStrategy/get")
+//    public ResponseVO getRefundStrategy() {
+//        return ticketService.getRefundStrategies();
+//    }
 
     @PostMapping("/refund/choose")
     public ResponseVO chooseRefundTicket(@RequestParam int ticketId) {
