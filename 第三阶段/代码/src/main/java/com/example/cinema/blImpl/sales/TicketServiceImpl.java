@@ -325,6 +325,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Override
 	public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
 		try {
+			System.out.println(strategyForm.getRefundable()+" "+strategyForm.getRatio()+" "+strategyForm.getTime());
+
 			ticketMapper.insertOneRefundStrategy(strategyForm.getPO());
 			return ResponseVO.buildSuccess("新增退票策略成功");
 		} catch (Exception e) {

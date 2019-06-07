@@ -61,7 +61,7 @@ public class TicketController {
 
     @PostMapping("/refundStrategy/publish")
     public ResponseVO publishRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
-        System.out.println("apublishRefundStrategy()");
+        System.out.println("publishRefundStrategy()");
         return ticketService.addRefundStrategy(ticketRefundStrategyForm);
     }
 
@@ -84,7 +84,7 @@ public class TicketController {
     }
 
     @PostMapping("/refundStrategy/get")
-    public ResponseVO removeRefundMovies() {
+    public ResponseVO getRefundStrategy() {
         return ticketService.getRefundStrategies();
     }
 
