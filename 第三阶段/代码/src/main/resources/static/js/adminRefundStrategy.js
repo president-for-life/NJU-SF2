@@ -68,10 +68,11 @@ $(document).ready(function () {
 		var strategyDomStr = '';
 		strategyList.forEach(function (strategy) {
 			strategyDomStr+=
-				"<li class='strategy-item card' id='strategy-'"+strategy.id+" data-strategy='"+JSON.stringify(strategy)+"'>"+
+				"<li class='strategy-item card' id='strategy-"+strategy.id+"' data-strategy='"+JSON.stringify(strategy)+"'>"+
 					"<div class='strategy-info'>" +
 						"<div class='strategy-title'>" +
 							"<span class='primary-text'>退票策略id："+strategy.id+"</span>"+
+							// "<span class='strategy-operation'>修改退票策略</span>"+
 						"</div>"+
 						"<div style='display: flex'>" +
 							"<span class='label "+(strategy.refundable ? 'primary-bg' : 'error-bg')+"'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>"+
@@ -80,8 +81,11 @@ $(document).ready(function () {
 						"</div>"+
 						"<div id='movie-list-for-strategy' >" +
 							"<span>使用本退票策略的电影：</span>"+
+							"<button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
+				" class='icon-plus-sign'></i>新增电影</button>"+
+							"<button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
+				" class='icon-minus-sign'></i>删除电影</button>"+
 						"</div>"+
-						// "<div class='strategy-operation'>修改退票策略</div>"+
 					"</div>"+
 				"</li>";
 
@@ -183,7 +187,7 @@ $(document).ready(function () {
 				alert(JSON.stringify(error));
 			}
 		);
-	})
+	});
 
 	/**
 	 * 如果点击了特定的退票策略，就进入了"修改退票策略"Modal
@@ -199,4 +203,70 @@ $(document).ready(function () {
 		$("#updateStrategyModal").modal('show');
 		$("#updateStrategyModal")[0].dataset.strategyId = strategy.id;
 	});
+
+	/**
+	 * 如果点击了"新增电影"按钮，就为指定的退票策略添加电影
+	 */
+	// $('.add-movie-for-strategy').click(function (e) {
+	// 	e.stopPropagation();
+	// 	return false;
+	// });
+
+	$(document).on('click', '.add-movie-for-strategy', function (e) {
+		e.stopPropagation();
+		alert("点击新增电影按钮");
+	});
+
+	/**
+	 * 点击"为退票策略新增电影"Modal的"确定"按钮：将选择的要添加的电影列表提交给后端
+	 */
+	$('#add-movie-for-strategy-form-btn').click(function () {
+		// todo
+		var formData={
+
+		};
+
+
+		postRequest(
+			'/ticket/refundStrategy/addMovies',
+			formData,
+			function (res) {
+				// todo：渲染指定退票策略的电影列表
+
+			},
+			function (error) {
+				alert(JSON.stringify(error));
+			}
+		);
+	});
+
+
+	// /**
+	//  * 为指定的退票策略删除电影
+	//  */
+	// $('.remove-movie-for-strategy').click(function () {
+	//
+	//
+	// });
+	//
+	// /**
+	//  * 点击"为退票策略删除电影"Modal的"确定"按钮：将选择的要删除的电影列表提交给后端
+	//  */
+	// $('#remove-movie-for-strategy-form-btn').click(function () {
+	// 	// todo
+	// 	var formData={
+	//
+	// 	};
+	//
+	// 	postRequest(
+	// 		'/ticket//refundStrategy/removeMovies',
+	// 		formData,
+	// 		function (res) {
+	// 			// todo: 渲染指定退票策略的电影列表
+	// 		},
+	// 		function (error) {
+	// 			alert(JSON.stringify(error));
+	// 		}
+	// 	);
+	// });
 });

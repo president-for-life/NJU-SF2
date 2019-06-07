@@ -31,7 +31,7 @@
 			<li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
 			<li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
 			<li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-			<li role="presentation"><a href="/admin/coupon/manage"><i class="icon-inbox"></i>优惠券管理</a> </li>
+			<li role="presentation"><a href="/admin/coupon/manage"><i class="icon-inbox"></i>优惠券管理</a></li>
 			<li role="presentation"><a href="/admin/member"><i class="icon-credit-card"></i> 会员卡管理</a></li>
 			<li role="presentation" class="active"><a href="#"><i class="icon-ticket"></i> 退票策略管理</a></li>
 			<li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
@@ -42,7 +42,8 @@
 		<div class="content-header">
 			<span class="title gray-text">退票策略</span>
 			<button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
-			        data-target="#addStrategyModal"><i class="icon-plus-sign"></i> 新增退票策略</button>
+			        data-target="#addStrategyModal"><i class="icon-plus-sign"></i> 新增退票策略
+			</button>
 		</div>
 		<ul class="strategy-on-list">
 		</ul>
@@ -62,7 +63,8 @@
 				<form class="form-horizontal" role="form">
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="add-strategy-refundable-input"><span class="error-text">*
+						<label class="col-sm-2 control-label" for="add-strategy-refundable-input"><span
+								class="error-text">*
 						</span>是否可退票</label>
 						<div class="col-sm-10">
 							<select id="add-strategy-refundable-input">
@@ -90,21 +92,21 @@
 					</div>
 
 
-<!--					<div class="form-group">-->
-<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">使用本退票策略的电影列表</label>-->
-<!--						<div class="col-sm-10">-->
-<!--							<select id="add-strategy-movie-input" class="form-control">-->
-<!--							</select>-->
-<!--							<p class="help-block">不选择代表所有电影</p>-->
-<!--						</div>-->
-<!--					</div>-->
+					<!--					<div class="form-group">-->
+					<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">使用本退票策略的电影列表</label>-->
+					<!--						<div class="col-sm-10">-->
+					<!--							<select id="add-strategy-movie-input" class="form-control">-->
+					<!--							</select>-->
+					<!--							<p class="help-block">不选择代表所有电影</p>-->
+					<!--						</div>-->
+					<!--					</div>-->
 
-<!--					<div class="form-group">-->
-<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">已选电影</label>-->
-<!--						<div id="add-selected-movies" class="col-sm-10">-->
+					<!--					<div class="form-group">-->
+					<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">已选电影</label>-->
+					<!--						<div id="add-selected-movies" class="col-sm-10">-->
 
-<!--						</div>-->
-<!--					</div>-->
+					<!--						</div>-->
+					<!--					</div>-->
 
 
 				</form>
@@ -148,7 +150,8 @@
 								class="error-text">*
 						</span>返还比例</label>
 						<div class="col-sm-10">
-							<input type="number" class="form-control" id="update-strategy-ratio-input" min="0.0" max="1.0"
+							<input type="number" class="form-control" id="update-strategy-ratio-input" min="0.0"
+							       max="1.0"
 							       step="0.1" value="">
 						</div>
 					</div>
@@ -160,36 +163,53 @@
 							       step="10" value="">
 						</div>
 					</div>
-
-
-<!--					<div class="form-group">-->
-<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">使用本退票策略的电影列表</label>-->
-<!--						<div class="col-sm-10">-->
-<!--							<select id="update-strategy-movie-input" class="form-control">-->
-<!--							</select>-->
-<!--							<p class="help-block">不选择代表所有电影</p>-->
-<!--						</div>-->
-<!--					</div>-->
-
-<!--					<div class="form-group">-->
-<!--						<label class="col-sm-2 control-label" for="add-strategy-movie-input">已选电影</label>-->
-<!--						<div id="selected-movies" class="col-sm-10">-->
-
-<!--						</div>-->
-<!--					</div>-->
-
-
 				</form>
 			</div>
 			<div class="modal-footer">
-<!--				<button type="button" class="btn btn-danger" id="update-strategy-remove-btn">删除</button>-->
+				<!--				<button type="button" class="btn btn-danger" id="update-strategy-remove-btn">删除</button>-->
 				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				<button type="button" class="btn btn-primary" id="update-strategy-form-btn">确认</button>
 			</div>
 		</div>
 	</div>
+</div>
 
+<!--为指定的退票策略添加电影-->
+<div class="modal fade" id="addMovieForStrategyModal" tabindex="-1" role="dialog"
+     aria-labelledby="addMovieForStrategyModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="addMovieForStrategyModalLabel">为退票策略新增电影</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">-->
+						<label class="col-sm-2 control-label" for="add-strategy-movie-input">使用本退票策略的电影列表</label>
+						<div class="col-sm-10">
+							<select id="add-strategy-movie-input" class="form-control">
+							</select>
+							<p class="help-block">不选择代表所有电影</p>
+						</div>
+					</div>
 
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="add-strategy-movie-input">已选电影</label>
+						<div id="add-selected-movies" class="col-sm-10">
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<!--				<button type="button" class="btn btn-danger" id="update-strategy-remove-btn">删除</button>-->
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="add-movie-for-strategy-form-btn">确认</button>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
