@@ -101,4 +101,28 @@ public interface TicketService {
      * @author 戴羽涵
      */
     ResponseVO getTicketsByUser(int userId);
+
+    ResponseVO searchAllRefundStrategy();
+
+    /**
+     * 获取没有被指定退票策略的电影列表，并且这些电影状态是"未下架"
+     *
+     * @return
+     */
+    ResponseVO getMoviesNotInRefundStrategy();
+
+    /**
+     * 获取所有已经指定退票策略的电影列表
+     *
+     * @return
+     */
+    ResponseVO getMoviesInRefundStrategy();
+
+    /**
+     * 获取使用指定退票策略的电影列表
+     *
+     * @param strategyId
+     * @return
+     */
+    ResponseVO getMoviesByRefundStrategy(int strategyId);
 }

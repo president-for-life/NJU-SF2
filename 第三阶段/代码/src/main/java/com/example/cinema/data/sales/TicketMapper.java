@@ -1,5 +1,6 @@
 package com.example.cinema.data.sales;
 
+import com.example.cinema.po.Movie;
 import com.example.cinema.po.Ticket;
 import com.example.cinema.po.TicketRefundStrategy;
 import org.apache.ibatis.annotations.Mapper;
@@ -133,4 +134,11 @@ public interface TicketMapper {
      * @return 用到movieList的po
      */
     List<TicketRefundStrategy> selectRefundStrategies();
+
+    /**
+     * 选择所有有效的可供添加到退票策略的中的未下架的电影
+     *
+     * @return
+     */
+    List<Movie> selectMovieNotInRefundStrategy();
 }

@@ -51,31 +51,55 @@ public class TicketController {
 
     @PostMapping("/refundStrategy/publish")
     public ResponseVO publishRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
+        System.out.println("apublishRefundStrategy()");
         return ticketService.addRefundStrategy(ticketRefundStrategyForm);
     }
 
     @PostMapping("/refundStrategy/update")
     public ResponseVO updateRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
+        System.out.println("updateRefundStrategy()");
         return ticketService.updateRefundStrategy(ticketRefundStrategyForm);
     }
 
     @PostMapping("/refundStrategy/addMovies")
     public ResponseVO addRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
+        System.out.println("addRefundMovies()");
         return ticketService.addRefundMovies(refundStrategyId, movieIdList);
     }
 
     @PostMapping("/refundStrategy/removeMovies")
     public ResponseVO removeRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
+        System.out.println("removeRefundMovies()");
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
     }
 
     @PostMapping("/refund/choose")
     public ResponseVO chooseRefundTicket(@RequestParam int ticketId) {
+        System.out.println("chooseRefundTicket()");
         return ticketService.addRefundTicket(ticketId);
     }
 
     @PostMapping("/refund/confirm")
     public ResponseVO confirmRefundTicket(@RequestParam int ticketId) {
+        System.out.println("confirmRefundTicket()");
         return ticketService.completeRefundTicket(ticketId);
+    }
+
+    @GetMapping("/refundStrategy/all")
+    public ResponseVO searchAllRefundStrategy() {
+        System.out.println("searchAllRefundStrategy()");
+        return ticketService.searchAllRefundStrategy();
+    }
+
+    @GetMapping("/refundStrategy/getSelectableMovies")
+    public ResponseVO getMoviesNotInRefundStrategy() {
+        System.out.println("getMoviesNotInRefundStrategy()");
+        return ticketService.getMoviesNotInRefundStrategy();
+    }
+
+    @GetMapping("/refundStrategy/getMovies")
+    public ResponseVO getMoviesByRefundStrategy(@RequestParam int strategyId) {
+        System.out.println("getMoviesByRefundStrategy()");
+        return ticketService.getMoviesByRefundStrategy(strategyId);
     }
 }

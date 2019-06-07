@@ -138,4 +138,18 @@
                 on rm.movie_id = m.id
     </select>
 
+    <resultMap id="Movie" type="com.example.cinema.po.Movie">
+        <id column="id" property="id"></id>
+        <result column="poster_url" property="posterUrl"></result>
+        <result column="screen_writer" property="screenWriter"></result>
+        <result column="start_date" property="startDate"></result>
+        <result column="end_date" property="endDate"></result>
+    </resultMap>
+    
+    <select id="selectMovieNotInRefundStrategy" resultMap="Movie">
+        select * from movie
+        where movie.status = 0 and movie.id not in
+        (select movie_id from refund_strategy_movie)
+    </select>
+
 </mapper>

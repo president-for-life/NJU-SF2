@@ -1,76 +1,89 @@
 package com.example.cinema.vo;
 
 import com.example.cinema.po.Movie;
+import com.example.cinema.po.TicketRefundStrategy;
 
 import java.util.List;
 
 public class TicketRefundStrategyVO {
 
-    /**
-     * 退票策略id
-     */
-    private int id;
+	/**
+	 * 退票策略id
+	 */
+	private int id;
 
-    /**
-     * 是否可退票
-     */
-    private int refundable;
+	/**
+	 * 是否可退票
+	 */
+	private int refundable;
 
-    /**
-     * 返还比例
-     */
-    private double ratio;
+	/**
+	 * 返还比例
+	 */
+	private double ratio;
 
-    /**
-     * 开场前 time 分钟不许退票
-     */
-    private int time;
+	/**
+	 * 开场前 time 分钟不许退票
+	 */
+	private int time;
 
-    /**
-     * 使用本退票策略的电影列表
-     */
-    private List<Movie> movieList;
+	/**
+	 * 使用本退票策略的电影列表
+	 */
+	private List<Movie> movieList;
 
-    public int getId() {
-        return id;
-    }
+	public TicketRefundStrategyVO() {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	}
 
-    public boolean getRefundable() {
-        return refundable == 1;
-    }
+	public TicketRefundStrategyVO(TicketRefundStrategy ticketRefundStrategy) {
+		this.id = ticketRefundStrategy.getId();
+		this.refundable = ticketRefundStrategy.getRefundable() ? 1 : 0;
+		this.ratio = ticketRefundStrategy.getRatio();
+		this.time = ticketRefundStrategy.getTime();
+		this.movieList = ticketRefundStrategy.getMovieList();
+	}
 
-    public void setRefundable(boolean refundable) {
-        this.refundable = refundable ? 1 : 0;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public double getRatio() {
-        return ratio;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setRatio(double ratio) {
-        if(ratio < 0 || ratio > 1) {
-            throw new IllegalArgumentException("返还比例必须在0到1之间（包含）！");
-        }
-        this.ratio = ratio;
-    }
+	public boolean getRefundable() {
+		return refundable == 1;
+	}
 
-    public int getTime() {
-        return time;
-    }
+	public void setRefundable(boolean refundable) {
+		this.refundable = refundable ? 1 : 0;
+	}
 
-    public void setTime(int time) {
-        this.time = time;
-    }
+	public double getRatio() {
+		return ratio;
+	}
 
-    public List<Movie> getMovieList() {
-        return movieList;
-    }
+	public void setRatio(double ratio) {
+		if (ratio < 0 || ratio > 1) {
+			throw new IllegalArgumentException("返还比例必须在0到1之间（包含）！");
+		}
+		this.ratio = ratio;
+	}
 
-    public void setMovieList(List<Movie> movieList) {
-        this.movieList = movieList;
-    }
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public List<Movie> getMovieList() {
+		return movieList;
+	}
+
+	public void setMovieList(List<Movie> movieList) {
+		this.movieList = movieList;
+	}
 }
