@@ -63,4 +63,62 @@
 	</div>
 </div>
 </body>
+
+
+<!--用户取票Modal-->
+<div class="modal fade" id="pickUpTicketModal" tabindex="-1" role="dialog"
+     aria-labelledby="pickUpTicketModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="pickUpTicketModalLabel">用户取票</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">票号</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-ticketid"></span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">电影名称</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-moviename"></span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">影厅号</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-hallname"></span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">开始时间</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-starttime"></span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">结束时间</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-endtime"></span>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label primary-text">座位号</label>
+						<span class="col-sm-10 pick-up-ticket-text" id="pick-up-ticket-seat"></span>
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="pick-up-ticket-form-btn">确认取票</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--用户退票Modal-->
 </html>

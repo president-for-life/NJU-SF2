@@ -54,7 +54,7 @@ public class TicketController {
         return ticketService.getBySchedule(scheduleId);
     }
 
-    @GetMapping("/pickUp")
+    @PostMapping("/pickUp")
     public ResponseVO pickUpTicket(@RequestParam int ticketId){
         return ticketService.pickUpTicket(ticketId);
     }
