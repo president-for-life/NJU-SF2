@@ -98,7 +98,7 @@ $(document).on('click','.pick-up-btn', function (e) {
 	$('#pick-up-ticket-hallname').text(schedule.hallName);
 	$('#pick-up-ticket-starttime').text(formatDateAndTime(schedule.startTime));
 	$('#pick-up-ticket-endtime').text(formatDateAndTime(schedule.endTime));
-	$('#pick-up-ticket-seat').text(ticket.rowIndex+"排 "+ticket.columnIndex+"座");
+	$('#pick-up-ticket-seat').text((ticket.rowIndex + 1) + "排 " + (ticket.columnIndex + 1) + "座");
 
 	// 显示"取票"的Modal
 	$('#pickUpTicketModal').modal('show');
