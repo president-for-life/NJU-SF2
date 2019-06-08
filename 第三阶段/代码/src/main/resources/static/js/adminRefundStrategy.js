@@ -188,7 +188,7 @@ $(document).ready(function () {
 		var strategy = JSON.parse(e.currentTarget.dataset.strategy);
 
 		$("#update-strategy-refundable-input").val(strategy.refundable ? "是" : "否");
-		$("#update-strategy-ratio-input").val(strategy.radio);
+		$("#update-strategy-ratio-input").val(strategy.ratio);
 		$("#update-strategy-time-input").val(strategy.time);
 
 		$("#updateStrategyModal").modal('show');
@@ -328,7 +328,7 @@ $(document).ready(function () {
 	 */
 	function removeSelectedMovie(strategyId,movieId) {
 		postRequest(
-			'/ticket//refundStrategy/removeMovies?refundStrategyId=' + strategyId,
+			'/ticket/refundStrategy/removeMovies?refundStrategyId=' + strategyId,
 			[movieId],
 			function (res) {
 				if (res.success) {

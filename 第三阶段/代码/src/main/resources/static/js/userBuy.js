@@ -55,10 +55,10 @@ function renderOrderList(list) {
             proceedToPayButton +
 			"    <div class='order-card'>" +
             "        <span class='title'>" + "订单号：" + order.orderId + "</span>" +
-			"        <span class='title'>" + order.schedule.movieName + "</span>" +
-			"        <span class='title'>" + order.schedule.hallName + "</span>" +
-			"        <span class='title'>" + formatDateAndTime(new Date(order.schedule.startTime)) + "</span>" +
-			"        <span class='title'>" + formatDateAndTime(new Date(order.schedule.endTime)) + "</span>" +
+			"        <span class='order-detail'>" + "电影：" + order.schedule.movieName + "</span>" +
+			"        <span class='order-detail'>" + "影厅：" + order.schedule.hallName + "</span>" +
+			"        <span class='order-detail'>" + "开始时间：" + formatDateAndTime(new Date(order.schedule.startTime)) + "</span>" +
+			"        <span class='order-detail'>" + "结束时间：" + formatDateAndTime(new Date(order.schedule.endTime)) + "</span>" +
 			"    </div>" +
 			"    <div class='seat-card'>" +
 			seatsDomStr +
