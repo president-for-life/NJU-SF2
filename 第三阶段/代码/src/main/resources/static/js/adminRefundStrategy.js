@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-	getSelectableMovies();
+	// getSelectableMovies();
 
 	getStrategyList();
 
@@ -79,7 +79,7 @@ $(document).ready(function () {
 							"<span>返还比例："+strategy.ratio+"</span>"+
 							"<span>开场前 "+strategy.time+" 分钟不允许退票</span>"+
 						"</div>"+
-						"<div id='movie-list-for-strategy' >" +
+						"<div class='movie-list-for-strategy' >" +
 							"<span>使用本退票策略的电影：</span>"+
 							"<button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
 				" class='icon-plus-sign'></i>新增电影</button>"+
@@ -88,14 +88,19 @@ $(document).ready(function () {
 						"</div>"+
 					"</div>"+
 				"</li>";
-
-			var movieDomStr = '';
-			strategy.movieList.forEach(function (movieName) {
-				movieDomStr+="<span class='label label-primary'>"+movieName+"</span>";
-			});
-			$('#add-movie-list-for-strategy').append(movieDomStr);
 		});
 		$('.strategy-on-list').append(strategyDomStr);
+
+		strategyList.forEach(function (strategy) {
+			var movieDomStr = '';
+			strategy.movieList.forEach(function (movie) {
+				movieDomStr+="<span class='label label-primary'>"+movie.name+"</span>";
+				// console.log(movie.name);
+			});
+			// console.log(movieDomStr);
+			$('#strategy-'+strategy.id+' .movie-list-for-strategy span:first').after(movieDomStr);
+			// $('#strategy-'+1+' .movie-list-for-strategy span:first').after("<span>测试</span>")
+		});
 	}
 
 	/**
@@ -116,40 +121,24 @@ $(document).ready(function () {
 	var selectedMovieIds = new Set();
 	var selectedMovieNames = new Set();
 
-	$('#add-strategy-movie-input').change(function () {
-		var movieId = $('#add-strategy-movie-input').val();
-		var movieName = $('#add-strategy-movie-input').children('option:selected').text();
-		if (movieId == -1) {
-			selectedMovieIds.clear();
-			selectedMovieNames.clear();
-		} else {
-			selectedMovieIds.add(movieId);
-			selectedMovieNames.add(movieName);
-		}
-		renderSelectedMovies();
-	});
-
-	/**
-	 * 渲染选择的使用该退票策略的电影列表
-	 */
-	function renderSelectedMovies() {
-		$('#selected-movies').empty();
-		var moviesDomStr = "";
-		selectedMovieNames.forEach(function (movieName) {
-			moviesDomStr+="<span class='label label-primary'>"+movieName+"</span>";
-		});
-		$('#selected-movies').append(moviesDomStr);
-	}
-
 	/**
 	 * 获取可以选择的电影列表：这些电影必须还没有指定退票策略、未下架
 	 */
 	function getSelectableMovies() {
+		// 首先进行清空
+		$('#add-strategy-movie-input').empty();
+		selectedMovieIds.clear();
+		selectedMovieNames.clear();
+
 		getRequest(
 			'/ticket/refundStrategy/getSelectableMovies',
 			function (res) {
 				var movieList = res.content;
-				$('#add-strategy-movie-input').append("<option value=" + -1 + ">所有电影</option>");
+				if (movieList.length == 0) {
+					$('#add-strategy-movie-input').append("<option value=" + -1 + ">没有可供添加的电影</option>");
+				} else {
+					$('#add-strategy-movie-input').append("<option value=" + -1 + ">所有电影</option>");
+				}
 				movieList.forEach(function (movie) {
 					$('#add-strategy-movie-input').append("<option value=" + movie.id + ">" + movie.name + "</option>");
 				});
@@ -204,35 +193,70 @@ $(document).ready(function () {
 		$("#updateStrategyModal")[0].dataset.strategyId = strategy.id;
 	});
 
+	// =============================================================================
+	// ===============================为退票策略新增电影列表===========================
+	// =============================================================================
+
 	/**
 	 * 如果点击了"新增电影"按钮，就为指定的退票策略添加电影
 	 */
-	// $('.add-movie-for-strategy').click(function (e) {
-	// 	e.stopPropagation();
-	// 	return false;
-	// });
-
 	$(document).on('click', '.add-movie-for-strategy', function (e) {
 		e.stopPropagation();
-		alert("点击新增电影按钮");
+
+		// 获得可供当前退票策略选择的电影列表
+		getSelectableMovies();
+
+		var strategy = JSON.parse(e.currentTarget.parentElement.parentElement.parentElement.dataset.strategy);
+		$('#addMovieForStrategyModal').modal('show');
+		$('#addMovieForStrategyModal')[0].dataset.strategyId = strategy.id;
 	});
+
+	/**
+	 * 如果为指定退票策略新增了电影列表，就在Modal中进行渲染
+	 */
+	$('#add-strategy-movie-input').change(function () {
+		var movieId = $('#add-strategy-movie-input').val();
+		var movieName = $('#add-strategy-movie-input').children('option:selected').text();
+		if (movieId == -1) {
+			selectedMovieIds.clear();
+			selectedMovieNames.clear();
+		} else {
+			selectedMovieIds.add(movieId);
+			selectedMovieNames.add(movieName);
+		}
+		renderSelectedMovies();
+	});
+
+	/**
+	 * 在Modal中渲染选择的使用该退票策略的电影列表
+	 */
+	function renderSelectedMovies() {
+		$('#add-selected-movies').empty();
+		var moviesDomStr = "";
+		selectedMovieNames.forEach(function (movieName) {
+			moviesDomStr+="<span class='label label-primary'>"+movieName+"</span>";
+		});
+		$('#add-selected-movies').append(moviesDomStr);
+	}
 
 	/**
 	 * 点击"为退票策略新增电影"Modal的"确定"按钮：将选择的要添加的电影列表提交给后端
 	 */
 	$('#add-movie-for-strategy-form-btn').click(function () {
-		// todo
-		var formData={
-
-		};
-
-
+		var movieIdList=[];
+		selectedMovieIds.forEach(function(movieId){
+			movieIdList.push(movieId);
+		});
 		postRequest(
-			'/ticket/refundStrategy/addMovies',
-			formData,
+			'/ticket/refundStrategy/addMovies?refundStrategyId='+Number(document.getElementById('addMovieForStrategyModal').dataset.strategyId),
+			movieIdList,
 			function (res) {
-				// todo：渲染指定退票策略的电影列表
-
+				if (res.success) {
+					getStrategyList();
+					$('#addMovieForStrategyModal').modal('hide');
+				} else {
+					alert(res.message);
+				}
 			},
 			function (error) {
 				alert(JSON.stringify(error));
