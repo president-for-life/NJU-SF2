@@ -40,6 +40,10 @@
         select * from ticket where user_id=#{userId} order by time desc
     </select>
 
+    <select id="selectTicketsByOrder" resultMap="Ticket">
+        select * from ticket where order_id = #{orderId} order by time desc
+    </select>
+
     <update id="updateTicketState">
         update ticket set state = #{state} where id = #{ticketId}
     </update>
@@ -50,15 +54,6 @@
 
     <update id="cleanExpiredTicket">
         update ticket SET  state =2 WHERE minute(timediff(now(),time))>15 and state=0;
-    </update>
-
-    <update id="lockTables">
-        lock tables refund_strategy read;
-        lock tables refund_strategy_movie read
-    </update>
-
-    <update id="unlockTables">
-        unlock tables
     </update>
 
     <resultMap id="TicketRefundStrategy" type="com.example.cinema.po.TicketRefundStrategy">
@@ -105,11 +100,14 @@
     </insert>
 
     <delete id="deleteStrategyAndMovies">
+        delete from refund_strategy_movie
+        where refund_strategy_id = #{strategyId}
+        and movie_id in (
         <foreach collection="movieIdList" item="item" index="index"
                  separator=",">
-            delete from refund_strategy_movie
-            where refund_strategy_id = #{strategyId} and movie_id = #{item}
+              #{item}
         </foreach>
+        )
     </delete>
 
     <select id="selectRefundStrategyById" resultMap="TicketRefundStrategy">
@@ -136,6 +134,20 @@
                 on r.id = rm.refund_strategy_id
             left join movie m
                 on rm.movie_id = m.id
+    </select>
+
+    <resultMap id="Movie" type="com.example.cinema.po.Movie">
+        <id column="id" property="id"></id>
+        <result column="poster_url" property="posterUrl"></result>
+        <result column="screen_writer" property="screenWriter"></result>
+        <result column="start_date" property="startDate"></result>
+        <result column="end_date" property="endDate"></result>
+    </resultMap>
+    
+    <select id="selectMovieNotInRefundStrategy" resultMap="Movie">
+        select * from movie
+        where movie.status = 0 and movie.id not in
+        (select movie_id from refund_strategy_movie)
     </select>
 
 </mapper>

@@ -5,6 +5,8 @@ import com.example.cinema.vo.TicketVO;
 import com.example.cinema.vo.TicketWithScheduleVO;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 李莹
@@ -194,5 +196,13 @@ public class Ticket {
         vo.setActualPayment(this.getActualPayment());
         vo.setTime(this.getTime());
         return vo;
+    }
+
+    public static List<TicketVO> ticketList2TicketVOList(List<Ticket> ticketList) {
+        List<TicketVO> res = new ArrayList<>();
+        for(Ticket ticket : ticketList) {
+            res.add(ticket.getVO());
+        }
+        return res;
     }
 }

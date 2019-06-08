@@ -10,28 +10,60 @@ var useVIP = true;
 
 $(document).ready(function () {
 	if(window.location.href.indexOf("orderId") > -1) { // 继续支付订单
-		// TODO
+	    // TODO bug 超时提示
+        let orderId = parseInt(window.location.href.split('?')[1].split('&')[2].split('=')[1]);
+        scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
+
+        // 退出选座页面，进入订单页面
+        $('#seat-state').css("display", "none");
+        $('#order-state').css("display", "");
+
+        postRequest(
+            '/ticket/proceed?orderId=' + orderId,
+            null,
+            function (res) {
+                if (res.success) {
+                    var orderInfo = res.content;  // 从后端res中获取返回的数据
+
+                    for(let ticket of res.content.ticketVOList) {
+                        selectedSeats.push([ticket.columnIndex, ticket.rowIndex]);
+                    }
+
+                    getScheduleAndSeatsInfo();
+
+                    renderOrder(orderInfo);
+                } else {
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+
+        getVIPInfo();
+
 	} else { // 从头购票
 		scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
-	}
 
-	getInfo();
-
-	function getInfo() {
-		// 获得被锁座位信息
-		getRequest(
-			'/ticket/get/occupiedSeats?scheduleId=' + scheduleId,
-			function (res) {
-				if (res.success) {
-					renderSchedule(res.content.scheduleItem, res.content.seats);
-				}
-			},
-			function (error) {
-				alert(JSON.stringify(error));
-			}
-		);
+        getScheduleAndSeatsInfo();
 	}
 });
+
+function getScheduleAndSeatsInfo() {
+    // 获得被锁座位信息
+    getRequest(
+        '/ticket/get/occupiedSeats?scheduleId=' + scheduleId,
+        function (res) {
+            if (res.success) {
+                renderSchedule(res.content.scheduleItem, res.content.seats);
+            }
+        },
+        function (error) {
+            alert(JSON.stringify(error));
+        }
+    );
+}
 
 // 加载某场次的座位
 // schedule：场次号
@@ -118,9 +150,6 @@ function orderConfirmClick() {
 	$('#seat-state').css("display", "none");
 	$('#order-state').css("display", "");
 
-
-	// TODO:这里是假数据，需要连接后端获取真数据，数据格式可以自行修改，但如果改了格式，别忘了修改renderOrder方法
-	// TODO: 从后端的addTicket()返回orderInfo
 	var seats=[];
 	selectedSeats.forEach(function (value, index, array) {
 		var seat = {};
@@ -166,24 +195,28 @@ function orderConfirmClick() {
 		}
 	);
 
-	getRequest(
-		'/vip/' + sessionStorage.getItem('id') + '/get',
-		function (res) {
-			isVIP = res.success;
-			useVIP = res.success;
-			if (isVIP) {
-				$('#member-balance').html("<div><b>会员卡余额：</b>" + res.content.balance.toFixed(2) + "元</div>");
-			} else { // 不是会员，无会员卡支付界面
-				$("#member-pay").css("display", "none");
-				$("#nonmember-pay").addClass("active");
+	getVIPInfo();
+}
 
-				$("#modal-body-member").css("display", "none");
-				$("#modal-body-nonmember").css("display", "");
-			}
-		},
-		function (error) {
-			alert(error);
-		});
+function getVIPInfo() {
+    getRequest(
+        '/vip/' + sessionStorage.getItem('id') + '/get',
+        function (res) {
+            isVIP = res.success;
+            useVIP = res.success;
+            if (isVIP) {
+                $('#member-balance').html("<div><b>会员卡余额：</b>" + res.content.balance.toFixed(2) + "元</div>");
+            } else { // 不是会员，无会员卡支付界面
+                $("#member-pay").css("display", "none");
+                $("#nonmember-pay").addClass("active");
+
+                $("#modal-body-member").css("display", "none");
+                $("#modal-body-nonmember").css("display", "");
+            }
+        },
+        function (error) {
+            alert(error);
+        });
 }
 
 // 切换支付方式

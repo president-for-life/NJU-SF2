@@ -27,5 +27,4 @@ public class ActivityController {
         return activityService.getActivities();
     }
 
-
 }

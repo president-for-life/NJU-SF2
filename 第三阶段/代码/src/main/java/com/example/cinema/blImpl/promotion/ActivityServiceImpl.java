@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,18 +80,7 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
-    @Override
-    public List<Activity> getOngoingActivities() {
-        try {
-            return activityMapper.selectOngoingActivities();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
-    @Override
-    public List<Activity> getActivitiesByMovie(int movieId) {
+    private List<Activity> getActivitiesByMovie(int movieId) {
         try {
             return activityMapper.selectActivitiesByMovie(movieId);
         } catch (Exception e) {
@@ -99,13 +89,43 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
-    @Override
-    public List<Activity> getActivitiesWithoutMovie() {
+    private List<Activity> getActivitiesWithoutMovie() {
         try {
             return activityMapper.selectActivitiesWithoutMovie();
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void participate(int movieId, int userId) {
+        try {
+            List<Activity> activitiesWithMovie
+                    = this.getActivitiesByMovie(movieId);
+            List<Activity> activitiesWithoutMovie
+                    = this.getActivitiesWithoutMovie();
+            activitiesWithMovie.addAll(activitiesWithoutMovie);
+
+            List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
+            for(Activity activity : activitiesWithMovie) {
+                couponsToBeIssued.add(activity.getCoupon());
+            }
+
+            // 赠送优惠券
+            for (Coupon coupon : couponsToBeIssued) {
+                couponService.issueCoupon(Arrays.asList(coupon.getId()), Arrays.asList(userId));
+            }
+
+            ////////////////////控制台测试信息////////////////////
+            System.out.print("赠送优惠券：");
+            for (Coupon coupon : couponsToBeIssued) {
+                System.out.print(" 满" + coupon.getTargetAmount() + "送" + coupon.getDiscountAmount());
+            }
+            System.out.println();
+            ////////////////////控制台测试信息////////////////////
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

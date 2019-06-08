@@ -31,7 +31,12 @@ public class TicketController {
 
     @PostMapping("/buy")
     public ResponseVO buyTicket(@RequestBody List<Integer> ticketId, @RequestParam int couponId) {
-        return ticketService.completeTicket(ticketId, couponId);
+        return ticketService.completeByCreditCard(ticketId, couponId);
+    }
+
+    @PostMapping("/proceed")
+    public ResponseVO proceedWithOrder(@RequestParam int orderId) {
+        return ticketService.proceedWithOrder(orderId);
     }
 
     @GetMapping("/get/{userId}")
@@ -56,31 +61,61 @@ public class TicketController {
 
     @PostMapping("/refundStrategy/publish")
     public ResponseVO publishRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
+        System.out.println("publishRefundStrategy()");
         return ticketService.addRefundStrategy(ticketRefundStrategyForm);
     }
 
     @PostMapping("/refundStrategy/update")
     public ResponseVO updateRefundStrategy(@RequestBody TicketRefundStrategyForm ticketRefundStrategyForm) {
+        System.out.println("updateRefundStrategy()");
+        System.out.println(ticketRefundStrategyForm.getRefundable()+" "+ticketRefundStrategyForm.getRatio()+" "+ticketRefundStrategyForm.getTime());
         return ticketService.updateRefundStrategy(ticketRefundStrategyForm);
     }
 
     @PostMapping("/refundStrategy/addMovies")
     public ResponseVO addRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
+        System.out.println("addRefundMovies()");
         return ticketService.addRefundMovies(refundStrategyId, movieIdList);
     }
 
     @PostMapping("/refundStrategy/removeMovies")
     public ResponseVO removeRefundMovies(@RequestParam int refundStrategyId, @RequestBody List<Integer> movieIdList) {
+        System.out.println("removeRefundMovies()");
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
     }
 
+//    @PostMapping("/refundStrategy/get")
+//    public ResponseVO getRefundStrategy() {
+//        return ticketService.getRefundStrategies();
+//    }
+
     @PostMapping("/refund/choose")
     public ResponseVO chooseRefundTicket(@RequestParam int ticketId) {
+        System.out.println("chooseRefundTicket()");
         return ticketService.addRefundTicket(ticketId);
     }
 
     @PostMapping("/refund/confirm")
     public ResponseVO confirmRefundTicket(@RequestParam int ticketId) {
+        System.out.println("confirmRefundTicket()");
         return ticketService.completeRefundTicket(ticketId);
+    }
+
+    @GetMapping("/refundStrategy/all")
+    public ResponseVO searchAllRefundStrategy() {
+        System.out.println("searchAllRefundStrategy()");
+        return ticketService.searchAllRefundStrategy();
+    }
+
+    @GetMapping("/refundStrategy/getSelectableMovies")
+    public ResponseVO getMoviesNotInRefundStrategy() {
+        System.out.println("getMoviesNotInRefundStrategy()");
+        return ticketService.getMoviesNotInRefundStrategy();
+    }
+
+    @GetMapping("/refundStrategy/getMovies")
+    public ResponseVO getMoviesByRefundStrategy(@RequestParam int strategyId) {
+        System.out.println("getMoviesByRefundStrategy()");
+        return ticketService.getMoviesByRefundStrategy(strategyId);
     }
 }

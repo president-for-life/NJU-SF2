@@ -88,10 +88,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Transactional
 	public ResponseVO addTicket(OrderForm orderForm) {
 		try {
-			////////////////////控制台测试信息////////////////////
-			System.out.println("----------TicketServiceImpl.addTicket测试信息----------");
-			////////////////////控制台测试信息////////////////////
-
 			// 锁座
 			this.lockSeat(orderForm);
 
@@ -126,6 +122,32 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+	@Override
+	public ResponseVO proceedWithOrder(int orderId) {
+		try {
+			List<Ticket> tickets = ticketMapper.selectTicketsByOrder(orderId);
+			List<TicketVO> ticketVOList = Ticket.ticketList2TicketVOList(tickets);
+
+			// 计算总金额
+			Ticket firstTicket = tickets.get(0);
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
+			double total = scheduleItem.getFare() * tickets.size();
+
+			// 用户拥有的、且满足本次订单使用门槛的优惠券
+			List<Coupon> couponsOwnedByUser = couponService.getCouponsByUserAndAmount(firstTicket.getUserId(), total);
+
+			// 返回的TicketWithCouponVO
+			TicketWithCouponVO vo = new TicketWithCouponVO();
+			vo.setTicketVOList(ticketVOList);
+			vo.setTotal(total);
+			vo.setCoupons(couponsOwnedByUser);
+
+			return ResponseVO.buildSuccess(vo);
+		} catch(Exception e) {
+			return ResponseVO.buildFailure("失败");
+		}
+	}
+
 	/**
 	 * 判断电影票是否已过期
 	 *
@@ -146,139 +168,63 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
-	/**
-	 * 根据优惠活动、订单中的电影决定赠送优惠券
-	 *
-	 * @param movieId 订单中的电影id
-	 * @param userId  用户id
-	 * @author 梁正川
-	 */
-	private void issueCoupon(int movieId, int userId) {
-		try {
-			List<Activity> activitiesWithMovie
-					= activityService.getActivitiesByMovie(movieId);
-			List<Activity> activitiesWithoutMovie
-					= activityService.getActivitiesWithoutMovie();
-			activitiesWithMovie.addAll(activitiesWithoutMovie);
+	private ResponseVO completeTickets(List<Integer> ticketIdList, int couponId, boolean byVIPCard) {
+        try {
+            // 根据第一张电影票就能够获取排片信息
+            Ticket firstTicket = ticketMapper.selectTicketById(ticketIdList.get(0));
+            ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
 
-			List<Coupon> couponsToBeIssued = new ArrayList<>(); // 赠送的优惠券
-			for(Activity activity : activitiesWithMovie) {
-				couponsToBeIssued.add(activity.getCoupon());
-			}
+            // 计算最终需要支付的金额
+            Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
+            boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
+            double actualPayment = scheduleItem.getFare() * ticketIdList.size()
+                    - (noCoupon ? 0 : coupon.getDiscountAmount());
 
-			// 赠送优惠券
-			for (Coupon coupon : couponsToBeIssued) {
-				couponService.issueCoupon(Arrays.asList(coupon.getId()), Arrays.asList(userId));
-			}
+            // 判断电影票是否超时
+            boolean success = !this.areExpired(ticketIdList);
 
-			////////////////////控制台测试信息////////////////////
-			System.out.print("赠送优惠券：");
-			for (Coupon coupon : couponsToBeIssued) {
-				System.out.print(" 满" + coupon.getTargetAmount() + "送" + coupon.getDiscountAmount());
-			}
-			System.out.println();
-			////////////////////控制台测试信息////////////////////
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            if (success && byVIPCard) { // 未超时且使用会员卡支付，尝试扣款
+                // 判断扣款是否成功
+                success = vipService.pay(firstTicket.getUserId(), actualPayment);
+            }
 
-	/**
-	 * @see #issueCoupon(int, int)
-	 */
+            if (success) { // 未超时且扣款成功
+                for (int ticketId : ticketIdList) {
+                    ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
+                    ticketMapper.updateTicketActualPayment(
+                            ticketId,
+                            actualPayment / ticketIdList.size() // 平均每张票实际付款
+                    );
+                }
+
+                // 删除用过的优惠券
+                if (!noCoupon) {
+                    couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
+                }
+
+                // 尝试赠送优惠券
+                activityService.participate(scheduleItem.getMovieId(), firstTicket.getUserId());
+
+                return ResponseVO.buildSuccess("会员卡购票成功");
+            } else { // 电影票超时或扣款失败（会员卡余额不足）
+                return ResponseVO.buildFailure("会员卡扣款失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("会员卡购票失败");
+        }
+    }
+
 	@Override
 	@Transactional
-	public ResponseVO completeTicket(List<Integer> ticketIdList, int couponId) {
-		////////////////////控制台测试信息////////////////////
-		System.out.println("----------TicketServiceImpl.completeTicket测试信息----------");
-		////////////////////控制台测试信息////////////////////
-
-		// 根据第一张电影票就能够获取排片信息
-		Ticket firstTicket = ticketMapper.selectTicketById(ticketIdList.get(0));
-		ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
-
-		Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
-		boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
-		double actualPayment = scheduleItem.getFare() * ticketIdList.size()
-				- (noCoupon ? 0 : coupon.getDiscountAmount());
-
-		if (!this.areExpired(ticketIdList)) { // 电影票未超时
-			for (int ticketId : ticketIdList) {
-				ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
-				ticketMapper.updateTicketActualPayment(
-						ticketId,
-						actualPayment / ticketIdList.size() // 平均每张票实际付款
-				);
-			}
-
-			// 删除用过的优惠券
-			if (!noCoupon) {
-				couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
-			}
-
-			// 尝试赠送优惠券
-			this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
-
-			return ResponseVO.buildSuccess("会员卡购票成功");
-		} else { // 电影票超时
-			return ResponseVO.buildFailure("会员卡购票失败");
-		}
+	public ResponseVO completeByCreditCard(List<Integer> ticketIdList, int couponId) {
+	    return this.completeTickets(ticketIdList, couponId, false);
 	}
 
-	/**
-	 * @see #issueCoupon(int, int)
-	 */
 	@Override
 	@Transactional
 	public ResponseVO completeByVIPCard(List<Integer> ticketIdList, int couponId) {
-		try {
-			////////////////////控制台测试信息////////////////////
-			System.out.println("----------TicketServiceImpl.completeByVIPCard测试信息----------");
-			////////////////////控制台测试信息////////////////////
-
-			// 根据第一张电影票就能够获取排片信息
-			Ticket firstTicket = ticketMapper.selectTicketById(ticketIdList.get(0));
-			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(firstTicket.getScheduleId());
-
-			// 计算最终需要支付的金额
-			Coupon coupon = couponService.getCouponById(couponId); // 使用的优惠券
-			boolean noCoupon = (coupon == null); // 判断是否存在 couponId 对应的优惠券
-			double actualPayment = scheduleItem.getFare() * ticketIdList.size()
-					- (noCoupon ? 0 : coupon.getDiscountAmount());
-
-			// 判断电影票是否超时
-			boolean success = !this.areExpired(ticketIdList);
-
-			if (success) { // 未超时，尝试扣款
-				// 判断扣款是否成功
-				success = vipService.pay(firstTicket.getUserId(), actualPayment);
-			}
-
-			if (success) { // 未超时且扣款成功
-				for (int ticketId : ticketIdList) {
-					ticketMapper.updateTicketState(ticketId, 1); // 更新电影票状态为“已完成”
-					ticketMapper.updateTicketActualPayment(
-							ticketId,
-							actualPayment / ticketIdList.size() // 平均每张票实际付款
-					);
-				}
-
-				// 删除用过的优惠券
-				if (!noCoupon) {
-					couponService.deleteCouponUser(coupon.getId(), firstTicket.getUserId());
-				}
-
-				// 尝试赠送优惠券
-				this.issueCoupon(scheduleItem.getMovieId(), firstTicket.getUserId());
-
-				return ResponseVO.buildSuccess("会员卡购票成功");
-			} else { // 电影票超时或扣款失败（会员卡余额不足）
-				return ResponseVO.buildFailure("会员卡扣款失败");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("会员卡购票失败");
-		}
+	    return this.completeTickets(ticketIdList, couponId, true);
 	}
 
 	@Override
@@ -299,6 +245,8 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Override
 	public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
 		try {
+			System.out.println(strategyForm.getRefundable()+" "+strategyForm.getRatio()+" "+strategyForm.getTime());
+
 			ticketMapper.insertOneRefundStrategy(strategyForm.getPO());
 			return ResponseVO.buildSuccess("新增退票策略成功");
 		} catch (Exception e) {
@@ -340,10 +288,20 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+    @Override
+	public ResponseVO getRefundStrategies() {
+        try {
+            return ResponseVO.buildSuccess(
+                    ticketMapper.selectRefundStrategies()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("删除指定退票策略的电影列表失败");
+        }
+    }
+
 	@Override
 	public ResponseVO addRefundTicket(int ticketId) {
-		ticketMapper.lockTables(); // 锁数据库表，防止管理员修改退票策略
-
 		try {
 			Ticket ticket = ticketMapper.selectTicketById(ticketId);
 			int scheduleId = ticket.getScheduleId();
@@ -379,7 +337,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	@Override
 	public ResponseVO completeRefundTicket(int ticketId) {
 		try {
-			ticketMapper.unlockTables(); // 解锁数据库表，管理员现在开始可以修改退票策略
 			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
 				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
 				return ResponseVO.buildSuccess("退票成功");
@@ -458,6 +415,72 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
+		}
+	}
+
+	@Override
+	public ResponseVO searchAllRefundStrategy() {
+		try {
+			List<TicketRefundStrategyVO> ticketRefundStrategyVOList = new ArrayList<>();
+			ticketMapper.selectRefundStrategies().forEach(ticketRefundStrategy -> {
+				ticketRefundStrategyVOList.add(new TicketRefundStrategyVO(ticketRefundStrategy));
+			});
+			return ResponseVO.buildSuccess(ticketRefundStrategyVOList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取已有的所有退票策略失败");
+		}
+	}
+
+	@Override
+	public ResponseVO getMoviesNotInRefundStrategy() {
+		try {
+			List<MovieVO> movieVOList = new ArrayList<>();
+			ticketMapper.selectMovieNotInRefundStrategy().forEach(
+					movie -> {
+						movieVOList.add(new MovieVO(movie));
+					}
+			);
+			return ResponseVO.buildSuccess(movieVOList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取未被指定退票策略的电影列表失败");
+		}
+	}
+
+	@Override
+	public ResponseVO getMoviesInRefundStrategy() {
+		try {
+			List<MovieVO> movieVOList = new ArrayList<>();
+			ticketMapper.selectRefundStrategies().forEach(
+					ticketRefundStrategy -> {
+						ticketRefundStrategy.getMovieList().forEach(
+								movie -> {
+									movieVOList.add(new MovieVO(movie));
+								}
+						);
+					}
+			);
+			return ResponseVO.buildSuccess(movieVOList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取所有已经指定退票策略的电影列表失败");
+		}
+	}
+
+	@Override
+	public ResponseVO getMoviesByRefundStrategy(int strategyId) {
+		try {
+			List<MovieVO> movieVOList = new ArrayList<>();
+			ticketMapper.selectRefundStrategyById(strategyId).getMovieList().forEach(
+					movie -> {
+						movieVOList.add(new MovieVO(movie));
+					}
+			);
+			return ResponseVO.buildSuccess(movieVOList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("获取使用指定退票策略的电影列表失败");
 		}
 	}
 }

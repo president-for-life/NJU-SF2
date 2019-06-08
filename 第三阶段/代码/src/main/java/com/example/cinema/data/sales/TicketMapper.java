@@ -1,5 +1,6 @@
 package com.example.cinema.data.sales;
 
+import com.example.cinema.po.Movie;
 import com.example.cinema.po.Ticket;
 import com.example.cinema.po.TicketRefundStrategy;
 import org.apache.ibatis.annotations.Mapper;
@@ -61,6 +62,11 @@ public interface TicketMapper {
     List<Ticket> selectTicketsByUser(int userId);
 
     /**
+     * 选择某订单的电影票
+     */
+    List<Ticket> selectTicketsByOrder(int orderId);
+
+    /**
      * 定时删除已失效的多个电影票
      */
     @Scheduled(cron = "0/1 * * * * ?")
@@ -69,19 +75,6 @@ public interface TicketMapper {
     /*================================================================================
     退票策略
      */
-
-    /**
-     * 锁退票策略表、退票策略电影表
-     * 用户进入退票流程前使用
-     * 防止管理员在退票流程中修改退票策略
-     */
-    void lockTables();
-
-    /**
-     * 解锁退票策略表、退票策略电影表
-     * 用户完成退票流程后使用
-     */
-    void unlockTables();
 
     /**
      * 插入单一退票策略
@@ -133,4 +126,11 @@ public interface TicketMapper {
      * @return 用到movieList的po
      */
     List<TicketRefundStrategy> selectRefundStrategies();
+
+    /**
+     * 选择所有有效的可供添加到退票策略的中的未下架的电影
+     *
+     * @return
+     */
+    List<Movie> selectMovieNotInRefundStrategy();
 }
