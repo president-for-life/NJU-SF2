@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 影厅管理
  *
- * @author 范佳杰，徐志乐
+ * @author 范佳杰
+ * @author 徐志乐
  * @date 2019/4/12 1:59 PM
  */
 @RestController
@@ -31,6 +32,5 @@ public class HallController {
     public ResponseVO updateOneHall(@RequestBody HallForm hallUpdateForm) {
         return hallService.updateOneHall(hallUpdateForm);
     }
-
 
 }

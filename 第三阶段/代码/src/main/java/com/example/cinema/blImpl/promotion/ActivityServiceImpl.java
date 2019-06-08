@@ -80,8 +80,7 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
-    @Override
-    public List<Activity> getActivitiesByMovie(int movieId) {
+    private List<Activity> getActivitiesByMovie(int movieId) {
         try {
             return activityMapper.selectActivitiesByMovie(movieId);
         } catch (Exception e) {
@@ -90,8 +89,7 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
-    @Override
-    public List<Activity> getActivitiesWithoutMovie() {
+    private List<Activity> getActivitiesWithoutMovie() {
         try {
             return activityMapper.selectActivitiesWithoutMovie();
         } catch (Exception e) {

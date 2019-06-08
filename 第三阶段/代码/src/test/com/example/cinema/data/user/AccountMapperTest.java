@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class) //导入spring测试框架[2]
+@ExtendWith(SpringExtension.class) //导入spring测试框架
 @SpringBootTest  //提供spring依赖注入
 @Transactional  //事务管理，默认回滚,如果配置了多数据源记得指定事务管理器
 @DisplayName("Test AccountMapper")
@@ -27,7 +27,7 @@ class AccountMapperTest {
     private static User user;
 
     @BeforeAll
-    void setUp() {
+    static void setUp() {
         user = new User();
         user.setRole("admin");
         user.setUsername("test_user");
