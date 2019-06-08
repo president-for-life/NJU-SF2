@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	var selectedMovieIds = new Set();
+	var selectedMovieNames = new Set();
 
 	// getSelectableMovies();
 
@@ -33,8 +35,8 @@ $(document).ready(function () {
 	function getStrategyForm() {
 		return {
 			refundable: $('#add-strategy-refundable-input').val() == "是",
-			ratio:$('#add-strategy-ratio-input').val(),
-			time:$('#add-strategy-time-input').val()
+			ratio: $('#add-strategy-ratio-input').val(),
+			time: $('#add-strategy-time-input').val()
 			// movieList: selectedMovieIds
 		};
 	}
@@ -46,14 +48,15 @@ $(document).ready(function () {
 	 */
 	function validateStrategyForm(data) {
 		var isValidate = true;
-		if(!data.refundable){
+		if (!data.refundable) {
 			isValidate = false;
 			$('#add-strategy-refundable-input').parent('.form-group').addClass('has-error');
 		}
-		if(!data.ratio){
+		if (!data.ratio) {
 			isValidate = false;
 			$('#add-strategy-ratio-input').parent('.form-group').addClass('has-error');
-		}if(!data.time){
+		}
+		if (!data.time) {
 			isValidate = false;
 			$('#add-strategy-time-input').parent('.form-group').addClass('has-error');
 		}
@@ -67,38 +70,40 @@ $(document).ready(function () {
 		$('.strategy-on-list').empty();
 		var strategyDomStr = '';
 		strategyList.forEach(function (strategy) {
-			strategyDomStr+=
-				"<li class='strategy-item card' id='strategy-"+strategy.id+"' data-strategy='"+JSON.stringify(strategy)+"'>"+
-					"<div class='strategy-info'>" +
-						"<div class='strategy-title'>" +
-							"<span class='primary-text'>退票策略id："+strategy.id+"</span>"+
-							// "<span class='strategy-operation'>修改退票策略</span>"+
-						"</div>"+
-						"<div style='display: flex'>" +
-							"<span class='label "+(strategy.refundable ? 'primary-bg' : 'error-bg')+"'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>"+
-							"<span>返还比例："+strategy.ratio+"</span>"+
-							"<span>开场前 "+strategy.time+" 分钟不允许退票</span>"+
-						"</div>"+
-						"<div class='movie-list-for-strategy' >" +
-							"<span>使用本退票策略的电影：</span>"+
-							"<button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
-				" class='icon-plus-sign'></i>新增电影</button>"+
-							"<button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
-				" class='icon-minus-sign'></i>删除电影</button>"+
-						"</div>"+
-					"</div>"+
+			strategyDomStr +=
+				"<li class='strategy-item card' id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+				"<div class='strategy-info'>" +
+				"<div class='strategy-title'>" +
+				"<span class='primary-text'>退票策略id：" + strategy.id + "</span>" +
+				// "<span class='strategy-operation'>修改退票策略</span>"+
+				"</div>" +
+				"<div style='display: flex'>" +
+				"<span class='label " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
+				"<span>返还比例：" + strategy.ratio + "</span>" +
+				"<span>开场前 " + strategy.time + " 分钟不允许退票</span>" +
+				"</div>" +
+				"<div class='movie-list-for-strategy' >" +
+				"<span>使用本退票策略的电影：</span>" +
+				"<button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
+				" class='icon-plus-sign'></i>新增电影</button>" +
+				"<button type='button' class='btn btn-error remove-movie-for-strategy'><i" +
+				" class='icon-minus-sign'></i>删除电影</button>" +
+				"</div>" +
+				"</div>" +
 				"</li>";
 		});
 		$('.strategy-on-list').append(strategyDomStr);
 
+		// 渲染已有的退票策略对应的电影列表
 		strategyList.forEach(function (strategy) {
 			var movieDomStr = '';
 			strategy.movieList.forEach(function (movie) {
-				movieDomStr+="<span class='label label-primary'>"+movie.name+"</span>";
+				movieDomStr += "<span class='label label-primary movie-for-strategy'"+" data-movieid="+movie.id+" data-strategyid="+strategy.id+">" +
+					movie.name +" </span>";
 				// console.log(movie.name);
 			});
 			// console.log(movieDomStr);
-			$('#strategy-'+strategy.id+' .movie-list-for-strategy span:first').after(movieDomStr);
+			$('#strategy-' + strategy.id + ' .movie-list-for-strategy span:first').after(movieDomStr);
 			// $('#strategy-'+1+' .movie-list-for-strategy span:first').after("<span>测试</span>")
 		});
 	}
@@ -117,9 +122,6 @@ $(document).ready(function () {
 			}
 		);
 	}
-
-	var selectedMovieIds = new Set();
-	var selectedMovieNames = new Set();
 
 	/**
 	 * 获取可以选择的电影列表：这些电影必须还没有指定退票策略、未下架
@@ -154,11 +156,11 @@ $(document).ready(function () {
 	 * 点击"修改退票策略"Modal的"确定"按钮：将新输入的Form提交给后端
 	 */
 	$('#update-strategy-form-btn').click(function () {
-		var formData={
+		var formData = {
 			id: Number($('#updateStrategyModal')[0].dataset.strategyId),
-			refundable: $('#update-strategy-refundable-input').val()=="是",
-			ratio:$('#update-strategy-ratio-input').val(),
-			time:$('#update-strategy-time-input').val()
+			refundable: $('#update-strategy-refundable-input').val() == "是",
+			ratio: $('#update-strategy-ratio-input').val(),
+			time: $('#update-strategy-time-input').val()
 		};
 
 		postRequest(
@@ -185,7 +187,7 @@ $(document).ready(function () {
 	$(document).on('click', '.strategy-item', function (e) {
 		var strategy = JSON.parse(e.currentTarget.dataset.strategy);
 
-		$("#update-strategy-refundable-input").val(strategy.refundable?"是":"否");
+		$("#update-strategy-refundable-input").val(strategy.refundable ? "是" : "否");
 		$("#update-strategy-ratio-input").val(strategy.radio);
 		$("#update-strategy-time-input").val(strategy.time);
 
@@ -207,6 +209,10 @@ $(document).ready(function () {
 		getSelectableMovies();
 
 		var strategy = JSON.parse(e.currentTarget.parentElement.parentElement.parentElement.dataset.strategy);
+
+		// 在Modal show之前，首先进行初始化清空
+		$('#add-selected-movies').empty();
+
 		$('#addMovieForStrategyModal').modal('show');
 		$('#addMovieForStrategyModal')[0].dataset.strategyId = strategy.id;
 	});
@@ -232,9 +238,10 @@ $(document).ready(function () {
 	 */
 	function renderSelectedMovies() {
 		$('#add-selected-movies').empty();
+
 		var moviesDomStr = "";
 		selectedMovieNames.forEach(function (movieName) {
-			moviesDomStr+="<span class='label label-primary'>"+movieName+"</span>";
+			moviesDomStr += "<span class='label label-primary'>" + movieName + "</span>";
 		});
 		$('#add-selected-movies').append(moviesDomStr);
 	}
@@ -243,12 +250,18 @@ $(document).ready(function () {
 	 * 点击"为退票策略新增电影"Modal的"确定"按钮：将选择的要添加的电影列表提交给后端
 	 */
 	$('#add-movie-for-strategy-form-btn').click(function () {
-		var movieIdList=[];
-		selectedMovieIds.forEach(function(movieId){
+		// console.log(selectedMovieIds);
+		// 如果本次没有选中任何电影，直接返回
+		if (selectedMovieIds==undefined||selectedMovieIds.size == 0) {
+			$('#addMovieForStrategyModal').modal('hide');
+			return;
+		}
+		var movieIdList = [];
+		selectedMovieIds.forEach(function (movieId) {
 			movieIdList.push(movieId);
 		});
 		postRequest(
-			'/ticket/refundStrategy/addMovies?refundStrategyId='+Number(document.getElementById('addMovieForStrategyModal').dataset.strategyId),
+			'/ticket/refundStrategy/addMovies?refundStrategyId=' + Number(document.getElementById('addMovieForStrategyModal').dataset.strategyId),
 			movieIdList,
 			function (res) {
 				if (res.success) {
@@ -293,4 +306,41 @@ $(document).ready(function () {
 	// 		}
 	// 	);
 	// });
+
+	// ===================================================================================
+	// ===============================为退票策略删除指定的电影列表============================
+	// ===================================================================================
+	$(document).on('click','.movie-for-strategy',function (e) {
+		e.stopPropagation();
+		var movieId=Number(e.currentTarget.dataset.movieid);
+		var movieName=e.currentTarget.innerText;
+		var isToRemove=confirm('确定删除电影："' + movieName+'" ？');
+		var strategyId=Number(e.currentTarget.dataset.strategyid);
+
+		// console.log(movieId, movieName, strategyId);
+		if (isToRemove) {
+			removeSelectedMovie(strategyId,movieId)
+		}
+	});
+
+	/**
+	 * 删除指定退票策略的选中电影
+	 */
+	function removeSelectedMovie(strategyId,movieId) {
+		postRequest(
+			'/ticket//refundStrategy/removeMovies?refundStrategyId=' + strategyId,
+			[movieId],
+			function (res) {
+				if (res.success) {
+					getStrategyList();
+				} else {
+					alert(res.message);
+				}
+			},
+			function (error) {
+				alert(JSON.stringify(error));
+			}
+		);
+	}
+
 });
