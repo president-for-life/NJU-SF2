@@ -70,14 +70,6 @@ public interface VIPService {
     ResponseVO addVIPCard(int userId, int strategyId);
 
     /**
-     * 获得会员卡信息
-     * TESTED
-     *
-     * @author 李莹
-     */
-    ResponseVO getVIPCardStrategy(int strategyId);
-
-    /**
      * 充值会员卡
      * TESTED
      *

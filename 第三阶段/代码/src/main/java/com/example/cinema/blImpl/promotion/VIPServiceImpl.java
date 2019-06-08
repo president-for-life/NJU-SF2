@@ -25,7 +25,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     会员卡策略
      */
 
-    // TESTED
     @Override
     public ResponseVO addStrategy(VIPCardStrategyForm strategyForm) {
         VIPCardStrategy strategy = strategyForm.getPO();
@@ -38,7 +37,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
     @Override
     public ResponseVO updateStrategy(VIPCardStrategyForm strategyForm) {
         try {
@@ -58,6 +56,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
+    @Override
     public ResponseVO removeStrategy(int strategyId) {
         try {
             vipCardMapper.deleteStrategy(strategyId);
@@ -68,7 +67,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
     @Override
     public ResponseVO getStrategy(int strategyId) {
         try {
@@ -79,7 +77,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
     @Override
     public ResponseVO getAllStrategies() {
         try {
@@ -94,7 +91,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     会员卡
      */
 
-    // TESTED
     @Override
     public ResponseVO addVIPCard(int userId, int strategyId) {
         try {
@@ -119,21 +115,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
-    @Override
-    public ResponseVO getVIPCardStrategy(int strategyId) {
-        try {
-            VIPCardStrategy vipCardStrategy
-                    = vipCardMapper.selectStrategyById(strategyId);
-            VIPCardStrategyVO vipCardStrategyVO = vipCardStrategy.getVO();
-            return ResponseVO.buildSuccess(vipCardStrategyVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("获取会员卡策略失败！");
-        }
-    }
-
-    // TESTED
     @Override
     public ResponseVO charge(VIPCardChargeForm vipCardChargeForm) {
         try {
@@ -172,7 +153,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TODO UNTESTED
     @Override
     public boolean pay(int userId, double pay) {
         if (pay < 0) {
@@ -195,7 +175,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
     @Override
     public ResponseVO getCardByUserId(int userId) {
         try {
@@ -217,7 +196,6 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
     }
 
-    // TESTED
     @Override
     public ResponseVO getChargeRecords(int vipCardId) {
         try {
