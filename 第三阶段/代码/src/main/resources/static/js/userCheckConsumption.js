@@ -20,13 +20,13 @@ $(document).ready(function () {
                         "<td></td>" +
                         "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
                         "</tr>"+
-                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" >"+
                         "<td>"+"票价："+ticket.schedule.fare.toFixed(2)+"</td>"+
                         "<td></td>" +
                         "<td></td>" +
                         "</tr>"+
-                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" width='100%'> >"+
-                        "<td>"+"实际消费金额："+ticket.actualPayment.toFixed(2)+"</td>"+
+                        "<tr style=\"display: none;\"  bgcolor=\"#e4e7ea\" >"+
+                        "<td>"+"消费金额："+ticket.actualPayment.toFixed(2)+"</td>"+
                         "<td></td>" +
                         "<td></td>" +
                         "</tr>";
