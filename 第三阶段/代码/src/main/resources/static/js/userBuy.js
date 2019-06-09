@@ -29,12 +29,12 @@ function renderOrderList(list) {
             let appendButton = "";
             if (seat.state === "支付已完成") {
                 appendButton =
-                    "<button class='pick-up-btn btn-primary' id='pick-up-" + seat.id + "'>取票</button>" +
-                    "<button class='refund-btn btn-primary' id='refund-" + seat.id + "'>退票</button>";
+                    "<button class='pick-up-btn user-buy-btn' id='pick-up-" + seat.id + "'>取票</button>" +
+                    "<button class='refund-btn user-buy-btn' id='refund-" + seat.id + "'>退票</button>";
             }
 
 			seatsDomStr +=
-                "        <div " + "id='ticket-" + seat.id + "' data-ticket='" + JSON.stringify(seat) + "'>" +
+                "        <div class='seat'" + "id='ticket-" + seat.id + "' data-ticket='" + JSON.stringify(seat) + "'>" +
                 "            <span>" + (seat.rowIndex + 1) + "排" + (seat.columnIndex + 1) + "座" + "</span>" +
                 appendButton +
                 "        </div>";

@@ -74,13 +74,12 @@ $(document).ready(function () {
 				"<li class='strategy-item card' id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
 				"    <div class='strategy-info'>" +
 				"        <div class='strategy-title'>" +
-				"            <span class='primary-text'>退票策略id：" + strategy.id + "</span>" +
-				// "<span class='strategy-operation'>修改退票策略</span>"+
+				"            <span class='title'>退票策略" + strategy.id + "</span>" +
 				"        </div>" +
-				"        <div style='display: flex'>" +
-				"            <span class='label " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
-				"            <span>返还比例：" + strategy.ratio + "</span>" +
-				"            <span>开场前 " + strategy.time + " 分钟不允许退票</span>" +
+				"        <div class='strategy-details'>" +
+				"            <span class='label strategy-detail " + (strategy.refundable ? 'primary-bg' : 'error-bg') + "'>" + (strategy.refundable ? '允许退票' : '禁止退票') + "</span>" +
+				"            <span class='strategy-detail'>返还比例：" + strategy.ratio + "</span>" +
+				"            <span class='strategy-detail'>开场前 " + strategy.time + " 分钟不允许退票</span>" +
 				"        </div>" +
 				"        <div class='movie-list-for-strategy' >" +
 				"            <span>使用本退票策略的电影：</span>" +
