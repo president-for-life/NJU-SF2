@@ -7,13 +7,18 @@ $(document).ready(function () {
             console.log(res);
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
-            var recordDomStr = "<tr>"+
-                "<td>"+"购买时间"+"</td>"+
-                "<td></td>" +
-                "<td></td>" +
-                "</tr>"+"<div>";
+            if(data.length!==0) {
+                var recordDomStr = "<tr>" +
+                    "<td>" + "购买时间" + "</td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "</tr>" + "<div>";
+            }
+            else{
+
+            }
             data.forEach(function (ticket) {
-                if(ticket.state == "支付已完成" || ticket.state == "已出票") {
+                if(ticket.state == "支付已完成" || ticket.state =="已出票") {
                     recordDomStr +=
                         "<tr> " +
                         "<td>" + timetrans(ticket.time)+ "</td>" +
@@ -32,8 +37,10 @@ $(document).ready(function () {
                         "</tr>";
                 }
             });
-            recordDomStr+="</div>";
-            $content_container_tbody.append(recordDomStr);
+            if(data.length!==0) {
+                recordDomStr += "</div>";
+                $content_container_tbody.append(recordDomStr);
+            }
         },
         function (error) {
             alert(error);
