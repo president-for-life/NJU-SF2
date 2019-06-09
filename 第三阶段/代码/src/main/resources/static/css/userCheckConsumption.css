@@ -1,7 +1,7 @@
 .table {
     flex: 1;
     min-height: 100px;
-    width: 100%;
+    min-width: 100%;
     padding: 20px;
 }
 .card{
