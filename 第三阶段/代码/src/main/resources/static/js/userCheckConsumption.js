@@ -15,7 +15,11 @@ $(document).ready(function () {
                     "</tr>" + "<div>";
             }
             else{
-
+                var recordDomStr = "<tr>" +
+                    "<td>" + "无消费记录" + "</td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "</tr>" ;
             }
             data.forEach(function (ticket) {
                 if(ticket.state == "支付已完成" || ticket.state =="已出票") {
@@ -39,8 +43,9 @@ $(document).ready(function () {
             });
             if(data.length!==0) {
                 recordDomStr += "</div>";
-                $content_container_tbody.append(recordDomStr);
+
             }
+            $content_container_tbody.append(recordDomStr);
         },
         function (error) {
             alert(error);
