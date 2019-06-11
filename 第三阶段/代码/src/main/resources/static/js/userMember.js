@@ -89,38 +89,30 @@ $(document).on('click','#buy-strategy-list .strategy-container .strategy-item', 
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#buy-strategy-' + strategy.id);
 
-    if($('#buyModal')[0].dataset.strategyId === undefined
+    if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
         $item.parent().siblings().children().css('background', '#1caf9a');
         $item.css('background', '#ff9900');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
     } else { // 已选该卡
         $item.css('background', '#1caf9a');
-        $('#buyModal')[0].dataset.strategyId = undefined;
+        $('#buyModal')[0].dataset.strategyId = -1;
     }
-});
-
-// 鼠标悬停在会员卡上的效果
-$(".strategy-item").hover(function(){
-    console.log("hover");
 });
 
 $(document).on('click','#switch-strategy-list .strategy-container .strategy-item', function (e) {
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#switch-strategy-' + strategy.id);
 
-    console.log($('#buyModal')[0].dataset.strategyId);
     console.log(strategy.id);
-    if($('#buyModal')[0].dataset.strategyId === undefined
+    if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
-        $item.parent().siblings().children().css('background', '#1caf9a');
-        $item.css('background', '#ff9900');
+        $item.parent().siblings().children().css('box-shadow', '');
+        $item.css('box-shadow', '10px 10px 5px #888888');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
-        console.log("hey");
     } else { // 已选该卡
-        $item.css('background', '#1caf9a');
-        $('#buyModal')[0].dataset.strategyId = undefined;
-        console.log("haha");
+        $item.css('box-shadow', '');
+        $('#buyModal')[0].dataset.strategyId = -1;
     }
 });
 
@@ -194,7 +186,6 @@ $(document).on('click', '#r', function () {
     else {
         $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="none";
     }
-
 });
 
 // 点击更换会员卡
@@ -229,13 +220,16 @@ function confirmCommit() {
     if (validateForm()) {
         if ($('#userMember-cardNum').val() === "123123123" && $('#userMember-cardPwd').val() === "123123") {
             if (isBuyState) {
-                if($('#buyModal')[0].dataset.strategyId == undefined) {
+                let strategyId = $('#buyModal')[0].dataset.strategyId;
+                console.log("buy:");
+                console.log(strategyId);
+                if(strategyId == -1) {
                     alert("请选择会员卡！");
                     return;
                 }
                 postRequest(
                     '/vip/add?userId=' + sessionStorage.getItem('id')
-                    + '&strategyId=' + $('#buyModal')[0].dataset.strategyId,
+                    + '&strategyId=' + strategyId,
                     null,
                     function (res) {
                         $('#buyModal').modal('hide');
