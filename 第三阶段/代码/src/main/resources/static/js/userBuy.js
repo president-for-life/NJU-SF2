@@ -1,3 +1,5 @@
+var strategy_first;  // 首次请求获取到的strategy
+
 $(document).ready(function () {
 	getOrderList();
 });
@@ -143,6 +145,7 @@ $(document).on('click', '.refund-btn', function (e) {
 	// console.log(ticketId);
 
 	let strategy = getStrategyForTicket(ticketId);
+	strategy_first = strategy;
 
 	// 如果该电影票没有对应的退票策略，默认不允许退票
 
@@ -199,6 +202,18 @@ $(document).on('click', '.refund-btn', function (e) {
 // 点击"退票"Modal的"确认退票"按钮
 $(document).on('click', '#refund-ticket-form-btn', function (e) {
 	var ticketId = Number($('#refund-ticket-ticketid').text());
+
+	var strategy_second = getStrategyForTicket(ticketId);  // 第二次获取的strategy
+	// 如果两次获取到的strategy不相同，说明退票策略已经被修改，用户需要重新进行退票
+	// todo：还没有进行测试
+	console.log(strategy_first);
+	console.log(strategy_second);
+
+	if (!isSameStrategies(strategy_first,strategy_second)) {
+		alert("所选电影票对应的退票策略已经被修改，请重新进行退票！")
+		$('#refundTicketModal').modal('hide');
+		return;
+	}
 
 	postRequest(
 		'/ticket/refund/confirm?ticketId=' + ticketId,
@@ -282,4 +297,36 @@ function timeMinuteDifference(startDate, endDate) {
 	var end = new Date(endDate);
 	var mm = end - start;  // 毫秒差
 	return parseInt(mm / 60000);  // 分钟差:：整数
+}
+
+function isSameStrategies(strategy_first, strategy_second) {
+	// 如果第二次没有查询到的strategy
+	if (strategy_second == -1) {
+		console.log("第二次查询strategy没有获取到");
+		return false;
+	}
+
+	// 比较strategy的id、refundable、ratio、time、movieList
+	if (strategy_first.id != strategy_second.id) {
+		console.log("id不同");
+		return false;
+	}
+	if (strategy_first.refundable != strategy_second.refundable) {
+		console.log("refundable不同");
+		return false;
+	}
+	if (strategy_first.ratio != strategy_second.ratio) {
+		console.log("id不同");
+		return false;
+	}
+	if (strategy_first.time != strategy_second.time) {
+		console.log("time不同");
+		return false;
+	}
+	if (JSON.stringify(strategy_first.movieList) != JSON.stringify(strategy_second.movieList)) {
+		console.log("movieList不同")
+		return false;
+	}
+	console.log("两次获取的退票策略相同");
+	return true;
 }
