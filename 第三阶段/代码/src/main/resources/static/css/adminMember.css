@@ -1,15 +1,21 @@
+.big {
+    font-size: 20px;
+}
+
 .strategy-container {
-    flex-basis: 30%;
     display: flex;
     width: 100%;
-    min-height: 50px;
+    min-height: 180px;
     margin: 20px 0;
 }
 
 .strategy-item {
+    background: url("../images/vipCard.jpg");
+    background-size: 100% 100%;
+    border-radius: 10px;
     display: flex;
+    flex-basis: 30%;
     flex-direction: column;
-    min-width: 40%;
     padding: 20px;
     color: #fff;
     justify-content: space-around;
@@ -22,6 +28,18 @@
 
 .content-member {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+}
+
+.discount {
+    color: yellow;
+}
+
+.amount {
+    font-size: 18px;
+}
+
+.SE {
+    color: #00d6e9;
 }
