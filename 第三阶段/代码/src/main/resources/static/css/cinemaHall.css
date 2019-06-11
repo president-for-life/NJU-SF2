@@ -3,14 +3,14 @@
 }
 
 .cinema-hall-name {
-    font-size: 18px;
+    font-size: 24px;
     color: #000;
 
     cursor: pointer;
 }
 
 .cinema-hall-size {
-    font-size: 14px;
+    font-size: 18px;
     color: #999;
 
     cursor: pointer;
@@ -49,6 +49,15 @@
 
     border: none;
     outline: none;
+}
+
+.hall-item {
+    padding: 20px 20px 20px 20px;
+    border-radius: 10px;
+}
+
+.hall-item:hover {
+    background: #beffcc;
 }
 
 .content-header {

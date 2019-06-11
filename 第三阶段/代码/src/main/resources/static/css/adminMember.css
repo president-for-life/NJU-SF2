@@ -21,6 +21,10 @@
     justify-content: space-around;
 }
 
+.strategy-item:hover {
+    box-shadow: 10px 10px 5px #888888;
+}
+
 .content-header {
     display: flex;
     justify-content: space-between;
