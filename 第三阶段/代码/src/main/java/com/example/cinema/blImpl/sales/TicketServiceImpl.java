@@ -300,7 +300,7 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			TicketRefundStrategy ticketRefundStrategy
 					= ticketMapper.selectRefundStrategyByMovie(movieId);
 
-			System.out.println(ticketRefundStrategy.getId());
+//			System.out.println(ticketRefundStrategy.getId());
 
 //			// 计算指定要退票的电影票所在场次的放映时间是否在允许退票的时间段
 //			Date movieStartDate = scheduleService.getScheduleItemById(scheduleId).getStartTime();

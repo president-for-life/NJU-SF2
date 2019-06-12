@@ -21,6 +21,10 @@
     padding: 10px 10px 10px 0;
 }
 
+.strategy-item:hover {
+    background-color: rgba(28, 175, 154, 0.12);
+}
+
 .strategy-info {
     flex: 1;
     padding: 10px 20px 0 20px;
@@ -31,4 +35,8 @@
     font-weight: bold;
     align-items: center;
     padding: 0 0 10px 0;
+}
+
+.add-movie-for-strategy {
+    
 }
