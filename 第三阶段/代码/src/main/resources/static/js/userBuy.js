@@ -249,20 +249,6 @@ $(document).on('click', '#refund-ticket-form-btn', function (e) {
  */
 function getStrategyForTicket(ticketId) {
 	let strategy;
-	// postRequest(
-	// 	'/ticket/refund/choose?ticketId=' + ticketId,
-	// 	null,
-	// 	function (res) {
-	// 		if (res.success) {
-	// 			strategy= JSON.stringify(res.content);
-	// 		} else {
-	// 			strategy = -1;
-	// 		}
-	// 	},
-	// 	function (error) {
-	// 		alert(JSON.stringify(error));
-	// 	}
-	// );
 	// todo：这里如果不设置async=false，就会出现异步执行，该函数的返回结果会变成"undefined"；不知道有没有别的解决办法
 	$.ajax({
 		async: false,
