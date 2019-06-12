@@ -20,8 +20,11 @@
     vertical-align:middle;
     border-top: 1px solid #dddddd;
 }
+.itemtop{
+    line-height:3
+}
 .item{
-    flex: 1;
+    line-height:3;
 }
 .item:hover{
     background: #f6faff;

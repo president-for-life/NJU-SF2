@@ -19,7 +19,7 @@ $(document).ready(function () {
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
-                        "<tr class='item'>" +
+                        "<tr class='item' id='r'>" +
                         "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
                         "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
                         "<td valign='middle'>"+
@@ -60,7 +60,7 @@ $(document).ready(function () {
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
-                        "<tr class='item'>" +
+                        "<tr class='item' id='r'>" +
                         "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
                         "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
                         "<td valign='middle'>"+
@@ -94,8 +94,8 @@ $(document).ready(function () {
 
                 var $content_container_tbody = $("#tbody2");
                 $content_container_tbody.empty();
-                var consumptionDomStr = "<tr >"+
-                    "<td align='center'>"+"名称"+"</td>"+
+                var consumptionDomStr = "<tr  class='itemtop'>"+
+                    "<td align='center' >"+"名称"+"</td>"+
                     "<td align='center'>"+"描述"+"</td>" +
                     "<td align='center'>"+"使用门槛"+"</td>"+
                     "<td align='center'>"+"优惠金额"+"</td>" +
@@ -106,8 +106,7 @@ $(document).ready(function () {
                 data.forEach(function (coupon) {
 
                     consumptionDomStr+=
-                        "<tr></tr>"+
-                        "<tr class='item'>" +
+                        "<tr class='item' id='r'>" +
                         "<td style=\"display: none\" class='coupon-id'>" + coupon.id+ "</td>" +
                         "<td style=\"width: 180px; overflow: auto;position: center\" align='center'>" +coupon.name+ "</td>"+
                         "<td  style=\"width: 180px; overflow: auto;position: center\" align='center'>"+coupon.description+"</td>"+
@@ -200,7 +199,21 @@ $(document).ready(function () {
                 $("input[name='colModel']").prop("checked",false) //如果不是选中的，就移除所有的状态是checked的选项。
                 console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
             }
+        };
+    $(document).on('click', '#r', function () {
+            a=$(this).find("input");
+        if(a.checked)//判断按钮的状态是不是选中的
+        {
+            $(this).find("input").prop("checked",false);//如果是选中的，就让所有的状态为选中。
+        }
+        else
+        {
+            $(this).find("input").prop("checked",true) ;//如果不是选中的，就移除所有的状态是checked的选项。
+            console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
         }
 
+
+    });
+    
 
 });
