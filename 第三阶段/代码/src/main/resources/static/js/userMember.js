@@ -91,11 +91,11 @@ $(document).on('click','#buy-strategy-list .strategy-container .strategy-item', 
 
     if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
-        $item.parent().siblings().children().css('background', '#1caf9a');
-        $item.css('background', '#ff9900');
+        $item.parent().siblings().children().css('box-shadow', '');
+        $item.css('box-shadow', '10px 10px 5px #888888');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
     } else { // 已选该卡
-        $item.css('background', '#1caf9a');
+        $item.css('box-shadow', '');
         $('#buyModal')[0].dataset.strategyId = -1;
     }
 });
@@ -104,7 +104,6 @@ $(document).on('click','#switch-strategy-list .strategy-container .strategy-item
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#switch-strategy-' + strategy.id);
 
-    console.log(strategy.id);
     if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
         $item.parent().siblings().children().css('box-shadow', '');

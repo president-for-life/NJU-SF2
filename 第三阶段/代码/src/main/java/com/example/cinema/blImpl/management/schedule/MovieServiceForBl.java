@@ -7,10 +7,7 @@ import com.example.cinema.po.Movie;
  */
 public interface MovieServiceForBl {
     /**
-     * 根据id查找电影
-     *
-     * @param id 电影id
-     * @return po.Movie
+     * @author 范佳杰
      */
     Movie getMovieById(int id);
 }

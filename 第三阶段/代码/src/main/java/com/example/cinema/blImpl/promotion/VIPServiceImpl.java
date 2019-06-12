@@ -18,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class VIPServiceImpl implements VIPService, VIPServiceForBl {
+
     @Autowired
     VIPCardMapper vipCardMapper;
 
@@ -59,8 +60,13 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Override
     public ResponseVO removeStrategy(int strategyId) {
         try {
-            vipCardMapper.deleteStrategy(strategyId);
-            return ResponseVO.buildSuccess("删除会员卡充值优惠策略成功！");
+            // 只有当没有会员卡使用该策略时才能删除该策略
+            if(vipCardMapper.strategyUseCount(strategyId) == 0) {
+                vipCardMapper.deleteStrategy(strategyId);
+                return ResponseVO.buildSuccess("删除会员卡充值优惠策略成功！");
+            } else {
+                return ResponseVO.buildFailure("存在会员卡使用该充值优惠策略！");
+            }
         } catch(Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("删除会员卡充值优惠策略失败！");

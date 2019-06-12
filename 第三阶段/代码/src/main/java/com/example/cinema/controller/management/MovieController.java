@@ -34,13 +34,11 @@ public class MovieController {
 
     @RequestMapping(value = "/movie/all", method = RequestMethod.GET)
     public ResponseVO searchAllMovie() {
-        //返回结果中包括已经下架的电影
         return movieService.searchAllMovie();
     }
 
     @RequestMapping(value = "/movie/all/exclude/off", method = RequestMethod.GET)
     public ResponseVO searchOtherMoviesExcludeOff() {
-        //返回结果中不包括已经下架的电影
         return movieService.searchOtherMoviesExcludeOff();
     }
 

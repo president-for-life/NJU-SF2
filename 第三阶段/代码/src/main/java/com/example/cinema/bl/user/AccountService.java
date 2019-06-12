@@ -11,8 +11,6 @@ import com.example.cinema.vo.UserVO;
 public interface AccountService {
 
     /**
-     * 注册账号
-     *
      * @author 胡文
      */
     ResponseVO registerAccount(UserForm userForm);
@@ -25,23 +23,17 @@ public interface AccountService {
     UserVO login(UserForm userForm);
 
     /**
-     * 更新账号信息
-     *
      * @author 徐志乐
      */
     ResponseVO updateUser(UserForm userUpdateForm);
 
 
     /**
-     * 搜索全部管理员账号信息
-     *
      * @author 徐志乐
      */
     ResponseVO searchAllAdmin();
 
     /**
-     * 删除账号
-     *
      * @author 徐志乐
      */
     ResponseVO deleteOneAccount(Integer id);

@@ -13,29 +13,21 @@ import java.util.List;
 @Mapper
 public interface HallMapper {
     /**
-     * 查询所有影厅信息
-     *
      * @author 范佳杰
      */
     List<Hall> selectHalls();
 
     /**
-     * 根据id查询影厅
-     *
      * @author 范佳杰
      */
     Hall selectHallById(@Param("hallId") int hallId);
 
     /**
-     * 插入影厅
-     *
      * @author 徐志乐
      */
     void insertOneHall(Hall hall);
 
     /**
-     * 更新影厅
-     *
      * @author 徐志乐
      */
     void updateOneHall(Hall hall);

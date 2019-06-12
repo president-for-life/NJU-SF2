@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class MovieServiceImpl implements MovieService, MovieServiceForBl {
+
     private static final String SCHEDULE_ERROR_MESSAGE = "有电影后续仍有排片或已有观众购票且未使用";
 
     @Autowired
@@ -131,9 +132,6 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
 
     /**
      * 下架和修改电影的前置检查
-     *
-     * @param movieIdList 电影id数组
-     * @return ResponseVO
      */
     public ResponseVO preCheck(List<Integer> movieIdList) {
         Date thisTime = new Date();
@@ -146,14 +144,9 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
             }
         }
 
-        // 未检查是否有观众购买该电影的票并还未观看
-
         return ResponseVO.buildSuccess();
     }
 
-    /**
-     * po.Movie数组转vo.MovieVO数组
-     */
     private List<MovieVO> movieList2MovieVOList(List<Movie> movieList) {
         List<MovieVO> movieVOList = new ArrayList<>();
         for (Movie movie : movieList) {

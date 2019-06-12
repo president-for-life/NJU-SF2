@@ -25,6 +25,7 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
 
     @Autowired
     ActivityMapper activityMapper;
+
     @Autowired
     CouponServiceForBl couponService;
 
@@ -80,6 +81,11 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
+    /**
+     * 优惠电影列表中含有某电影的优惠活动
+     *
+     * @author 梁正川
+     */
     private List<Activity> getActivitiesByMovie(int movieId) {
         try {
             return activityMapper.selectActivitiesByMovie(movieId);
@@ -89,6 +95,11 @@ public class ActivityServiceImpl implements ActivityService, ActivityServiceForB
         }
     }
 
+    /**
+     * 选择条件为“观看任意电影”的优惠活动
+     *
+     * @author 梁正川
+     */
     private List<Activity> getActivitiesWithoutMovie() {
         try {
             return activityMapper.selectActivitiesWithoutMovie();

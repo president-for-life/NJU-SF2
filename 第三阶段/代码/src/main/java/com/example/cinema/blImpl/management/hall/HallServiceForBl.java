@@ -8,8 +8,6 @@ import com.example.cinema.po.Hall;
  */
 public interface HallServiceForBl {
     /**
-     * 搜索影厅
-     *
      * @author 范佳杰
      */
     Hall getHallById(int hallId);

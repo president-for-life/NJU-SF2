@@ -19,6 +19,7 @@ import java.util.*;
  */
 @Service
 public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForBl {
+
     private static final String TIME_CONFLICT_ERROR_MESSAGE = "时间段冲突";
     private static final String CROSS_DAYS_ERROR_MESSAGE = "起止时间不能跨天";
     private static final String DATE_INTERVAL_LESS_THAN_LENGTH_ERROR_MESSAGE = "起止时间段不能少于电影时长或结束时间不能早于开始时间";
@@ -30,14 +31,14 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
     private static final String ID_LIST_NULL_ERROR_MESSAGE = "id列表不可为空";
     private static final String VIEW_CONFLICT_ERROR_MESSAGE = "有排片信息已对观众可见，无法删除或修改";
 
-
     @Autowired
     private ScheduleMapper scheduleMapper;
+
     @Autowired
     private MovieServiceForBl movieServiceForBl;
+
     @Autowired
     private HallServiceForBl hallServiceForBl;
-
 
     @Override
     public ResponseVO addSchedule(ScheduleForm scheduleForm) {
@@ -138,7 +139,6 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
             e.printStackTrace();
             return null;
         }
-
     }
 
     @Override
@@ -223,10 +223,6 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
 
     /**
      * 获得num天后的日期
-     *
-     * @param oldDate
-     * @param num
-     * @return
      */
     Date getNumDayAfterDate(Date oldDate, int num) {
         Calendar calendarTime = Calendar.getInstance();
@@ -238,9 +234,6 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
 
     /**
      * 新增或修改排片信息的公共前置检查
-     *
-     * @param scheduleForm
-     * @return
      */
     ResponseVO preCheck(ScheduleForm scheduleForm) {
         try {
@@ -302,7 +295,6 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
             if (s.getEndTime().before(endDate) && s.getEndTime().after(today)) {
                 return true;
             }
-
         }
 
         return false;
@@ -329,9 +321,6 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
         return scheduleVOList;
     }
 
-    /**
-     * po.ScheduleItem数组转vo.ScheduleItemVO数组
-     */
     private List<ScheduleItemVO> scheduleItemList2ScheduleItemVOList(List<ScheduleItem> scheduleItemList) {
         List<ScheduleItemVO> scheduleItemVOList = new ArrayList<>();
         for (ScheduleItem scheduleItem : scheduleItemList) {

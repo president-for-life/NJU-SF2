@@ -13,8 +13,6 @@ import java.util.Date;
  */
 public interface ScheduleService {
     /**
-     * 添加排片信息
-     *
      * @author 范佳杰
      */
     ResponseVO addSchedule(ScheduleForm scheduleForm);
@@ -42,15 +40,11 @@ public interface ScheduleService {
     ResponseVO deleteBatchOfSchedule(ScheduleBatchDeleteForm scheduleBatchDeleteForm);
 
     /**
-     * 修改排片信息
-     *
      * @author 范佳杰
      */
     ResponseVO updateSchedule(ScheduleForm scheduleForm);
 
     /**
-     * 根据排片id获取排片信息
-     *
      * @author 范佳杰
      */
     ResponseVO getScheduleById(int scheduleId);

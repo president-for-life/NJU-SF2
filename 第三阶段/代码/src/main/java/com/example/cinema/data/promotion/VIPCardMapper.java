@@ -20,36 +20,26 @@ public interface VIPCardMapper {
      */
 
     /**
-     * 插入会员卡策略
-     *
      * @author 梁正川
      */
     int insertStrategy(VIPCardStrategy vipCardStrategy);
 
     /**
-     * 更新会员卡策略
-     *
      * @author 梁正川
      */
     void updateStrategy(VIPCardStrategy vipCardStrategy);
 
     /**
-     * 删除会员卡策略
-     *
      * @author 梁正川
      */
     void deleteStrategy(@Param("id") int id);
 
     /**
-     * 选择单一会员卡策略
-     *
      * @author 梁正川
      */
     VIPCardStrategy selectStrategyById(@Param("id") int id);
 
     /**
-     * 选择所有会员卡策略
-     *
      * @author 梁正川
      */
     List<VIPCardStrategy> selectStrategies();
@@ -66,8 +56,6 @@ public interface VIPCardMapper {
      */
 
     /**
-     * 插入单一会员卡
-     *
      * @author 梁正川
      */
     void insertOneCard(VIPCard vipCard);
@@ -85,7 +73,7 @@ public interface VIPCardMapper {
     /**
      * 更新单一会员卡的余额
      *
-     * @param balance 更新的余额
+     * @author 李莹
      */
     void updateCardBalance(
             @Param("id") int id,
@@ -93,14 +81,12 @@ public interface VIPCardMapper {
     );
 
     /**
-     * 选择单一会员卡
-     *
      * @author 梁正川
      */
     VIPCard selectCardById(@Param("id") int id);
 
     /**
-     * 根据用户选择单一会员卡
+     * @author 梁正川
      */
     VIPCard selectCardByUserId(@Param("userId") int userId);
 
@@ -109,15 +95,11 @@ public interface VIPCardMapper {
      */
 
     /**
-     * 插入单一充值记录
-     *
      * @author 梁正川
      */
     int insertOneChargeRecord(VIPCardCharge charge);
 
     /***
-     * 选择某用户的充值记录
-     *
      * @author 梁正川
      */
     List<VIPCardCharge> selectChargeRecordsByCard(@Param("vipCardId") int vipCardId);
