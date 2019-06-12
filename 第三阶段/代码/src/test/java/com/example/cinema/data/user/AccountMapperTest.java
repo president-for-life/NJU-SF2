@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.cinema.data.user.AccountMapper;
 import com.example.cinema.po.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,9 +31,22 @@ class AccountMapperTest {
         user.setPassword("password");
     }
 
+    @BeforeEach
+    void setupThis(){
+        System.out.println("@BeforeEach executed");
+    }
+
+
+
     @Test
     @DisplayName("Add user")
     void addUserTest() {
-        accountMapper.insertOneAccount(AccountMapperTest.user);
+        try{
+            accountMapper.insertOneAccount(AccountMapperTest.user);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

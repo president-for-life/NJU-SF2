@@ -76,15 +76,31 @@ $(document).ready(function(){
     function renderAdminList(list) {
         $('.admin-on-list').empty();
         var adminDomStr = '';
+        var i = 0;
         list.forEach(function (user) {
+            if (i%4 === 0) {
+                adminDomStr +=
+                    "<div class='container'>";
+                if (i !== 0){
+                    adminDomStr += "</div>";
+                }
+            }
+            i++;
             adminDomStr +=
-                "<div class='admin-item-container'>"+
-                "<li id='user-" + user.id + "' class='admin-item' data-user='" + JSON.stringify(user) + "'>" +
-                "<div class='admin-item-text' ' >" + user.username + "</div>" +
-                "</li>"+
+                "<div class=\"col-lg-3 col-sm-6\">" +
+                "<div class=\"policy-block text-center\">" +
+                "<div id='user-" + user.id + "' class='admin-item policy-icon' data-user='" + JSON.stringify(user) + "'>" +
+                "<i class=\"icon-male icon-2x\"></i>" +
+                "</div>" +
+                "<div class=\"policy-text\">" +
+                "<h4 class=\"policy-title\">"+ user.username +"</h4>" +
+                "<p class=\"policy-desc\">No." + i + "</p>" +
+                "</div>" +
+                "</div>" +
                 "</div>"
             ;
         });
+        adminDomStr += "</div>";
         $('.admin-on-list').append(adminDomStr);
     }
 

@@ -19,10 +19,10 @@ $(document).ready(function () {
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
-                        "<tr>" +
-                        "<td class='user-id'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
-                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
-                        "<td >"+
+                        "<tr class='item'>" +
+                        "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
+                        "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
+                        "<td valign='middle'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -31,11 +31,11 @@ $(document).ready(function () {
                 consumptionDomStr+="<tr>" +
                     "<td>" + "</td>" +
                     "<td>"+"</td>"+
-                    "<td >"+"<input type=\"checkbox\"  role=\"checkbox\"  onclick=\"couponsCbox(this)\"  style=\"width:20px\">\n全选</br>"+"</td>"+
+                    "<td  valign='middle'>"+"<input type=\"checkbox\"  role=\"checkbox\"  onclick=\"couponsCbox(this)\"  style=\"width:20px\">\n全选</br>"+"</td>"+
                     "</tr>"+ "<tr>" +
                     "<td>" + "</td>" +
                     "<td>"+"</td>"+
-                    "<td >"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
+                    "<td valign='middle'>"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
                     "</tr>"+
                     "</div>";
 
@@ -60,10 +60,10 @@ $(document).ready(function () {
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
-                        "<tr>" +
-                        "<td class='user-id'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
-                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount+"</td>"+
-                        "<td >"+
+                        "<tr class='item'>" +
+                        "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
+                        "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
+                        "<td valign='middle'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -72,11 +72,11 @@ $(document).ready(function () {
                 consumptionDomStr+="<tr>" +
                     "<td>" + "</td>" +
                     "<td>"+"</td>"+
-                    "<td >"+"<input type=\"checkbox\"  role=\"checkbox\"  onclick=\"couponsCbox(this)\"  style=\"width:20px\">\n全选</br>"+"</td>"+
+                    "<td valign='middle'>"+"<input type=\"checkbox\"  role=\"checkbox\"  onclick=\"couponsCbox(this)\"  style=\"width:20px\">\n全选</br>"+"</td>"+
                     "</tr>"+ "<tr>" +
                     "<td>" + "</td>" +
                     "<td>"+"</td>"+
-                    "<td >"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
+                    "<td valign='middle'>"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
                     "</tr>"+
                     "</div>";
 
@@ -94,27 +94,28 @@ $(document).ready(function () {
 
                 var $content_container_tbody = $("#tbody2");
                 $content_container_tbody.empty();
-                var consumptionDomStr = "<tr>"+
-                    "<td >"+"名称"+"</td>"+
-                    "<td>"+"描述"+"</td>" +
-                    "<td >"+"使用门槛"+"</td>"+
-                    "<td>"+"优惠金额"+"</td>" +
-                    "<td >"+"可用时间"+"</td>"+
-                    "<td>"+"失效时间"+"</td>" +
-                    "<td >"+"</td>"+
+                var consumptionDomStr = "<tr >"+
+                    "<td align='center'>"+"名称"+"</td>"+
+                    "<td align='center'>"+"描述"+"</td>" +
+                    "<td align='center'>"+"使用门槛"+"</td>"+
+                    "<td align='center'>"+"优惠金额"+"</td>" +
+                    "<td align='center'>"+"可用时间"+"</td>"+
+                    "<td align='center'>"+"失效时间"+"</td>" +
+                    "<td align='center'>"+"</td>"+
                     "</tr>"+"<div>";
                 data.forEach(function (coupon) {
 
                     consumptionDomStr+=
-                        "<tr>" +
+                        "<tr></tr>"+
+                        "<tr class='item'>" +
                         "<td style=\"display: none\" class='coupon-id'>" + coupon.id+ "</td>" +
-                        "<td style=\"width: 100px; overflow: auto\">" + coupon.name+ "</td>" +
-                        "<td  style=\"width: 100px; overflow: auto\">"+coupon.description+"</td>"+
-                        "<td  style=\"width: 50px; overflow: auto\">" + coupon.targetAmount+ "</td>" +
-                        "<td  style=\"width: 50px; overflow: auto\">"+coupon.discountAmount+"</td>"+
-                        "<td  style=\"width: 100px; overflow: auto\">" + timetrans(coupon.startTime)+ "</td>" +
-                        "<td  style=\"width: 100px; overflow: auto\">"+timetrans(coupon.endTime)+"</td>"+
-                        "<td   style=\"width: 30px; overflow: auto\">"+
+                        "<td style=\"width: 180px; overflow: auto;position: center\" align='center'>" +coupon.name+ "</td>"+
+                        "<td  style=\"width: 180px; overflow: auto;position: center\" align='center'>"+coupon.description+"</td>"+
+                        "<td  style=\"width: 100px; overflow: auto; position: center\" align='center'>" + coupon.targetAmount+ "</td>" +
+                        "<td  style=\"width: 100px; overflow: auto;position: center\" align='center'>"+coupon.discountAmount+"</td>"+
+                        "<td  style=\"width: 150px; overflow: auto;position: center\" align='center'>" + timetrans(coupon.startTime)+ "</td>" +
+                        "<td  style=\"width: 150px; overflow: auto;position: center\" align='center'>"+timetrans(coupon.endTime)+"</td>"+
+                        "<td   style=\"width: 30px; overflow: auto;position: center\" align='center'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox\"  id=\"coupon-check\" style=\"width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -125,6 +126,7 @@ $(document).ready(function () {
                     "<td>"+"</td>" +
                     "<td >"+"</td>"+
                     "<td>"+"</td>" +
+                    "<td >"+"</td>"+
                     "<td >"+"</td>"+
                     "<td>"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"sendCouponClick()\">赠送</button>"+"</td>" +
                     "</tr>"+
