@@ -141,27 +141,16 @@ getChargeRecordsClick = function() {
             var data=res.content||[];
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
-            var recordDomStr = "<tr>"+
-                               "<td>"+"充值时间"+"</td>"+
-                               "<td></td>" +
-                               "</tr>"+"<div>";
+            var recordDomStr = "";
             data.forEach(function (vipCardCharge) {
                recordDomStr +=
-                    "<tr>" +
-                    "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
-                   "<td></td>"+
-                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
-                    "</tr>"+
-                    "<tr style=\"display: none; able-layout:fixed\"   bgcolor=\"#e4e7ea\" width='100%'>"+
-                    "<td>"+"充值金额："+vipCardCharge.payment.toFixed(2)+"</td>"+
-                   "<td></td>"+
-                   "<td></td>"+
-                    "</tr>"+
-                     "<tr style=\"display: none; able-layout:fixed\"  bgcolor=\"#e4e7ea\" width='100%'>"+
-                    "<td>"+"冲入金额："+vipCardCharge.amount.toFixed(2)+"</td>"+
-                    "<td></td>"+
-                   "<td></td>"+
-                    "</tr>";
+                   "<div  class='item' id=\'r\' data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> " +
+                   "<ul style=\'font-size: small; width: 100%\'>"+"充值时间"+"</ul>"+
+                   "<ul style=\'width: 100%;font-size: larger\'>" +  timetrans(vipCardCharge.time)+ "</ul>" +
+                   "<ul  style=\"display: none;width: 100%;font-size: larger\">"+"充值金额："+vipCardCharge.payment.toFixed(2)+"</ul>"+
+                   "<ul style=\"display: none;width: 100%;font-size: larger\" >"+"冲入金额："+vipCardCharge.amount.toFixed(2)+"</ul>"+
+                   "</div>";
+
             });
             recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
@@ -173,17 +162,17 @@ getChargeRecordsClick = function() {
 };
 
 $(document).on('click', '#r', function () {
-    if($(this).get(0).parentNode.parentNode. nextSibling.style.display==="none") {
-        $(this).get(0).parentNode.parentNode. nextSibling.style.display="";
+    if($(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display==="none") {
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display="";
     }
     else {
-        $(this).get(0).parentNode.parentNode. nextSibling.style.display="none";
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display="none";
     }
-    if($(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display==="none") {
-        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="";
+    if($(this).get(0).firstChild.nextSibling. nextSibling.nextSibling. nextSibling.style.display==="none") {
+        $(this).get(0).firstChild.nextSibling. nextSibling. nextSibling.nextSibling.style.display="";
     }
     else {
-        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="none";
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling. nextSibling.style.display="none";
     }
 });
 
