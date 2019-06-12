@@ -3,15 +3,14 @@
     padding: 20px;
 }
 .item{
-    border-style:solid;
     padding: 10px 10px 10px 10px;
     width: 100%;
     margin: 5px;
     border-radius: 10px;
     flex-direction: row;
     flex: 1;
-    background-color: #fefff9;
+    background-color: white;
 }
 .item:hover{
-    background:#dff0d8;
+    background: #f6faff;
 }

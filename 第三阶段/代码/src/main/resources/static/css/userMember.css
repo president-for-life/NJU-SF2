@@ -208,3 +208,15 @@
     position: relative;
     padding: 15px;
 }
+.item{
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 10px;
+    flex-direction: row;
+    flex: 1;
+    background-color: white;
+}
+.item:hover{
+    background: #f6faff;
+}
