@@ -15,15 +15,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class) //导入spring测试框架
-@SpringBootTest  //提供spring依赖注入
-@Transactional  //事务管理，默认回滚,如果配置了多数据源记得指定事务管理器
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@Transactional
 @DisplayName("Test TicketService")
 class TicketServiceImplTest {
 
@@ -170,49 +169,5 @@ class TicketServiceImplTest {
         ticketService.pickUpTicket(ticketIdList.get(0));
         List<String> ticketStateList = this.getTicketStateList();
         assertEquals("已出票", ticketStateList.get(0));
-    }
-
-    @Test
-    void addRefundStrategy() {
-    }
-
-    @Test
-    void updateRefundStrategy() {
-    }
-
-    @Test
-    void addRefundMovies() {
-    }
-
-    @Test
-    void removeRefundMovies() {
-    }
-
-    @Test
-    void getRefundStrategies() {
-    }
-
-    @Test
-    void addRefundTicket() {
-    }
-
-    @Test
-    void completeRefundTicket() {
-    }
-
-    @Test
-    void getTicketsByUser() {
-    }
-
-    @Test
-    void getOrdersByUser() {
-    }
-
-    @Test
-    void getMoviesNotInRefundStrategy() {
-    }
-
-    @Test
-    void getMoviesInRefundStrategy() {
     }
 }
