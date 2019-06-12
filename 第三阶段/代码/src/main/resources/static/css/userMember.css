@@ -70,11 +70,12 @@
 
 /* info为vip信息样式 */
 .card .info {
+    background: #f6faff;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    border: 1px solid #1caf9a;
+    border: 1px solid #aafff8;
 }
 
 .card .info .price {
