@@ -98,6 +98,10 @@ $(document).ready(function () {
 	 * 如果是"不允许退票"，则不显示"返还比例"、"时间限制"
 	 */
 	function renderStrategyList(strategyList) {
+		// strategyList排序
+		strategyList.sort(function (a, b) {
+			return a.id - b.id;
+		});
 		$('.strategy-on-list').empty();
 		var strategyDomStr = '';
 		strategyList.forEach(function (strategy) {
@@ -115,8 +119,11 @@ $(document).ready(function () {
 					"        <span class='strategy-detail'>返还比例：" + strategy.ratio + "</span>" +
 					"        <span class='strategy-detail'>开场前 " + strategy.time + " 分钟不允许退票</span>" +
 					"    </div>";
+			} else {
+				strategyDomStr +=
+					"        </div>";
 			}
-			strategyDomStr+="        " +
+			strategyDomStr+=
 				"        <div class='movie-list-for-strategy' >" +
 				"            <span>使用本退票策略的电影：</span>" +
 				"            <button type='button' class='btn btn-primary add-movie-for-strategy'><i" +
