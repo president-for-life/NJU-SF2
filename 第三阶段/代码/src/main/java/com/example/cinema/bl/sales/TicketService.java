@@ -49,23 +49,17 @@ public interface TicketService {
     ResponseVO completeByVIPCard(List<Integer> ticketIdList, int couponId);
 
     /**
-     * 取票
-     *
      * @author 戴羽涵
      */
     ResponseVO pickUpTicket(int ticketId);
 
     /**
-     * 新增退票策略
-     *
      * @author 戴羽涵
      * @param strategyForm 没有用到movieList的form
      */
     ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm);
 
     /**
-     * 修改退票策略
-     *
      * @author 戴羽涵
      * @param strategyForm 没有用到movieList的form
      */
@@ -84,13 +78,6 @@ public interface TicketService {
      * @author 戴羽涵
      */
     ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList);
-
-    /**
-     * 获得所有退票策略
-     *
-     * @author 戴羽涵
-     */
-    ResponseVO getRefundStrategies();
 
     /**
      * 用户请求退票
@@ -118,33 +105,24 @@ public interface TicketService {
      */
     ResponseVO getTicketsByUser(int userId);
 
+    /**
+     * @author 戴羽涵
+     */
     ResponseVO searchAllRefundStrategy();
 
     /**
-     * 获取没有被指定退票策略的电影列表，并且这些电影状态是"未下架"
-     *
-     * @return
+     * 获取没有被指定退票策略的电影列表，并且这些电影状态是“未下架”
      */
     ResponseVO getMoviesNotInRefundStrategy();
 
     /**
-     * 获取所有已经指定退票策略的电影列表
-     *
-     * @return
-     */
-    ResponseVO getMoviesInRefundStrategy();
-
-    /**
      * 获取使用指定退票策略的电影列表
      *
-     * @param strategyId
-     * @return
+     * @author 戴羽涵
      */
     ResponseVO getMoviesByRefundStrategy(int strategyId);
 
     /**
-     * 获得用户的所有订单（包括所有状态）
-     *
      * @author 戴羽涵
      */
     ResponseVO getOrdersByUser(int userId);

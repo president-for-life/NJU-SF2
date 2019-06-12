@@ -288,18 +288,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
-    @Override
-	public ResponseVO getRefundStrategies() {
-        try {
-            return ResponseVO.buildSuccess(
-                    ticketMapper.selectRefundStrategies()
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("删除指定退票策略的电影列表失败");
-        }
-    }
-
 	@Override
 	public ResponseVO addRefundTicket(int ticketId) {
 		try {
@@ -451,26 +439,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseVO.buildFailure("获取未被指定退票策略的电影列表失败");
-		}
-	}
-
-	@Override
-	public ResponseVO getMoviesInRefundStrategy() {
-		try {
-			List<MovieVO> movieVOList = new ArrayList<>();
-			ticketMapper.selectRefundStrategies().forEach(
-					ticketRefundStrategy -> {
-						ticketRefundStrategy.getMovieList().forEach(
-								movie -> {
-									movieVOList.add(new MovieVO(movie));
-								}
-						);
-					}
-			);
-			return ResponseVO.buildSuccess(movieVOList);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("获取所有已经指定退票策略的电影列表失败");
 		}
 	}
 
