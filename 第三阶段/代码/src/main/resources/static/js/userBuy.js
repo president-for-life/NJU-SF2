@@ -35,10 +35,22 @@ function renderOrderList(list) {
                     "<button type='button' class='btn btn-primary refund-btn user-buy-btn' id='refund-" + seat.id + "'>退票</button>";
             }
 
+			let toAddColor = "";
+
+			if (seat.state == "支付已完成") {
+				toAddColor = "green";
+			} else if (seat.state == "已退票") {
+				toAddColor = "palevioletred";
+			} else if (seat.state == "已失效") {
+				toAddColor = "gray";
+			} else if (seat.state == "已出票") {
+				toAddColor="lightseagreen";
+			}
+
 			seatsDomStr +=
                 "        <div class='seat'" + "id='ticket-" + seat.id + "' data-ticket='" + JSON.stringify(seat) + "'>" +
                 "            <span class='seat-info'>" + (seat.rowIndex + 1) + "排 " + (seat.columnIndex + 1) + "座" + "</span>" +
-				"            <span class='seat-info'>" + seat.state+"</span>" +
+				"            <span class='seat-info' style='color: "+toAddColor+"'>" + seat.state+"</span>" +
                 appendButton +
                 "        </div>";
 		});

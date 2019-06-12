@@ -16,7 +16,7 @@
 }
 
 .seat {
-    padding: 10px 5px 5px 10px;
+    padding: 10px 100px 5px 20px;
     border-radius: 10px;
 }
 
@@ -25,7 +25,10 @@
 }
 
 .seat-info {
-    padding: 10px 20px 10px 20px;
+    padding: 10px 5px 10px 5px;
+    width: 170px;
+    display: inline-block;
+    text-align: center;
 }
 
 .seat-card {
@@ -53,8 +56,8 @@
     /*color: #ffffff;*/
     /*background-color: #1caf9a;*/
     /*border-color: #189987;*/
-    padding: 0 10px 0 10px;
-    margin: 0 10px 0 10px;
+    padding: 3px 12px 3px 12px;
+    margin: 6px 10px 6px 10px;
     float: right;
 }
 
@@ -66,7 +69,7 @@
 }
 
 .card {
-    padding: 30px 40px;
+    padding: 30px 70px;
     color: #444444;
     /*margin-bottom: 40px;*/
 }
