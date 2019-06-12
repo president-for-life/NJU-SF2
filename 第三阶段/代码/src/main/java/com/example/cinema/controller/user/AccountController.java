@@ -54,7 +54,6 @@ public class AccountController {
 
     @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
     public ResponseVO searchAllAdmin() {
-        //返回结果中包括所有userRole为Admin的对象
         return accountService.searchAllAdmin();
     }
 

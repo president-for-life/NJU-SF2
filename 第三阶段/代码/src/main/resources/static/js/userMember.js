@@ -52,10 +52,12 @@ function getVIP() {
         for (let strategy of strategies) {
             strategiesDomStr +=
                 "<div class='strategy-container'>" +
-                "    <div class='strategy-item primary-bg' " + "id='buy-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
-                "        <span class='gray-text'>"+strategy.description+"</span>" +
-                "        <span class='title'>价格："+strategy.price+"</span>" +
-                "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
+                "    <div class='strategy-item' " + "id='buy-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "        <span class='title'>NJU-<span class='SE title'>SE</span>-VIP</span>" +
+                "        <span class='big'>__</span>" +
+                "        <span class='big'>价格：<span class='amount'>"+strategy.price+"</span></span>" +
+                "        <span class='big'>满<span class='amount'>"+strategy.targetAmount+"</span>减<span class='discount amount'>" + strategy.discountAmount+"</span></span>" +
+                "        <span class='gray-text' style='text-align: right'>"+strategy.description+"</span>" +
                 "    </div>" +
                 "</div>";
         }
@@ -69,10 +71,12 @@ function getVIP() {
         for (let strategy of strategies) {
             strategiesDomStr +=
                 "<div class='strategy-container'>" +
-                "    <div class='strategy-item primary-bg' " + "id='switch-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
-                "        <span class='gray-text'>"+strategy.description+"</span>" +
-                "        <span class='title'>价格："+strategy.price+"</span>" +
-                "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
+                "    <div class='strategy-item' " + "id='switch-strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "        <span class='title'>NJU-<span class='SE title'>SE</span>-VIP</span>" +
+                "        <span class='big'>__</span>" +
+                "        <span class='big'>价格：<span class='amount'>"+strategy.price+"</span></span>" +
+                "        <span class='big'>满<span class='amount'>"+strategy.targetAmount+"</span>减<span class='discount amount'>" + strategy.discountAmount+"</span></span>" +
+                "        <span class='gray-text' style='text-align: right'>"+strategy.description+"</span>" +
                 "    </div>" +
                 "</div>";
         }
@@ -85,14 +89,14 @@ $(document).on('click','#buy-strategy-list .strategy-container .strategy-item', 
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#buy-strategy-' + strategy.id);
 
-    if($('#buyModal')[0].dataset.strategyId === undefined
+    if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
-        $item.parent().siblings().children().css('background', '#1caf9a');
-        $item.css('background', '#ff9900');
+        $item.parent().siblings().children().css('box-shadow', '');
+        $item.css('box-shadow', '10px 10px 5px #888888');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
     } else { // 已选该卡
-        $item.css('background', '#1caf9a');
-        $('#buyModal')[0].dataset.strategyId = undefined;
+        $item.css('box-shadow', '');
+        $('#buyModal')[0].dataset.strategyId = -1;
     }
 });
 
@@ -100,18 +104,14 @@ $(document).on('click','#switch-strategy-list .strategy-container .strategy-item
     let strategy = JSON.parse(e.currentTarget.dataset.strategy);
     let $item = $('#switch-strategy-' + strategy.id);
 
-    console.log($('#buyModal')[0].dataset.strategyId);
-    console.log(strategy.id);
-    if($('#buyModal')[0].dataset.strategyId === undefined
+    if($('#buyModal')[0].dataset.strategyId == -1
         || $('#buyModal')[0].dataset.strategyId != strategy.id) { // 未选该卡
-        $item.parent().siblings().children().css('background', '#1caf9a');
-        $item.css('background', '#ff9900');
+        $item.parent().siblings().children().css('box-shadow', '');
+        $item.css('box-shadow', '10px 10px 5px #888888');
         $('#buyModal')[0].dataset.strategyId = strategy.id;
-        console.log("hey");
     } else { // 已选该卡
-        $item.css('background', '#1caf9a');
-        $('#buyModal')[0].dataset.strategyId = undefined;
-        console.log("haha");
+        $item.css('box-shadow', '');
+        $('#buyModal')[0].dataset.strategyId = -1;
     }
 });
 
@@ -141,24 +141,16 @@ getChargeRecordsClick = function() {
             var data=res.content||[];
             var $content_container_tbody = $("#tbody");
             $content_container_tbody.empty();
-            var recordDomStr = "<tr>"+
-                               "<td>"+"充值时间"+"</td>"+
-                               "<td></td>" +
-                               "</tr>"+"<div>";
+            var recordDomStr = "";
             data.forEach(function (vipCardCharge) {
-
                recordDomStr +=
-                    "<tr>" +
-                    "<td>" + timetrans(vipCardCharge.time)+ "</td>" +
-                   "<td></td>"+
-                    "<td>"+"<span id=\'r\' class=\"caret\" ></span>"+"</td>"+
-                    "</tr>"+
-                    "<tr style=\"display: none\" >"+
-                    "<td>"+"充值金额："+vipCardCharge.payment+"</td>"+
-                    "</tr>"+
-                     "<tr style=\"display: none\" >"+
-                    "<td>"+"实际消费金额:"+vipCardCharge.amount+"</td>"+
-                    "</tr>";
+                   "<div  class='item' id=\'r\' data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> " +
+                   "<ul style=\'font-size: small; width: 100%\'>"+"充值时间"+"</ul>"+
+                   "<ul style=\'width: 100%;font-size: larger\'>" +  timetrans(vipCardCharge.time)+ "</ul>" +
+                   "<ul  style=\"display: none;width: 100%;font-size: larger\">"+"充值金额："+vipCardCharge.payment.toFixed(2)+"</ul>"+
+                   "<ul style=\"display: none;width: 100%;font-size: larger\" >"+"冲入金额："+vipCardCharge.amount.toFixed(2)+"</ul>"+
+                   "</div>";
+
             });
             recordDomStr+="</div>";
             $content_container_tbody.append(recordDomStr);
@@ -170,19 +162,18 @@ getChargeRecordsClick = function() {
 };
 
 $(document).on('click', '#r', function () {
-    if($(this).get(0).parentNode.parentNode. nextSibling.style.display==="none") {
-        $(this).get(0).parentNode.parentNode. nextSibling.style.display="";
+    if($(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display==="none") {
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display="";
     }
     else {
-        $(this).get(0).parentNode.parentNode. nextSibling.style.display="none";
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling.style.display="none";
     }
-    if($(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display==="none") {
-        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="";
+    if($(this).get(0).firstChild.nextSibling. nextSibling.nextSibling. nextSibling.style.display==="none") {
+        $(this).get(0).firstChild.nextSibling. nextSibling. nextSibling.nextSibling.style.display="";
     }
     else {
-        $(this).get(0).parentNode.parentNode. nextSibling. nextSibling.style.display="none";
+        $(this).get(0).firstChild.nextSibling.nextSibling.nextSibling. nextSibling.style.display="none";
     }
-
 });
 
 // 点击更换会员卡
@@ -217,13 +208,16 @@ function confirmCommit() {
     if (validateForm()) {
         if ($('#userMember-cardNum').val() === "123123123" && $('#userMember-cardPwd').val() === "123123") {
             if (isBuyState) {
-                if($('#buyModal')[0].dataset.strategyId == undefined) {
+                let strategyId = $('#buyModal')[0].dataset.strategyId;
+                console.log("buy:");
+                console.log(strategyId);
+                if(strategyId == -1) {
                     alert("请选择会员卡！");
                     return;
                 }
                 postRequest(
                     '/vip/add?userId=' + sessionStorage.getItem('id')
-                    + '&strategyId=' + $('#buyModal')[0].dataset.strategyId,
+                    + '&strategyId=' + strategyId,
                     null,
                     function (res) {
                         $('#buyModal').modal('hide');

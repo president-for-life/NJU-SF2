@@ -1,5 +1,7 @@
 $(document).ready(function () {
+    firstPlace();
 
+    firstPopular();
 
     getScheduleRate();
 
@@ -144,6 +146,81 @@ $(document).ready(function () {
                 alert(JSON.stringify(error));
             });
     }
+    function firstPlace(){
+        getRequest(
+            '/statistics/PlacingRate?date=' +timetrans(new Date()) ,
+            function (res) {
+                var data = res.content || [];
+                var option = {
+                    title: {
+                        show: true,
+                        text: "今日上座率\n" + data + '%',
+                        x: 'center',
+                        y: 'center',
+                        textStyle: {
+                            fontSize: '20',
+                            color: 'black',
+                            fontWeight: 'normal'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{d}%",
+                        show: false
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'left',
+                        show: false
+                    },
+                    series:
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: ['65%', '85%'],
+                            avoidLabelOverlap: true,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [
+                                {value: data, name: ''},
+                                {value: 100 - data, name: ''}
+                            ]
+                        }
+
+                };
+                var scheduleRateChart = echarts.init($("#place-rate-container")[0]);
+                scheduleRateChart.setOption(option);
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            });
+    }
+
+
+    function timetrans(date) {
+        var date = new Date(date );//如果date为13位不需要乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+        return Y + M + D;
+    }
+
 
     $('#place-rate-btn').click(function getPlacingRate() {
         var date = getDate();
@@ -208,6 +285,44 @@ $(document).ready(function () {
                 alert(JSON.stringify(error));
             });
     });
+    function firstPopular(){
+        getRequest(
+            '/statistics/popular/movie?days=' + 3 + '&movieNum=' +3,
+            function (res) {
+
+                var data = res.content || [];
+                var tableData = data.map(function (item) {
+                    return item.boxOffice;
+                });
+                var nameList = data.map(function (item) {
+                    return item.name;
+                });
+                var option = {
+                    title: {
+                        text: '三日内最受欢迎电影',
+                        x: 'center'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: nameList
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: tableData,
+                        type: 'bar'
+                    }]
+                };
+                var scheduleRateChart = echarts.init($("#popular-movie-container")[0]);
+                scheduleRateChart.setOption(option);
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            });
+        // todo
+    };
+
 
     $('#popular-movies-btn').click(function getPolularMovie() {
         var days = getDys();

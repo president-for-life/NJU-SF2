@@ -1,17 +1,36 @@
 .strategy-container {
     display: flex;
     width: 100%;
-    min-height: 50px;
+    min-height: 120px;
     margin: 20px 0;
 }
 
 .strategy-item {
-    flex-basis: 30%;
+    background: url("../images/vipCard.jpg");
+    background-size: 100% 100%;
+    border-radius: 10px;
     display: flex;
+    flex-basis: 60%;
     flex-direction: column;
     padding: 20px;
     color: #fff;
     justify-content: space-around;
+}
+
+.strategy-item:hover {
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.discount {
+    color: yellow;
+}
+
+.amount {
+    font-size: 18px;
+}
+
+.SE {
+    color: #00d6e9;
 }
 
 .card {
@@ -73,7 +92,7 @@
 
 .card .info .content {
     font-size: 15px;
-    width: 30%;
+    width: 60%;
 }
 
 .card .info .content .line {
@@ -170,6 +189,7 @@
 .notice {
      margin-left: 12px;
 }
+
 .table-wrapper {
     padding: 20px;
 }
@@ -187,4 +207,16 @@
     background-color: white;
     position: relative;
     padding: 15px;
+}
+.item{
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 10px;
+    flex-direction: row;
+    flex: 1;
+    background-color: white;
+}
+.item:hover{
+    background: #f6faff;
 }

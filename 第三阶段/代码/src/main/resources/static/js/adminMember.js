@@ -22,10 +22,12 @@ $(document).ready(function() {
         strategies.forEach(function (strategy) {
             strategiesDomStr +=
                 "<div class='strategy-container'>" +
-                "    <div class='strategy-item primary-bg' " + "id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
-                "        <span class='gray-text'>"+strategy.description+"</span>" +
-                "        <span class='title'>价格："+strategy.price+"</span>" +
-                "        <span class='title'>满"+strategy.targetAmount+"减<span class='error-text title'>" + strategy.discountAmount+"</span></span>" +
+                "    <div class='strategy-item' " + "id='strategy-" + strategy.id + "' data-strategy='" + JSON.stringify(strategy) + "'>" +
+                "        <span class='title'>NJU-<span class='SE title'>SE</span>-VIP</span>" +
+                "        <span class='big'>__</span>" +
+                "        <span class='big'>价格：<span class='amount'>"+strategy.price+"</span></span>" +
+                "        <span class='big'>满<span class='amount'>"+strategy.targetAmount+"</span>减<span class='discount amount'>" + strategy.discountAmount+"</span></span>" +
+                "        <span class='gray-text' style='text-align: right'>"+strategy.description+"</span>" +
                 "    </div>" +
                 "</div>";
         });

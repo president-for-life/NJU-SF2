@@ -19,15 +19,11 @@ public interface CouponService {
     ResponseVO getValidCoupons();
 
     /**
-     * 获得某用户拥有的优惠劵
-     *
      * @author 李莹
      */
     ResponseVO getCouponsByUser(int userId);
 
     /**
-     * 发布优惠券
-     *
      * @author 李莹
      */
     ResponseVO addCoupon(CouponForm couponForm);

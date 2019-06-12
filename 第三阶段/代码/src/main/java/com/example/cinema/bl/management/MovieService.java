@@ -10,8 +10,6 @@ import com.example.cinema.vo.ResponseVO;
  */
 public interface MovieService {
     /**
-     * 上架电影
-     *
      * @author 范佳杰
      */
     ResponseVO addMovie(MovieForm addMovieForm);
@@ -38,8 +36,6 @@ public interface MovieService {
     ResponseVO searchOtherMoviesExcludeOff();
 
     /**
-     * 根据关键字搜索电影
-     *
      * @author 范佳杰
      */
     ResponseVO getMovieByKeyword(String keyword);
@@ -52,8 +48,6 @@ public interface MovieService {
     ResponseVO pullOfBatchOfMovie(MovieBatchOffForm movieBatchOffForm);
 
     /**
-     * 更新电影信息
-     *
      * @author 范佳杰
      */
     ResponseVO updateMovie(MovieForm updateMovieForm);

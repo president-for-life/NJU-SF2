@@ -3,7 +3,8 @@ package com.example.cinema.vo;
 import com.example.cinema.po.ScheduleItem;
 
 /**
- * Created by liying on 2019/4/21.
+ * @author 李莹
+ * @date 2019/04/21
  */
 public class ScheduleWithSeatVO {
     /**

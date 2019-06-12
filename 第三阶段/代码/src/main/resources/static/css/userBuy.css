@@ -1,3 +1,43 @@
+.order-card {
+    /*padding: 10px;*/
+    background-color: white;
+    border-radius: 10px;
+    margin: 40px 0 10px 0
+}
+
+.order-container {
+    font-size: 25px;
+    padding: 0 0 20px 0;
+}
+
+.order-detail {
+    display: block;
+    margin: 10px 10px 10px 10px;
+}
+
+.seat {
+    padding: 10px 100px 5px 20px;
+    border-radius: 10px;
+}
+
+.seat:hover {
+    background-color: rgba(28, 175, 154, 0.12);
+}
+
+.seat-info {
+    padding: 10px 5px 10px 5px;
+    width: 170px;
+    display: inline-block;
+    text-align: center;
+}
+
+.seat-card {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
 .table-wrapper {
     padding: 20px;
 }
@@ -12,10 +52,26 @@
     vertical-align: middle;
 }
 
+.user-buy-btn {
+    /*color: #ffffff;*/
+    /*background-color: #1caf9a;*/
+    /*border-color: #189987;*/
+    padding: 3px 12px 3px 12px;
+    margin: 6px 10px 6px 10px;
+    float: right;
+}
+
+.proceed-btn {
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
+    float: right;
+
+}
+
 .card {
-    padding: 30px 40px;
+    padding: 30px 70px;
     color: #444444;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 
 .card .header {
@@ -32,6 +88,12 @@
 }
 
 .pick-up-ticket-text{
+    text-align: left;
+    margin-bottom: 0;
+    padding-top: 7px;
+}
+
+.refund-ticket-text{
     text-align: left;
     margin-bottom: 0;
     padding-top: 7px;

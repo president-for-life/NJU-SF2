@@ -21,8 +21,10 @@ import java.util.List;
  */
 @Service
 public class HallServiceImpl implements HallService, HallServiceForBl {
+
     @Autowired
     private HallMapper hallMapper;
+
     @Autowired
     private ScheduleServiceForBl scheduleServiceForBl;
 
@@ -83,7 +85,6 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     @Override
     public ResponseVO insertOneHall(HallForm hallForm) {
         try {
-            // TODO 最好判断是否有重名影厅
             hallMapper.insertOneHall(hallForm.getPO());
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
@@ -95,7 +96,6 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     public ResponseVO updateOneHall(HallForm hallUpdateForm) {
         try {
             Hall hall = hallUpdateForm.getPO();
-            // TODO 需要判断影厅当前是否已经被使用
             int numSchedules = scheduleServiceForBl.getNumSchedules(hall.getId());
             if (numSchedules > 0) {
                 return ResponseVO.buildFailure("正在使用中的影厅");

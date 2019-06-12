@@ -84,11 +84,6 @@ public class TicketController {
         return ticketService.removeRefundMovies(refundStrategyId, movieIdList);
     }
 
-//    @PostMapping("/refundStrategy/get")
-//    public ResponseVO getRefundStrategy() {
-//        return ticketService.getRefundStrategies();
-//    }
-
     @PostMapping("/refund/choose")
     public ResponseVO chooseRefundTicket(@RequestParam int ticketId) {
         System.out.println("chooseRefundTicket()");

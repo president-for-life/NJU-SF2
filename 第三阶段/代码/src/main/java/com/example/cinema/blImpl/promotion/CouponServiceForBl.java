@@ -19,9 +19,7 @@ public interface CouponServiceForBl {
     List<Coupon> getCouponsByUserAndAmount(int userId, double amount);
 
     /**
-     * 发布优惠券
-     *
-     * @return vo.ResponseVO
+     * @author 梁正川
      */
     ResponseVO addCoupon(CouponForm couponForm);
 
@@ -33,16 +31,12 @@ public interface CouponServiceForBl {
     void deleteCouponUser(int couponId, int userId);
 
     /**
-     * 根据id查找优惠券
-     *
-     * @param couponId 优惠券id
-     * @return po.Coupon
      * @author 梁正川
      */
     Coupon getCouponById(int couponId);
 
     /**
-     * 让多个观众获得多个优惠劵
+     * 让多个观众每人都获得多个优惠劵
      *
      * @author 梁正川
      */

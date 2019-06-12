@@ -1,4 +1,5 @@
-$(document).ready(function () {;
+$(document).ready(function () {
+    firstRequest();
     function getMoney() {
         return $('#money-input').val();
     }
@@ -20,9 +21,9 @@ $(document).ready(function () {;
                     consumptionDomStr+=
                         "<tr>" +
                         "<td class='user-id'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
-                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount+"</td>"+
+                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
                         "<td >"+
-                        "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\"  id=\"consumption-check\" style=\" width:20px\">"+
+                        "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
 
@@ -44,6 +45,47 @@ $(document).ready(function () {;
                 alert(error);
             });
     });
+    function firstRequest(){
+        getRequest(
+            '/statistics/consumption?amount='+0,
+            function (res) {
+                var data=res.content||[];
+                var $content_container_tbody = $("#tbody1");
+                $content_container_tbody.empty();
+                var consumptionDomStr =  "<tr>" +
+                    "<td>" + "</td>" +
+                    "<td>"+"</td>"+
+                    "<td >"+ "</td>"+
+                    "</tr>"+"<div>";
+                data.forEach(function (consumption) {
+
+                    consumptionDomStr+=
+                        "<tr>" +
+                        "<td class='user-id'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
+                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
+                        "<td >"+
+                        "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
+                        "</td>"+
+                        "</tr>"
+
+                });
+                consumptionDomStr+="<tr>" +
+                    "<td>" + "</td>" +
+                    "<td>"+"</td>"+
+                    "<td >"+"<input type=\"checkbox\"  role=\"checkbox\"  onclick=\"couponsCbox(this)\"  style=\"width:20px\">\n全选</br>"+"</td>"+
+                    "</tr>"+ "<tr>" +
+                    "<td>" + "</td>" +
+                    "<td>"+"</td>"+
+                    "<td >"+" <button type=\"button\" class=\"btn btn-primary\"  onclick=\"getCouponClick()\">赠送优惠券</button>"+ "</td>"+
+                    "</tr>"+
+                    "</div>";
+
+                $content_container_tbody.append(consumptionDomStr);
+            },
+            function (error) {
+                alert(error);
+            });
+    }
     getCouponClick =    function(){
         getRequest(
             '/coupon/get/all',
@@ -59,6 +101,7 @@ $(document).ready(function () {;
                     "<td>"+"优惠金额"+"</td>" +
                     "<td >"+"可用时间"+"</td>"+
                     "<td>"+"失效时间"+"</td>" +
+                    "<td >"+"</td>"+
                     "</tr>"+"<div>";
                 data.forEach(function (coupon) {
 
@@ -100,10 +143,7 @@ $(document).ready(function () {;
         var Y = date.getFullYear() + '-';
         var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
         var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
-        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-        var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
-        return Y + M + D + h + m + s;
+        return Y + M + D ;
     };
 
 
@@ -147,21 +187,18 @@ $(document).ready(function () {;
 
 
     couponsCbox=function(a){
-        //找到下面所有的复选框
-        var ck =document.getElementsByClassName("coupon-cbox");
 
         //遍历所有复选框，设置选中状态。
-        for(var i=0;i<ck.length;i++)
-        {
             if(a.checked)//判断全选按钮的状态是不是选中的
             {
-                ck[i].setAttribute("checked","checked");//如果是选中的，就让所有的状态为选中。
+                $("input[name='colModel']").prop("checked",true);//如果是选中的，就让所有的状态为选中。
             }
             else
             {
-                ck[i].removeAttribute("checked");//如果不是选中的，就移除所有的状态是checked的选项。
+                $("input[name='colModel']").prop("checked",false) //如果不是选中的，就移除所有的状态是checked的选项。
+                console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
             }
         }
-    }
+
 
 });

@@ -1,32 +1,16 @@
-.table-wrapper {
+.card{
+   background-color: white;
     padding: 20px;
 }
-
-.table-wrapper .table b {
-    color: #1caf9a;
-    font-size: 20px;
-}
-
-.table-wrapper .table td{
-    height: 60px;
-    vertical-align: middle;
-}
-
-.card {
-    padding: 30px 40px;
-    color: #444444;
-    margin-bottom: 40px;
-}
-
-.card .header {
-    display: flex;
+.item{
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 10px;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 0 5px 0;
+    flex: 1;
+    background-color: white;
 }
-
-.card .header .title {
-    font-size: 24px;
-    font-weight: 500;
+.item:hover{
+    background: #f6faff;
 }
