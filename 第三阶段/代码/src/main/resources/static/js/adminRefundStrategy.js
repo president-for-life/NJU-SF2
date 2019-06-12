@@ -2,8 +2,6 @@ $(document).ready(function () {
 	var selectedMovieIds = new Set();
 	var selectedMovieNames = new Set();
 
-	// getSelectableMovies();
-
 	getStrategyList();
 
 	/**
