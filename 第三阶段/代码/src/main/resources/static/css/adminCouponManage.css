@@ -14,6 +14,20 @@
     margin-top: 20px;
 
 }
-
+.table > tbody > tr > td{
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align:middle;
+    border-top: 1px solid #dddddd;
+}
+.itemtop{
+    line-height:3
+}
+.item{
+    line-height:3;
+}
+.item:hover{
+    background: #f6faff;
+}
 
 
