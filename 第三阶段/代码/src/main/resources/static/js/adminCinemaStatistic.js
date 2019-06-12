@@ -154,7 +154,7 @@ $(document).ready(function () {
                 var option = {
                     title: {
                         show: true,
-                        text: "上座率\n" + data + '%',
+                        text: "今日上座率\n" + data + '%',
                         x: 'center',
                         y: 'center',
                         textStyle: {
@@ -299,7 +299,7 @@ $(document).ready(function () {
                 });
                 var option = {
                     title: {
-                        text: '最受欢迎电影',
+                        text: '三日内最受欢迎电影',
                         x: 'center'
                     },
                     xAxis: {
