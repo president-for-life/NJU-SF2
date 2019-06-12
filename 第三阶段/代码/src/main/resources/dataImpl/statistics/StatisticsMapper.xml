@@ -21,7 +21,7 @@
         left join
           (select movie_id as movieId,sum(fare) as boxOffice from schedule
           right join
-          (select schedule_id from ticket where state = 1) t
+          (select schedule_id from ticket where state = 1 or state = 3) t
           on schedule.id = t.schedule_id group by movie_id) s
         on s.movieId = movie.id
         order by boxOffice desc
@@ -30,7 +30,7 @@
     <select id="selectAudiencePrice" resultType="com.example.cinema.po.AudiencePrice">
         select user_id as userId, sum(fare) as totalPrice from schedule right join
               (select * from ticket where schedule_id in
-              (select id from schedule where start_time between #{date} and #{nextDate}) and state = 1) t
+              (select id from schedule where start_time between #{date} and #{nextDate}) and (state = 1 or state = 3)) t
         on schedule.id = schedule_id group by user_id
     </select>
 
@@ -39,7 +39,7 @@
         left join
           (select movie_id as movieId,sum(fare) as boxOffice from schedule
           right join
-          (select schedule_id from ticket where state = 1 and time between #{daysAgoDate} and #{date}) t
+          (select schedule_id from ticket where (state = 1 or state = 3) and time between #{daysAgoDate} and #{date}) t
           on schedule.id = t.schedule_id group by movie_id) s
         on s.movieId = movie.id
         order by boxOffice desc
@@ -57,6 +57,6 @@
                     left join
                 ticket
                 on schedule.id = ticket.schedule_id
-             where state = 1 and start_time between #{date} and #{nextDate}) t
+             where (state = 1 or state = 3) and start_time between #{date} and #{nextDate}) t
     </select>
 </mapper>
