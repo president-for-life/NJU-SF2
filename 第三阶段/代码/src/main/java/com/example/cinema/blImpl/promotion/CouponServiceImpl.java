@@ -115,7 +115,7 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     private List<CouponForm> coupons2CouponForms(List<Coupon> coupons){
-        List<CouponForm> couponForms=new ArrayList();
+        List<CouponForm> couponForms = new ArrayList();
         for(Coupon coupon:coupons){
             couponForms.add(new CouponForm(coupon));
         }

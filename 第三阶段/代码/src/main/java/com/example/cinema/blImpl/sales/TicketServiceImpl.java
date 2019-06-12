@@ -300,22 +300,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 			TicketRefundStrategy ticketRefundStrategy
 					= ticketMapper.selectRefundStrategyByMovie(movieId);
 
-//			System.out.println(ticketRefundStrategy.getId());
-
-//			// 计算指定要退票的电影票所在场次的放映时间是否在允许退票的时间段
-//			Date movieStartDate = scheduleService.getScheduleItemById(scheduleId).getStartTime();
-//			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			Date presentDate = new Date();  // 获取当前日期时间
-//			long hourGap=(presentDate.getTime() - movieStartDate.getTime())/3600000;  // 毫秒 ==> 小时
-//			long minuteGap=(presentDate.getTime()-movieStartDate.getTime())/60000;  // 毫秒 ==> 分钟
-//
-//			boolean canBeRefund =
-//					ticket.getState() == 1 && ticketRefundStrategy.getRefundable() && (minuteGap >= (long) ticketRefundStrategy.getTime());
-//			if (canBeRefund) {  // 如果满足所有的退票条件，就计算可退给用户的金额
-//				double actualPayment = ticket.getActualPayment();  // 获取用户实际付款的金额
-//				double refundPayment = actualPayment * ticketRefundStrategy.getRatio();  // 计算可退还给用户的金额
-
-			// TODO: 2019-06-08 如果没有对应的退票策略，那ticketMapper会返回什么呢？
 			// 如果该电影票有对应的退票策略，则返回该退票策略
 			if(ticketRefundStrategy!=null) {
 				return ResponseVO.buildSuccess(ticketRefundStrategy.getVO());  // 将允许退票的电影票对应的退票策略返回，由前端计算可退还给用户的金额
