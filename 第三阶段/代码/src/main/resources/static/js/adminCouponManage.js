@@ -62,7 +62,7 @@ $(document).ready(function () {
                     consumptionDomStr+=
                         "<tr>" +
                         "<td class='user-id'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
-                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount+"</td>"+
+                        "<td>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
                         "<td >"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
