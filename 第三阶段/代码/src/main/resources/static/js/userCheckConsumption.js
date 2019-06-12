@@ -20,9 +20,9 @@ $(document).ready(function () {
                     recordDomStr +=
                         "<div  class='item' id=\'r\' data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> " +
                         "<ul style=\'font-size: small; width: 100%\'>"+"消费时间"+"</ul>"+
-                        "<ul style=\'width: 100%\'>" + timetrans(ticket.time)+ "</ul>" +
-                        "<ul  style=\"display: none;width: 100%\">"+"票价："+ticket.schedule.fare.toFixed(2)+"</ul>"+
-                        "<ul style=\"display: none;width: 100%\" >"+"消费金额："+ticket.actualPayment.toFixed(2)+"</ul>"+
+                        "<ul style=\'width: 100%;font-size: larger\'>" + timetrans(ticket.time)+ "</ul>" +
+                        "<ul  style=\"display: none;width: 100%;font-size: larger\">"+"票价："+ticket.schedule.fare.toFixed(2)+"</ul>"+
+                        "<ul style=\"display: none;width: 100%;font-size: larger\" >"+"消费金额："+ticket.actualPayment.toFixed(2)+"</ul>"+
                         "</div>";
                 }
             });
