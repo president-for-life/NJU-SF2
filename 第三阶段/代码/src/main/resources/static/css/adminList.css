@@ -1,34 +1,91 @@
 .admin-item {
-    list-style: none;
-    display: flex;
-    margin-top: 0px;
-    border-bottom: 1px solid #ccc;
-    align: center;
+    cursor: pointer;
 }
-
-
-.admin-username {
-    color:blue;
-    font-weight:bold;
-}
-
 
 .content-header {
     display: flex;
     justify-content: space-between;
 }
 
-.admin-item-container {
-    border-radius:25px;
-    margin: 20px auto;
-    border: 2px solid rgb(210,217,231);
-    background: rgb(0,164,255);
-    cursor: pointer;
-    width: 400px;
+.policy-block {
+    padding: 75px 15px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
 }
 
-.admin-item-text {
-    margin: 0 auto;
-    font-size: 32px;
-    color: 	white;
+@media only screen and (min-width: 992px) and (max-width: 1199.98px), only screen and (max-width: 767.98px) {
+    .policy-block {
+        padding: 40px 15px;
+    }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 991.98px), only screen and (max-width: 767.98px) {
+    .policy-block {
+        margin-top: 10px;
+    }
+}
+
+.policy-block:hover {
+    -webkit-box-shadow: 0 5px 20px 0 rgba(195, 195, 195, 0.6);
+    box-shadow: 0 5px 20px 0 rgba(195, 195, 195, 0.6);
+}
+
+.policy-block:hover .policy-icon:after {
+    opacity: 1;
+    visibility: visible;
+    -webkit-animation: spin 10s infinite linear;
+    animation: spin 10s infinite linear;
+}
+
+.policy-icon {
+    color: #fff;
+    font-size: 40px;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    line-height: 84px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    background-color: #87b106;
+    position: relative;
+}
+
+.policy-icon:after {
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    content: '';
+    position: absolute;
+    border: 2px dashed #87b106;
+    top: -5px;
+    left: -5px;
+    border-radius: 50%;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.policy-text {
+    margin-top: 42px;
+}
+
+.policy-text .policy-title {
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.policy-text .policy-desc {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #777777;
+}
+.container{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
