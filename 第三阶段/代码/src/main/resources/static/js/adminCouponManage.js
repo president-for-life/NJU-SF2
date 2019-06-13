@@ -22,7 +22,7 @@ $(document).ready(function () {
                         "<tr class='item' id='r'>" +
                         "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
                         "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
-                        "<td valign='middle'>"+
+                        "<td valign='middle' id='d'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -63,7 +63,7 @@ $(document).ready(function () {
                         "<tr class='item' id='r'>" +
                         "<td class='user-id' valign='middle'>" + "用户id&nbsp;:"+"&nbsp;"+consumption.userId+ "</td>" +
                         "<td valign='middle'>"+"消费金额&nbsp;:"+"&nbsp;"+consumption.amount.toFixed(2)+"</td>"+
-                        "<td valign='middle'>"+
+                        "<td valign='middle' id='d'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"coupon-cbox\" name='colModel' id=\"consumption-check\" style=\" width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -114,7 +114,7 @@ $(document).ready(function () {
                         "<td  style=\"width: 100px; overflow: auto;position: center\" align='center'>"+coupon.discountAmount+"</td>"+
                         "<td  style=\"width: 150px; overflow: auto;position: center\" align='center'>" + timetrans(coupon.startTime)+ "</td>" +
                         "<td  style=\"width: 150px; overflow: auto;position: center\" align='center'>"+timetrans(coupon.endTime)+"</td>"+
-                        "<td   style=\"width: 30px; overflow: auto;position: center\" align='center'>"+
+                        "<td   style=\"width: 30px; overflow: auto;position: center\" align='center' id='d'>"+
                         "<input role=\"checkbox\" type=\"checkbox\" class=\"cbox\"  id=\"coupon-check\" style=\"width:20px\">"+
                         "</td>"+
                         "</tr>"
@@ -200,20 +200,5 @@ $(document).ready(function () {
                 console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
             }
         };
-    $(document).on('click', '#r', function () {
-            a=$(this).find("input");
-        if(a.checked)//判断按钮的状态是不是选中的
-        {
-            $(this).find("input").prop("checked",false);//如果是选中的，就让所有的状态为选中。
-        }
-        else
-        {
-            $(this).find("input").prop("checked",true) ;//如果不是选中的，就移除所有的状态是checked的选项。
-            console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
-        }
-
-
-    });
-    
-
+ 
 });
