@@ -89,3 +89,11 @@
     margin-top: 15px;
 }
 
+.content-container{
+    background-image:url(../images/grey_wash_wall_@2X.png);
+}
+
+.imTitle{
+    font-weight: bold;
+}
+
