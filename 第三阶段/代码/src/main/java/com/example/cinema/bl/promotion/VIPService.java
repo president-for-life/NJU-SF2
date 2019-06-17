@@ -50,7 +50,7 @@ public interface VIPService {
      * 某用户获得使用某种策略的会员卡
      * 如果用户已持有会员卡，切换会员卡使用的策略
      *
-     * @author 李莹
+     * @author 梁正川
      */
     ResponseVO addVIPCard(int userId, int strategyId);
 
