@@ -24,14 +24,22 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Autowired
 	TicketMapper ticketMapper;
+
 	@Autowired
 	ScheduleServiceForBl scheduleService;
+
 	@Autowired
 	HallServiceForBl hallService;
+
 	@Autowired
 	ActivityServiceForBl activityService;
+
 	@Autowired
 	CouponServiceForBl couponService;
+
+	@Autowired
+	TicketRefundStrategyServiceForBl ticketRefundStrategyService;
+
 	@Autowired
 	VIPServiceForBl vipService;
 
@@ -373,7 +381,6 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 					tempOrder.setTime(ticket.getTime());
 					tempOrder.setState(ticket.getStateString());
-					// TODO setActualPayment
 				}
 				tempOrder.getSeatVOList().add(ticket.getSeatVO());
 			}

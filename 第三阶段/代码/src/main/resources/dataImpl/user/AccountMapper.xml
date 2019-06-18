@@ -22,10 +22,6 @@
         select * from user where role = 'admin'
     </select>
 
-    <select id="selectUsers" resultMap="User">
-        select * from user where role = 'user'
-    </select>
-
     <select id="getAccountByName" resultMap="User">
         select * from user where username=#{username}
     </select>

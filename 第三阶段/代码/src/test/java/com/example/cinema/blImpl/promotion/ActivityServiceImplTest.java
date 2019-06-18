@@ -19,14 +19,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-@DisplayName("Test ActivityService")
+@DisplayName("ActivityServiceImpl自底向上集成测试")
 class ActivityServiceImplTest {
 
     @Autowired
-    ActivityServiceForBl activityService;
+    ActivityServiceImpl activityService;
 
     @Autowired
-    CouponMapper couponMapper;
+    CouponMapper couponMapper; // 用于验证 ActivityServiceImpl 的功能
 
     private static final int userId = 16;
     private static final int movieId = 26;
