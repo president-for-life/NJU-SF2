@@ -320,8 +320,7 @@ $(document).ready(function () {
             function (error) {
                 alert(JSON.stringify(error));
             });
-        // todo
-    };
+    }
 
 
     $('#popular-movies-btn').click(function getPolularMovie() {
@@ -361,7 +360,6 @@ $(document).ready(function () {
             function (error) {
                 alert(JSON.stringify(error));
             });
-        // todo
     });
 
     function getDate() {

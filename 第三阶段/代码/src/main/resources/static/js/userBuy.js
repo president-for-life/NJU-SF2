@@ -86,7 +86,6 @@ function renderOrderList(list) {
 
 // 点击继续购票
 $(document).on('click', '.proceed-btn', function (e) {
-	// TODO 失效验证
 	let orderId = parseInt(this.id.replace("proceed-", ""));
 	let order = JSON.parse($('#order-' + orderId)[0].dataset.order);
 	console.log(order);
@@ -163,8 +162,6 @@ $(document).on('click', '.refund-btn', function (e) {
 
 	// 如果该电影票没有对应的退票策略，默认不允许退票
 
-
-	// todo:这里还没有测试如果没有对应的退票策略会怎么样
 	if (strategy == -1) {
 		confirm("当前选中的电影票没有对应的退票策略，不允许退票！");
 		return;
@@ -218,7 +215,6 @@ $(document).on('click', '#refund-ticket-form-btn', function (e) {
 
 	var strategy_second = getStrategyForTicket(ticketId);  // 第二次获取的strategy
 	// 如果两次获取到的strategy不相同，说明退票策略已经被修改，用户需要重新进行退票
-	// todo：还没有进行测试
 
 	if (!isSameStrategies(strategy_first,strategy_second)) {
 		alert("所选电影票对应的退票策略已经被修改，请重新进行退票！")
@@ -249,7 +245,7 @@ $(document).on('click', '#refund-ticket-form-btn', function (e) {
  */
 function getStrategyForTicket(ticketId) {
 	let strategy;
-	// todo：这里如果不设置async=false，就会出现异步执行，该函数的返回结果会变成"undefined"；不知道有没有别的解决办法
+	// 这里如果不设置async=false，就会出现异步执行，该函数的返回结果会变成"undefined"；不知道有没有别的解决办法
 	$.ajax({
 		async: false,
 		type: "POST",

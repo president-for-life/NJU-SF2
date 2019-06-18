@@ -166,7 +166,6 @@ $(document).ready(function() {
             endTime: $("#schedule-end-date-input").val(),
             fare: $("#schedule-price-input").val()
         };
-        //todo 需要做一下表单验证？
         if (!validScheForm(form)){
             return
         }
@@ -198,7 +197,6 @@ $(document).ready(function() {
             endTime: $("#schedule-edit-end-date-input").val(),
             fare: $("#schedule-edit-price-input").val()
         };
-        //todo 需要做一下表单验证？
         if (!validScheForm(form)){
             return
         }

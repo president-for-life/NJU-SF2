@@ -22,7 +22,7 @@ $(document).ready(function() {
         var activitiesDomStr = "";
 
         activities.forEach(function (activity) {
-            var movieDomStr = "";// TODO
+            var movieDomStr = "";
 
             activitiesDomStr +=
                 "<div class='activity-container'>" +

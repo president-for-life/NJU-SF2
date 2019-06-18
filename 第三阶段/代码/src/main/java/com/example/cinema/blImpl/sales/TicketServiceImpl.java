@@ -219,7 +219,7 @@ public class TicketServiceImpl implements TicketService {
 
                 return ResponseVO.buildSuccess("会员卡购票成功");
             } else { // 电影票超时或扣款失败（会员卡余额不足）
-                return ResponseVO.buildFailure("会员卡扣款失败");
+                return ResponseVO.buildFailure("电影票超时或会员卡扣款失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
