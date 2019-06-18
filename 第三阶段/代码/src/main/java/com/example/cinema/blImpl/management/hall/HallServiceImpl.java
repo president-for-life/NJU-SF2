@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.management.hall;
 
 import com.example.cinema.bl.management.HallService;
+import com.example.cinema.blImpl.management.schedule.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
 import com.example.cinema.data.management.HallMapper;
 import com.example.cinema.po.Hall;

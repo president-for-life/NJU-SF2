@@ -1,7 +1,7 @@
 package com.example.cinema.blImpl.sales;
 
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.blImpl.management.hall.HallServiceForBl;
+import com.example.cinema.blImpl.management.schedule.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
 import com.example.cinema.blImpl.promotion.ActivityServiceForBl;
 import com.example.cinema.blImpl.promotion.CouponServiceForBl;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
