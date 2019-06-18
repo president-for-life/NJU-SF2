@@ -199,7 +199,7 @@ $(document).on('click', '.refund-btn', function (e) {
 			confirm("当前选中的电影票对应的电影场次距离开影的时间不足 " + time + " 分钟，不允许退票！");
 		} else if (!refundable) {
 			// 对应的退票策略不允许退票
-			confirm("当前选中的电影拍哦对应的退票策略不允许退票！");
+			confirm("当前选中的电影票对应的退票策略不允许退票！");
 		} else {
 			confirm("不允许退票！");
 		}

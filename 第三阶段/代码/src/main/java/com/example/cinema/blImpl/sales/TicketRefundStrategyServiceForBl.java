@@ -16,4 +16,8 @@ public interface TicketRefundStrategyServiceForBl {
     ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList);
 
     ResponseVO searchAllRefundStrategy();
+
+    ResponseVO getMoviesNotInRefundStrategy();
+
+    ResponseVO getMoviesByRefundStrategy(int strategyId);
 }

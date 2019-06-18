@@ -20,7 +20,7 @@ import java.util.*;
  * @author 李莹
  */
 @Service
-public class TicketServiceImpl implements TicketService, TicketServiceForBl {
+public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	TicketMapper ticketMapper;
@@ -42,6 +42,10 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 
 	@Autowired
 	VIPServiceForBl vipService;
+
+	/*================================================================================
+    购票
+     */
 
 	@Override
 	public ResponseVO getBySchedule(int scheduleId) {
@@ -235,6 +239,10 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 	    return this.completeTickets(ticketIdList, couponId, true);
 	}
 
+	/*================================================================================
+    取票
+     */
+
 	@Override
 	public ResponseVO pickUpTicket(int ticketId) {
 		try {
@@ -250,90 +258,9 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
-	@Override
-	public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
-		try {
-			System.out.println(strategyForm.getRefundable()+" "+strategyForm.getRatio()+" "+strategyForm.getTime());
-
-			ticketMapper.insertOneRefundStrategy(strategyForm.getPO());
-			return ResponseVO.buildSuccess("新增退票策略成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("新增退票策略失败");
-		}
-	}
-
-	@Override
-	public ResponseVO updateRefundStrategy(TicketRefundStrategyForm strategyForm) {
-		try {
-			ticketMapper.updateOneRefundStrategy(strategyForm.getPO());
-			return ResponseVO.buildSuccess("修改退票策略成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("修改退票策略失败");
-		}
-	}
-
-	@Override
-	public ResponseVO addRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
-		try {
-			ticketMapper.insertStrategyAndMovies(refundStrategyId, movieIdList);
-			return ResponseVO.buildSuccess("添加指定退票策略的电影列表成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("添加指定退票策略的电影列表失败");
-		}
-	}
-
-	@Override
-	public ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
-		try {
-			ticketMapper.deleteStrategyAndMovies(refundStrategyId, movieIdList);
-			return ResponseVO.buildSuccess("删除指定退票策略的电影列表成功");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("删除指定退票策略的电影列表失败");
-		}
-	}
-
-	@Override
-	public ResponseVO addRefundTicket(int ticketId) {
-		try {
-			Ticket ticket = ticketMapper.selectTicketById(ticketId);
-			int scheduleId = ticket.getScheduleId();
-
-			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(scheduleId);
-			int movieId = scheduleItem.getMovieId();
-
-			TicketRefundStrategy ticketRefundStrategy
-					= ticketMapper.selectRefundStrategyByMovie(movieId);
-
-			// 如果该电影票有对应的退票策略，则返回该退票策略
-			if(ticketRefundStrategy!=null) {
-				return ResponseVO.buildSuccess(ticketRefundStrategy.getVO());  // 将允许退票的电影票对应的退票策略返回，由前端计算可退还给用户的金额
-			} else {
-				return ResponseVO.buildFailure("电影票没有对应的退票策略，无法进行退票");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("选择指定要退票的电影票失败");
-		}
-	}
-
-	@Override
-	public ResponseVO completeRefundTicket(int ticketId) {
-		try {
-			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
-				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
-				return ResponseVO.buildSuccess("退票成功");
-			} else {
-				return ResponseVO.buildFailure("电影票不满足退票条件，无法退票");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("退票失败");
-		}
-	}
+	/*================================================================================
+    查看票
+     */
 
 	@Override
 	public ResponseVO getTicketsByUser(int userId) {
@@ -393,59 +320,81 @@ public class TicketServiceImpl implements TicketService, TicketServiceForBl {
 		}
 	}
 
+	/*================================================================================
+    退票
+     */
+
 	@Override
-	public List<Ticket> getTicketsByUserForBl(int userId) {
+	public ResponseVO addRefundTicket(int ticketId) {
 		try {
-			return ticketMapper.selectTicketsByUser(userId);
+			Ticket ticket = ticketMapper.selectTicketById(ticketId);
+			int scheduleId = ticket.getScheduleId();
+
+			ScheduleItem scheduleItem = scheduleService.getScheduleItemById(scheduleId);
+			int movieId = scheduleItem.getMovieId();
+
+			TicketRefundStrategy ticketRefundStrategy
+					= ticketMapper.selectRefundStrategyByMovie(movieId);
+
+			// 如果该电影票有对应的退票策略，则返回该退票策略
+			if(ticketRefundStrategy!=null) {
+				return ResponseVO.buildSuccess(ticketRefundStrategy.getVO());  // 将允许退票的电影票对应的退票策略返回，由前端计算可退还给用户的金额
+			} else {
+				return ResponseVO.buildFailure("电影票没有对应的退票策略，无法进行退票");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
+			return ResponseVO.buildFailure("选择指定要退票的电影票失败");
 		}
+	}
+
+	@Override
+	public ResponseVO completeRefundTicket(int ticketId) {
+		try {
+			if (ticketMapper.selectTicketById(ticketId).getState() == 1) { // 支付已完成但未出票
+				ticketMapper.updateTicketState(ticketId, 4); // 更改状态为“已退票”
+				return ResponseVO.buildSuccess("退票成功");
+			} else {
+				return ResponseVO.buildFailure("电影票不满足退票条件，无法退票");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseVO.buildFailure("退票失败");
+		}
+	}
+
+	@Override
+	public ResponseVO addRefundStrategy(TicketRefundStrategyForm strategyForm) {
+		return ticketRefundStrategyService.addRefundStrategy(strategyForm); // 委托
+	}
+
+	@Override
+	public ResponseVO updateRefundStrategy(TicketRefundStrategyForm strategyForm) {
+		return ticketRefundStrategyService.updateRefundStrategy(strategyForm); // 委托
+	}
+
+	@Override
+	public ResponseVO addRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
+		return ticketRefundStrategyService.addRefundMovies(refundStrategyId, movieIdList); // 委托
+	}
+
+	@Override
+	public ResponseVO removeRefundMovies(int refundStrategyId, List<Integer> movieIdList) {
+		return ticketRefundStrategyService.removeRefundMovies(refundStrategyId, movieIdList); // 委托
 	}
 
 	@Override
 	public ResponseVO searchAllRefundStrategy() {
-		try {
-			List<TicketRefundStrategyVO> ticketRefundStrategyVOList = new ArrayList<>();
-			ticketMapper.selectRefundStrategies().forEach(ticketRefundStrategy -> {
-				ticketRefundStrategyVOList.add(new TicketRefundStrategyVO(ticketRefundStrategy));
-			});
-			return ResponseVO.buildSuccess(ticketRefundStrategyVOList);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("获取已有的所有退票策略失败");
-		}
+		return ticketRefundStrategyService.searchAllRefundStrategy(); // 委托
 	}
 
 	@Override
 	public ResponseVO getMoviesNotInRefundStrategy() {
-		try {
-			List<MovieVO> movieVOList = new ArrayList<>();
-			ticketMapper.selectMovieNotInRefundStrategy().forEach(
-					movie -> {
-						movieVOList.add(new MovieVO(movie));
-					}
-			);
-			return ResponseVO.buildSuccess(movieVOList);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("获取未被指定退票策略的电影列表失败");
-		}
+		return ticketRefundStrategyService.getMoviesNotInRefundStrategy(); // 委托
 	}
 
 	@Override
 	public ResponseVO getMoviesByRefundStrategy(int strategyId) {
-		try {
-			List<MovieVO> movieVOList = new ArrayList<>();
-			ticketMapper.selectRefundStrategyById(strategyId).getMovieList().forEach(
-					movie -> {
-						movieVOList.add(new MovieVO(movie));
-					}
-			);
-			return ResponseVO.buildSuccess(movieVOList);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseVO.buildFailure("获取使用指定退票策略的电影列表失败");
-		}
+		return ticketRefundStrategyService.getMoviesByRefundStrategy(strategyId); // 委托
 	}
 }
