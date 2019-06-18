@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.management.hall;
+package com.example.cinema.blImpl.management.schedule;
 
 import com.example.cinema.po.Hall;
 
