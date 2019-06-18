@@ -200,6 +200,5 @@ $(document).ready(function () {
                 console.log("sss");//如果不是选中的，就移除所有的状态是checked的选项。
             }
         };
-
-
+ 
 });
