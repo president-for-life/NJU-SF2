@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-@DisplayName("Test CouponServiceImpl")
+@DisplayName("VIPServiceImpl自底向上集成测试")
 class VIPServiceImplTest {
 
     @Autowired

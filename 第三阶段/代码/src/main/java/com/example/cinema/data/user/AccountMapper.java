@@ -34,11 +34,6 @@ public interface AccountMapper {
     List<User> selectAdmins();
 
     /**
-     * @author 徐志乐
-     */
-    List<User> selectUsers();
-
-    /**
      * 根据用户名查找账号
      *
      * @author 胡文

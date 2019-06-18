@@ -36,11 +36,6 @@ public class OrderVO {
     private Timestamp time;
 
     /**
-     * 实际支付金额
-     */
-    private double actualPayment;
-
-    /**
      * 订单状态：
      * 0：支付未完成
      * 1：支付已完成但未出票
@@ -88,14 +83,6 @@ public class OrderVO {
 
     public void setTime(Timestamp time) {
         this.time = time;
-    }
-
-    public double getActualPayment() {
-        return actualPayment;
-    }
-
-    public void setActualPayment(double actualPayment) {
-        this.actualPayment = actualPayment;
     }
 
     public String getState() {

@@ -11,12 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class) //导入spring测试框架
 @SpringBootTest  //提供spring依赖注入
 @Transactional  //事务管理，默认回滚,如果配置了多数据源记得指定事务管理器
-@DisplayName("Test AccountMapper")
+@DisplayName("AccountMapper单元测试")
 class AccountMapperTest {
     @Autowired
     private AccountMapper accountMapper;
@@ -31,22 +33,58 @@ class AccountMapperTest {
         user.setPassword("password");
     }
 
-    @BeforeEach
-    void setupThis(){
-        System.out.println("@BeforeEach executed");
+    @Test
+    @DisplayName("insertOneAccount")
+    void insertOneAccount() {
+        accountMapper.insertOneAccount(AccountMapperTest.user);
+
+        User user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
+        assertEquals("admin", user.getRole());
+        assertEquals("password", user.getPassword());
     }
 
+    @Test
+    @DisplayName("updateOneAccount")
+    void updateOneAccount() {
+        accountMapper.insertOneAccount(AccountMapperTest.user);
 
+        User user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
+        user.setPassword("123456");
+
+        accountMapper.updateOneAccount(AccountMapperTest.user);
+
+        user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
+        assertEquals("123456", user.getPassword());
+    }
 
     @Test
-    @DisplayName("Add user")
-    void addUserTest() {
-        try{
-            accountMapper.insertOneAccount(AccountMapperTest.user);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+    @DisplayName("deleteOneAccount")
+    void deleteOneAccount() {
+        accountMapper.insertOneAccount(AccountMapperTest.user);
 
+        User user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
+        int id = user.getId();
+        accountMapper.deleteOneAccount(id);
+
+        user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
+
+        assertNull(user);
+    }
+
+    @Test
+    @DisplayName("selectAdmins")
+    void selectAdmins() {
+        int initialSize = accountMapper.selectAdmins().size();
+
+        accountMapper.insertOneAccount(AccountMapperTest.user);
+
+        User user2 = new User();
+        user2.setRole("admin");
+        user2.setUsername("test_user2");
+        user2.setPassword("password");
+        accountMapper.insertOneAccount(user2);
+
+        List<User> list = accountMapper.selectAdmins();
+        assertEquals(initialSize + 2, list.size());
     }
 }
