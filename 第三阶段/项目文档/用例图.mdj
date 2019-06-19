@@ -257,9 +257,9 @@
 												"$ref": "AAAAAAFrbrs2DQTaRnk="
 											},
 											"font": "Arial;13;1",
-											"left": 456,
+											"left": 457.5,
 											"top": 158,
-											"width": 118,
+											"width": 125,
 											"height": 13,
 											"text": "影院角色的增删改查"
 										},
@@ -292,9 +292,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 451,
+									"left": 452.5,
 									"top": 151,
-									"width": 129.28515625,
+									"width": 136,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFrbrs2DQTb8Sw="
@@ -394,7 +394,7 @@
 							"containerChangeable": true,
 							"left": 424,
 							"top": 120,
-							"width": 182,
+							"width": 192,
 							"height": 88,
 							"nameCompartment": {
 								"$ref": "AAAAAAFrbrs2DQTaRnk="
@@ -458,7 +458,7 @@
 											"font": "Arial;13;1",
 											"left": 173,
 											"top": 373,
-											"width": 41.17724609375,
+											"width": 42,
 											"height": 13,
 											"text": "管理员"
 										},
@@ -493,7 +493,7 @@
 									"font": "Arial;13;0",
 									"left": 168,
 									"top": 366,
-									"width": 51.17724609375,
+									"width": 52,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFrbryWbwYBKG8="
@@ -577,7 +577,7 @@
 							"containerChangeable": true,
 							"left": 168,
 							"top": 312,
-							"width": 51.17724609375,
+							"width": 52,
 							"height": 80,
 							"nameCompartment": {
 								"$ref": "AAAAAAFrbryWbgYA2b8="
@@ -636,9 +636,9 @@
 												"$ref": "AAAAAAFrbr0xswZJRug="
 											},
 											"font": "Arial;13;1",
-											"left": 661.5,
+											"left": 663,
 											"top": 206.5,
-											"width": 145,
+											"width": 153,
 											"height": 13,
 											"text": "会员卡充值优惠策略管理"
 										},
@@ -671,9 +671,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 656.5,
+									"left": 658,
 									"top": 199.5,
-									"width": 155.79296875,
+									"width": 164,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFrbr0xswZK7iw="
@@ -773,7 +773,7 @@
 							"containerChangeable": true,
 							"left": 624,
 							"top": 168,
-							"width": 220,
+							"width": 231,
 							"height": 89,
 							"nameCompartment": {
 								"$ref": "AAAAAAFrbr0xswZJRug="
@@ -1426,7 +1426,7 @@
 											"top": 63,
 											"width": 543,
 											"height": 13,
-											"text": "影院系统"
+											"text": "影院管理系统"
 										},
 										{
 											"_type": "LabelView",
@@ -2715,7 +2715,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 417,
-									"top": 271,
+									"top": 272,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2736,7 +2736,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 413,
-									"top": 256,
+									"top": 257,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2757,7 +2757,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 424,
-									"top": 300,
+									"top": 301,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2777,8 +2777,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 240,
-									"top": 316,
+									"left": 241,
+									"top": 317,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -2798,7 +2798,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 239,
+									"left": 240,
 									"top": 303,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -2819,7 +2819,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 243,
+									"left": 244,
 									"top": 344,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -2841,7 +2841,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 594,
-									"top": 225,
+									"top": 227,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -2861,7 +2861,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 588,
-									"top": 213,
+									"top": 215,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -2881,7 +2881,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 605,
-									"top": 251,
+									"top": 253,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -2926,7 +2926,7 @@
 								"$ref": "AAAAAAFrbryWbgX/W80="
 							},
 							"lineStyle": 1,
-							"points": "219:344;623:240",
+							"points": "220:344;623:242",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFrbsgjmR/PhlY="
@@ -3046,7 +3046,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 244,
+									"left": 245,
 									"top": 326,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -3067,7 +3067,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 245,
+									"left": 246,
 									"top": 313,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -3088,7 +3088,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 241,
+									"left": 242,
 									"top": 354,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -3195,7 +3195,7 @@
 								"$ref": "AAAAAAFrbryWbgX/W80="
 							},
 							"lineStyle": 1,
-							"points": "219:349;439:336",
+							"points": "220:349;439:336",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFrbsg1SSA5eag="
@@ -3315,7 +3315,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 246,
+									"left": 247,
 									"top": 336,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -3336,7 +3336,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 250,
+									"left": 251,
 									"top": 323,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -3357,7 +3357,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 238,
+									"left": 239,
 									"top": 363,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -3464,7 +3464,7 @@
 								"$ref": "AAAAAAFrbryWbgX/W80="
 							},
 							"lineStyle": 1,
-							"points": "219:354;663:408",
+							"points": "220:354;663:408",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFrbshHKiCsWA0="
@@ -3584,7 +3584,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 248,
+									"left": 249,
 									"top": 346,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -3605,7 +3605,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 254,
+									"left": 255,
 									"top": 334,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -3626,7 +3626,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 235,
+									"left": 236,
 									"top": 371,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -3733,7 +3733,7 @@
 								"$ref": "AAAAAAFrbryWbgX/W80="
 							},
 							"lineStyle": 1,
-							"points": "219:359;447:430",
+							"points": "220:359;447:430",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFrbshakCEo72I="
@@ -5748,7 +5748,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFrbrbzVQRN6qU="
 					},
-					"name": "影院系统"
+					"name": "影院管理系统"
 				},
 				{
 					"_type": "UMLActor",
