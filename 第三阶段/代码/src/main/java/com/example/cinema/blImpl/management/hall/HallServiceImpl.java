@@ -82,6 +82,10 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
             return -1;
         }
     }
+    /*
+     * @author Xu
+     * 插入一个新的影厅对象
+     */
 
     @Override
     public ResponseVO insertOneHall(HallForm hallForm) {
@@ -92,6 +96,12 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
             return ResponseVO.buildFailure(e.getMessage());
         }
     }
+
+    /*
+     * @author Xu
+     * 更新影厅信息
+     */
+
 
     @Override
     public ResponseVO updateOneHall(HallForm hallUpdateForm) {
