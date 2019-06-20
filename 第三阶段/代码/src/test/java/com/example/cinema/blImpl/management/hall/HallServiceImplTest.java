@@ -14,12 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HallServiceImplTest {
 
+    /**
     @Autowired
-    private HallServiceImpl hallService = new HallServiceImpl();
+    private HallServiceImpl hallService = new HallServiceImpl(new HallMapperStub()); // 桩
 
     private static HallForm hallForm;
-
-
 
     @BeforeAll
     static void setUp(){
@@ -31,30 +30,32 @@ class HallServiceImplTest {
     }
 
     @Test
-    void getNumHalls() {
-
-    }
-
-    @Test
-    void getNumSeats() {
-    }
-
-    @Test
     void insertOneHall() {
-        try{
-            hallService.insertOneHall(hallForm).getSuccess();
-            System.out.println("insert successfully");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            System.out.println("insert failed");
-        }
-        finally {
-            System.out.println("insertHallTest over.");
-        }
+        int initialSize = hallService.getNumHalls();
+        hallService.insertOneHall(hallForm);
+        int afterSize = hallService.getNumHalls();
+        assertEquals(initialSize + 1, afterSize);
     }
 
     @Test
     void updateOneHall() {
+        hallService.insertOneHall(hallForm);
+        List<HallVO> halls = (List<HallVO>) hallService.searchAllHall().getContent();
+
+        HallVO updatedHall = halls.get(0);
+
+        int id = updatedHall.getId();
+        hallForm.setId(id);
+        hallForm.setColumn(16);
+        hallForm.setName("xx");
+        hallService.updateOneHall(hallForm);
+
+        halls = (List<HallVO>) hallService.searchAllHall().getContent();
+        for(HallVO hall : halls) {
+            if(hall.getName().equals("xx")) {
+                assertEquals(16, hall.getColumn());
+            }
+        }
     }
+    **/
 }
