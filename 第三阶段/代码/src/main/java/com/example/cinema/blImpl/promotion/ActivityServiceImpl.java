@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 本类的职责是发布、获得、用户参与优惠活动
+ *
  * @author 李莹
  * @date 2019/4/20
  */
