@@ -31,6 +31,14 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
 
     private static final String repeatName =  "影厅名重复";
 
+    /** 用于集成测试
+    public HallServiceImpl() {}
+
+    public HallServiceImpl(HallMapper mapper) {
+        this.hallMapper = mapper;
+    }
+     **/
+
     private static List<HallVO> hallList2HallVOList(List<Hall> hallList) {
         List<HallVO> hallVOList = new ArrayList<>();
         for (Hall hall : hallList) {
@@ -106,14 +114,9 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
      * @author Xu
      * 更新影厅信息
      */
-
-
     @Override
     public ResponseVO updateOneHall(HallForm hallUpdateForm) {
         try {
-            if(ifNameRepeat(hallUpdateForm.getName())){
-                return ResponseVO.buildFailure(repeatName);
-            }
             Hall hall = hallUpdateForm.getPO();
             int numSchedules = scheduleServiceForBl.getNumSchedules(hall.getId());
             if (numSchedules > 0) {
