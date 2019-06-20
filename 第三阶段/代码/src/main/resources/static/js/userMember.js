@@ -152,7 +152,9 @@ getChargeRecordsClick = function() {
                    "</div>";
 
             });
-            recordDomStr+="</div>";
+            if(data.length!==0) {
+                recordDomStr += "<div>无充值记录";
+            }
             $content_container_tbody.append(recordDomStr);
             $('#checkRecord').modal("show")
         },
