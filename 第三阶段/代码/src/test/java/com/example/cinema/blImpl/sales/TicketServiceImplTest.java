@@ -170,4 +170,40 @@ class TicketServiceImplTest {
         List<String> ticketStateList = this.getTicketStateList();
         assertEquals("已出票", ticketStateList.get(0));
     }
+
+//    @Test
+//    void addRefundStrategy() {
+//
+//    }
+//
+//    @Test
+//    void refundTicket() {
+//        this.addOrder();
+//        this.completeByVIPCard();
+//
+//        List<Integer> ticketIdList = this.getTicketIdList();
+//        ticketService.addRefundTicket(ticketIdList.get(0));
+//        List<String> ticketStateList = this.getTicketStateList();
+//        assertEquals("已退票", ticketStateList.get(0));
+//    }
+//
+//    @Test
+//    void updateRefundStrategy() {
+//
+//    }
+//
+//    @Test
+//    void addRefundMovies() {
+//
+//    }
+//
+//    @Test
+//    void removeRefundMovies() {
+//
+//    }
+//
+//    @Test
+//    void completeRefundTicket() {
+//
+//    }
 }
