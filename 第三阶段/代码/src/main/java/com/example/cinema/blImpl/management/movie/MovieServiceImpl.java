@@ -43,6 +43,7 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
     }
 
     @Override
+
     public ResponseVO searchOneMovieByIdAndUserId(int movieId, int userId) {
         try {
             Movie movie = movieMapper.selectMovieByIdAndUserId(movieId, userId);
@@ -132,6 +133,7 @@ public class MovieServiceImpl implements MovieService, MovieServiceForBl {
 
     /**
      * 下架和修改电影的前置检查
+     * @author Xu
      */
     public ResponseVO preCheck(List<Integer> movieIdList) {
         Date thisTime = new Date();
