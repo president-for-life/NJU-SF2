@@ -43,6 +43,11 @@ public class AccountServiceImpl implements AccountService {
         return new UserVO(user);
     }
 
+    /*
+     * @author Xu
+     * 搜索返回所有的user属性role为admin的对象
+     */
+
     @Override
     public ResponseVO searchAllAdmin() {
         try {
@@ -53,6 +58,12 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+
+    /*
+     * @author Xu
+     * 更新一个user对象
+     */
+
     @Override
     public ResponseVO updateUser(UserForm userUpdateForm) {
         try {
@@ -62,6 +73,12 @@ public class AccountServiceImpl implements AccountService {
             return ResponseVO.buildFailure(ACCOUNT_EXIST);
         }
     }
+
+
+    /*
+     * @author Xu
+     * 删除一个user对象
+     */
 
     @Override
     public ResponseVO deleteOneAccount(Integer id) {
