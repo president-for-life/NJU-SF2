@@ -157,7 +157,7 @@ class TicketServiceImplTest {
         List<String> stateList = this.getTicketStateList();
 
         for(String state : stateList) {
-            assertEquals("支付未完成", state);
+            assertEquals("支付已完成", state);
         }
     }
 
