@@ -23,18 +23,23 @@ $(document).ready(function() {
         var isValidate = true;
         if(!data.name) {
             isValidate = false;
-            $('#hall-name-input').parent('.form-group').addClass('has-error');
             alert("影厅名不能为空")
         }
         if(!data.column) {
             isValidate = false;
-            $('#hall-column-input').parent('.form-group').addClass('has-error');
             alert("列数不能为空")
         }
         if(!data.row) {
             isValidate = false;
-            $('#hall-row-input').parent('.form-group').addClass('has-error');
             alert("行数不能为空")
+        }
+        if(data.row <= 0){
+            isValidate = false;
+            alert("非法行数")
+        }
+        if(data.column <= 0){
+            isValidate = false;
+            alert("非法列数")
         }
         return isValidate;
     }
@@ -52,6 +57,14 @@ $(document).ready(function() {
         if(!data.row) {
             isValidate = false;
             alert("行数不能为空")
+        }
+        if(data.row <= 0){
+            isValidate = false;
+            alert("非法行数")
+        }
+        if(data.column <= 0){
+            isValidate = false;
+            alert("非法列数")
         }
         return isValidate;
     }
