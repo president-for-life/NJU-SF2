@@ -51,7 +51,7 @@ class AccountMapperTest {
         User user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
         user.setPassword("123456");
 
-        accountMapper.updateOneAccount(AccountMapperTest.user);
+        accountMapper.updateOneAccount(user);
 
         user = accountMapper.getAccountByName(AccountMapperTest.user.getUsername());
         assertEquals("123456", user.getPassword());
