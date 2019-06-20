@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
+ * 本类的职责是创建、获得、发放、删除优惠券
+ *
  * @author 李莹
+ * @author 梁正川
  * @date 2019/4/17
  */
 @Service

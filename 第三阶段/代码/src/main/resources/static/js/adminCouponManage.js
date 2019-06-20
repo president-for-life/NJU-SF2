@@ -17,7 +17,7 @@ $(document).ready(function () {
                     "<td >"+ "</td>"+
                     "</tr>"+"<div>";
                 //若无会员
-                if(data.length!==0) {
+                if(data.length===0) {
                     consumptionDomStr += "<div>暂无会员</div>";
 
                 }
@@ -63,7 +63,7 @@ $(document).ready(function () {
                     "<td >"+ "</td>"+
                     "</tr>"+"<div>";
                 //若无会员
-                if(data.length!==0) {
+                if(data.length===0) {
                     consumptionDomStr = "<div>暂无会员</div>";
 
                 }
@@ -114,7 +114,7 @@ $(document).ready(function () {
                     "<td align='center'>"+"</td>"+
                     "</tr>"+"<div>";
                 //若无优惠券
-                if(data.length!==0) {
+                if(data.length===0) {
                     consumptionDomStr = "<div>暂无优惠券</div>";
 
                 }

@@ -44,6 +44,7 @@ public class CouponForm {
      */
     private Timestamp endTime;
 
+    public CouponForm() {}
 
     public CouponForm(Coupon coupon){
         this.description=coupon.getDescription();
