@@ -16,6 +16,11 @@ $(document).ready(function () {
                     "<td>"+"</td>"+
                     "<td >"+ "</td>"+
                     "</tr>"+"<div>";
+                //若无会员
+                if(data.length!==0) {
+                    consumptionDomStr += "<div>暂无会员</div>";
+
+                }
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
@@ -57,6 +62,11 @@ $(document).ready(function () {
                     "<td>"+"</td>"+
                     "<td >"+ "</td>"+
                     "</tr>"+"<div>";
+                //若无会员
+                if(data.length!==0) {
+                    consumptionDomStr = "<div>暂无会员</div>";
+
+                }
                 data.forEach(function (consumption) {
 
                     consumptionDomStr+=
@@ -103,6 +113,11 @@ $(document).ready(function () {
                     "<td align='center'>"+"失效时间"+"</td>" +
                     "<td align='center'>"+"</td>"+
                     "</tr>"+"<div>";
+                //若无优惠券
+                if(data.length!==0) {
+                    consumptionDomStr = "<div>暂无优惠券</div>";
+
+                }
                 data.forEach(function (coupon) {
 
                     consumptionDomStr+=
