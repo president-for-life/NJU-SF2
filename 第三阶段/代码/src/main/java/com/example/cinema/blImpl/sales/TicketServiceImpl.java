@@ -16,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
+ * 本类与电影票有关
+ * 实现了购票、取票、退票、管理退票策略的功能
+ *
  * @author 李莹
+ * @author 戴羽涵
  */
 @Service
 public class TicketServiceImpl implements TicketService {

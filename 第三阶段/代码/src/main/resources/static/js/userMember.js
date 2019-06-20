@@ -152,8 +152,8 @@ getChargeRecordsClick = function() {
                    "</div>";
 
             });
-            if(data.length!==0) {
-                recordDomStr += "<div>无充值记录";
+            if(data.length===0) {
+                recordDomStr = "<div>无充值记录</div>";
             }
             $content_container_tbody.append(recordDomStr);
             $('#checkRecord').modal("show")
