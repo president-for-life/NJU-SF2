@@ -179,7 +179,7 @@ $(document).ready(function () {
 				if (movieList.length == 0) {
 					$('#add-strategy-movie-input').append("<option value=" + -1 + ">没有可供添加的电影</option>");
 				} else {
-					$('#add-strategy-movie-input').append("<option value=" + -1 + ">所有电影</option>");
+					$('#add-strategy-movie-input').append("<option value=" + -1 + ">清空下列已选择的电影</option>");
 				}
 				movieList.forEach(function (movie) {
 					$('#add-strategy-movie-input').append("<option value=" + movie.id + ">" + movie.name + "</option>");
