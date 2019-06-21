@@ -9,6 +9,7 @@ $(document).ready(function() {
             '/activity/get',
             function (res) {
                 var activities = res.content;
+                console.log(activities);
                 renderActivities(activities);
             },
             function (error) {

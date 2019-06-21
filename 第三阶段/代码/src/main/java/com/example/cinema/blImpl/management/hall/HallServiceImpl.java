@@ -117,6 +117,13 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     @Override
     public ResponseVO updateOneHall(HallForm hallUpdateForm) {
         try {
+            //如果影厅名与原始影厅名不同,则有可能出现重名。
+            if(!hallUpdateForm.getName().equals(hallMapper.selectHallById(hallUpdateForm.getId()).getName())){
+                if(ifNameRepeat(hallUpdateForm.getName())){
+                    return ResponseVO.buildFailure(repeatName);
+                }
+            }
+
             Hall hall = hallUpdateForm.getPO();
             int numSchedules = scheduleServiceForBl.getNumSchedules(hall.getId());
             if (numSchedules > 0) {
