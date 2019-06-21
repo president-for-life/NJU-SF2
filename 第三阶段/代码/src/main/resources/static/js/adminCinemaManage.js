@@ -72,6 +72,7 @@ $(document).ready(function() {
     function renderHall(halls){
         $('#hall-card').empty();
         var hallDomStr = "";
+        var container = "大";
         halls.forEach(function (hall) {
             var seat = "";
             for(var i =0;i<hall.row;i++){
@@ -81,10 +82,16 @@ $(document).ready(function() {
                 }
                 seat+= "<div>"+temp+"</div>";
             }
+            if (hall.row * hall.column > 50){
+                container = "(大)";
+            }
+            else {
+                container = "(小)";
+            }
             var hallDom =
                 "<div id='hall-" + hall.id + "' class='hall-item' data-hall='" + JSON.stringify(hall) + "'>" +
                 "<div>" +
-                "<span class='cinema-hall-name'>"+ hall.name +"</span>" +
+                "<span class='cinema-hall-name'>"+ hall.name +"</span>" + "<span>"+container+"</span>" +
                 "<span class='cinema-hall-size'>"+ hall.column +'*'+ hall.row +"</span>" +
                 "</div>" +
                 "<div class='cinema-seat'>" + seat +
