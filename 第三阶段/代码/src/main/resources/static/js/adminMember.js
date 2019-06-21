@@ -43,6 +43,11 @@ $(document).ready(function() {
             discountAmount: $("#member-discount-input").val()
         };
 
+        if(form.price <= 0 || form.targetAmount <= 0 || form.discountAmount <= 0) {
+            alert("输入不得小于等于0！");
+            return;
+        }
+
         postRequest(
             '/vip/strategy/add',
             form,
@@ -82,6 +87,11 @@ $(document).ready(function() {
             targetAmount: $("#member-edit-target-input").val(),
             discountAmount : $("#member-edit-discount-input").val()
         };
+
+        if(form.price <= 0 || form.targetAmount <= 0 || form.discountAmount <= 0) {
+            alert("输入不得小于等于0！");
+            return;
+        }
 
         postRequest(
             '/vip/strategy/update',
